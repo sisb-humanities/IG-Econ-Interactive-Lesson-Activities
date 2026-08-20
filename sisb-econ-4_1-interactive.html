@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 4.1 — Macroeconomy Aims | SISB Interactive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#008BCC; --navy:#002F6C; --orange:#FF8F1C;
+  --white:#FFFFFF; --grey-bg:#F2F6FA; --grey-2:#E4EDF5; --grey-3:#C8D8E8;
+  --text:#1A2B3C; --text-2:#456080; --text-3:#8098B0;
+  --green:#28A745; --green-bg:#E6F6E8; --green-txt:#155724;
+  --orange-bg:#FFF5E6; --orange-txt:#7A3D00;
+  --red:#D63864; --red-bg:#FEE8F0; --red-txt:#7A0830;
+  --radius:10px; --shadow:0 2px 12px rgba(0,47,108,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--grey-bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* top bar */
+.topbar{background:var(--navy);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.tb-logo{font-size:20px;font-weight:900;letter-spacing:.02em;color:#fff;display:flex;align-items:center;line-height:1}
+.tb-logo .logo-i{display:inline-block;width:5px;height:.7em;background:var(--blue);border-radius:1px;margin:0 2px;align-self:center}
+.tb-div{width:1px;height:28px;background:rgba(255,255,255,.2);margin:0 6px}
+.tb-title{font-size:13px;font-weight:400;color:rgba(255,255,255,.85)}
+.tb-badge{margin-left:auto;background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
+
+/* tabs */
+.tabbar{background:#fff;border-bottom:2px solid var(--grey-2);display:flex;padding:0 24px;position:sticky;top:56px;z-index:150;flex-wrap:wrap}
+.tab{padding:13px 20px;font-size:13px;font-weight:700;color:var(--text-3);cursor:pointer;border-bottom:3px solid transparent;transition:.15s;margin-bottom:-2px;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.tab:hover{color:var(--navy)}
+.tab.active{color:var(--navy);border-bottom-color:var(--orange)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:26px 20px 60px;width:100%}
+.panel{display:none}.panel.active{display:block}
+
+.intro{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:22px}
+.intro h1{font-size:22px;color:var(--navy);font-weight:900;margin-bottom:6px}
+.intro p{font-size:14.5px;color:var(--text-2);line-height:1.55}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+
+/* === MATCHING GAME === */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:720px){.match-grid{grid-template-columns:1fr}.match-grid .col-aims{order:-1}}
+.col-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.scenario{background:#fff;border:1.5px solid var(--grey-3);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;cursor:grab;font-size:14px;line-height:1.5;box-shadow:var(--shadow);transition:.12s;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.scenario:hover{border-color:var(--blue)}
+.scenario.dragging{opacity:.45}
+.scenario.placed{cursor:default;border-style:solid}
+.scenario .sc-tag{display:inline-block;font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.scenario.correct{border-color:var(--green);background:var(--green-bg)}
+.scenario.wrong{border-color:var(--red);background:var(--red-bg)}
+.aim-slot{background:var(--grey-bg);border:2px dashed var(--grey-3);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;min-height:64px;transition:.12s}
+.aim-slot.over{border-color:var(--blue);background:#EAF6FC}
+.aim-slot .aim-name{font-size:14.5px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:9px}
+.aim-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.aim-slot .aim-desc{font-size:12px;color:var(--text-2);margin-top:2px;margin-left:21px}
+.dropped{margin-top:10px}
+.btn-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{font-family:'Lato';font-size:13.5px;font-weight:700;padding:10px 20px;border-radius:24px;border:none;cursor:pointer;transition:.12s}
+.btn-primary{background:var(--orange);color:#fff}.btn-primary:hover{background:#e67d09}
+.btn-ghost{background:#fff;color:var(--navy);border:1.5px solid var(--grey-3)}.btn-ghost:hover{background:var(--grey-bg)}
+.score{font-size:14px;font-weight:700;color:var(--navy);display:flex;align-items:center;margin-left:auto}
+
+/* === HEALTH CHECK === */
+.hc-card{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px}
+.hc-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.hc-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;font-weight:900}
+.hc-val{font-size:26px;font-weight:900;color:var(--navy);line-height:1}
+.hc-aim{font-size:12px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.hc-q{font-size:14px;color:var(--text);margin:10px 0 12px;line-height:1.5}
+.choice-row{display:flex;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.choice{flex:1;min-width:130px;border:1.5px solid var(--grey-3);background:#fff;border-radius:8px;padding:9px 12px;font-size:13.5px;font-weight:700;cursor:pointer;text-align:center;transition:.12s;color:var(--text-2)}
+.choice:hover{border-color:var(--blue)}
+.choice.sel-good{border-color:var(--green);background:var(--green-bg);color:var(--green-txt)}
+.choice.sel-bad{border-color:var(--red);background:var(--red-bg);color:var(--red-txt)}
+.choice.sel-both{border-color:var(--orange);background:var(--orange-bg);color:var(--orange-txt)}
+.reveal{display:none;margin-top:12px;border-top:1px dashed var(--grey-3);padding-top:12px;font-size:13.5px;line-height:1.6;color:var(--text-2)}
+.reveal.show{display:block}
+.reveal strong{color:var(--navy)}
+.reveal .verdict{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:12px;margin-bottom:8px}
+.v-good{background:var(--green-bg);color:var(--green-txt)}
+.v-bad{background:var(--red-bg);color:var(--red-txt)}
+.v-both{background:var(--orange-bg);color:var(--orange-txt)}
+.hc-foot{background:var(--navy);color:#fff;border-radius:var(--radius);padding:18px 20px;margin-top:18px}
+.hc-foot h3{font-size:15px;margin-bottom:6px}
+.hc-foot p{font-size:13.5px;color:#CADCFC;line-height:1.55}
+.done-banner{display:none;background:var(--green-bg);border:1.5px solid var(--green);color:var(--green-txt);border-radius:var(--radius);padding:14px 18px;margin-top:16px;font-weight:700;font-size:14px}
+.done-banner.show{display:block}
+.foot-note{text-align:center;font-size:12px;color:var(--text-3);margin-top:30px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tb-logo">S<span class="logo-i"></span>SB</div>
+  <div class="tb-div"></div>
+  <div class="tb-title">IGCSE Economics · Unit 4.1 — Macroeconomy Aims</div>
+  <div class="tb-badge">Interactive</div>
+</div>
+<div class="tabbar">
+  <div class="tab active" data-tab="match">🎯 Match the Aim</div>
+  <div class="tab" data-tab="health">🩺 Thai Economy Health Check</div>
+</div>
+
+<div class="wrap">
+  <!-- ============ MATCH ============ -->
+  <div class="panel active" id="panel-match">
+    <div class="intro">
+      <div class="kicker">Activity 1 · Lesson 1</div>
+      <h1>Match the scenario to the macroeconomic aim</h1>
+      <p>Drag each real situation on the left into the government aim it relates to. When you're ready, press <b>Check answers</b>. You can reset and try again as many times as you like.</p>
+    </div>
+    <div class="match-grid">
+      <div class="col-scenarios">
+        <div class="col-lbl">Scenarios — drag these</div>
+        <div class="drop-pool" id="scenarioPool"></div>
+      </div>
+      <div class="col-aims">
+        <div class="col-lbl">The six aims — drop here</div>
+        <div id="aimSlots"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkMatch()">Check answers</button>
+      <button class="btn btn-ghost" onclick="resetMatch()">Reset</button>
+      <span class="score" id="matchScore"></span>
+    </div>
+  </div>
+
+  <!-- ============ HEALTH CHECK ============ -->
+  <div class="panel" id="panel-health">
+    <div class="intro">
+      <div class="kicker">Activity 2 · Lesson 1</div>
+      <h1>Is Thailand's economy healthy?</h1>
+      <p>Here are four real indicators for Thailand (2025). For each one, decide: is it <b>good news</b>, <b>bad news</b>, or <b>a bit of both</b> for that aim — then reveal an economist's view and compare. Figures are approximate and rounded for teaching.</p>
+    </div>
+    <div id="hcList"></div>
+    <div class="done-banner" id="hcDone">✓ Nice work — you've judged all four indicators. Which aim do you think the government should worry about most right now?</div>
+    <div class="hc-foot">
+      <h3>Remember: one number never tells the whole story</h3>
+      <p>A "good" headline figure can hide problems underneath — and a "bad" one can have a silver lining. Strong analysis always asks <i>why</i>, and <i>who is affected</i>. That's exactly the skill examiners reward.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">SISB · Cambridge IGCSE Economics (0455) · Unit 4.1 — built to accompany the revision hub</div>
+</div>
+
+<script src="sisb-tracker.js"></script>
+<script src="sisb-dragdrop.js"></script>
+<script>
+/* ---------- tab switching ---------- */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-'+t.dataset.tab).classList.add('active');
+  });
+});
+
+/* ================= MATCHING ================= */
+const AIMS = [
+  {id:'growth', name:'Economic growth', desc:'Producing more goods & services over time', color:'#008BCC'},
+  {id:'employ', name:'Full employment', desc:'As many people in work as possible', color:'#28A745'},
+  {id:'prices', name:'Stable prices', desc:'Low, steady inflation', color:'#FF8F1C'},
+  {id:'bop',    name:'Balance of payments', desc:'Exports roughly match imports', color:'#1C7293'},
+  {id:'redist', name:'Redistribution of income', desc:'Reducing the gap between rich & poor', color:'#D63864'},
+  {id:'env',    name:'Environmental sustainability', desc:'Protecting the planet for the future', color:'#2C5F2D'},
+];
+const SCENARIOS = [
+  {id:'s1', aim:'growth', tag:'Bangkok', text:'A new BTS Skytrain line lets firms produce and sell more, lifting Thailand\u2019s real GDP.'},
+  {id:'s2', aim:'employ', tag:'Retail',  text:'CP Group and 7-Eleven hire thousands more staff, so fewer people are without a job.'},
+  {id:'s3', aim:'prices', tag:'Daily life', text:'The Bank of Thailand keeps the rise in street-food and fuel prices low and steady.'},
+  {id:'s4', aim:'bop',    tag:'Trade',   text:'Money from 40 million tourists helps Thailand\u2019s exports keep pace with its oil imports.'},
+  {id:'s5', aim:'redist', tag:'Fairness', text:'The 30-baht healthcare scheme and progressive taxes help close the Bangkok\u2013Isaan income gap.'},
+  {id:'s6', aim:'env',    tag:'Planet',   text:'Thailand pushes electric vehicles and buses to cut Bangkok\u2019s PM2.5 haze.'},
+];
+
+function buildMatch(){
+  const pool=document.getElementById('scenarioPool');
+  const slots=document.getElementById('aimSlots');
+  pool.innerHTML=''; slots.innerHTML='';
+  // shuffle scenarios
+  const order=[...SCENARIOS].sort(()=>Math.random()-0.5);
+  order.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='scenario';d.id=s.id;d.dataset.aim=s.aim;
+    d.innerHTML='<span class="sc-tag">'+s.tag+'</span><br>'+s.text;
+    pool.appendChild(d);
+  });
+  AIMS.forEach(a=>{
+    const slot=document.createElement('div');
+    slot.className='aim-slot';slot.dataset.aim=a.id;
+    slot.innerHTML='<div class="aim-name"><span class="aim-dot" style="background:'+a.color+'"></span>'+a.name+'</div><div class="aim-desc">'+a.desc+'</div><div class="dropped" id="drop-'+a.id+'"></div>';
+    slots.appendChild(slot);
+  });
+  document.getElementById('matchScore').textContent='';
+}
+function checkMatch(){
+  let correct=0,placed=0;
+  AIMS.forEach(a=>{
+    const drop=document.getElementById('drop-'+a.id);
+    [...drop.children].forEach(el=>{
+      placed++;
+      if(el.dataset.aim===a.id){el.classList.add('correct');el.classList.remove('wrong');correct++;}
+      else{el.classList.add('wrong');el.classList.remove('correct');}
+    });
+  });
+  const sc=document.getElementById('matchScore');
+  if(placed<SCENARIOS.length){sc.textContent='Place all 6 first ('+placed+'/6 placed)';sc.style.color='#FF8F1C';}
+  else if(correct===SCENARIOS.length){
+    sc.textContent='🎉 All 6 correct!';sc.style.color='#28A745';
+    SISB_TRACKER.log('4.1', 'Match the Aim', correct+'/'+SCENARIOS.length+' correct');
+  }
+  else{sc.textContent=correct+' / 6 correct — green = right, pink = try again';sc.style.color='#002F6C';}
+}
+function resetMatch(){buildMatch();}
+buildMatch();
+
+/* ================= HEALTH CHECK ================= */
+const INDICATORS = [
+  {id:'i1', icon:'📈', bg:'#008BCC', val:'~2%', aim:'Economic growth',
+   q:'Thailand\u2019s real GDP grew about 2% in 2025 \u2014 slower than in past years. Good or bad news?',
+   verdict:'both', vlabel:'A bit of both',
+   note:'The economy is <strong>still growing</strong>, which is positive \u2014 more output and incomes. But ~2% is <strong>slow for a developing economy</strong> (many aim for 3\u20135%), driven by weaker exports and tourism. So it is growth, but not fast enough to create lots of new jobs or raise living standards quickly.'},
+  {id:'i2', icon:'👷', bg:'#28A745', val:'~1%', aim:'Full employment',
+   q:'Only about 1% of the workforce is unemployed \u2014 one of the lowest rates in the world. Good or bad news?',
+   verdict:'both', vlabel:'Mostly good \u2014 with a catch',
+   note:'A ~1% rate looks <strong>excellent</strong> \u2014 almost everyone who wants work has it. But look deeper: many jobs are <strong>low-paid, seasonal or informal</strong> (street vendors, farm labour), and an <strong>ageing population</strong> is shrinking the workforce. Low unemployment doesn\u2019t always mean high-quality, secure jobs.'},
+  {id:'i3', icon:'🏷️', bg:'#FF8F1C', val:'~0%', aim:'Stable prices',
+   q:'Inflation was near 0% in 2025 \u2014 just below the Bank of Thailand\u2019s 1\u20133% target. Good or bad news?',
+   verdict:'both', vlabel:'Surprisingly, a bit of both',
+   note:'Low inflation sounds great \u2014 prices are stable, so families can budget. But inflation <strong>below the target band</strong> can be a warning sign of <strong>weak demand</strong>. If prices start falling (deflation), people may delay spending and firms may cut production and jobs. Most governments want low <strong>but positive</strong> inflation, not zero.'},
+  {id:'i4', icon:'🚢', bg:'#1C7293', val:'Surplus', aim:'Balance of payments',
+   q:'Thailand\u2019s current account was in surplus (~2.4% of GDP), helped by tourism and exports. Good or bad news?',
+   verdict:'good', vlabel:'Good news',
+   note:'A surplus means <strong>more money is flowing in</strong> from exports and tourists than is flowing out on imports. This supports the baht and shows the economy can pay its way. (A very large, lasting surplus can have downsides too \u2014 but for the balance of payments aim, this is a <strong>healthy sign</strong>.)'},
+];
+function buildHealth(){
+  const list=document.getElementById('hcList');list.innerHTML='';
+  INDICATORS.forEach(ind=>{
+    const c=document.createElement('div');c.className='hc-card';
+    c.innerHTML=
+      '<div class="hc-head">'+
+        '<div class="hc-icon" style="background:'+ind.bg+'">'+ind.icon+'</div>'+
+        '<div><div class="hc-val">'+ind.val+'</div><div class="hc-aim">'+ind.aim+'</div></div>'+
+      '</div>'+
+      '<div class="hc-q">'+ind.q+'</div>'+
+      '<div class="choice-row">'+
+        '<div class="choice" data-v="good" data-id="'+ind.id+'">👍 Good news</div>'+
+        '<div class="choice" data-v="bad" data-id="'+ind.id+'">👎 Bad news</div>'+
+        '<div class="choice" data-v="both" data-id="'+ind.id+'">🤔 A bit of both</div>'+
+      '</div>'+
+      '<div class="reveal" id="rev-'+ind.id+'"><span class="verdict v-'+ind.verdict+'">'+ind.vlabel+'</span><br>'+ind.note+'</div>';
+    list.appendChild(c);
+  });
+  document.querySelectorAll('.choice').forEach(ch=>{
+    ch.addEventListener('click',()=>{
+      const id=ch.dataset.id;
+      // clear sibling selection
+      ch.parentElement.querySelectorAll('.choice').forEach(s=>s.classList.remove('sel-good','sel-bad','sel-both'));
+      ch.classList.add('sel-'+ch.dataset.v);
+      document.getElementById('rev-'+id).classList.add('show');
+      checkAllAnswered();
+    });
+  });
+}
+function checkAllAnswered(){
+  const answered=document.querySelectorAll('.reveal.show').length;
+  const done = answered===INDICATORS.length;
+  document.getElementById('hcDone').classList.toggle('show',done);
+  if(done){ SISB_TRACKER.log('4.1', 'Thai Economy Health Check', answered+'/'+INDICATORS.length+' indicators judged'); }
+}
+buildHealth();
+</script>
+</body>
+</html>
