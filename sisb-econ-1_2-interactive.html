@@ -369,9 +369,17 @@ function makeDraggable(el, onDrop){
       clearHot();
       if(bin) onDrop(el,bin);
     } else {
-      // tap = select / deselect
-      if(selected===el){ el.classList.remove('sel'); selected=null; }
-      else { if(selected) selected.classList.remove('sel'); selected=el; el.classList.add('sel'); }
+      /* Tap. If another card is already selected, this tap means "drop it here"
+         — even when the finger lands on a card already sitting in that column. */
+      const binEl=el.closest('.bin');
+      const drop = binEl ? binEl.querySelector('.drop') : el.parentElement;
+      if(selected && selected!==el){
+        drop.appendChild(selected); selected.classList.remove('sel'); selected=null;
+      } else if(selected===el){
+        el.classList.remove('sel'); selected=null;
+      } else {
+        selected=el; el.classList.add('sel');
+      }
     }
     dragging=null; moved=false;
   });
@@ -379,6 +387,9 @@ function makeDraggable(el, onDrop){
     if(ghost){ghost.remove();ghost=null;} if(dragging)dragging.style.opacity='';
     dragging=null; moved=false; clearHot();
   });
+  /* A tap on a chip must not bubble to the bank or bin behind it, or the chip
+     is selected and instantly returned in the same gesture. */
+  el.addEventListener('click', e=>e.stopPropagation());
 }
 function binAt(x,y){
   const el=document.elementFromPoint(x,y);
