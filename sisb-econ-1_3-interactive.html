@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SISB IGCSE Economics 1.3 — Opportunity Cost</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C;
+  --navy-soft:#E8EEF6; --blue-soft:#E8F4FB; --orange-soft:#FFF1E0;
+  --green:#2E7D4F; --green-soft:#EAF6EE; --red:#C0392B; --red-soft:#FDECEA;
+  --ink:#1B2733; --muted:#667085; --line:#D5DCE5; --paper:#FFFFFF;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:#F4F6F9;line-height:1.5;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 80px}
+
+/* header */
+header{background:var(--navy);color:#fff;padding:22px 0 0}
+.hd{max-width:1080px;margin:0 auto;padding:0 16px}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:900;opacity:.75}
+h1{margin:4px 0 2px;font-size:clamp(22px,3.4vw,32px);font-weight:900}
+.sub{opacity:.85;font-size:14px;margin-bottom:16px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:rgba(255,255,255,.10);color:#fff;border:0;border-radius:8px 8px 0 0;
+  padding:11px 15px;font:700 14px 'Lato',sans-serif;cursor:pointer;white-space:nowrap}
+nav button.on{background:#F4F6F9;color:var(--navy)}
+nav button .n{display:inline-block;width:19px;height:19px;line-height:19px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;text-align:center;margin-right:7px}
+nav button.on .n{background:var(--navy)}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 1px 3px rgba(16,24,40,.05)}
+.card h2{margin:0 0 4px;color:var(--navy);font-size:20px;font-weight:900}
+.card .lede{color:var(--muted);font-size:14px;margin:0 0 14px}
+.hook{border-left:7px solid var(--orange);background:var(--orange-soft);border-color:#F5D9B5}
+.hook h2{color:var(--navy)}
+.tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:900;letter-spacing:.1em;padding:4px 9px;border-radius:5px;margin-bottom:10px}
+p{margin:0 0 10px}
+.q{font-weight:700;color:var(--navy);margin-top:14px}
+.hidden{display:none}
+
+/* buttons */
+.btn{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:11px 20px;font:900 14px 'Lato',sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn.orange{background:var(--orange)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* chips + bins */
+.bank{display:flex;flex-wrap:wrap;gap:8px;padding:14px;background:var(--navy-soft);border:2px dashed #B9C6D8;border-radius:10px;min-height:64px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13.5px;font-weight:700;
+  cursor:grab;touch-action:none;transition:box-shadow .12s,border-color .12s;max-width:100%}
+.chip:active{cursor:grabbing}
+.chip.sel{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+.chip.ok{border-color:var(--green);background:var(--green-soft)}
+.chip.no{border-color:var(--red);background:var(--red-soft)}
+.chip.drag{position:fixed;z-index:999;pointer-events:none;box-shadow:0 10px 24px rgba(16,24,40,.28);transform:rotate(-2deg)}
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+@media(max-width:760px){.bins{grid-template-columns:repeat(2,1fr)}}
+.bin{border:2px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;min-height:150px;display:flex;flex-direction:column}
+.bin h3{margin:0;background:var(--navy);color:#fff;font-size:13px;font-weight:900;padding:9px 10px;letter-spacing:.04em}
+.bin h3 small{display:block;font-weight:400;opacity:.75;font-size:11px;letter-spacing:0}
+.bin .drop{flex:1;padding:9px;display:flex;flex-direction:column;gap:7px}
+.bin.hot{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}
+
+/* tables / matching */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:13px}
+td{border:1px solid var(--line);padding:8px 10px;vertical-align:middle}
+td.num{text-align:center;font-weight:900;font-size:16px;color:var(--navy)}
+td.plus{text-align:center;color:var(--muted);font-style:italic;background:var(--navy-soft)}
+select{font:700 14px 'Lato',sans-serif;padding:7px 9px;border:2px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);width:100%}
+select.ok{border-color:var(--green);background:var(--green-soft)}
+select.no{border-color:var(--red);background:var(--red-soft)}
+input[type=number]{font:900 16px 'Lato',sans-serif;padding:9px 12px;border:2px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);width:120px;-webkit-user-select:text;user-select:text}
+input[type=number].ok{border-color:var(--green);background:var(--green-soft)}
+input[type=number].no{border-color:var(--red);background:var(--red-soft)}
+
+/* feedback */
+.fb{margin-top:14px;padding:12px 14px;border-radius:9px;font-weight:700;font-size:14px}
+.fb.good{background:var(--green-soft);color:var(--green);border:1px solid #B7DFC6}
+.fb.bad{background:var(--red-soft);color:var(--red);border:1px solid #F3C4BE}
+.fb ol{margin:8px 0 0;padding-left:20px;font-weight:400;color:var(--ink)}
+.fb ol li{margin-bottom:3px}
+.note{background:var(--blue-soft);border-left:6px solid var(--blue);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:14px;font-size:14px}
+.note b{color:var(--navy)}
+
+/* model answer */
+.model{background:var(--orange-soft);border:2px solid var(--orange);border-radius:10px;padding:16px;margin-top:12px;-webkit-user-select:text;user-select:text}
+.model .lbl{font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--navy);margin-bottom:8px}
+.ss{color:#B25E00;font-weight:900;background:#FFE2BE;border-radius:4px;padding:0 3px}
+.why{background:var(--green-soft);border-left:6px solid var(--green);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:12px;font-size:14px}
+.why b{color:var(--green)}
+
+/* progress */
+.prog{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--navy);padding:10px 16px;
+  display:flex;align-items:center;gap:14px;font-size:13px;font-weight:700;color:var(--navy);z-index:50}
+.bar{flex:1;height:9px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width .4s}
+.scorepill{background:var(--navy);color:#fff;border-radius:20px;padding:4px 12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 16px 8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="eyebrow">SISB &nbsp;|&nbsp; IGCSE ECONOMICS 0455</div>
+    <h1>Unit 1.3 — Opportunity Cost</h1>
+    <div class="sub">Grade 9 &nbsp;•&nbsp; The next best alternative forgone &nbsp;•&nbsp; Thai context</div>
+    <nav id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ================= 1 HOOK ================= -->
+<section data-tab="0">
+  <div class="card hook">
+    <span class="tag">THE PROBLEM IN THE WORLD</span>
+    <h2>Eighty-two billion baht, spent once</h2>
+    <p>You already ride the <b>MRT Purple Line</b> through Nonthaburi. Right now Thailand is spending about <b>฿82 billion</b> extending it south from Tao Poon to Rat Burana — 23.6 km, 17 new stations, opening around 2030.</p>
+    <p>That money is real and it is finite. The same ฿82 billion could have re-equipped provincial hospitals across Isaan. It could have put a tablet and an internet connection in the hands of every state-school student. It could have gone into the <b>Land Bridge</b> ports at Ranong and Chumphon. The Bureau of the Budget cannot fund all four. It funds one.</p>
+    <p style="font-weight:900;color:var(--navy);margin-bottom:0">The true cost of the Purple Line is not ฿82 billion. It is the hospital that never got built.</p>
+  </div>
+
+  <div class="card">
+    <h2>Think first</h2>
+    <p class="lede">No definitions yet — just your brain.</p>
+    <p class="q">The government builds the Purple Line extension. What has Thailand actually lost?</p>
+    <div class="btnrow" id="hookQ">
+      <button class="btn ghost" data-a="0">฿82 billion</button>
+      <button class="btn ghost" data-a="0">Nothing — the trains are useful</button>
+      <button class="btn ghost" data-a="1">The best thing it could have built instead</button>
+      <button class="btn ghost" data-a="0">The tax people paid</button>
+    </div>
+    <div id="hookFb"></div>
+    <div class="note hidden" id="hookNote">
+      <b>So here is the big idea.</b> Resources are <b>scarce</b> — there is never enough to satisfy every want — so every economic agent has to <b>choose</b>.
+      The moment you choose, you close a door. The value of the door you closed is the <b>opportunity cost</b>:
+      <b>the cost of the next best alternative forgone.</b>
+      Not the money you handed over. Not a list of everything you could have done. <b>One thing — the next best one.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 SORT ================= -->
+<section data-tab="1" class="hidden">
+  <div class="card">
+    <h2>Cost, or not a cost?</h2>
+    <p class="lede">Examiners fill Paper 1 with things that <i>look</i> like opportunity costs but are not. Drag each card into the right column — or tap a card, then tap a column.</p>
+    <div class="bank" id="bank"></div>
+    <div class="bins" id="bins">
+      <div class="bin" data-bin="opp"><h3>OPPORTUNITY COST<small>the next best thing given up</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="money"><h3>MONEY COST<small>what you actually pay out</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="sunk"><h3>SUNK COST<small>already spent, cannot be recovered</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="ben"><h3>NOT A COST<small>this is a benefit or a gain</small></h3><div class="drop"></div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn" id="sortCheck">Check my sort</button>
+      <button class="btn ghost" id="sortReset">Reset</button>
+    </div>
+    <div id="sortFb"></div>
+    <div class="note hidden" id="sortNote">
+      <b>The two that catch everyone out.</b><br>
+      <b>Money cost is not opportunity cost.</b> The ฿82 billion paid to the contractors is what Thailand <i>spent</i>. The hospitals it could have bought are what Thailand <i>gave up</i>. In the exam, an answer that says “the opportunity cost is ฿82 billion” scores zero for the definition mark.<br>
+      <b>Sunk costs are already gone.</b> Ploy paid ฿18,000 for a console she never uses. That money is spent whatever she decides now, so it cannot be the cost of keeping it. What she gives up by keeping it is the <b>฿12,000 she could get by selling it today</b> — that is the opportunity cost.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 WHOSE CHOICE ================= -->
+<section data-tab="2" class="hidden">
+  <div class="card">
+    <h2>Whose choice, and what was given up?</h2>
+    <p class="lede">Consumers, workers, producers and governments all face opportunity cost. For each Thai decision, choose the <b>one</b> thing that was forgone.</p>
+    <table>
+      <thead><tr><th style="width:38%">The decision made in Thailand</th><th style="width:14%">Agent</th><th style="width:26%">Opportunity cost is…</th><th>Why</th></tr></thead>
+      <tbody id="agentRows"></tbody>
+    </table>
+    <div class="btnrow">
+      <button class="btn" id="agCheck">Check answers</button>
+      <button class="btn ghost" id="agReset">Reset</button>
+    </div>
+    <div id="agFb"></div>
+    <div class="note hidden" id="agNote">
+      Notice the pattern: in every row the answer is a <b>thing</b>, never a sum of money that was paid out. Ploy gave up a concert, not ฿3,000.
+      Somchai gave up a career, not his tuition fees. Thailand gave up hospitals, not ฿82 billion. If your answer has a baht sign in front of it,
+      check whether that money was <i>spent</i> or <i>forgone</i> — only the second one counts.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 CALCULATION ================= -->
+<section data-tab="3" class="hidden">
+  <div class="card">
+    <h2>The farmer in Bang Kruai</h2>
+    <p class="lede">Opportunity cost can be measured in goods, not just in baht. A farmer can use his land for rice or for durian — here are two combinations he could produce in one year.</p>
+    <table style="max-width:520px">
+      <thead><tr><th>Rice (sacks)</th><th style="width:70px"></th><th>Durian (kg)</th></tr></thead>
+      <tbody>
+        <tr><td class="num" id="r1"></td><td class="plus">plus</td><td class="num" id="d1"></td></tr>
+        <tr><td class="num" id="r2"></td><td class="plus">plus</td><td class="num" id="d2"></td></tr>
+      </tbody>
+    </table>
+
+    <p class="q">(a) Calculate the opportunity cost of producing <b>1 kg of durian</b>. <span style="color:var(--orange)">[2]</span></p>
+    <div class="btnrow">
+      <input type="number" id="ansA" step="0.01" inputmode="decimal" aria-label="Opportunity cost of 1 kg of durian">
+      <span style="font-size:14px;color:var(--muted)">sacks of rice</span>
+      <button class="btn" id="checkA">Check</button>
+    </div>
+    <div id="fbA"></div>
+
+    <p class="q">(b) Calculate the opportunity cost of producing <b>1 sack of rice</b>. <span style="color:var(--orange)">[2]</span></p>
+    <div class="btnrow">
+      <input type="number" id="ansB" step="0.01" inputmode="decimal" aria-label="Opportunity cost of 1 sack of rice">
+      <span style="font-size:14px;color:var(--muted)">kg of durian</span>
+      <button class="btn" id="checkB">Check</button>
+    </div>
+    <div id="fbB"></div>
+
+    <div class="btnrow"><button class="btn ghost" id="newQ">New numbers</button></div>
+    <div class="note hidden" id="calcNote">
+      <b>The method, every time.</b> Find how much of one good is <i>given up</i>, find how much of the other is <i>gained</i>, then divide the first by the second.
+      Marks are awarded for the working as well as the number — and an answer with no units (“2”) throws away a mark that “2 sacks of rice” would have earned.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 EXAM ================= -->
+<section data-tab="4" class="hidden">
+  <div class="card">
+    <h2>Exam practice — multiple choice</h2>
+    <div id="mcqBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>Build a 4-mark answer</h2>
+    <p class="lede">Put the four steps of a 4-mark answer in the right order. Tap them in sequence.</p>
+    <div class="bank" id="chainBank"></div>
+    <div class="bank" id="chainSlot" style="background:var(--blue-soft);border-color:var(--blue);margin-top:10px"></div>
+    <div class="btnrow">
+      <button class="btn" id="chainCheck">Check order</button>
+      <button class="btn ghost" id="chainReset">Reset</button>
+    </div>
+    <div id="chainFb"></div>
+  </div>
+
+  <div class="card">
+    <h2>Model answer</h2>
+    <p class="lede">Write your own answer in your book first. Only then reveal this.</p>
+    <p class="q">Explain, using an example, why workers face an opportunity cost when making decisions. <span style="color:var(--orange)">[4]</span></p>
+    <div class="btnrow"><button class="btn orange" id="revealBtn">Reveal model answer</button></div>
+    <div class="model hidden" id="model">
+      <div class="lbl">MODEL ANSWER — SENTENCE STARTERS HIGHLIGHTED</div>
+      <p><span class="ss">Opportunity cost means</span> the cost of the next best alternative forgone when a decision is made.</p>
+      <p><span class="ss">For example,</span> a worker in Thailand who trains for six years to become a doctor at Siriraj Hospital gives up the hotel management course in Phuket that was her next best option.</p>
+      <p><span class="ss">This happens because</span> a worker’s time and training are scarce, so specialising in one profession means the other careers can no longer be pursued.</p>
+      <p style="margin-bottom:0"><span class="ss">Therefore, the opportunity cost is</span> the salary and career she would have had in hotel management — not the tuition fees she paid for medical school.</p>
+      <div class="why"><b>Why this scores well:</b> Define → Example → Explain → Develop, in that order. The example is specifically Thai and names a real hospital, not “a worker somewhere”. The word <i>because</i> is what unlocks the explanation mark. Crucially, the last sentence names <i>one thing forgone</i> and explicitly rejects the money that was paid out — that is the development mark.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Take it home</h2>
+    <p><b>[8]</b> Discuss whether the Thai government was right to spend ฿82 billion on extending the MRT Purple Line rather than on upgrading provincial hospitals.</p>
+    <div class="note"><b>Structure:</b> Paragraph 1 FOR (“One advantage of the Purple Line extension is…”) → Paragraph 2 AGAINST (“However, this is not always beneficial because…”) → Paragraph 3 JUDGMENT (“Overall, transport spending tends to be the better choice when…”). Most of the marks live in paragraph 3, so give a <i>condition</i> — when does it depend, and on what? — not a summary.</div>
+  </div>
+</section>
+
+</div>
+
+<div class="prog">
+  <span>Progress</span>
+  <span class="bar"><i id="pbar"></i></span>
+  <span class="scorepill" id="pscore">0 / 4 activities</span>
+</div>
+
+<footer>SISB · Singapore International School of Bangkok — IGCSE Economics 0455 · Unit 1.3 Opportunity Cost</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+const ITEMS = [
+  {t:'The concert tickets Ploy gave up to buy trainers', b:'opp'},
+  {t:'The ฿12,000 Ploy could get by selling her unused console today', b:'opp'},
+  {t:'The Isaan hospital upgrades ฿82bn could have funded', b:'opp'},
+  {t:'The hotel management career Somchai gave up to become a doctor', b:'opp'},
+  {t:'The ฿3,000 Ploy handed over at the till', b:'money'},
+  {t:'The ฿82 billion paid to the Purple Line contractors', b:'money'},
+  {t:'The ฿30,000 a farmer spends on fertiliser for his durian', b:'money'},
+  {t:'The ฿18,000 already paid for a console Ploy never uses', b:'sunk'},
+  {t:'The tunnelling already completed under Samsen Road', b:'sunk'},
+  {t:'The medical school fees Somchai paid four years ago', b:'sunk'},
+  {t:'The 400,000 daily journeys the Purple Line will carry', b:'ben'},
+  {t:'The ฿95,000 the durian crop earns at market', b:'ben'}
+];
+const AGENTS = [
+  {ex:'Nong Ploy spends her ฿3,000 allowance on trainers at Central Westgate. She had been saving for concert tickets, and also wanted a phone case.',
+   f:'Consumer', a:'The concert tickets',
+   why:'Her next best use of the money — not the phone case, which was only third best, and not the ฿3,000 she paid.'},
+  {ex:'Khun Somchai trains for six years as a doctor at Siriraj. His next best option was a hotel management course in Phuket.',
+   f:'Worker', a:'The hotel management career',
+   why:'Workers specialise, and specialising closes other doors. Fees are a money cost, not an alternative forgone.'},
+  {ex:'Toyota’s Samut Prakan plant spends its whole R&D budget on hybrid engines rather than fully electric vehicles.',
+   f:'Producer', a:'The electric vehicles it could have developed',
+   why:'Firms choose between competing business opportunities; the R&D budget is scarce.'},
+  {ex:'The Thai government spends ฿82 billion extending the MRT Purple Line instead of upgrading hospitals in Isaan.',
+   f:'Government', a:'The Isaan hospital upgrades',
+   why:'Tax revenue is finite, so the next best project the money could have funded is forgone.'},
+  {ex:'A Nonthaburi farmer grows durian on one rai of land instead of renting that land out for ฿40,000 a year.',
+   f:'Producer', a:'The ฿40,000 rent forgone',
+   why:'The rent is money he could have had and gave up — that is forgone income, not money paid out.'}
+];
+const AGOPTS = ['— choose —','The concert tickets','The ฿3,000 she spent','The hotel management career',
+  'The electric vehicles it could have developed','The Isaan hospital upgrades','The ฿82 billion spent',
+  'The ฿40,000 rent forgone','The ฿30,000 cost of growing durian'];
+const MCQ = [
+  {q:'Nong Ploy bought a new games console for ฿18,000 but has never used it. The second-hand value of her console is ฿12,000. What is the opportunity cost of Nong Ploy owning the console?',
+   o:['฿0','฿6,000','฿12,000','฿18,000'], a:2,
+   why:'By keeping it she gives up the ฿12,000 she could have had by selling it. The ฿18,000 is a sunk cost — already spent whatever she decides now.'},
+  {q:'What is the opportunity cost to the Thai economy if the government decides to build the Land Bridge between Ranong and Chumphon?',
+   o:['the cost of relocating and compensating residents','the money spent on building the Land Bridge','the other projects that could have been undertaken instead','the overall cost to taxpayers of financing the project'], a:2,
+   why:'A, B and D are all financial costs. Only C names the alternative that was given up — and that is what opportunity cost means.'},
+  {q:'A Grade 9 student chooses IGCSE Economics. She could otherwise have taken Art, Drama or Computer Science. Her second choice was Computer Science. What is her opportunity cost?',
+   o:['Art, Drama and Computer Science','Art only','Computer Science only','nothing, because she is happy with her choice'], a:2,
+   why:'Only the NEXT BEST alternative counts. Listing every option you rejected is the single most common Grade 9 error on this topic.'},
+  {q:'A farmer uses one rai of land to grow durian instead of renting it out for ฿40,000 a year. The durian earns ฿95,000 and costs ฿30,000 to grow. What is the opportunity cost of growing durian on that land?',
+   o:['฿30,000','฿40,000','฿65,000','฿95,000'], a:1,
+   why:'The next best use of the land was renting it, so ฿40,000 of rent is forgone. ฿65,000 is his profit and ฿30,000 is a production cost — neither is an alternative given up.'}
+];
+const CHAIN = [
+  {k:1, t:'“Opportunity cost means…” — define the key term'},
+  {k:2, t:'“For example, a worker in Thailand…” — give a Thai example'},
+  {k:3, t:'“This happens because…” — explain the cause'},
+  {k:4, t:'“Therefore, the opportunity cost is…” — develop the outcome'}
+];
+
+/* ---------------- TABS ---------------- */
+const TABS = ['The problem','Cost or not?','Whose choice?','Rice or durian','Exam practice'];
+const nav = document.getElementById('nav');
+TABS.forEach((label,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML='<span class="n">'+(i+1)+'</span>'+label;
+  b.onclick=()=>show(i); nav.appendChild(b);
+});
+function show(i){
+  [...nav.children].forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('section[data-tab]').forEach(s=>s.classList.toggle('hidden',+s.dataset.tab!==i));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+show(0);
+
+/* ---------------- PROGRESS ---------------- */
+const done={sort:false,ag:false,calc:false,mcq:false};
+function progress(){
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('pbar').style.width=(n/4*100)+'%';
+  document.getElementById('pscore').textContent=n+' / 4 activities';
+}
+
+/* ---------------- POINTER-EVENTS DRAG ENGINE (iPad-safe) ---------------- */
+let selected=null, ghost=null, dragging=null, startX=0, startY=0, moved=false;
+
+function makeDraggable(el, onDrop){
+  el.addEventListener('pointerdown', e=>{
+    if(el.dataset.locked==='1') return;
+    dragging=el; moved=false; startX=e.clientX; startY=e.clientY;
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', e=>{
+    if(dragging!==el) return;
+    const dx=e.clientX-startX, dy=e.clientY-startY;
+    if(!moved && Math.hypot(dx,dy)<8) return;
+    if(!moved){
+      moved=true;
+      const r=el.getBoundingClientRect();
+      ghost=el.cloneNode(true); ghost.classList.add('drag');
+      ghost.style.width=r.width+'px'; ghost.style.left=r.left+'px'; ghost.style.top=r.top+'px';
+      ghost._ox=e.clientX-r.left; ghost._oy=e.clientY-r.top;
+      document.body.appendChild(ghost); el.style.opacity='.35';
+    }
+    ghost.style.left=(e.clientX-ghost._ox)+'px';
+    ghost.style.top=(e.clientY-ghost._oy)+'px';
+    highlight(e.clientX,e.clientY);
+  });
+  el.addEventListener('pointerup', e=>{
+    if(dragging!==el) return;
+    if(moved){
+      ghost.remove(); ghost=null; el.style.opacity='';
+      const bin=binAt(e.clientX,e.clientY);
+      clearHot();
+      if(bin) onDrop(el,bin);
+    } else {
+      /* Tap. If another card is already selected, this tap means "drop it here"
+         — even when the finger lands on a card already sitting in that column. */
+      const binEl=el.closest('.bin');
+      const drop = binEl ? binEl.querySelector('.drop') : el.parentElement;
+      if(selected && selected!==el){
+        drop.appendChild(selected); selected.classList.remove('sel'); selected=null;
+      } else if(selected===el){
+        el.classList.remove('sel'); selected=null;
+      } else {
+        selected=el; el.classList.add('sel');
+      }
+    }
+    dragging=null; moved=false;
+  });
+  el.addEventListener('pointercancel', ()=>{
+    if(ghost){ghost.remove();ghost=null;} if(dragging)dragging.style.opacity='';
+    dragging=null; moved=false; clearHot();
+  });
+  /* A tap on a chip must not bubble to the bank or bin behind it, or the chip
+     is selected and instantly returned in the same gesture. */
+  el.addEventListener('click', e=>e.stopPropagation());
+}
+function binAt(x,y){
+  const el=document.elementFromPoint(x,y);
+  return el?el.closest('.bin'):null;
+}
+function highlight(x,y){ clearHot(); const b=binAt(x,y); if(b) b.classList.add('hot'); }
+function clearHot(){ document.querySelectorAll('.bin.hot').forEach(b=>b.classList.remove('hot')); }
+
+/* ---------------- 1. HOOK ---------------- */
+document.getElementById('hookQ').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const fb=document.getElementById('hookFb');
+  if(b.dataset.a==='1'){
+    fb.className='fb good';
+    fb.textContent='Exactly. The ฿82 billion did not vanish — it bought trains. What vanished is the best thing Thailand could have bought instead, and that is the real cost of the decision.';
+    document.getElementById('hookNote').classList.remove('hidden');
+  } else {
+    fb.className='fb bad';
+    fb.textContent='Not quite. Thailand still gets something for that money — 23.6 km of railway. Think about what it can no longer have. Try again.';
+  }
+});
+
+/* ---------------- 2. SORT ---------------- */
+const bank=document.getElementById('bank');
+function buildSort(){
+  bank.innerHTML='';
+  document.querySelectorAll('#bins .drop').forEach(d=>d.innerHTML='');
+  document.getElementById('sortFb').className=''; document.getElementById('sortFb').textContent='';
+  const shuffled=[...ITEMS].sort(()=>Math.random()-0.5);
+  shuffled.forEach(it=>{
+    const c=document.createElement('div');
+    c.className='chip'; c.textContent=it.t; c.dataset.bin=it.b;
+    makeDraggable(c,(el,bin)=>{ bin.querySelector('.drop').appendChild(el); el.classList.remove('sel'); if(selected===el)selected=null; });
+    bank.appendChild(c);
+  });
+}
+document.querySelectorAll('#bins .bin').forEach(bin=>{
+  bin.addEventListener('click', ()=>{
+    if(selected){ bin.querySelector('.drop').appendChild(selected); selected.classList.remove('sel'); selected=null; }
+  });
+});
+bank.addEventListener('click', ()=>{ if(selected){ bank.appendChild(selected); selected.classList.remove('sel'); selected=null; } });
+document.getElementById('sortReset').onclick=buildSort;
+document.getElementById('sortCheck').onclick=()=>{
+  let right=0, placed=0;
+  document.querySelectorAll('#bins .bin').forEach(bin=>{
+    bin.querySelectorAll('.chip').forEach(c=>{
+      placed++;
+      const ok=c.dataset.bin===bin.dataset.bin;
+      c.classList.toggle('ok',ok); c.classList.toggle('no',!ok);
+      if(ok) right++;
+    });
+  });
+  const fb=document.getElementById('sortFb');
+  if(placed<ITEMS.length){ fb.className='fb bad'; fb.textContent='You still have '+(ITEMS.length-placed)+' card(s) in the bank. Place them all, then check.'; return; }
+  if(right===ITEMS.length){
+    fb.className='fb good'; fb.textContent='All 12 correct. Only four of those were opportunity costs — now read why the other eight are not.';
+    done.sort=true; progress();
+  } else {
+    fb.className='fb bad'; fb.textContent=right+' / 12 correct. The red ones are in the wrong column — drag them and try again.';
+  }
+  document.getElementById('sortNote').classList.remove('hidden');
+};
+buildSort();
+
+/* ---------------- 3. WHOSE CHOICE ---------------- */
+const ar=document.getElementById('agentRows');
+function buildAg(){
+  ar.innerHTML='';
+  AGENTS.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+r.ex+'</td><td><b style="color:var(--navy)">'+r.f+'</b></td>'+
+      '<td><select data-i="'+i+'">'+AGOPTS.map(o=>'<option>'+o+'</option>').join('')+'</select></td>'+
+      '<td class="whycell" style="color:var(--muted);font-size:13px"></td>';
+    ar.appendChild(tr);
+  });
+  document.getElementById('agFb').className=''; document.getElementById('agFb').textContent='';
+}
+document.getElementById('agReset').onclick=buildAg;
+document.getElementById('agCheck').onclick=()=>{
+  let right=0;
+  ar.querySelectorAll('select').forEach(s=>{
+    const r=AGENTS[+s.dataset.i], ok=s.value===r.a;
+    s.classList.toggle('ok',ok); s.classList.toggle('no',!ok);
+    s.closest('tr').querySelector('.whycell').textContent = ok? r.why : '';
+    if(ok) right++;
+  });
+  const fb=document.getElementById('agFb');
+  if(right===AGENTS.length){
+    fb.className='fb good'; fb.textContent='All five correct.';
+    done.ag=true; progress(); document.getElementById('agNote').classList.remove('hidden');
+  } else { fb.className='fb bad'; fb.textContent=right+' / 5 correct. Look again at the red rows.'; }
+};
+buildAg();
+
+/* ---------------- 4. CALCULATION ---------------- */
+let q3={}, calcDone={A:false,B:false};
+function newQ(){
+  const durStep=[5,10,10,20][Math.floor(Math.random()*4)];
+  const ratio=[2,3,4,0.5][Math.floor(Math.random()*4)];
+  const riceStep=Math.round(durStep*ratio);
+  const d1=[30,40,50,60][Math.floor(Math.random()*4)];
+  let r1=[100,110,120,140][Math.floor(Math.random()*4)];
+  if(r1-riceStep<10) r1=riceStep+40;
+  q3={r1:r1,d1:d1,r2:r1-riceStep,d2:d1+durStep,riceStep:riceStep,durStep:durStep};
+  ['r1','d1','r2','d2'].forEach(k=>document.getElementById(k).textContent=q3[k]);
+  ['A','B'].forEach(w=>{
+    const inp=document.getElementById('ans'+w);
+    inp.value=''; inp.classList.remove('ok','no');
+    document.getElementById('fb'+w).className='';
+    document.getElementById('fb'+w).innerHTML='';
+  });
+  calcDone={A:false,B:false};
+}
+function fmt(n){ return (Math.round(n*100)/100).toString(); }
+function checkCalc(w){
+  const correct = w==='A' ? q3.riceStep/q3.durStep : q3.durStep/q3.riceStep;
+  const inp=document.getElementById('ans'+w);
+  const fb=document.getElementById('fb'+w);
+  const val=parseFloat(inp.value);
+  if(isNaN(val)){ fb.className='fb bad'; fb.textContent='Enter a number first. Work out how much of one crop is given up, then divide by how much of the other is gained.'; return; }
+  const ok=Math.abs(val-correct)<0.005;
+  inp.classList.toggle('ok',ok); inp.classList.toggle('no',!ok);
+  const lost = w==='A'? q3.riceStep : q3.durStep;
+  const got  = w==='A'? q3.durStep  : q3.riceStep;
+  const lostLine = w==='A' ? 'Rice given up = '+q3.r1+' − '+q3.r2+' = <b>'+lost+'</b>' : 'Durian given up = '+q3.d2+' − '+q3.d1+' = <b>'+lost+'</b>';
+  const gotLine  = w==='A' ? 'Durian gained = '+q3.d2+' − '+q3.d1+' = <b>'+got+'</b>'  : 'Rice gained = '+q3.r1+' − '+q3.r2+' = <b>'+got+'</b>';
+  const units = w==='A' ? 'sacks of rice per 1 kg of durian' : 'kg of durian per 1 sack of rice';
+  fb.className='fb '+(ok?'good':'bad');
+  fb.innerHTML=(ok?'Correct — 2 marks.':'Not yet — check your working.')+
+    '<ol><li>'+lostLine+'</li><li>'+gotLine+'</li><li>'+lost+' ÷ '+got+' = <b>'+fmt(correct)+'</b> '+units+'</li></ol>';
+  calcDone[w]=ok;
+  document.getElementById('calcNote').classList.remove('hidden');
+  if(calcDone.A && calcDone.B && !done.calc){ done.calc=true; progress(); }
+}
+document.getElementById('checkA').onclick=()=>checkCalc('A');
+document.getElementById('checkB').onclick=()=>checkCalc('B');
+document.getElementById('newQ').onclick=newQ;
+newQ();
+
+/* ---------------- 5a. MCQ ---------------- */
+const mb=document.getElementById('mcqBox');
+let mcqRight=0;
+MCQ.forEach((m,i)=>{
+  const d=document.createElement('div');
+  d.style.marginBottom='18px';
+  d.innerHTML='<p class="q">'+(i+1)+'. '+m.q+' <span style="color:var(--orange)">[1]</span></p>'+
+    '<div class="btnrow">'+m.o.map((o,j)=>'<button class="btn ghost" data-j="'+j+'">'+'ABCD'[j]+'&nbsp; '+o+'</button>').join('')+'</div>'+
+    '<div class="fbslot"></div>';
+  d.addEventListener('click', e=>{
+    const b=e.target.closest('button[data-j]'); if(!b||d.dataset.done==='1') return;
+    const fb=d.querySelector('.fbslot');
+    if(+b.dataset.j===m.a){
+      d.dataset.done='1'; b.style.background='var(--green)'; b.style.color='#fff'; b.style.borderColor='var(--green)';
+      fb.className='fbslot fb good'; fb.innerHTML='Correct. '+m.why;
+      mcqRight++; if(mcqRight===MCQ.length){ done.mcq=true; progress(); }
+    } else {
+      b.style.background='var(--red-soft)'; b.style.borderColor='var(--red)'; b.style.color='var(--red)';
+      fb.className='fbslot fb bad'; fb.textContent='Not that one — read the stem again and try another option.';
+    }
+  });
+  mb.appendChild(d);
+});
+
+/* ---------------- 5b. CHAIN BUILDER ---------------- */
+const cb=document.getElementById('chainBank'), cs=document.getElementById('chainSlot');
+function buildChain(){
+  cb.innerHTML=''; cs.innerHTML='';
+  [...CHAIN].sort(()=>Math.random()-0.5).forEach(c=>{
+    const el=document.createElement('div');
+    el.className='chip'; el.textContent=c.t; el.dataset.k=c.k;
+    el.onclick=()=>{ if(el.parentElement===cb) cs.appendChild(el); else cb.appendChild(el); el.classList.remove('ok','no'); };
+    cb.appendChild(el);
+  });
+  document.getElementById('chainFb').className=''; document.getElementById('chainFb').textContent='';
+}
+document.getElementById('chainReset').onclick=buildChain;
+document.getElementById('chainCheck').onclick=()=>{
+  const chips=[...cs.children], fb=document.getElementById('chainFb');
+  if(chips.length<4){ fb.className='fb bad'; fb.textContent='Tap all four steps into the blue box first.'; return; }
+  let ok=true;
+  chips.forEach((c,i)=>{ const good=+c.dataset.k===i+1; c.classList.toggle('ok',good); c.classList.toggle('no',!good); if(!good) ok=false; });
+  if(ok){ fb.className='fb good'; fb.textContent='That is the 4-mark formula: Define → Example → Explain → Develop. Use it every time.'; }
+  else { fb.className='fb bad'; fb.textContent='Close. Remember you always define the term first and finish with the outcome.'; }
+};
+buildChain();
+
+/* ---------------- 5c. MODEL ---------------- */
+document.getElementById('revealBtn').onclick=function(){
+  document.getElementById('model').classList.remove('hidden');
+  this.remove();
+};
+
+progress();
+</script>
+</body>
+</html>
