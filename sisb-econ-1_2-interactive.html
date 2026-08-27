@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SISB IGCSE Economics 1.2 — The Factors of Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C;
+  --navy-soft:#E8EEF6; --blue-soft:#E8F4FB; --orange-soft:#FFF1E0;
+  --green:#2E7D4F; --green-soft:#EAF6EE; --red:#C0392B; --red-soft:#FDECEA;
+  --ink:#1B2733; --muted:#667085; --line:#D5DCE5; --paper:#FFFFFF;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:#F4F6F9;line-height:1.5;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 80px}
+
+/* header */
+header{background:var(--navy);color:#fff;padding:22px 0 0}
+.hd{max-width:1080px;margin:0 auto;padding:0 16px}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:900;opacity:.75}
+h1{margin:4px 0 2px;font-size:clamp(22px,3.4vw,32px);font-weight:900}
+.sub{opacity:.85;font-size:14px;margin-bottom:16px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:rgba(255,255,255,.10);color:#fff;border:0;border-radius:8px 8px 0 0;
+  padding:11px 15px;font:700 14px 'Lato',sans-serif;cursor:pointer;white-space:nowrap}
+nav button.on{background:#F4F6F9;color:var(--navy)}
+nav button .n{display:inline-block;width:19px;height:19px;line-height:19px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;text-align:center;margin-right:7px}
+nav button.on .n{background:var(--navy)}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 1px 3px rgba(16,24,40,.05)}
+.card h2{margin:0 0 4px;color:var(--navy);font-size:20px;font-weight:900}
+.card .lede{color:var(--muted);font-size:14px;margin:0 0 14px}
+.hook{border-left:7px solid var(--orange);background:var(--orange-soft);border-color:#F5D9B5}
+.hook h2{color:var(--navy)}
+.tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:900;letter-spacing:.1em;padding:4px 9px;border-radius:5px;margin-bottom:10px}
+p{margin:0 0 10px}
+.q{font-weight:700;color:var(--navy);margin-top:14px}
+.hidden{display:none}
+
+/* buttons */
+.btn{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:11px 20px;font:900 14px 'Lato',sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn.orange{background:var(--orange)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* chips + bins */
+.bank{display:flex;flex-wrap:wrap;gap:8px;padding:14px;background:var(--navy-soft);border:2px dashed #B9C6D8;border-radius:10px;min-height:64px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13.5px;font-weight:700;
+  cursor:grab;touch-action:none;transition:box-shadow .12s,border-color .12s;max-width:100%}
+.chip:active{cursor:grabbing}
+.chip.sel{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+.chip.ok{border-color:var(--green);background:var(--green-soft)}
+.chip.no{border-color:var(--red);background:var(--red-soft)}
+.chip.drag{position:fixed;z-index:999;pointer-events:none;box-shadow:0 10px 24px rgba(16,24,40,.28);transform:rotate(-2deg)}
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+@media(max-width:760px){.bins{grid-template-columns:repeat(2,1fr)}}
+.bin{border:2px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;min-height:150px;display:flex;flex-direction:column}
+.bin h3{margin:0;background:var(--navy);color:#fff;font-size:13px;font-weight:900;padding:9px 10px;letter-spacing:.04em}
+.bin h3 small{display:block;font-weight:400;opacity:.75;font-size:11px;letter-spacing:0}
+.bin .drop{flex:1;padding:9px;display:flex;flex-direction:column;gap:7px}
+.bin.hot{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}
+
+/* tables / matching */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:13px}
+td{border:1px solid var(--line);padding:8px 10px;vertical-align:middle}
+select{font:700 14px 'Lato',sans-serif;padding:7px 9px;border:2px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);width:100%}
+select.ok{border-color:var(--green);background:var(--green-soft)}
+select.no{border-color:var(--red);background:var(--red-soft)}
+
+/* feedback */
+.fb{margin-top:14px;padding:12px 14px;border-radius:9px;font-weight:700;font-size:14px}
+.fb.good{background:var(--green-soft);color:var(--green);border:1px solid #B7DFC6}
+.fb.bad{background:var(--red-soft);color:var(--red);border:1px solid #F3C4BE}
+.note{background:var(--blue-soft);border-left:6px solid var(--blue);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:14px;font-size:14px}
+.note b{color:var(--navy)}
+
+/* model answer */
+.model{background:var(--orange-soft);border:2px solid var(--orange);border-radius:10px;padding:16px;margin-top:12px;-webkit-user-select:text;user-select:text}
+.model .lbl{font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--navy);margin-bottom:8px}
+.ss{color:#B25E00;font-weight:900;background:#FFE2BE;border-radius:4px;padding:0 3px}
+.why{background:var(--green-soft);border-left:6px solid var(--green);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:12px;font-size:14px}
+.why b{color:var(--green)}
+
+/* progress */
+.prog{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--navy);padding:10px 16px;
+  display:flex;align-items:center;gap:14px;font-size:13px;font-weight:700;color:var(--navy);z-index:50}
+.bar{flex:1;height:9px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width .4s}
+.scorepill{background:var(--navy);color:#fff;border-radius:20px;padding:4px 12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 16px 8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="eyebrow">SISB &nbsp;|&nbsp; IGCSE ECONOMICS 0455</div>
+    <h1>Unit 1.2 — The Factors of Production</h1>
+    <div class="sub">Grade 9 &nbsp;•&nbsp; Land, Labour, Capital, Enterprise &nbsp;•&nbsp; Thai context</div>
+    <nav id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ================= 1 HOOK ================= -->
+<section data-tab="0">
+  <div class="card hook">
+    <span class="tag">THE PROBLEM IN THE WORLD</span>
+    <h2>Empty fields in the “rice bowl” of Thailand</h2>
+    <p>Thailand has the land. Thailand has the tractors. So why do rice farmers in Suphan Buri and Nakhon Sawan leave part of their fields unplanted every year?</p>
+    <p>Ask them and you hear the same answer: <b>they cannot find anyone to do the work.</b> Thailand’s population is ageing quickly, families are having far fewer children, and young people who finish school head to Bangkok for air-conditioned office jobs — not to the paddy fields. Farms, building sites and seafood factories now depend heavily on migrant workers from Myanmar and Cambodia. When those workers go home, the work stops.</p>
+    <p style="font-weight:900;color:var(--navy);margin-bottom:0">A field with nobody to work it produces nothing. Money cannot plant rice.</p>
+  </div>
+
+  <div class="card">
+    <h2>Think first</h2>
+    <p class="lede">No definitions yet — just your brain.</p>
+    <p class="q">The farmer owns the land and owns a tractor. Which resource is missing?</p>
+    <div class="btnrow" id="hookQ">
+      <button class="btn ghost" data-a="0">More land</button>
+      <button class="btn ghost" data-a="0">More money</button>
+      <button class="btn ghost" data-a="1">People to do the work</button>
+      <button class="btn ghost" data-a="0">Better weather</button>
+    </div>
+    <div id="hookFb"></div>
+    <div class="note hidden" id="hookNote">
+      <b>So here is the big idea.</b> To produce <i>anything</i> — a bowl of som tum, a Skytrain journey, an Economics lesson — you need
+      <b>resources</b>. Economists call them the <b>factors of production</b> and sort them into four groups:
+      <b>C</b>apital, <b>E</b>nterprise, <b>L</b>and, <b>L</b>abour. <b>CELL.</b>
+      Remove one and production stops, no matter how rich you are.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 CELL SORT ================= -->
+<section data-tab="1" class="hidden">
+  <div class="card">
+    <h2>Sort the resources into C.E.L.L.</h2>
+    <p class="lede">Drag each Thai resource into the right column — or tap a card, then tap a column.</p>
+    <div class="bank" id="bank"></div>
+    <div class="bins" id="bins">
+      <div class="bin" data-bin="land"><h3>LAND<small>natural resources</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="labour"><h3>LABOUR<small>human effort</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="capital"><h3>CAPITAL<small>man-made, used to produce</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="ent"><h3>ENTERPRISE<small>risk &amp; organising</small></h3><div class="drop"></div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn" id="sortCheck">Check my sort</button>
+      <button class="btn ghost" id="sortReset">Reset</button>
+    </div>
+    <div id="sortFb"></div>
+    <div class="note hidden" id="sortNote">
+      <b>The two that catch everyone out.</b><br>
+      <b>The mortar and papaya shredder</b> — “it’s made of stone and wood, so it’s land!” No. The test is not what it is made of,
+      it is whether a human made it <i>to help produce something else</i>. Rubber trees in the ground are land; a rubber tyre in a factory is capital.<br>
+      <b>The street-food seller</b> — she is two factors at once. Chopping papaya, she is <b>labour</b>. Choosing what to sell, setting the
+      price and risking her own money, she is <b>enterprise</b>. In a small Thai business one person is often two factors; in CP All those
+      jobs belong to thousands of different people.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 REWARDS ================= -->
+<section data-tab="2" class="hidden">
+  <div class="card">
+    <h2>Who gets paid what?</h2>
+    <p class="lede">Every factor earns a reward for being used. Choose the correct reward for each Thai example.</p>
+    <table>
+      <thead><tr><th style="width:30%">Thai example</th><th style="width:22%">Factor</th><th style="width:26%">Its reward is…</th><th>Why</th></tr></thead>
+      <tbody id="rewardRows"></tbody>
+    </table>
+    <div class="btnrow">
+      <button class="btn" id="rewCheck">Check answers</button>
+      <button class="btn ghost" id="rewReset">Reset</button>
+    </div>
+    <div id="rewFb"></div>
+    <div class="note hidden" id="rewNote">
+      Collectively, these four rewards — rent, wages and salaries, interest and profit — are known as <b>income</b>.
+      Careful: “money” is not an acceptable answer in an exam.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 CHANGES ================= -->
+<section data-tab="3" class="hidden">
+  <div class="card">
+    <h2>More, fewer, better, worse</h2>
+    <p class="lede">The <b>quantity</b> (how much) and <b>quality</b> (how good) of Thailand’s factors change all the time. Complete each row.</p>
+    <table>
+      <thead><tr><th style="width:40%">What happens in Thailand</th><th>Which factor?</th><th>Quantity or quality?</th><th>Rises or falls?</th></tr></thead>
+      <tbody id="changeRows"></tbody>
+    </table>
+    <div class="btnrow">
+      <button class="btn" id="chCheck">Check answers</button>
+      <button class="btn ghost" id="chReset">Reset</button>
+    </div>
+    <div id="chFb"></div>
+    <div class="note hidden" id="chNote">
+      <b>The Thai story behind the table.</b> Thailand’s working-age population is shrinking, so simply adding <i>more</i> workers is
+      getting harder every year. That leaves one route: raise the <b>quality</b> of the labour it already has — education, training,
+      healthcare, English and digital skills. Remember this; it comes back in Unit 4 when we ask why some economies grow faster than others.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 EXAM ================= -->
+<section data-tab="4" class="hidden">
+  <div class="card">
+    <h2>Exam practice — multiple choice</h2>
+    <div id="mcqBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>Build a 4-mark answer</h2>
+    <p class="lede">Put the four steps of a 4-mark answer in the right order. Tap them in sequence.</p>
+    <div class="bank" id="chainBank"></div>
+    <div class="bank" id="chainSlot" style="background:var(--blue-soft);border-color:var(--blue);margin-top:10px"></div>
+    <div class="btnrow">
+      <button class="btn" id="chainCheck">Check order</button>
+      <button class="btn ghost" id="chainReset">Reset</button>
+    </div>
+    <div id="chainFb"></div>
+  </div>
+
+  <div class="card">
+    <h2>Model answer</h2>
+    <p class="lede">Write your own answer in your book first. Only then reveal this.</p>
+    <p class="q">Explain how an increase in the number of migrant workers coming to Thailand affects the quantity of labour. <span style="color:var(--orange)">[4]</span></p>
+    <div class="btnrow"><button class="btn orange" id="revealBtn">Reveal model answer</button></div>
+    <div class="model hidden" id="model">
+      <div class="lbl">MODEL ANSWER — SENTENCE STARTERS HIGHLIGHTED</div>
+      <p><span class="ss">Labour means</span> the human resource used in the production process — the people who do the work.</p>
+      <p><span class="ss">For example,</span> many farms in Suphan Buri and building sites in Bangkok employ migrant workers from Myanmar and Cambodia.</p>
+      <p><span class="ss">This happens because</span> there are not enough Thai workers willing to do this work, so when more migrant workers arrive the number of people available to work in Thailand increases.</p>
+      <p style="margin-bottom:0"><span class="ss">Therefore,</span> the quantity of labour rises, which means farms and firms can produce more output than they could before.</p>
+      <div class="why"><b>Why this scores well:</b> Define → Example → Explain → Develop, in that order. The example is specifically Thai, not “a country”. The word <i>because</i> is what unlocks the explanation mark, and the last sentence lands on an economic consequence instead of trailing off.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Take it home</h2>
+    <p><b>[8]</b> Discuss whether capital is always the most important factor of production for a business in Thailand.</p>
+    <div class="note"><b>Structure:</b> Paragraph 1 FOR (“One advantage of capital is…”) → Paragraph 2 AGAINST (“However, capital is not always the most important because…”) → Paragraph 3 JUDGMENT (“Overall, capital tends to matter most when…”). Most of the marks live in paragraph 3, so give a <i>condition</i>, not a summary.</div>
+  </div>
+</section>
+
+</div>
+
+<div class="prog">
+  <span>Progress</span>
+  <span class="bar"><i id="pbar"></i></span>
+  <span class="scorepill" id="pscore">0 / 4 activities</span>
+</div>
+
+<footer>SISB · Singapore International School of Bangkok — IGCSE Economics 0455 · Unit 1.2 The Factors of Production</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+const ITEMS = [
+  {t:'Rubber trees on a plantation in Surat Thani', b:'land'},
+  {t:'Natural gas from the Gulf of Thailand', b:'land'},
+  {t:'Rice paddy fields in Suphan Buri', b:'land'},
+  {t:'A Bangkok Airways pilot flying to Koh Samui', b:'labour'},
+  {t:'A 7-Eleven cashier in Nonthaburi', b:'labour'},
+  {t:'A Muay Thai trainer at a gym near Chaeng Watthana', b:'labour'},
+  {t:'Café Amazon’s espresso machine', b:'capital'},
+  {t:'The BTS Skytrain carriages', b:'capital'},
+  {t:'Robot arms in a Samut Prakan truck factory', b:'capital'},
+  {t:'A som tum seller’s mortar and papaya shredder', b:'capital'},
+  {t:'Someone risking their savings to open a bubble-tea shop', b:'ent'},
+  {t:'The street-food seller who decides what to sell and takes the risk', b:'ent'}
+];
+const REWARDS = [
+  {ex:'A som tum seller pays ฿300 a day to the market for her pitch.', f:'Land', a:'Rent', why:'A payment to use land or property.'},
+  {ex:'A 7-Eleven worker in Nonthaburi is paid by the hour.', f:'Labour', a:'Wages and salaries', why:'Paid by the hour = wage; a fixed monthly amount = salary.'},
+  {ex:'SCG borrows money from a bank to buy a new machine.', f:'Capital', a:'Interest', why:'The cost of borrowing to fund capital.'},
+  {ex:'After all the costs of the cart are paid, what is left for the owner.', f:'Enterprise', a:'Profit', why:'The return for good ideas and for taking risk.'}
+];
+const REWOPTS = ['— choose —','Rent','Wages and salaries','Interest','Profit'];
+const CHANGES = [
+  {e:'A severe drought in Isaan dries out farmland for a whole season.', f:'Land', q:'Quantity', d:'Falls'},
+  {e:'The government raises the national minimum wage sharply.', f:'Labour', q:'Quantity', d:'Falls'},
+  {e:'A Thai university trains 500 extra nurses every year.', f:'Labour', q:'Quality', d:'Rises'},
+  {e:'Floods destroy machinery in an industrial estate in Ayutthaya.', f:'Capital', q:'Quantity', d:'Falls'},
+  {e:'A pick-up truck factory installs AI-controlled robot arms.', f:'Capital', q:'Quality', d:'Rises'},
+  {e:'Thousands of migrant workers leave Thailand and return to Myanmar.', f:'Labour', q:'Quantity', d:'Falls'}
+];
+const MCQ = [
+  {q:'Which option is <b>not</b> an example of capital as a resource?',
+   o:['the delivery truck of a 7-Eleven','the coffee machine in a Café Amazon branch','the rubber trees on a plantation in Surat Thani','the ovens in a bakery in Nonthaburi'], a:2,
+   why:'A, B and D are all man-made resources used to produce something else. Rubber trees are a natural resource — land.'},
+  {q:'Which event is <b>most</b> likely to improve the quality of labour in Thailand?',
+   o:['a fall in the rate of income tax','increased government spending on training and healthcare','workers emigrating to work in South Korea','an increase in the national minimum wage'], a:1,
+   why:'A changes incentives to work and C reduces the number of workers — both are quantity. Only B makes workers more skilled and healthier.'},
+  {q:'A street-food seller pays 300 baht a day for her space in the market. This payment is the reward to which factor?',
+   o:['capital','enterprise','labour','land'], a:3,
+   why:'She is paying to use a space — that is rent, the reward to land. Many pick “enterprise” because she is an entrepreneur, but the question asks what the payment rewards.'}
+];
+const CHAIN = [
+  {k:1, t:'“Labour means…” — define the key term'},
+  {k:2, t:'“For example, in Suphan Buri…” — give a Thai example'},
+  {k:3, t:'“This happens because…” — explain the cause'},
+  {k:4, t:'“Therefore, the quantity of labour…” — develop the outcome'}
+];
+
+/* ---------------- TABS ---------------- */
+const TABS = ['The problem','C.E.L.L. sort','Rewards','Quantity & quality','Exam practice'];
+const nav = document.getElementById('nav');
+TABS.forEach((label,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML='<span class="n">'+(i+1)+'</span>'+label;
+  b.onclick=()=>show(i); nav.appendChild(b);
+});
+function show(i){
+  [...nav.children].forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('section[data-tab]').forEach(s=>s.classList.toggle('hidden',+s.dataset.tab!==i));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+show(0);
+
+/* ---------------- PROGRESS ---------------- */
+const done={sort:false,rew:false,ch:false,mcq:false};
+function progress(){
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('pbar').style.width=(n/4*100)+'%';
+  document.getElementById('pscore').textContent=n+' / 4 activities';
+}
+
+/* ---------------- POINTER-EVENTS DRAG ENGINE (iPad-safe) ---------------- */
+/* Native HTML5 drag-and-drop does not work on iPad Safari, so everything below
+   uses Pointer Events plus a tap-to-select fallback. */
+let selected=null, ghost=null, dragging=null, startX=0, startY=0, moved=false;
+
+function makeDraggable(el, onDrop){
+  el.addEventListener('pointerdown', e=>{
+    if(el.dataset.locked==='1') return;
+    dragging=el; moved=false; startX=e.clientX; startY=e.clientY;
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', e=>{
+    if(dragging!==el) return;
+    const dx=e.clientX-startX, dy=e.clientY-startY;
+    if(!moved && Math.hypot(dx,dy)<8) return;
+    if(!moved){
+      moved=true;
+      const r=el.getBoundingClientRect();
+      ghost=el.cloneNode(true); ghost.classList.add('drag');
+      ghost.style.width=r.width+'px'; ghost.style.left=r.left+'px'; ghost.style.top=r.top+'px';
+      ghost._ox=e.clientX-r.left; ghost._oy=e.clientY-r.top;
+      document.body.appendChild(ghost); el.style.opacity='.35';
+    }
+    ghost.style.left=(e.clientX-ghost._ox)+'px';
+    ghost.style.top=(e.clientY-ghost._oy)+'px';
+    highlight(e.clientX,e.clientY);
+  });
+  el.addEventListener('pointerup', e=>{
+    if(dragging!==el) return;
+    if(moved){
+      ghost.remove(); ghost=null; el.style.opacity='';
+      const bin=binAt(e.clientX,e.clientY);
+      clearHot();
+      if(bin) onDrop(el,bin);
+    } else {
+      // tap = select / deselect
+      if(selected===el){ el.classList.remove('sel'); selected=null; }
+      else { if(selected) selected.classList.remove('sel'); selected=el; el.classList.add('sel'); }
+    }
+    dragging=null; moved=false;
+  });
+  el.addEventListener('pointercancel', ()=>{
+    if(ghost){ghost.remove();ghost=null;} if(dragging)dragging.style.opacity='';
+    dragging=null; moved=false; clearHot();
+  });
+}
+function binAt(x,y){
+  const el=document.elementFromPoint(x,y);
+  return el?el.closest('.bin'):null;
+}
+function highlight(x,y){ clearHot(); const b=binAt(x,y); if(b) b.classList.add('hot'); }
+function clearHot(){ document.querySelectorAll('.bin.hot').forEach(b=>b.classList.remove('hot')); }
+
+/* ---------------- 1. HOOK ---------------- */
+document.getElementById('hookQ').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const fb=document.getElementById('hookFb');
+  if(b.dataset.a==='1'){
+    fb.className='fb good';
+    fb.textContent='Exactly. The land is there and the tractor is there. What is missing is people — and that is a resource you cannot buy off a shelf.';
+    document.getElementById('hookNote').classList.remove('hidden');
+  } else {
+    fb.className='fb bad';
+    fb.textContent='Not quite. The farmer already has land, a tractor and money — and the field is still empty. Something else is missing. Try again.';
+  }
+});
+
+/* ---------------- 2. CELL SORT ---------------- */
+const bank=document.getElementById('bank');
+function buildSort(){
+  bank.innerHTML='';
+  document.querySelectorAll('#bins .drop').forEach(d=>d.innerHTML='');
+  document.getElementById('sortFb').className=''; document.getElementById('sortFb').textContent='';
+  const shuffled=[...ITEMS].sort(()=>Math.random()-0.5);
+  shuffled.forEach(it=>{
+    const c=document.createElement('div');
+    c.className='chip'; c.textContent=it.t; c.dataset.bin=it.b;
+    makeDraggable(c,(el,bin)=>{ bin.querySelector('.drop').appendChild(el); el.classList.remove('sel'); if(selected===el)selected=null; });
+    bank.appendChild(c);
+  });
+}
+document.querySelectorAll('#bins .bin').forEach(bin=>{
+  bin.addEventListener('click', ()=>{
+    if(selected){ bin.querySelector('.drop').appendChild(selected); selected.classList.remove('sel'); selected=null; }
+  });
+});
+bank.addEventListener('click', ()=>{ if(selected){ bank.appendChild(selected); selected.classList.remove('sel'); selected=null; } });
+document.getElementById('sortReset').onclick=buildSort;
+document.getElementById('sortCheck').onclick=()=>{
+  let right=0, placed=0;
+  document.querySelectorAll('#bins .bin').forEach(bin=>{
+    bin.querySelectorAll('.chip').forEach(c=>{
+      placed++;
+      const ok=c.dataset.bin===bin.dataset.bin;
+      c.classList.toggle('ok',ok); c.classList.toggle('no',!ok);
+      if(ok) right++;
+    });
+  });
+  const fb=document.getElementById('sortFb');
+  if(placed<ITEMS.length){ fb.className='fb bad'; fb.textContent='You still have '+(ITEMS.length-placed)+' card(s) in the bank. Place them all, then check.'; return; }
+  if(right===ITEMS.length){
+    fb.className='fb good'; fb.textContent='All 12 correct. That is CELL sorted — now read the two tricky ones below.';
+    done.sort=true; progress();
+  } else {
+    fb.className='fb bad'; fb.textContent=right+' / 12 correct. The red ones are in the wrong column — drag them and try again.';
+  }
+  document.getElementById('sortNote').classList.remove('hidden');
+};
+buildSort();
+
+/* ---------------- 3. REWARDS ---------------- */
+const rr=document.getElementById('rewardRows');
+function buildRew(){
+  rr.innerHTML='';
+  REWARDS.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+r.ex+'</td><td><b style="color:var(--navy)">'+r.f+'</b></td>'+
+      '<td><select data-i="'+i+'">'+REWOPTS.map(o=>'<option>'+o+'</option>').join('')+'</select></td>'+
+      '<td class="whycell" style="color:var(--muted);font-size:13px"></td>';
+    rr.appendChild(tr);
+  });
+  document.getElementById('rewFb').className=''; document.getElementById('rewFb').textContent='';
+}
+document.getElementById('rewReset').onclick=buildRew;
+document.getElementById('rewCheck').onclick=()=>{
+  let right=0;
+  rr.querySelectorAll('select').forEach(s=>{
+    const r=REWARDS[+s.dataset.i], ok=s.value===r.a;
+    s.classList.toggle('ok',ok); s.classList.toggle('no',!ok);
+    s.closest('tr').querySelector('.whycell').textContent = ok? r.why : '';
+    if(ok) right++;
+  });
+  const fb=document.getElementById('rewFb');
+  if(right===REWARDS.length){
+    fb.className='fb good'; fb.textContent='All four correct.';
+    done.rew=true; progress(); document.getElementById('rewNote').classList.remove('hidden');
+  } else { fb.className='fb bad'; fb.textContent=right+' / 4 correct. Look again at the red rows.'; }
+};
+buildRew();
+
+/* ---------------- 4. CHANGES ---------------- */
+const cr=document.getElementById('changeRows');
+const sel=(opts,key,i)=>'<select data-i="'+i+'" data-k="'+key+'">'+['— choose —',...opts].map(o=>'<option>'+o+'</option>').join('')+'</select>';
+function buildCh(){
+  cr.innerHTML='';
+  CHANGES.forEach((c,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+c.e+'</td><td>'+sel(['Land','Labour','Capital','Enterprise'],'f',i)+'</td>'+
+      '<td>'+sel(['Quantity','Quality'],'q',i)+'</td><td>'+sel(['Rises','Falls'],'d',i)+'</td>';
+    cr.appendChild(tr);
+  });
+  document.getElementById('chFb').className=''; document.getElementById('chFb').textContent='';
+}
+document.getElementById('chReset').onclick=buildCh;
+document.getElementById('chCheck').onclick=()=>{
+  let right=0, total=0;
+  cr.querySelectorAll('select').forEach(s=>{
+    total++;
+    const ok=s.value===CHANGES[+s.dataset.i][s.dataset.k];
+    s.classList.toggle('ok',ok); s.classList.toggle('no',!ok);
+    if(ok) right++;
+  });
+  const fb=document.getElementById('chFb');
+  if(right===total){
+    fb.className='fb good'; fb.textContent='All 18 boxes correct. Now read why this matters for Thailand.';
+    done.ch=true; progress(); document.getElementById('chNote').classList.remove('hidden');
+  } else { fb.className='fb bad'; fb.textContent=right+' / '+total+' correct. Fix the red boxes and check again.'; }
+};
+buildCh();
+
+/* ---------------- 5a. MCQ ---------------- */
+const mb=document.getElementById('mcqBox');
+let mcqRight=0;
+MCQ.forEach((m,i)=>{
+  const d=document.createElement('div');
+  d.style.marginBottom='18px';
+  d.innerHTML='<p class="q">'+(i+1)+'. '+m.q+' <span style="color:var(--orange)">[1]</span></p>'+
+    '<div class="btnrow">'+m.o.map((o,j)=>'<button class="btn ghost" data-j="'+j+'">'+'ABCD'[j]+'&nbsp; '+o+'</button>').join('')+'</div>'+
+    '<div class="fbslot"></div>';
+  d.addEventListener('click', e=>{
+    const b=e.target.closest('button[data-j]'); if(!b||d.dataset.done==='1') return;
+    const fb=d.querySelector('.fbslot');
+    if(+b.dataset.j===m.a){
+      d.dataset.done='1'; b.style.background='var(--green)'; b.style.color='#fff'; b.style.borderColor='var(--green)';
+      fb.className='fbslot fb good'; fb.innerHTML='Correct. '+m.why;
+      mcqRight++; if(mcqRight===MCQ.length){ done.mcq=true; progress(); }
+    } else {
+      b.style.background='var(--red-soft)'; b.style.borderColor='var(--red)'; b.style.color='var(--red)';
+      fb.className='fbslot fb bad'; fb.textContent='Not that one — read the stem again and try another option.';
+    }
+  });
+  mb.appendChild(d);
+});
+
+/* ---------------- 5b. CHAIN BUILDER ---------------- */
+const cb=document.getElementById('chainBank'), cs=document.getElementById('chainSlot');
+function buildChain(){
+  cb.innerHTML=''; cs.innerHTML='';
+  cs.dataset.empty='1';
+  [...CHAIN].sort(()=>Math.random()-0.5).forEach(c=>{
+    const el=document.createElement('div');
+    el.className='chip'; el.textContent=c.t; el.dataset.k=c.k;
+    el.onclick=()=>{ if(el.parentElement===cb) cs.appendChild(el); else cb.appendChild(el); el.classList.remove('ok','no'); };
+    cb.appendChild(el);
+  });
+  document.getElementById('chainFb').className=''; document.getElementById('chainFb').textContent='';
+}
+document.getElementById('chainReset').onclick=buildChain;
+document.getElementById('chainCheck').onclick=()=>{
+  const chips=[...cs.children], fb=document.getElementById('chainFb');
+  if(chips.length<4){ fb.className='fb bad'; fb.textContent='Tap all four steps into the blue box first.'; return; }
+  let ok=true;
+  chips.forEach((c,i)=>{ const good=+c.dataset.k===i+1; c.classList.toggle('ok',good); c.classList.toggle('no',!good); if(!good) ok=false; });
+  if(ok){ fb.className='fb good'; fb.textContent='That is the 4-mark formula: Define → Example → Explain → Develop. Use it every time.'; }
+  else { fb.className='fb bad'; fb.textContent='Close. Remember you always define the term first and finish with the outcome.'; }
+};
+buildChain();
+
+/* ---------------- 5c. MODEL ---------------- */
+document.getElementById('revealBtn').onclick=function(){
+  document.getElementById('model').classList.remove('hidden');
+  this.remove();
+};
+
+progress();
+</script>
+</body>
+</html>
