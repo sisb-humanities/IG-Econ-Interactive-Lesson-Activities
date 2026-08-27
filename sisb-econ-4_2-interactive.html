@@ -125,10 +125,6 @@ select.pick.no{border-color:var(--red);background:var(--rtint)}
 .stat{background:var(--tint);border-radius:12px;padding:14px;text-align:center}
 .stat .n{font-size:28px;font-weight:900;color:var(--navy);line-height:1.1}
 .stat .l{font-size:11.5px;font-weight:700;letter-spacing:.8px;color:var(--grey);text-transform:uppercase;margin-top:5px}
-.splitbar{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-top:8px;border:1px solid var(--line)}
-.splitbar div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;
-  font-size:13.5px;transition:width .25s ease;overflow:hidden;white-space:nowrap}
-.sb-con{background:var(--red)}.sb-firm{background:var(--blue)}
 
 /* ---------- ordering ---------- */
 .order{display:flex;flex-direction:column;gap:9px;margin-top:10px}
@@ -305,19 +301,27 @@ footer{text-align:center;color:var(--grey);font-size:12.5px;padding:24px 16px 40
     </div>
     <div class="card">
       <h2>5 · Who really pays a 10-baht tax?</h2>
-      <p class="sub">Both products cost 60 baht. Both get a 10-baht tax. Slide from "many rivals" to "no substitutes" and watch the burden move.</p>
+      <p class="sub">Watch the diagram, not just the numbers. The blue supply line (S) always shifts up to orange (S + tax) by the same 10 baht. The only thing the slider changes is the steepness of the red demand line (D). Drag it and watch where the new equilibrium (E1) lands.</p>
       <label style="font-weight:700;color:var(--navy);font-size:14px">Demand is: <span id="elLbl">very elastic</span></label>
       <input type="range" class="slider" id="elSlide" min="0" max="100" step="1" value="15">
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--grey);font-weight:700">
-        <span>ELASTIC — many close substitutes</span><span>INELASTIC — no substitutes</span>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--grey);font-weight:700;line-height:1.35">
+        <span>ELASTIC — many close substitutes<br><span style="font-weight:400;font-style:italic">flat demand line, like one brand of bubble tea</span></span>
+        <span style="text-align:right">INELASTIC — no substitutes<br><span style="font-weight:400;font-style:italic">steep demand line, like cigarettes</span></span>
+      </div>
+      <div class="chartCard">
+        <svg id="incidChart" viewBox="0 0 640 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Supply and demand diagram showing how a tax splits between consumer and firm"></svg>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;padding:2px 8px 8px;font-size:13px;font-weight:700">
+          <span style="color:var(--red)"><span style="display:inline-block;width:11px;height:11px;background:var(--red);border-radius:3px;margin-right:5px;vertical-align:middle"></span><span id="legCon">Consumer's share (P to P1): 15%</span></span>
+          <span style="color:var(--blue)"><span style="display:inline-block;width:11px;height:11px;background:var(--blue);border-radius:3px;margin-right:5px;vertical-align:middle"></span><span id="legFirm">Firm's share (Z to P): 85%</span></span>
+        </div>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n" id="newPrice">61.5</div><div class="l">New price (baht)</div></div>
-        <div class="stat"><div class="n" id="conShare" style="color:var(--red)">15%</div><div class="l">Paid by the consumer</div></div>
-        <div class="stat"><div class="n" id="firmShare" style="color:var(--blue)">85%</div><div class="l">Paid by the firm</div></div>
+        <div class="stat"><div class="n" id="newPrice">61.5</div><div class="l">New price, P1 (baht)</div></div>
+        <div class="stat"><div class="n" id="conShare" style="color:var(--red)">15%</div><div class="l">Consumer's share — P to P1</div></div>
+        <div class="stat"><div class="n" id="firmShare" style="color:var(--blue)">85%</div><div class="l">Firm's share — Z to P</div></div>
       </div>
-      <div class="splitbar"><div class="sb-con" id="sbCon">CONSUMER</div><div class="sb-firm" id="sbFirm">FIRM</div></div>
       <div class="note" id="elNote"></div>
+      <div class="note" style="margin-top:8px"><b>How to read it.</b> E0 is the equilibrium before the tax. E1 is the equilibrium after the tax. The vertical bracket at E1 shows the 10-baht gap splitting into two parts: the <b style="color:var(--red)">red part (P to P1)</b> is the price rise the consumer pays, and the <b style="color:var(--blue)">blue part (Z to P)</b> is the amount the firm loses from its own price. A steep D squeezes the red part to fill almost the whole bracket. A flat D squeezes the blue part instead.</div>
     </div>
     <div class="card">
       <h2>State the rule</h2>
@@ -374,7 +378,6 @@ footer{text-align:center;color:var(--grey);font-size:12.5px;padding:24px 16px 40
 
 <footer>SISB · Singapore International School of Bangkok · IGCSE Economics 0455 · Unit 4.2 Fiscal Policy</footer>
 
-<script src="sisb-tracker.js"></script>
 <script>
 /* =========================================================================
    SISB pointer-events drag engine.
@@ -792,24 +795,99 @@ function checkConc(){
   }
 }
 
-/* ================= 5. INCIDENCE ================= */
+/* ================= 5. INCIDENCE =================
+   A real supply-and-demand diagram, not a formula dressed up as one.
+   The supply line S is fixed. S+tax is S shifted up by a fixed pixel amount
+   representing the 10-baht tax. The equilibrium point EQ sits on S at a
+   fixed spot, so the "before tax" price and quantity never move. The ONLY
+   thing the slider changes is the slope of the demand line D, which always
+   passes through that same fixed EQ point. Where the (rotating) D line
+   crosses S+tax gives the new equilibrium E1 — and that crossing point is
+   what determines the consumer/firm split. The numbers on screen are read
+   directly off this geometry, not computed separately from it. */
+var IC = { W:640, H:340, L:74, R:36, T:26, B:284,
+           Sx0:104, Sy0:250, Sx1:560, Sy1:92, taxPx:52, eqT:0.5 };
+IC.mS = (IC.Sy1-IC.Sy0)/(IC.Sx1-IC.Sx0);
+IC.EQx = IC.Sx0 + IC.eqT*(IC.Sx1-IC.Sx0);
+IC.EQy = IC.Sy0 + IC.eqT*(IC.Sy1-IC.Sy0);
+
+function lineIntersect(a1,a2,b1,b2){
+  var x1=a1[0],y1=a1[1],x2=a2[0],y2=a2[1],x3=b1[0],y3=b1[1],x4=b2[0],y4=b2[1];
+  var den=(x1-x2)*(y3-y4)-(y1-y2)*(x3-x4);
+  var px=((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4))/den;
+  var py=((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4))/den;
+  return [px,py];
+}
+function clipToPlot(cx,cy,m){
+  var tXlo=IC.L-cx, tXhi=(IC.W-IC.R)-cx;
+  var tYlo=(IC.T-cy)/m, tYhi=(IC.B-cy)/m;
+  var tlo=Math.max(-400,tXlo,tYlo), thi=Math.min(400,tXhi,tYhi);
+  return [[cx+tlo, cy+m*tlo],[cx+thi, cy+m*thi]];
+}
+function spread(items,key,minGap){
+  var arr=items.slice().sort(function(a,b){return a[key]-b[key];});
+  for(var i=1;i<arr.length;i++){
+    if(arr[i][key]-arr[i-1][key]<minGap) arr[i][key]=arr[i-1][key]+minGap;
+  }
+  var map={}; arr.forEach(function(o){ map[o.id]=o[key]; });
+  return map;
+}
 function renderEl(){
-  var v=+document.getElementById('elSlide').value;
-  var con=Math.round(5+v*0.9);            // consumer share 5% .. 95%
-  var firm=100-con;
-  var price=(60+10*con/100).toFixed(2);
-  document.getElementById('conShare').textContent=con+'%';
-  document.getElementById('firmShare').textContent=firm+'%';
+  var v=+document.getElementById('elSlide').value, e=v/100;
+  var mD = 0.16 + e*(3.6-0.16);                       // demand slope: shallow -> steep
+  var far1=[IC.EQx-300, IC.EQy-300*mD], far2=[IC.EQx+300, IC.EQy+300*mD];
+  var E1 = lineIntersect(far1,far2, [IC.Sx0,IC.Sy0-IC.taxPx],[IC.Sx1,IC.Sy1-IC.taxPx]);
+  var Z  = [E1[0], E1[1]+IC.taxPx];
+  var conRisePx = IC.EQy - E1[1], firmFallPx = Z[1] - IC.EQy;
+  var conShare = Math.max(0,Math.min(100, conRisePx/IC.taxPx*100));
+  var firmShare = 100-conShare;
+  var price = (60 + 10*conShare/100).toFixed(2);
+
   document.getElementById('newPrice').textContent=price;
+  document.getElementById('conShare').textContent=Math.round(conShare)+'%';
+  document.getElementById('firmShare').textContent=Math.round(firmShare)+'%';
   document.getElementById('elLbl').textContent =
     v<25?'very elastic':v<45?'fairly elastic':v<60?'in between':v<80?'fairly inelastic':'very inelastic';
-  document.getElementById('sbCon').style.width=con+'%';
-  document.getElementById('sbFirm').style.width=firm+'%';
-  document.getElementById('sbCon').textContent = con>22?'CONSUMER '+con+'%':con+'%';
-  document.getElementById('sbFirm').textContent = firm>22?'FIRM '+firm+'%':firm+'%';
-  document.getElementById('elNote').innerHTML = con>60
-    ? '<b>Like cigarettes.</b> Buyers are addicted and there is no close substitute, so the firm can raise the price by almost the whole tax and keep its customers. The consumer bears the burden.'
-    : '<b>Like one brand of bubble tea.</b> Five rivals sit in the same mall corridor. Raise the price and customers simply walk next door \u2014 so the shop has to absorb most of the tax out of its own profit.';
+  document.getElementById('elNote').innerHTML = conShare>60
+    ? '<b>Like cigarettes.</b> The steep demand line barely moves left when supply shifts, so almost the whole tax shows up as a higher price. Buyers are addicted and there is no close substitute — the firm can raise the price and keep its customers.'
+    : '<b>Like one brand of bubble tea.</b> The flat demand line means a small price rise sends customers straight to a rival, so E1 slides mostly sideways rather than upward. The shop has to absorb most of the tax out of its own profit instead.';
+
+  // ---- draw the diagram ----
+  var dEnds = clipToPlot(IC.EQx, IC.EQy, mD);
+  var svg=document.getElementById('incidChart');
+  var L=IC.L,R=IC.W-IC.R,T=IC.T,B=IC.B;
+  var brX = E1[0] + 20;
+  var yLbl = spread([{id:'P1',y:E1[1]},{id:'P',y:IC.EQy},{id:'Z',y:Z[1]}], 'y', 15);
+  var xLbl = spread([{id:'Q1',x:E1[0]},{id:'Q',x:IC.EQx}], 'x', 30);
+  svg.innerHTML =
+    '<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+B+'" stroke="#333" stroke-width="2"/>'+
+    '<line x1="'+L+'" y1="'+B+'" x2="'+R+'" y2="'+B+'" stroke="#333" stroke-width="2"/>'+
+    '<text x="'+L+'" y="18" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222">Price</text>'+
+    '<text x="'+(R-10)+'" y="'+(B+24)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="end">Quantity</text>'+
+    '<line x1="'+IC.Sx0+'" y1="'+IC.Sy0+'" x2="'+IC.Sx1+'" y2="'+IC.Sy1+'" stroke="#008BCC" stroke-width="3"/>'+
+    '<text x="'+(IC.Sx1+6)+'" y="'+(IC.Sy1+4)+'" font-family="Lato,Arial" font-size="14" font-weight="700" fill="#008BCC">S</text>'+
+    '<line x1="'+IC.Sx0+'" y1="'+(IC.Sy0-IC.taxPx)+'" x2="'+IC.Sx1+'" y2="'+(IC.Sy1-IC.taxPx)+'" stroke="#FF8F1C" stroke-width="3"/>'+
+    '<text x="'+(IC.Sx1+6)+'" y="'+(IC.Sy1-IC.taxPx+4)+'" font-family="Lato,Arial" font-size="14" font-weight="700" fill="#FF8F1C">S + tax</text>'+
+    '<line x1="'+dEnds[0][0].toFixed(1)+'" y1="'+dEnds[0][1].toFixed(1)+'" x2="'+dEnds[1][0].toFixed(1)+'" y2="'+dEnds[1][1].toFixed(1)+'" stroke="#C62828" stroke-width="3"/>'+
+    '<text x="'+dEnds[1][0].toFixed(1)+'" y="'+(dEnds[1][1]+16).toFixed(1)+'" font-family="Lato,Arial" font-size="14" font-weight="700" fill="#C62828" text-anchor="middle">D</text>'+
+    '<line x1="'+L+'" y1="'+IC.EQy+'" x2="'+IC.EQx+'" y2="'+IC.EQy+'" stroke="#5A6572" stroke-width="1.4" stroke-dasharray="4 3"/>'+
+    '<line x1="'+IC.EQx+'" y1="'+IC.EQy+'" x2="'+IC.EQx+'" y2="'+B+'" stroke="#5A6572" stroke-width="1.4" stroke-dasharray="4 3"/>'+
+    '<line x1="'+L+'" y1="'+E1[1].toFixed(1)+'" x2="'+E1[0].toFixed(1)+'" y2="'+E1[1].toFixed(1)+'" stroke="#5A6572" stroke-width="1.4" stroke-dasharray="4 3"/>'+
+    '<line x1="'+E1[0].toFixed(1)+'" y1="'+E1[1].toFixed(1)+'" x2="'+E1[0].toFixed(1)+'" y2="'+B+'" stroke="#5A6572" stroke-width="1.4" stroke-dasharray="4 3"/>'+
+    '<line x1="'+L+'" y1="'+Z[1].toFixed(1)+'" x2="'+E1[0].toFixed(1)+'" y2="'+Z[1].toFixed(1)+'" stroke="#5A6572" stroke-width="1.4" stroke-dasharray="4 3"/>'+
+    '<circle cx="'+IC.EQx+'" cy="'+IC.EQy+'" r="5.5" fill="#002F6C"/>'+
+    '<text x="'+(IC.EQx+9)+'" y="'+(IC.EQy-9)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#002F6C">E0</text>'+
+    '<circle cx="'+E1[0].toFixed(1)+'" cy="'+E1[1].toFixed(1)+'" r="5.5" fill="#002F6C"/>'+
+    '<text x="'+(E1[0]+9).toFixed(1)+'" y="'+(E1[1]-9).toFixed(1)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#002F6C">E1</text>'+
+    '<text x="'+(L-8)+'" y="'+(yLbl.P+4).toFixed(1)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="end">P</text>'+
+    '<text x="'+(L-8)+'" y="'+(yLbl.P1+4).toFixed(1)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="end">P1</text>'+
+    '<text x="'+(L-8)+'" y="'+(yLbl.Z+4).toFixed(1)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="end">Z</text>'+
+    '<text x="'+xLbl.Q.toFixed(1)+'" y="'+(B+18)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Q</text>'+
+    '<text x="'+xLbl.Q1.toFixed(1)+'" y="'+(B+18)+'" font-family="Lato,Arial" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Q1</text>'+
+    '<line x1="'+brX+'" y1="'+(E1[1]+1.5).toFixed(1)+'" x2="'+brX+'" y2="'+(IC.EQy-0.5)+'" stroke="#C62828" stroke-width="7" stroke-linecap="round"/>'+
+    '<line x1="'+brX+'" y1="'+(IC.EQy+0.5)+'" x2="'+brX+'" y2="'+(Z[1]-1.5).toFixed(1)+'" stroke="#008BCC" stroke-width="7" stroke-linecap="round"/>';
+  document.getElementById('legCon').textContent = 'Consumer\u2019s share (P to P1): '+Math.round(conShare)+'%';
+  document.getElementById('legFirm').textContent = 'Firm\u2019s share (Z to P): '+Math.round(firmShare)+'%';
 }
 document.getElementById('elSlide').addEventListener('input',renderEl);
 renderEl();
