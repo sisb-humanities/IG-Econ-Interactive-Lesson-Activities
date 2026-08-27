@@ -163,6 +163,7 @@ const UNITS = [
 
 function build(){
   const wrap = document.getElementById('units');
+  wrap.innerHTML = '';
   UNITS.forEach((u,idx)=>{
     const built = u.topics.filter(t=>t.activity).length;
     const card = document.createElement('div');
@@ -196,6 +197,49 @@ function build(){
   });
 }
 build();
+
+/* ============================================================
+   AUTO-DETECT ACTIVITY FILES FROM THE GITHUB REPO
+   ------------------------------------------------------------
+   Naming rule: for topic "X.Y", the activity file must be named
+   exactly            sisb-econ-X_Y-interactive.html
+   (dot in the topic code becomes an underscore in the filename —
+   matches every file so far: 1.1 -> sisb-econ-1_1-interactive.html,
+   4.1 -> sisb-econ-4_1-interactive.html, 4.2 -> sisb-econ-4_2-interactive.html).
+
+   Upload a new file with that exact name to the repo root and it
+   appears here automatically next page load — no editing index.html.
+
+   This asks the GitHub API what files exist in the repo. If that
+   call fails (offline, or GitHub's rate limit is hit) the page
+   just keeps whatever was already hardcoded above — it never breaks.
+   ============================================================ */
+const REPO_OWNER = 'sisb-humanities';
+const REPO_NAME  = 'IG-Econ-Interactive-Lesson-Activities';
+
+async function autoDetectActivities(){
+  try{
+    const res = await fetch('https://api.github.com/repos/'+REPO_OWNER+'/'+REPO_NAME+'/contents/');
+    if(!res.ok) return; // e.g. rate-limited — silently keep existing links
+    const files = await res.json();
+    if(!Array.isArray(files)) return;
+    const names = new Set(files.filter(f=>f.type==='file').map(f=>f.name));
+    let changed = false;
+    UNITS.forEach(u=>{
+      u.topics.forEach(t=>{
+        const expected = 'sisb-econ-' + t.code.replace('.', '_') + '-interactive.html';
+        if(names.has(expected) && t.activity !== expected){
+          t.activity = expected;
+          changed = true;
+        }
+      });
+    });
+    if(changed) build(); // re-render with newly-detected activities
+  }catch(e){
+    /* offline or blocked — page still works with whatever was hardcoded */
+  }
+}
+autoDetectActivities();
 </script>
 </body>
 </html>
