@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SISB IGCSE Economics 1.4 — Production Possibility Curves</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C;
+  --navy-soft:#E8EEF6; --blue-soft:#E8F4FB; --orange-soft:#FFF1E0;
+  --green:#2E7D4F; --green-soft:#EAF6EE; --red:#C0392B; --red-soft:#FDECEA;
+  --ink:#1B2733; --muted:#667085; --line:#D5DCE5; --paper:#FFFFFF;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:#F4F6F9;line-height:1.5;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 90px}
+
+header{background:var(--navy);color:#fff;padding:22px 0 0}
+.hd{max-width:1080px;margin:0 auto;padding:0 16px}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:900;opacity:.75}
+h1{margin:4px 0 2px;font-size:clamp(22px,3.4vw,32px);font-weight:900}
+.sub{opacity:.85;font-size:14px;margin-bottom:16px}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:rgba(255,255,255,.10);color:#fff;border:0;border-radius:8px 8px 0 0;
+  padding:11px 15px;font:700 14px 'Lato',sans-serif;cursor:pointer;white-space:nowrap}
+nav button.on{background:#F4F6F9;color:var(--navy)}
+nav button .n{display:inline-block;width:19px;height:19px;line-height:19px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;text-align:center;margin-right:7px}
+nav button.on .n{background:var(--navy)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0;box-shadow:0 1px 3px rgba(16,24,40,.05)}
+.card h2{margin:0 0 4px;color:var(--navy);font-size:20px;font-weight:900}
+.card .lede{color:var(--muted);font-size:14px;margin:0 0 14px}
+.hook{border-left:7px solid var(--orange);background:var(--orange-soft);border-color:#F5D9B5}
+.tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:900;letter-spacing:.1em;padding:4px 9px;border-radius:5px;margin-bottom:10px}
+p{margin:0 0 10px}
+.q{font-weight:700;color:var(--navy);margin-top:14px}
+.hidden{display:none}
+
+.btn{background:var(--blue);color:#fff;border:0;border-radius:9px;padding:11px 20px;font:900 14px 'Lato',sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}
+.btn.orange{background:var(--orange)}
+.btn.small{padding:8px 13px;font-size:13px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+.chip{background:#fff;border:2px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13.5px;font-weight:700;
+  cursor:grab;touch-action:none;transition:box-shadow .12s,border-color .12s;max-width:100%}
+.chip:active{cursor:grabbing}
+.chip.sel{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+.chip.ok{border-color:var(--green);background:var(--green-soft)}
+.chip.no{border-color:var(--red);background:var(--red-soft)}
+.chip.drag{position:fixed;z-index:999;pointer-events:none;box-shadow:0 10px 24px rgba(16,24,40,.28);transform:rotate(-2deg)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;padding:14px;background:var(--navy-soft);border:2px dashed #B9C6D8;border-radius:10px;min-height:60px}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+@media(max-width:760px){.bins{grid-template-columns:1fr}}
+.bin{border:2px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;min-height:150px;display:flex;flex-direction:column}
+.bin h3{margin:0;background:var(--navy);color:#fff;font-size:13px;font-weight:900;padding:9px 10px}
+.bin h3 small{display:block;font-weight:400;opacity:.75;font-size:11px}
+.bin .drop{flex:1;padding:9px;display:flex;flex-direction:column;gap:7px}
+.bin.hot{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}
+
+.fb{margin-top:14px;padding:12px 14px;border-radius:9px;font-weight:700;font-size:14px}
+.fb.good{background:var(--green-soft);color:var(--green);border:1px solid #B7DFC6}
+.fb.bad{background:var(--red-soft);color:var(--red);border:1px solid #F3C4BE}
+.note{background:var(--blue-soft);border-left:6px solid var(--blue);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:14px;font-size:14px}
+.note b{color:var(--navy)}
+
+.model{background:var(--orange-soft);border:2px solid var(--orange);border-radius:10px;padding:16px;margin-top:12px;-webkit-user-select:text;user-select:text}
+.model .lbl{font-size:11px;font-weight:900;letter-spacing:.1em;color:var(--navy);margin-bottom:8px}
+.ss{color:#7A3D00;font-weight:900;background:#FFE2BE;border-radius:4px;padding:0 3px}
+.why{background:var(--green-soft);border-left:6px solid var(--green);border-radius:0 9px 9px 0;padding:12px 14px;margin-top:12px;font-size:14px}
+.why b{color:var(--green)}
+
+/* explorer */
+.explorer{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start}
+@media(max-width:840px){.explorer{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block;touch-action:pan-y}
+.readout{background:var(--navy);color:#fff;border-radius:10px;padding:14px}
+.readout .r{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.readout .r:last-child{border:0}
+.readout .r b{font-weight:900;color:#FFD9A8}
+.readout h4{margin:0 0 8px;font-size:12px;letter-spacing:.1em;font-weight:900;color:#8FC7E8}
+.ocbox{background:var(--orange-soft);border:2px solid var(--orange);border-radius:10px;padding:11px 13px;margin-top:10px;font-size:13.5px;font-weight:700;color:#7A3D00}
+
+.prog{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--navy);padding:10px 16px;
+  display:flex;align-items:center;gap:14px;font-size:13px;font-weight:700;color:var(--navy);z-index:50}
+.bar{flex:1;height:9px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width .4s}
+.scorepill{background:var(--navy);color:#fff;border-radius:20px;padding:4px 12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 16px 8px}
+.pt{cursor:pointer}
+.pt circle{transition:r .12s}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="eyebrow">SISB &nbsp;|&nbsp; IGCSE ECONOMICS 0455</div>
+    <h1>Unit 1.4 — Production Possibility Curves</h1>
+    <div class="sub">Grade 9 &nbsp;•&nbsp; Opportunity cost, shifts and movements &nbsp;•&nbsp; Thai context</div>
+    <nav id="nav"></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ============ 1 HOOK ============ -->
+<section data-tab="0">
+  <div class="card hook">
+    <span class="tag">THE PROBLEM IN THE WORLD</span>
+    <h2>The year Thailand lost rice and cars in the same week</h2>
+    <p>October 2011. The Chao Phraya bursts its banks. Two metres of water sits inside the Rojana Industrial Estate in Ayutthaya for six weeks. Honda's plant is submerged — a thousand brand-new cars are written off. Hard-disk factories shut, and the price of computer hard drives rises <i>around the world</i>.</p>
+    <p>At the same moment, 1.6 million rai of paddy land is also underwater. Rice gone. Cars gone. Same flood, same weeks.</p>
+    <p style="font-weight:900;color:var(--navy);margin-bottom:0">Thailand did not <i>choose</i> to produce less. It lost resources. That is a different thing — and economists draw it differently.</p>
+  </div>
+
+  <div class="card">
+    <h2>Think first</h2>
+    <p class="lede">No definitions yet. Just your brain.</p>
+    <p class="q">In a normal year, Thailand cannot grow more rice <b>and</b> build more cars at the same time without something changing. Why not?</p>
+    <div class="btnrow" id="hookQ">
+      <button class="btn ghost" data-a="0">Because Thai people don't want more of both</button>
+      <button class="btn ghost" data-a="1">Because land, workers and machines can only be used in one place at a time</button>
+      <button class="btn ghost" data-a="0">Because the government does not allow it</button>
+      <button class="btn ghost" data-a="0">Because rice and cars are made in different provinces</button>
+    </div>
+    <div id="hookFb"></div>
+    <div class="note hidden" id="hookNote">
+      <b>That is the whole of this topic.</b> A country's resources are limited, so every extra car has a price paid in rice — an <b>opportunity cost</b>.
+      The <b>production possibility curve (PPC)</b> is simply a picture of that trade-off: the maximum combinations of two goods a country can produce when every resource is used
+      fully and efficiently. Move to the next tab and drag Thailand along its own curve.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 EXPLORER ============ -->
+<section data-tab="1" class="hidden">
+  <div class="card">
+    <h2>Drag Thailand along its curve</h2>
+    <p class="lede">Drag the orange dot. Watch what one good costs you in the other. Then try the two buttons underneath.</p>
+    <div class="explorer">
+      <div>
+        <svg id="svg" viewBox="0 0 520 360" aria-label="Thailand PPC explorer"></svg>
+      </div>
+      <div>
+        <div class="readout">
+          <h4>THAILAND'S OUTPUT</h4>
+          <div class="r"><span>Rice</span><b><span id="roRice">—</span> m tonnes</b></div>
+          <div class="r"><span>Electronics &amp; cars</span><b><span id="roMan">—</span> m units</b></div>
+          <div class="r"><span>Curve position</span><b id="roPos">on the curve</b></div>
+        </div>
+        <div class="ocbox" id="ocBox">Drag the dot to see the opportunity cost of your move.</div>
+        <div class="btnrow" style="margin-top:12px">
+          <button class="btn small orange" id="btnFlood">2011 floods</button>
+          <button class="btn small" id="btnEEC">EEC investment</button>
+          <button class="btn small ghost" id="btnReset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="expQ" class="hidden">
+      <p class="q" id="expQtext"></p>
+      <div class="btnrow" id="expOpts"></div>
+      <div id="expFb"></div>
+    </div>
+    <div class="note" id="expHint"></div>
+  </div>
+</section>
+
+<!-- ============ 3 POINT ID ============ -->
+<section data-tab="2" class="hidden">
+  <div class="card">
+    <h2>Find the point</h2>
+    <p class="lede">Read the statement, then tap the correct point on Thailand's diagram. Five in a row.</p>
+    <div style="max-width:520px;margin:0 auto"><svg id="svg2" viewBox="0 0 520 340"></svg></div>
+    <p class="q" id="pidQ"></p>
+    <div id="pidFb"></div>
+    <div class="btnrow"><button class="btn ghost small" id="pidReset">Start again</button></div>
+  </div>
+</section>
+
+<!-- ============ 4 SORT ============ -->
+<section data-tab="3" class="hidden">
+  <div class="card">
+    <h2>Shift or movement? Six Thai headlines</h2>
+    <p class="lede">Drag each headline into a column — or tap a card, then tap a column. Then press Check.</p>
+    <div class="bank" id="bank"></div>
+    <div class="bins" id="bins">
+      <div class="bin" data-bin="along"><h3>MOVEMENT ALONG THE PPC<small>same resources, used differently</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="out"><h3>OUTWARD SHIFT<small>more or better resources</small></h3><div class="drop"></div></div>
+      <div class="bin" data-bin="in"><h3>INWARD SHIFT<small>fewer or worse resources</small></h3><div class="drop"></div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn" id="sortCheck">Check my answers</button>
+      <button class="btn ghost" id="sortReset">Reset</button>
+    </div>
+    <div id="sortFb"></div>
+    <div class="note"><b>The classic trap.</b> Taking workers off the rice fields to build cars does <i>not</i> move the curve. Thailand has exactly the same resources — it has just pointed them somewhere else. The curve itself only moves when the <b>quantity</b> or the <b>quality</b> of resources changes.</div>
+  </div>
+</section>
+
+<!-- ============ 5 EXAM ============ -->
+<section data-tab="4" class="hidden">
+  <div class="card">
+    <h2>Exam practice</h2>
+    <p class="lede">Three multiple choice questions in Paper 1 style. Answer all three to unlock the rest.</p>
+    <div id="mcqBox"></div>
+  </div>
+
+  <div class="card">
+    <h2>Build the 6-mark chain</h2>
+    <p class="lede">Tap the four sentences into the right order: Context → effect → chain → judgement.</p>
+    <div class="bank" id="chainBank"></div>
+    <div class="bank" id="chainSlot" style="background:var(--blue-soft);border-color:#9FCDE8;margin-top:10px"></div>
+    <div class="btnrow">
+      <button class="btn" id="chainCheck">Check the order</button>
+      <button class="btn ghost" id="chainReset">Shuffle</button>
+    </div>
+    <div id="chainFb"></div>
+  </div>
+
+  <div class="card">
+    <h2>Model answer</h2>
+    <p class="lede">Have a go on paper first. The highlighted words are the sentence starters from your Sentence Starters sheet.</p>
+    <p class="q">Analyse the effects on Thailand of moving resources out of rice farming and into electronics factories. [6]</p>
+    <div class="btnrow"><button class="btn orange" id="revealBtn">Show the model answer</button></div>
+    <div class="model hidden" id="model">
+      <div class="lbl">GRADE C — 6 MARKS — DEFINE → CONTEXT → CHAIN × 2 → OVERALL</div>
+      <p>A movement along the PPC means producing more of one good and less of another using the same total resources.
+        <span class="ss">In Thailand,</span> workers and land are moving out of rice farming in Isaan and into electronics factories in the Eastern Economic Corridor.</p>
+      <p><span class="ss">One effect is</span> that output of electronics rises. <span class="ss">This leads to</span> higher export earnings, <b>because</b> an electronic component sells for far more per kilogram than rice does, <span class="ss">as a result</span> incomes and tax revenue in Rayong increase.</p>
+      <p><span class="ss">Another effect is</span> that rice output falls. <span class="ss">This decreases</span> the supply of rice <b>because</b> fewer rai are being planted, <span class="ss">as a result</span> the price of rice in Thai markets may rise and farming families in the north-east may lose their income.</p>
+      <p style="margin-bottom:0"><span class="ss">Overall,</span> Thailand gains manufactured output, but the opportunity cost is the rice and the rural jobs it gives up.</p>
+      <div class="why"><b>Why this scores well:</b> two separate chains, each with at least two links, each anchored in a real Thai place. The word <b>because</b> appears in both chains. The last sentence names the opportunity cost — which is what a 6-mark PPC question is really testing.</div>
+    </div>
+  </div>
+</section>
+
+<footer>SISB IGCSE Economics 0455 · Unit 1.4 Production Possibility Curves · Sentence starters as issued in class</footer>
+</div>
+
+<div class="prog">
+  <span>Progress</span>
+  <div class="bar"><i id="pbar"></i></div>
+  <span class="scorepill" id="pscore">0 / 5 activities</span>
+</div>
+
+<script src="sisb-tracker.js"></script>
+<script>
+/* ---------------- TABS ---------------- */
+const TABS=['The flood','Drag the curve','Find the point','Shift or movement?','Exam practice'];
+const nav=document.getElementById('nav');
+TABS.forEach((t,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML='<span class="n">'+(i+1)+'</span>'+t;
+  b.onclick=()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.querySelectorAll('section[data-tab]').forEach(s=>s.classList.toggle('hidden',+s.dataset.tab!==i));
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  nav.appendChild(b);
+});
+nav.firstChild.classList.add('on');
+
+/* ---------------- PROGRESS ---------------- */
+const done={hook:false,exp:false,pid:false,sort:false,exam:false};
+let logged=false;
+function progress(){
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('pbar').style.width=(n/5*100)+'%';
+  document.getElementById('pscore').textContent=n+' / 5 activities';
+  if(n===5 && !logged){
+    logged=true;
+    if(window.SISB_TRACKER) SISB_TRACKER.log('Unit 1','1.4 Production Possibility Curves — interactive','5/5 activities complete');
+  }
+}
+
+/* ---------------- POINTER-EVENTS DRAG (iPad-safe) ---------------- */
+let selected=null, ghost=null, dragging=null, startX=0, startY=0, moved=false;
+function makeDraggable(el){
+  el.addEventListener('pointerdown', e=>{ dragging=el; moved=false; startX=e.clientX; startY=e.clientY; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e=>{
+    if(dragging!==el) return;
+    const dx=e.clientX-startX, dy=e.clientY-startY;
+    if(!moved && Math.hypot(dx,dy)<8) return;
+    if(!moved){
+      moved=true;
+      const r=el.getBoundingClientRect();
+      ghost=el.cloneNode(true); ghost.classList.add('drag');
+      ghost.style.width=r.width+'px'; ghost.style.left=r.left+'px'; ghost.style.top=r.top+'px';
+      ghost._ox=e.clientX-r.left; ghost._oy=e.clientY-r.top;
+      document.body.appendChild(ghost); el.style.opacity='.35';
+    }
+    ghost.style.left=(e.clientX-ghost._ox)+'px';
+    ghost.style.top=(e.clientY-ghost._oy)+'px';
+    highlight(e.clientX,e.clientY);
+  });
+  el.addEventListener('pointerup', e=>{
+    if(dragging!==el) return;
+    if(moved){
+      ghost.remove(); ghost=null; el.style.opacity='';
+      const bin=binAt(e.clientX,e.clientY); clearHot();
+      if(bin) bin.querySelector('.drop').appendChild(el);
+      el.classList.remove('ok','no');
+    } else {
+      const binEl=el.closest('.bin');
+      const drop = binEl ? binEl.querySelector('.drop') : el.parentElement;
+      if(selected && selected!==el){ drop.appendChild(selected); selected.classList.remove('sel'); selected=null; }
+      else if(selected===el){ el.classList.remove('sel'); selected=null; }
+      else { selected=el; el.classList.add('sel'); }
+    }
+    dragging=null; moved=false;
+  });
+  el.addEventListener('pointercancel', ()=>{ if(ghost){ghost.remove();ghost=null;} if(dragging)dragging.style.opacity=''; dragging=null; moved=false; clearHot(); });
+  el.addEventListener('click', e=>e.stopPropagation());
+}
+function binAt(x,y){ const el=document.elementFromPoint(x,y); return el?el.closest('.bin'):null; }
+function highlight(x,y){ clearHot(); const b=binAt(x,y); if(b) b.classList.add('hot'); }
+function clearHot(){ document.querySelectorAll('.bin.hot').forEach(b=>b.classList.remove('hot')); }
+document.addEventListener('click', e=>{
+  const bin=e.target.closest('.bin'), pool=e.target.closest('.bank');
+  if(selected && bin){ bin.querySelector('.drop').appendChild(selected); selected.classList.remove('sel'); selected=null; }
+  else if(selected && pool){ pool.appendChild(selected); selected.classList.remove('sel'); selected=null; }
+});
+
+/* ---------------- 1. HOOK ---------------- */
+document.getElementById('hookQ').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const fb=document.getElementById('hookFb');
+  if(b.dataset.a==='1'){
+    b.style.background='var(--green)'; b.style.color='#fff'; b.style.borderColor='var(--green)';
+    fb.className='fb good'; fb.textContent='Exactly. Resources are scarce, so using them for one thing means not using them for another.';
+    document.getElementById('hookNote').classList.remove('hidden');
+    done.hook=true; progress();
+  } else {
+    b.style.background='var(--red-soft)'; b.style.borderColor='var(--red)'; b.style.color='var(--red)';
+    fb.className='fb bad'; fb.textContent='Not quite — think about the resources themselves, not about wanting or allowing.';
+  }
+});
+
+/* ---------------- 2. EXPLORER ---------------- */
+const SVG=document.getElementById('svg');
+const PL={x0:70,x1:470,y0:40,y1:300}; // plot area in svg units
+let cap=100;                 // capacity scalar (100 = normal year)
+let tParam=0.5;              // position along curve (0 = all rice, 1 = all manufactured)
+let lastRice=null,lastMan=null;
+const SPAN=130; // axis shows up to 130 so an outward shift still fits on screen
+const px=v=>PL.x0+(v/SPAN)*(PL.x1-PL.x0);
+const py=v=>PL.y1-(v/SPAN)*(PL.y1-PL.y0);
+const manOf=t=>cap*Math.sin(t*Math.PI/2);
+const riceOf=t=>cap*Math.cos(t*Math.PI/2);
+
+function curvePath(c){
+  let d='';
+  for(let i=0;i<=60;i++){
+    const t=i/60, X=px(c*Math.sin(t*Math.PI/2)), Y=py(c*Math.cos(t*Math.PI/2));
+    d+=(i?' L':'M')+X.toFixed(1)+' '+Y.toFixed(1);
+  }
+  return d;
+}
+function drawExplorer(){
+  const man=manOf(tParam), rice=riceOf(tParam);
+  SVG.innerHTML=`
+   <defs><marker id="ah" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#002F6C"/></marker></defs>
+   <line x1="${PL.x0}" y1="${PL.y1}" x2="${PL.x1+20}" y2="${PL.y1}" stroke="#002F6C" stroke-width="2.5" marker-end="url(#ah)"/>
+   <line x1="${PL.x0}" y1="${PL.y1}" x2="${PL.x0}" y2="${PL.y0-20}" stroke="#002F6C" stroke-width="2.5" marker-end="url(#ah)"/>
+   <text x="${(PL.x0+PL.x1)/2}" y="${PL.y1+32}" text-anchor="middle" font-size="13" font-weight="700" fill="#002F6C">Electronics &amp; cars (m units)</text>
+   <text x="26" y="${(PL.y0+PL.y1)/2}" font-size="13" font-weight="700" fill="#002F6C" transform="rotate(-90 26 ${(PL.y0+PL.y1)/2})" text-anchor="middle">Rice (m tonnes)</text>
+   <path id="ghostCurve" d="${curvePath(100)}" fill="none" stroke="#B9C6D8" stroke-width="2" stroke-dasharray="5 5" ${cap===100?'opacity="0"':''}/>
+   <path d="${curvePath(cap)}" fill="none" stroke="#002F6C" stroke-width="3"/>
+   <line x1="${px(man)}" y1="${py(rice)}" x2="${px(man)}" y2="${PL.y1}" stroke="#8098B0" stroke-width="1.2" stroke-dasharray="3 3"/>
+   <line x1="${px(man)}" y1="${py(rice)}" x2="${PL.x0}" y2="${py(rice)}" stroke="#8098B0" stroke-width="1.2" stroke-dasharray="3 3"/>
+   <circle id="handle" cx="${px(man)}" cy="${py(rice)}" r="11" fill="#FF8F1C" stroke="#fff" stroke-width="3" style="cursor:grab"/>
+   <text x="${PL.x1-10}" y="${PL.y0+14}" text-anchor="end" font-size="12" font-style="italic" font-weight="700" fill="#002F6C">${cap>100?'PPC₂ (after growth)':cap<100?'PPC₂ (after the floods)':'PPC'}</text>`;
+  document.getElementById('roRice').textContent=rice.toFixed(0);
+  document.getElementById('roMan').textContent=man.toFixed(0);
+  document.getElementById('roPos').textContent='on the curve';
+}
+function setPos(t){
+  t=Math.max(0,Math.min(1,t));
+  const oldRice=riceOf(tParam), oldMan=manOf(tParam);
+  tParam=t; drawExplorer();
+  const rice=riceOf(t), man=manOf(t);
+  const dMan=man-oldMan, dRice=rice-oldRice;
+  const oc=document.getElementById('ocBox');
+  if(Math.abs(dMan)>0.6){
+    if(dMan>0) oc.innerHTML='You gained <b>'+dMan.toFixed(0)+'m units</b> of electronics. The opportunity cost was <b>'+Math.abs(dRice).toFixed(0)+'m tonnes of rice</b>.';
+    else oc.innerHTML='You gained <b>'+dRice.toFixed(0)+'m tonnes</b> of rice. The opportunity cost was <b>'+Math.abs(dMan).toFixed(0)+'m units of electronics</b>.';
+  }
+  checkTask1();
+}
+function svgPoint(e){
+  const r=SVG.getBoundingClientRect();
+  const sx=(e.clientX-r.left)/r.width*520;
+  return sx;
+}
+SVG.addEventListener('pointerdown', e=>{ SVG.setPointerCapture(e.pointerId); SVG._drag=true; moveHandle(e); });
+SVG.addEventListener('pointermove', e=>{ if(SVG._drag) moveHandle(e); });
+SVG.addEventListener('pointerup', ()=>{ SVG._drag=false; });
+SVG.addEventListener('pointercancel', ()=>{ SVG._drag=false; });
+function moveHandle(e){
+  e.preventDefault();
+  const sx=svgPoint(e);
+  const manVal=Math.max(0,Math.min(cap,(sx-PL.x0)/(PL.x1-PL.x0)*SPAN));
+  setPos(Math.asin(Math.min(1,manVal/cap))/(Math.PI/2));
+}
+
+const EXPQ=[
+  {q:'Thailand has just moved along its curve to make more electronics. What did it give up?',
+   o:[['Nothing — it used spare resources',0],['Rice — the resources came from the paddy fields',1],['Money',0]],
+   ok:'Correct. A movement along the curve always has an opportunity cost — here it is paid in rice.'},
+  {q:'The 2011 floods destroyed factories and drowned farmland. What has happened to the curve?',
+   o:[['It has shifted inwards — Thailand can now produce less of both goods',1],['Thailand has simply moved along the same curve',0],['The curve is unchanged, only prices changed',0]],
+   ok:'Yes. The quantity of capital and land fell, so productive capacity fell and the whole curve moved in.'},
+  {q:'The EEC builds a deep-sea port, a high-speed rail link and trains 5,000 extra engineers. Why does the curve move outwards?',
+   o:[['Because Thailand wants to produce more',0],['Because the quantity and quality of Thailand\'s resources have increased',1],['Because prices have fallen',0]],
+   ok:'Exactly — more capital and better-quality labour raise productive capacity, so more of BOTH goods becomes possible.'}
+];
+const answered=[false,false,false]; let current=null;
+const HINTS=[
+  'drag the dot until Thailand is making at least 70 million units of electronics and cars',
+  'press <b>2011 floods</b> and watch the whole curve move',
+  'press <b>EEC investment</b> and watch it move the other way'
+];
+function updateHint(){
+  const left=[0,1,2].filter(i=>!answered[i]);
+  const el=document.getElementById('expHint');
+  if(!left.length){ el.innerHTML='<b>Tab complete.</b> You have now shown a movement along the curve, an inward shift and an outward shift.'; return; }
+  el.innerHTML='<b>Still to do ('+left.length+' of 3):</b> '+left.map(i=>HINTS[i]).join(' &nbsp;·&nbsp; ')+'.';
+}
+function trigger(i){ if(answered[i]||current===i) return; askExp(i); }
+function askExp(i){
+  current=i;
+  const box=document.getElementById('expQ'); box.classList.remove('hidden');
+  document.getElementById('expQtext').textContent=EXPQ[i].q;
+  const opts=document.getElementById('expOpts'); opts.innerHTML='';
+  document.getElementById('expFb').className=''; document.getElementById('expFb').textContent='';
+  EXPQ[i].o.forEach(([label,correct])=>{
+    const b=document.createElement('button'); b.className='btn ghost'; b.textContent=label;
+    b.onclick=()=>{
+      const fb=document.getElementById('expFb');
+      if(correct){
+        b.style.background='var(--green)'; b.style.color='#fff'; b.style.borderColor='var(--green)';
+        fb.className='fb good'; fb.textContent=EXPQ[i].ok;
+        answered[i]=true; current=null; updateHint();
+        if(answered.every(Boolean)){ done.exp=true; progress(); }
+      } else {
+        b.style.background='var(--red-soft)'; b.style.borderColor='var(--red)'; b.style.color='var(--red)';
+        fb.className='fb bad'; fb.textContent='Not that one — look at the diagram again before you choose.';
+      }
+    };
+    opts.appendChild(b);
+  });
+}
+function checkTask1(){ if(manOf(tParam)>=70) trigger(0); }
+document.getElementById('btnFlood').onclick=()=>{ cap=75; if(manOf(tParam)>cap) tParam=1; drawExplorer(); document.getElementById('ocBox').innerHTML='Thailand has lost factories, machinery and farmland. Its <b>productive capacity</b> has fallen.'; trigger(1); };
+document.getElementById('btnEEC').onclick=()=>{ cap=125; drawExplorer(); document.getElementById('ocBox').innerHTML='New port, new rail link, better-trained engineers. Thailand can now produce <b>more of both goods</b>.'; trigger(2); };
+document.getElementById('btnReset').onclick=()=>{ cap=100; tParam=0.5; drawExplorer(); document.getElementById('ocBox').textContent='Back to a normal year. Drag the dot again.'; };
+updateHint();
+drawExplorer();
+
+/* ---------------- 3. FIND THE POINT ---------------- */
+const S2=document.getElementById('svg2');
+const P2={x0:70,x1:450,y0:40,y1:280};
+const qx=v=>P2.x0+(v/100)*(P2.x1-P2.x0);
+const qy=v=>P2.y1-(v/100)*(P2.y1-P2.y0);
+const PTS=[
+  {id:'A',x:0,y:100},{id:'B',x:100,y:0},
+  {id:'C',x:38,y:92.5},{id:'D',x:73,y:68.3},
+  {id:'E',x:92,y:88},{id:'F',x:28,y:26}
+];
+function curve2(){
+  let d='';
+  for(let i=0;i<=60;i++){ const t=i/60; d+=(i?' L':'M')+qx(100*Math.sin(t*Math.PI/2)).toFixed(1)+' '+qy(100*Math.cos(t*Math.PI/2)).toFixed(1); }
+  return d;
+}
+function drawS2(){
+  let pts='';
+  PTS.forEach(p=>{
+    pts+=`<g class="pt" data-id="${p.id}"><circle cx="${qx(p.x)}" cy="${qy(p.y)}" r="14" fill="transparent"/><circle cx="${qx(p.x)}" cy="${qy(p.y)}" r="7" fill="#FF8F1C" stroke="#fff" stroke-width="2"/><text x="${qx(p.x)+12}" y="${qy(p.y)-8}" font-size="15" font-weight="900" fill="#002F6C">${p.id}</text></g>`;
+  });
+  S2.innerHTML=`
+   <line x1="${P2.x0}" y1="${P2.y1}" x2="${P2.x1+20}" y2="${P2.y1}" stroke="#002F6C" stroke-width="2.5"/>
+   <line x1="${P2.x0}" y1="${P2.y1}" x2="${P2.x0}" y2="${P2.y0-15}" stroke="#002F6C" stroke-width="2.5"/>
+   <text x="${(P2.x0+P2.x1)/2}" y="${P2.y1+30}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#002F6C">Electronics &amp; cars</text>
+   <text x="26" y="${(P2.y0+P2.y1)/2}" font-size="12.5" font-weight="700" fill="#002F6C" transform="rotate(-90 26 ${(P2.y0+P2.y1)/2})" text-anchor="middle">Rice</text>
+   <path d="${curve2()}" fill="none" stroke="#002F6C" stroke-width="3"/>${pts}`;
+}
+const PID=[
+  {t:'Tap the point where every Thai resource is used to grow rice, and not a single car is built.',a:['A']},
+  {t:'Tap a point where Thailand uses all of its resources fully and efficiently, producing both goods.',a:['C','D']},
+  {t:'Tap the point that shows Thai workers and factories sitting idle — as in 2020, when the hotels were empty.',a:['F']},
+  {t:'Tap the point Thailand cannot reach with the resources it has today.',a:['E']},
+  {t:'Starting at C, Thailand builds more cars and grows less rice. Tap where it ends up.',a:['D']}
+];
+let pidI=0;
+function askPid(){
+  drawS2();
+  document.getElementById('pidQ').textContent=(pidI+1)+' of 5. '+PID[pidI].t;
+  S2.querySelectorAll('.pt').forEach(g=>{
+    g.addEventListener('click',()=>{
+      const fb=document.getElementById('pidFb');
+      if(PID[pidI].a.includes(g.dataset.id)){
+        g.querySelector('circle:last-of-type').setAttribute('fill','#2E7D4F');
+        fb.className='fb good'; fb.textContent='Correct — point '+g.dataset.id+'.';
+        pidI++;
+        if(pidI<PID.length) setTimeout(()=>{ document.getElementById('pidFb').className=''; document.getElementById('pidFb').textContent=''; askPid(); },900);
+        else { fb.textContent='All five correct. You can now read any PPC diagram in the exam.'; done.pid=true; progress(); }
+      } else {
+        fb.className='fb bad'; fb.textContent='Not point '+g.dataset.id+'. Read the statement again — is it inside, on, or beyond the curve?';
+      }
+    });
+  });
+}
+document.getElementById('pidReset').onclick=()=>{ pidI=0; document.getElementById('pidFb').className=''; document.getElementById('pidFb').textContent=''; askPid(); };
+askPid();
+
+/* ---------------- 4. SORT ---------------- */
+const CARDS=[
+  {t:'Floodwater destroys machinery in 800 factories at Rojana Industrial Estate, Ayutthaya',k:'in'},
+  {t:'Toyota retrains 2,000 pick-up workers to assemble EV batteries instead',k:'along'},
+  {t:'The EEC opens a new deep-sea port and a high-speed rail link to U-Tapao',k:'out'},
+  {t:'Thailand\'s working-age population falls as the country ages',k:'in'},
+  {t:'Thai technical colleges train 5,000 extra engineers a year',k:'out'},
+  {t:'Farmers in Isaan switch land from rice to growing durian for export',k:'along'}
+];
+const bank=document.getElementById('bank');
+function buildSort(){
+  bank.innerHTML='';
+  document.querySelectorAll('#bins .drop').forEach(d=>d.innerHTML='');
+  [...CARDS].sort(()=>Math.random()-0.5).forEach(c=>{
+    const el=document.createElement('div'); el.className='chip'; el.textContent=c.t; el.dataset.k=c.k;
+    makeDraggable(el); bank.appendChild(el);
+  });
+  document.getElementById('sortFb').className=''; document.getElementById('sortFb').textContent='';
+}
+document.getElementById('sortReset').onclick=buildSort;
+document.getElementById('sortCheck').onclick=()=>{
+  const fb=document.getElementById('sortFb');
+  if(bank.querySelectorAll('.chip').length){ fb.className='fb bad'; fb.textContent='Place every headline in a column first.'; return; }
+  let right=0;
+  document.querySelectorAll('#bins .bin').forEach(bin=>{
+    bin.querySelectorAll('.chip').forEach(ch=>{
+      const good=ch.dataset.k===bin.dataset.bin;
+      ch.classList.toggle('ok',good); ch.classList.toggle('no',!good);
+      if(good) right++;
+    });
+  });
+  if(right===CARDS.length){ fb.className='fb good'; fb.textContent='All six correct. Notice that both "movement along" cards involve the same workers and the same land doing a different job.'; done.sort=true; progress(); }
+  else { fb.className='fb bad'; fb.textContent=right+' of 6 correct. For each red card ask: has Thailand gained or lost resources, or just moved them?'; }
+};
+buildSort();
+
+/* ---------------- 5a. MCQ ---------------- */
+const MCQ=[
+  {q:'Which is <b>most</b> likely to cause an outward shift of Thailand\'s production possibility curve?',
+   o:['a flood that destroys factories in Ayutthaya','a fall in the number of people of working age','new robot machinery installed in Rayong car plants','moving workers from rice fields into car plants'],a:2,
+   why:'New machinery raises the quantity and quality of capital, so productive capacity rises.'},
+  {q:'A country is producing at a point inside its production possibility curve. This shows that',
+   o:['the country is experiencing economic growth','the combination of output is unattainable','some factors of production are unemployed','all resources are being used efficiently'],a:2,
+   why:'Inside the curve means resources exist but are not being used — spare capacity.'},
+  {q:'A movement along a production possibility curve always involves',
+   o:['an increase in the quantity of resources','an opportunity cost','a fall in the total output of the economy','an improvement in technology'],a:1,
+   why:'Along the curve, more of one good can only come from producing less of the other.'}
+];
+const mb=document.getElementById('mcqBox');
+let mcqRight=0;
+MCQ.forEach((m,i)=>{
+  const d=document.createElement('div'); d.style.marginBottom='18px';
+  d.innerHTML='<p class="q">'+(i+1)+'. '+m.q+' <span style="color:var(--orange)">[1]</span></p>'+
+    '<div class="btnrow">'+m.o.map((o,j)=>'<button class="btn ghost" data-j="'+j+'">'+'ABCD'[j]+'&nbsp; '+o+'</button>').join('')+'</div>'+
+    '<div class="fbslot"></div>';
+  d.addEventListener('click', e=>{
+    const b=e.target.closest('button[data-j]'); if(!b||d.dataset.done==='1') return;
+    const fb=d.querySelector('.fbslot');
+    if(+b.dataset.j===m.a){
+      d.dataset.done='1'; b.style.background='var(--green)'; b.style.color='#fff'; b.style.borderColor='var(--green)';
+      fb.className='fbslot fb good'; fb.innerHTML='Correct. '+m.why;
+      mcqRight++; if(mcqRight===MCQ.length){ done.exam=true; progress(); }
+    } else {
+      b.style.background='var(--red-soft)'; b.style.borderColor='var(--red)'; b.style.color='var(--red)';
+      fb.className='fbslot fb bad'; fb.textContent='Not that one — read the stem again and try another option.';
+    }
+  });
+  mb.appendChild(d);
+});
+
+/* ---------------- 5b. CHAIN BUILDER ---------------- */
+const CHAIN=[
+  {k:1,t:'In Thailand, workers and land are moving out of rice farming in Isaan and into electronics factories in the EEC.'},
+  {k:2,t:'One effect is that the output of electronics rises.'},
+  {k:3,t:'This leads to higher export earnings, because electronics sell for far more per kilogram than rice.'},
+  {k:4,t:'Overall, Thailand gains manufactured output, but the opportunity cost is the rice it gives up.'}
+];
+const cb=document.getElementById('chainBank'), cs=document.getElementById('chainSlot');
+function buildChain(){
+  cb.innerHTML=''; cs.innerHTML='';
+  [...CHAIN].sort(()=>Math.random()-0.5).forEach(c=>{
+    const el=document.createElement('div'); el.className='chip'; el.textContent=c.t; el.dataset.k=c.k;
+    el.onclick=()=>{ if(el.parentElement===cb) cs.appendChild(el); else cb.appendChild(el); el.classList.remove('ok','no'); };
+    cb.appendChild(el);
+  });
+  document.getElementById('chainFb').className=''; document.getElementById('chainFb').textContent='';
+}
+document.getElementById('chainReset').onclick=buildChain;
+document.getElementById('chainCheck').onclick=()=>{
+  const chips=[...cs.children], fb=document.getElementById('chainFb');
+  if(chips.length<4){ fb.className='fb bad'; fb.textContent='Tap all four sentences into the blue box first.'; return; }
+  let ok=true;
+  chips.forEach((c,i)=>{ const good=+c.dataset.k===i+1; c.classList.toggle('ok',good); c.classList.toggle('no',!good); if(!good) ok=false; });
+  if(ok){ fb.className='fb good'; fb.textContent='That is the 6-mark shape: Context → One effect is → This leads to … because → Overall.'; }
+  else { fb.className='fb bad'; fb.textContent='Close. Set the Thai context first, and always finish with your Overall judgement.'; }
+};
+buildChain();
+
+/* ---------------- 5c. MODEL ---------------- */
+document.getElementById('revealBtn').onclick=function(){
+  document.getElementById('model').classList.remove('hidden');
+  this.remove();
+};
+
+progress();
+</script>
+</body>
+</html>
