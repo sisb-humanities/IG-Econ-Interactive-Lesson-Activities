@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 4.3 — You are the MPC | SISB IGCSE Economics</title>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C;
+  --ink:#1A2733; --grey:#5A6B7C; --pale:#EEF4FA; --cream:#FFF4E6;
+  --line:#D3DEE8; --green:#1F7A4C; --greenbg:#E8F5EC;
+  --amber:#B5730B; --amberbg:#FFF3DE;
+  --red:#A03227; --redbg:#FDECEC;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Lato","Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);
+  background:#F7FAFC;line-height:1.55;font-size:16px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px}
+
+header{background:var(--navy);color:#fff;padding:22px 0 24px;margin-bottom:26px}
+header .wrap{padding-bottom:0}
+.kicker{color:var(--orange);font-weight:700;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase}
+header h1{margin:6px 0 4px;font-size:2rem;font-weight:700}
+header p{margin:0;color:#B9D3E8;font-size:.95rem;max-width:780px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:20px}
+h2{font-size:1.12rem;color:var(--navy);margin:0 0 12px}
+h3{font-size:.94rem;color:var(--blue);margin:0 0 8px;text-transform:uppercase;letter-spacing:.05em}
+.muted{color:var(--grey);font-size:.9rem}
+
+.scenarios{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.scn{flex:1 1 calc(25% - 9px);text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:13px 15px;
+  cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--ink);transition:.15s}
+.scn:hover{border-color:var(--blue)}
+.scn strong{display:block;color:var(--navy);font-size:.97rem;margin-bottom:3px}
+.scn.on{border-color:var(--navy);background:var(--pale);box-shadow:0 0 0 2px rgba(0,47,108,.12)}
+#brief{margin-top:16px;background:var(--pale);border-left:5px solid var(--blue);border-radius:6px;padding:14px 18px}
+#brief b{color:var(--navy)}
+
+.deck{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:352px 1fr;gap:20px;align-items:start}
+.rateBox{text-align:center}
+.rateNum{font-size:3.6rem;font-weight:700;color:var(--navy);line-height:1.02;margin:2px 0 0}
+.rateFrom{font-size:.88rem;color:var(--grey);min-height:1.3em}
+.btns{display:flex;gap:8px;margin:14px 0 0}
+button.act{flex:1;font-family:inherit;font-size:.93rem;font-weight:700;padding:11px 6px;border-radius:8px;
+  border:1.5px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer}
+button.act:hover{background:var(--pale)}
+button.act:disabled{opacity:.35;cursor:not-allowed}
+button.primary{background:var(--navy);color:#fff;font-size:1.02rem;padding:15px 6px}
+button.primary:hover{background:#003C86}
+button.ghost{border-color:var(--line);color:var(--grey);font-weight:400;font-size:.85rem;padding:8px 6px}
+
+.clock{margin-top:18px;border-radius:10px;background:var(--navy);color:#fff;padding:12px 10px 14px}
+.clock .cap{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#9FC4E4;font-weight:700}
+.clock .qbig{font-size:2.9rem;font-weight:700;line-height:1.05;margin:2px 0}
+.clock .yrs{font-size:.82rem;color:#B9D3E8}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.dot{width:11px;height:11px;border-radius:50%;background:#2C5589}
+.dot.done{background:var(--orange)}
+.lag{display:inline-block;margin-top:11px;padding:5px 12px;border-radius:20px;font-size:.8rem;font-weight:700}
+.lag.arriving{background:#FFE0B8;color:#7A4A00}
+.lag.settled{background:#CFE9DA;color:#145635}
+
+.chartHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.bigval{font-size:2.5rem;font-weight:700;line-height:1.05}
+svg.chart{width:100%;height:auto;display:block}
+
+.mrow{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.m{flex:1 1 calc(33.333% - 11px);border:1px solid var(--line);border-radius:10px;padding:15px 17px;background:#fff}
+.m .name{font-weight:700;color:var(--navy);font-size:.98rem}
+.m .num{font-size:2.4rem;font-weight:700;line-height:1.08;margin:6px 0 0}
+.m .sub{font-size:.83rem;color:var(--grey);margin-bottom:10px}
+.m .lbl{font-size:.9rem;min-height:3.6em;margin-bottom:10px}
+.pill{font-size:.74rem;font-weight:700;padding:2px 9px;border-radius:20px;white-space:nowrap;float:right}
+.ok{background:var(--greenbg);color:var(--green)}
+.wa{background:var(--amberbg);color:var(--amber)}
+.bad{background:var(--redbg);color:var(--red)}
+.numok{color:var(--green)} .numwa{color:var(--amber)} .numbad{color:var(--red)}
+
+.track{position:relative;height:14px;border-radius:8px;background:#EDF1F5}
+.track.grad{background:linear-gradient(to right,#D94F41 0%,#EFA24B 25%,#EFE3A6 45%,#5FB88C 56%,#0E8FD6 100%)}
+.band{position:absolute;top:0;bottom:0;background:#C8E6D3;border-radius:8px}
+.mark{position:absolute;top:-3px;width:5px;height:20px;border-radius:3px;background:var(--navy);
+  box-shadow:0 0 0 2px #fff;transition:left .45s ease}
+.scale{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);margin-top:6px}
+
+.chain{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.step{flex:1 1 calc(16.666% - 9px);border:1.5px solid #E4EAF0;border-radius:9px;padding:11px 13px;background:#FBFCFD;
+  opacity:.35;filter:grayscale(1);transform:scale(.97);
+  transition:opacity .5s ease, background .5s ease, border-color .5s ease, transform .5s ease, box-shadow .5s ease}
+.step.live{opacity:1;filter:none;transform:scale(1);background:var(--pale);
+  border-color:var(--blue);box-shadow:0 2px 10px rgba(0,139,204,.18)}
+.step.block{opacity:1;filter:none;transform:scale(1);background:var(--redbg);
+  border-color:var(--red);box-shadow:0 2px 10px rgba(160,50,39,.16)}
+.step .n{font-weight:700;font-size:.78rem;color:var(--blue);margin-bottom:4px}
+.step.block .n{color:var(--red)}
+.step p{margin:0;font-size:.83rem;line-height:1.45}
+.step .why{margin-top:7px;font-size:.78rem;color:var(--red);font-weight:700}
+
+.cons{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cbox{flex:1 1 calc(50% - 7px);border:1px solid var(--line);border-radius:9px;padding:13px 15px;background:#FAFCFE;opacity:.5;transition:.3s}
+.cbox.on{opacity:1;background:var(--pale);border-color:var(--blue)}
+.cbox b{color:var(--navy);display:block;margin-bottom:3px;font-size:.93rem}
+.cbox span{font-size:.87rem}
+
+.wl{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wl div{flex:1 1 calc(50% - 7px);border-radius:9px;padding:13px 16px;font-size:.89rem}
+.win{background:var(--greenbg);border:1px solid #A9D6BC}
+.lose{background:var(--redbg);border:1px solid #EFBEB8}
+.wl b{display:block;margin-bottom:5px}
+.win b{color:var(--green)} .lose b{color:var(--red)}
+.wl ul{margin:0;padding-left:18px} .wl li{margin-bottom:3px}
+
+#verdict{border-radius:9px;padding:16px 20px;font-size:.95rem;border:1px solid var(--line);background:#fff}
+#verdict.good{background:var(--greenbg);border-color:#A9D6BC}
+#verdict.mixed{background:var(--cream);border-color:var(--orange)}
+#verdict h4{margin:0 0 7px;color:var(--navy);font-size:1rem}
+#verdict p{margin:0 0 8px} #verdict p:last-child{margin-bottom:0}
+
+details.tp{margin-top:8px;border:1px dashed var(--line);border-radius:9px;background:#fff;padding:0 18px}
+details.tp summary{cursor:pointer;padding:13px 0;font-weight:700;color:var(--grey);font-size:.9rem;list-style:none}
+details.tp summary::-webkit-details-marker{display:none}
+details.tp summary::before{content:"▸ ";color:var(--orange)}
+details.tp[open] summary::before{content:"▾ "}
+details.tp .body{padding-bottom:16px;font-size:.9rem}
+details.tp li{margin-bottom:6px}
+
+/* ---------- sticky decision bar ---------- */
+.bar{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:16px;
+  background:var(--navy);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:16px;
+  box-shadow:0 4px 18px rgba(0,47,108,.18)}
+.barCap{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#9FC4E4;font-weight:700}
+.barNum{display:block;font-size:2.1rem;font-weight:700;line-height:1.05}
+.barSub{display:block;font-size:.76rem;color:#B9D3E8}
+.barRate{min-width:132px}
+.barBtns{display:flex;gap:8px;flex:1;min-width:330px}
+.bar button.act{border-color:#4E7099;background:rgba(255,255,255,.08);color:#fff;
+  font-size:.88rem;padding:10px 8px;white-space:nowrap}
+.bar button.act:hover{background:rgba(255,255,255,.18)}
+.bar button.primary{background:var(--orange);border-color:var(--orange);color:#3D2000;font-weight:700}
+.bar button.primary:hover{background:#FFA341}
+.bar button.ghost{flex:0 0 auto;border-color:#4E7099;color:#B9D3E8;font-weight:400;padding:8px 12px}
+.barClock{min-width:118px}
+.barQ{display:block;font-size:1.32rem;font-weight:700;line-height:1.15}
+.barRight{display:flex;flex-direction:column;gap:7px;align-items:flex-end}
+.bar .dots{justify-content:flex-start;gap:4px;margin-top:5px}
+.bar .dot{width:7px;height:7px}
+.bar .lag{margin-top:0;font-size:.74rem;padding:4px 10px}
+
+/* ---------- always-visible aims strip ---------- */
+.aims{display:flex;flex-wrap:wrap;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.a{flex:1 1 calc(25% - 9px);border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff}
+.a .an{font-weight:700;color:var(--navy);font-size:.84rem;text-transform:uppercase;letter-spacing:.03em}
+.a .av{font-size:1.85rem;font-weight:700;line-height:1.12;margin:3px 0 0}
+.a .al{font-size:.79rem;color:var(--grey);min-height:2.5em;margin:2px 0 8px;line-height:1.35}
+.a .pill{float:right;font-size:.68rem;padding:1px 8px}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:-1px}
+.tab{font-family:inherit;font-size:.9rem;font-weight:700;color:var(--grey);background:#EDF2F7;
+  border:1px solid var(--line);border-bottom-color:transparent;border-radius:9px 9px 0 0;
+  padding:10px 16px;cursor:pointer;position:relative;top:1px}
+.tab:hover{background:#E3EBF2;color:var(--navy)}
+.tab.on{background:#fff;color:var(--navy);border-bottom-color:#fff}
+.badge{display:inline-block;margin-left:7px;background:var(--orange);color:#fff;font-size:.7rem;
+  border-radius:20px;padding:1px 8px;vertical-align:1px}
+.badge:empty{display:none}
+.badge.done{background:var(--green)}
+.badge.warn{background:var(--red)}
+.pane{display:none;background:#fff;border:1px solid var(--line);border-radius:0 10px 10px 10px;
+  padding:20px 22px;margin-bottom:20px}
+.pane.on{display:block}
+.pane h3{margin:0 0 10px}
+.pane h3.mid{margin-top:26px}
+
+@media (max-width:900px){
+  .aims{grid-template-columns:1fr 1fr}
+  .bar{position:static}
+  .barBtns{min-width:100%}
+}
+@media (max-width:560px){ .aims{grid-template-columns:1fr} }
+
+.delta{font-size:.82rem;font-weight:700;margin-left:7px;white-space:nowrap}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--grey);font-weight:400}
+table.log{width:100%;border-collapse:collapse;font-size:.88rem}
+table.log th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:700;font-size:.82rem}
+table.log td{padding:7px 10px;border-bottom:1px solid var(--line)}
+table.log tr:nth-child(even) td{background:#F6F9FC}
+table.log td.ch{background:var(--cream) !important;font-weight:700;color:#9A5200}
+.gate{text-align:center;padding:26px 20px;background:var(--cream);border:1px solid var(--orange);border-radius:9px}
+.gate p{margin:0 0 14px;font-size:.95rem;color:#8A4B00}
+.gate b{color:var(--navy)}
+
+footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
+
+@media (max-width:980px){
+  .deck{grid-template-columns:1fr}
+  .chain{grid-template-columns:repeat(3,1fr)}
+  .scenarios{grid-template-columns:1fr 1fr}
+  .mrow{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .cons,.wl{grid-template-columns:1fr}
+  .chain{grid-template-columns:1fr}
+  .scenarios{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Cambridge IGCSE Economics 0455 &nbsp;•&nbsp; Unit 4.3</div>
+    <h1>You are the MPC</h1>
+    <p>Set Thailand's interest rate and watch the four macroeconomic aims respond over time. Some situations have a good answer. One of them does not — and working out why is the point.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card" style="padding:16px 18px">
+    <div class="scenarios" id="scnRow"></div>
+    <div id="brief"></div>
+  </div>
+
+  <!-- decision bar: stays on screen while you read any tab -->
+  <div class="bar">
+    <div class="barRate">
+      <span class="barCap">Interest rate</span>
+      <span class="barNum" id="rateNum">3.00%</span>
+      <span class="barSub" id="rateFrom"></span>
+    </div>
+    <div class="barBtns">
+      <button class="act" id="btnCut">&#9660; Cut 0.25</button>
+      <button class="act" id="btnRaise">&#9650; Raise 0.25</button>
+      <button class="act primary" id="btnQ">Run next quarter &#9656;</button>
+    </div>
+    <div class="barClock">
+      <span class="barCap">Time elapsed</span>
+      <span class="barQ" id="qBig">Quarter 0</span>
+      <span class="barSub" id="qYears"></span>
+      <span class="dots" id="qDots"></span>
+    </div>
+    <div class="barRight">
+      <span class="lag settled" id="lagPill">No change yet</span>
+      <button class="act ghost" id="btnReset">Reset</button>
+    </div>
+  </div>
+
+  <!-- the four aims, always visible -->
+  <div class="aims" id="aims"></div>
+
+  <div class="tabs">
+    <button class="tab on" data-pane="p-growth">Growth over time</button>
+    <button class="tab" data-pane="p-chain">Chain of reasoning <span class="badge" id="bChain"></span></button>
+    <button class="tab" data-pane="p-cost">People &amp; the budget <span class="badge" id="bCost"></span></button>
+    <button class="tab" data-pane="p-side">Side effects &amp; who pays</button>
+    <button class="tab" data-pane="p-log">Your record <span class="badge" id="bLog"></span></button>
+    <button class="tab" data-pane="p-verdict">Verdict <span class="badge" id="bVerdict"></span></button>
+  </div>
+
+  <div class="pane on" id="p-growth">
+    <div id="chartWrap"></div>
+    <div id="gWarn"></div>
+  </div>
+
+  <div class="pane" id="p-chain">
+    <p class="muted" style="margin:0 0 12px">Each link lights up as the change works its way through the economy, one link per quarter. A red link is one that has broken.</p>
+    <div class="chain" id="chain"></div>
+    <p id="chainNote" style="margin:14px 0 0;font-size:.9rem"></p>
+  </div>
+
+  <div class="pane" id="p-cost">
+    <p class="muted" style="margin:0 0 14px">Unemployment is not just a number on a dial. Every percentage point is people — and it lands on the government budget without anyone changing a single tax rate.</p>
+    <div class="mrow" id="cost"></div>
+    <div id="costNote" style="margin-top:16px"></div>
+  </div>
+
+  <div class="pane" id="p-side">
+    <h3>The other two measures move too</h3>
+    <p class="muted" style="margin:0 0 12px">You only touched the interest rate. These are consequences, not separate decisions.</p>
+    <div class="cons" id="cons"></div>
+    <h3 class="mid">Who gains and who loses</h3>
+    <div class="wl" id="wl"></div>
+  </div>
+
+  <div class="pane" id="p-log">
+    <p class="muted" style="margin:0 0 12px">Every quarter you run is recorded here. Copy these rows onto your worksheet — orange rows are quarters in which you changed the rate.</p>
+    <div id="logWrap"></div>
+  </div>
+
+  <div class="pane" id="p-verdict">
+    <div id="gate" class="gate">
+      <p>Before you read this, <b>write your own answer on your worksheet</b>: which aim did your decision help, which did it damage, and what is the mechanism connecting them?</p>
+      <button class="act primary" id="btnGate" style="max-width:280px;margin:0 auto">I have written my answer — show me</button>
+    </div>
+    <div id="verdict" style="display:none"></div>
+  </div>
+
+  <details class="tp">
+    <summary>For teachers — how to run this</summary>
+    <div class="body">
+      <ul>
+        <li><b>Recession and Overheating first.</b> These behave the way the textbook says, so students build confidence that the chain works. Three minutes each. Ask them to write down which aims went green and which went amber.</li>
+        <li><b>Then Thailand 2026.</b> This one cannot be solved. Let them try every setting before you say so. The discovery — that cutting barely moves inflation, and that households will not borrow anyway — is limitations 2, 4 and 6 from Task 10, found rather than told.</li>
+        <li><b>Insist on the lag.</b> Students will change the rate and expect an instant result. Make them run at least three quarters before judging. The growth line makes the delay visible: the turn does not happen in the quarter they decide.</li>
+        <li><b>Read the growth chart together.</b> Orange points mark the quarters in which the rate was changed. The dashed line is potential growth — what the economy could sustain. Below it means spare capacity and rising unemployment.</li>
+        <li><b>The growth curve has a peak.</b> Cutting raises growth — up to a point. Past it, inflation gets high enough that uncertainty drags output back down, and students end up with rising prices <i>and</i> falling output. Let them cut to 0% and discover stagflation for themselves, then ask them to find the top of the curve.</li>
+        <li><b>Use the cost panel to reach fiscal policy.</b> When unemployment climbs, tax revenue falls and welfare spending rises on their own. Ask: "Has the government raised any taxes? Then why has the deficit grown?" That is the automatic stabiliser from Unit 4.2, arrived at from the other direction.</li>
+        <li><b>The question to land:</b> "You could not fix Thailand 2026 with the interest rate. So what <i>would</i> you use?" Expected: targeted lending schemes for SMEs, debt restructuring, energy subsidies, supply-side policy to raise productivity — fiscal and targeted measures, not monetary policy.</li>
+        <li><b>Links back:</b> the gains and losses panel is Task 7's five voices. The chain panel is Task 5 and slide 16. The verdict wording feeds straight into the 8-mark judgement in Task 12.</li>
+      </ul>
+    </div>
+  </details>
+
+  <footer>SISB &nbsp;&#8226;&nbsp; IGCSE Economics 0455 &nbsp;&#8226;&nbsp; Unit 4.3 Monetary Policy &nbsp;&#8226;&nbsp; Thai data reflects the MPC position of 26 August 2026</footer>
+</div>
+
+<script>
+"use strict";
+
+var NEUTRAL   = 3.25;   /* rate at which policy neither stimulates nor restrains */
+var SPEED     = 0.62;   /* share of the remaining effect arriving each quarter */
+var POTENTIAL = 2.6;    /* growth the economy could sustain, % per year */
+
+var SCENARIOS = {
+  recession: {
+    name:"Recession", tag:"Growth has stalled and prices are barely rising.",
+    brief:"Thailand is in a downturn. Firms are not investing, unemployment is climbing and inflation has fallen below the 1\u20133% target band. The government wants action. <b>Your task: get growth and inflation back into the green.</b>",
+    startRate:5.00, gBase:1.90, uNat:1.1, iBase:1.4, defBase:860, debt:false, supply:false
+  },
+  overheat: {
+    name:"Overheating", tag:"Spending is running ahead of what firms can produce.",
+    brief:"The economy is booming. Households are borrowing heavily and demand is running well ahead of what firms can supply, so prices are climbing fast. This is demand-pull inflation. <b>Your task: bring inflation back inside the 1\u20133% band.</b>",
+    startRate:1.00, gBase:2.24, uNat:1.1, iBase:0.7, defBase:620, debt:false, supply:false
+  },
+  thai2026: {
+    name:"Thailand, 2026", tag:"The real situation the MPC faced.",
+    brief:"Growth is low and uneven. Household debt is around 86% of GDP. Inflation has pushed above the target band \u2014 but it is coming from <b>world energy prices</b>, not from Thai spending. The rate is already 1.00%, the lowest since 2022. <b>Your task: try to get all four aims green. You will not manage it. Work out why.</b>",
+    startRate:1.00, gBase:-0.72, uNat:1.2, iBase:3.8, defBase:860, debt:true, supply:true
+  },
+  free: {
+    name:"Free play", tag:"Neutral economy. Experiment.",
+    brief:"A neutral starting point with no special problems. Move the rate as far as you like in each direction and watch which aims move together and which move against each other. <b>Your task: find a trade-off and be able to explain it.</b>",
+    startRate:3.25, gBase:2.50, uNat:1.1, iBase:1.5, defBase:780, debt:false, supply:false
+  }
+};
+
+var KEY = "sisb_u43_mpc_v4";
+var S;
+
+function cfg(){ return SCENARIOS[S.id]; }
+function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+function pos(v,lo,hi){ return clamp((v-lo)/(hi-lo)*100, 2, 98); }
+
+/* ---------------- the economy, in real units ---------------- */
+function economy(){
+  var c = cfg(), t = S.transmitted;
+  var t0 = NEUTRAL - c.startRate;        /* stimulus the scenario began with */
+  var debtF   = c.debt   ? 0.40 : 1;     /* indebted households will not borrow */
+  var supplyF = c.supply ? 0.22 : 1;     /* a rate cannot touch world energy prices */
+  var demandF = debtF * supplyF;         /* how much demand-pull the rate can generate */
+  var rEff    = NEUTRAL - t;             /* the rate the economy is actually feeling */
+
+  /* Inflation accelerates as policy gets looser — each further cut adds more
+     than the last. It falls back far more slowly when policy is tightened.   */
+  var infl = c.iBase + demandF * (t > 0 ? 3.20 * t + 0.22 * t * t : 0.90 * t);
+
+  /* THE BRAKE. Once inflation passes 5%, firms and households stop being able
+     to plan. Investment is postponed, contracts get harder to price, and that
+     uncertainty drags output down — however cheap borrowing is.               */
+  var drag = infl > 5 ? 0.62 * Math.pow(infl - 5, 1.35) : 0;
+
+  /* Very high rates do extra damage beyond the normal squeeze: debt servicing
+     costs bite and firms fail rather than merely postpone.                    */
+  var squeeze = rEff > 4 ? 0.60 * (rEff - 4) : 0;
+
+  var growth = c.gBase + 2.80 * t * debtF - drag - squeeze;
+
+  /* Okun: unemployment rises as output falls below potential.
+     Below ~0.9% it eases towards a floor rather than clipping flat.          */
+  var raw = c.uNat + 1.35 * (POTENTIAL - growth);
+  var unemp = raw > 0.9 ? raw : 0.4 + 0.5 * Math.exp((raw - 0.9) * 2);
+
+  /* The baht moves against where the rate STARTED. But high domestic inflation
+     erodes competitiveness even when the currency is weak — Thai costs rise
+     faster than those of the countries Thailand sells to.                     */
+  var bop = (c.supply ? 0.45 : 1.00) * (t - t0) - 0.80 * Math.max(0, infl - 5);
+
+  return { t:t, growth:growth, unemp:unemp, infl:infl, bop:bop,
+           drag:drag, squeeze:squeeze, rEff:rEff };
+}
+
+function growthStatus(g){
+  if(g > 4.0) return "wa";                 /* unsustainable \u2014 this is what pulls prices up */
+  return g >= 1.8 ? "ok" : (g >= 0.5 ? "wa" : "bad");
+}
+function growthLabel(g){
+  var e = economy();
+  if(e.drag > 3 && g < 3.0)
+    return "Falling back. Inflation is now so high that the economy is going backwards \u2014 this is stagflation.";
+  return g > 4.0 ? "Growing far faster than the economy can sustain. This is what pulls prices up."
+       : g >= 3.0 ? "Strong growth, above potential."
+       : g >= 1.8 ? "Healthy growth. Firms are expanding."
+       : g >= 0.5 ? "Below potential. There is spare capacity."
+       : g >= -0.2 ? "Stalled. Output is barely moving."
+       : "Contracting. The economy is shrinking.";
+}
+
+function metrics(){
+  var e = economy(), u = e.unemp, i = e.infl, b = e.bop;
+  var uSt = u <= 1.6 ? "ok" : (u <= 3.2 ? "wa" : "bad");
+  var iSt = (i >= 1 && i <= 3) ? "ok" : ((i >= 0.4 && i < 4) ? "wa" : "bad");
+  var bSt = b >= 0.35 ? "ok" : (b >= -0.35 ? "wa" : "bad");
+  return [
+    { name:"Employment", st:uSt, num:u.toFixed(1)+"%", sub:"unemployment rate",
+      lbl: u <= 1.0 ? "Very tight labour market. Almost everyone who wants work has it."
+         : u <= 1.6 ? "Close to full employment. Firms are hiring."
+         : u <= 3.2 ? "Hiring has stalled and jobs are being lost."
+         : u <= 5.0 ? "High unemployment. Many families have lost their income."
+         : "Severe unemployment. Whole communities are out of work.",
+      p: pos(u, 12.0, 0.4), lo:"12% \u2014 severe", hi:"0.4% \u2014 full employment" },
+
+    { name:"Stable prices", st:iSt, num:i.toFixed(1)+"%", sub:"inflation \u2014 target band 1\u20133%",
+      lbl: i > 9 ? "Out of control. Nobody can plan or price anything."
+         : i > 6 ? "Running away, far above the target band."
+         : i > 4 ? "Well above the 1\u20133% target band."
+         : i > 3 ? "Above the 1\u20133% target band."
+         : i >= 1 ? "Inside the 1\u20133% target band."
+         : i >= 0.4 ? "Below the target band. Prices are barely rising."
+         : "Far below target. Deflation is a risk.",
+      p: pos(i, 0, 14), band:[pos(1,0,14), pos(3,0,14)], lo:"0%", hi:"14%" },
+
+    { name:"Balance of payments", st:bSt, numSmall:true,
+      num: b >= 0.35 ? "Competitive" : (b >= -0.35 ? "Neutral" : "Uncompetitive"),
+      sub:"Thai exports on world markets",
+      lbl: b >= 0.35 ? "A weaker baht is making Thai exports cheaper abroad \u2014 but imported fuel costs more."
+         : b >= -0.35 ? "Little change. The baht is broadly where it was."
+         : (i > 5
+            ? "Thai costs and prices are rising far faster than in the countries Thailand sells to, so exports are being priced out \u2014 even though the baht itself is weak."
+            : "A stronger baht is pricing Thai exports out of foreign markets."),
+      p: pos(b, -5.0, 5.0), grad:true, lo:"Uncompetitive", hi:"Competitive" }
+  ];
+}
+
+/* ---------------- the human and fiscal cost ---------------- */
+/* Anchored to Thailand's FY2026 budget: 3.78tn baht of spending against
+   2.92tn of revenue, leaving an 860bn deficit (~4.4% of GDP), with public
+   debt already near the legal ceiling of 70%.                            */
+var LABOUR_FORCE    = 40;      /* millions */
+var PLANNED_REVENUE = 2920;    /* bn baht, FY2026 plan */
+var BASE_DEFICIT    = 860;     /* bn baht, FY2026 plan */
+var GDP_BN          = 19500;   /* bn baht */
+var DEBT_RATIO      = 68.2;    /* % of GDP, FY2026 */
+var TAX_PER_PP      = 50;      /* bn baht of revenue lost per extra point of unemployment */
+var WELF_PER_PP     = 6;       /* bn baht of extra support spending per point */
+
+function bn(v){
+  return (v >= 0 ? "+" : "\u2212") + Math.round(Math.abs(v)) + " bn";
+}
+
+function costData(){
+  var c = cfg(), e = economy();
+  var excess  = e.unemp - c.uNat;                  /* points above the natural rate */
+  var people  = e.unemp / 100 * LABOUR_FORCE;      /* millions out of work */
+  var taxLoss = TAX_PER_PP  * excess;              /* bn baht of revenue forgone */
+  var welfare = WELF_PER_PP * excess;              /* bn baht of extra support */
+  var revenue = PLANNED_REVENUE - taxLoss;
+  var base    = c.defBase === undefined ? BASE_DEFICIT : c.defBase;
+  var deficit = base + taxLoss + welfare;
+  var pctGdp  = deficit / GDP_BN * 100;
+  var uSt = e.unemp <= 1.6 ? "ok" : (e.unemp <= 3.2 ? "wa" : "bad");
+
+  return {
+    base:base, excess:excess, taxLoss:taxLoss, welfare:welfare,
+    revenue:revenue, deficit:deficit, pctGdp:pctGdp,
+    tiles: [
+      { name:"People out of work", st:uSt, num:people.toFixed(2) + "m",
+        sub:"of a labour force of about 40 million",
+        lbl: excess > 2 ? "Roughly " + (excess / 100 * LABOUR_FORCE).toFixed(2) +
+             " million more people are jobless than when the labour market is healthy."
+           : excess > 0.4 ? "Several hundred thousand more people are out of work than normal."
+           : excess < -0.4 ? "Firms cannot find the staff they need. Wages are being bid up."
+           : "Close to the number you would expect in a healthy labour market." },
+
+      { name:"Government tax revenue", st: taxLoss > 200 ? "bad" : (taxLoss > 50 ? "wa" : "ok"),
+        num: Math.round(revenue) + " bn", sub:"baht per year, against a plan of 2,920 bn",
+        lbl: taxLoss > 50 ? "That is " + Math.round(taxLoss) + " bn baht short of plan. People out of work pay no income tax and spend less, so VAT receipts fall too."
+           : taxLoss < -50 ? "That is " + Math.round(-taxLoss) + " bn baht ahead of plan, because more people are earning and spending."
+           : "Revenue is close to what the government budgeted for." },
+
+      { name:"Budget deficit", st: deficit > 1100 ? "bad" : (deficit > 920 ? "wa" : "ok"),
+        num: Math.round(deficit) + " bn", sub:"baht \u2014 " + pctGdp.toFixed(1) + "% of GDP, all of it borrowed",
+        lbl: deficit > base + 60
+             ? "The gap the government must borrow has widened well beyond the 860 bn baht it planned for."
+           : deficit < base - 30
+             ? "The gap has narrowed \u2014 but it is still a deficit. The government is borrowing less, not banking a surplus."
+           : "Close to the " + base + " bn baht deficit the government planned to borrow this year." }
+    ]
+  };
+}
+
+function costNote(){
+  var c = costData(), e = economy();
+  var mood, cls;
+  if(e.unemp > 5){
+    cls = "lose";
+    mood = "Young people cannot find a first job and households are falling behind on loan repayments. Public anger at the government is high.";
+  } else if(e.unemp > 3.2){
+    cls = "lose";
+    mood = "Many households have lost income and pressure on the government to act is building.";
+  } else if(e.unemp > 1.6){
+    cls = "";
+    mood = "Some people are struggling to find work, particularly younger workers and those in weaker regions.";
+  } else if(c.excess < -0.4){
+    cls = "";
+    mood = "Almost everyone who wants a job has one \u2014 but firms cannot find staff, so wages are bid up, which feeds straight back into inflation.";
+  } else {
+    cls = "win";
+    mood = "The labour market is healthy. Most people who want work can find it.";
+  }
+
+  var fiscal;
+  if(c.taxLoss > 60){
+    fiscal = "Lost tax of <b>" + Math.round(c.taxLoss) + " bn baht</b> plus <b>" +
+      Math.round(c.welfare) + " bn baht</b> of extra support payments push the deficit to <b>" +
+      Math.round(c.deficit) + " bn baht</b>, or " + c.pctGdp.toFixed(1) +
+      "% of GDP. Nobody changed a tax rate or announced any new spending \u2014 this happened by itself. " +
+      "Economists call it an automatic stabiliser, and it is the link between this unit and fiscal policy in Unit 4.2.";
+  } else if(c.taxLoss < -40){
+    fiscal = "More people earning and spending lifts revenue, narrowing the deficit to <b>" +
+      Math.round(c.deficit) + " bn baht</b> (" + c.pctGdp.toFixed(1) + "% of GDP). " +
+      "It is still a deficit. Thailand has planned one every year since the pandemic, so a stronger economy " +
+      "does not hand the government a surplus to spend \u2014 it just means borrowing less.";
+  } else {
+    fiscal = "The deficit is close to the <b>" + c.base + " bn baht</b> this scenario's budget planned for, " +
+      "about " + c.pctGdp.toFixed(1) + "% of GDP.";
+  }
+
+  var squeeze;
+  if(c.deficit > 1000){
+    squeeze = "Every extra baht borrowed has to be repaid with interest. Thailand's public debt is already around " +
+      DEBT_RATIO + "% of GDP against a legal ceiling of 70%, so a deficit this size does not buy new roads, " +
+      "schools or hospitals \u2014 it crowds them out. Interest payments come first, and the capital budget is what gets cut.";
+  } else {
+    squeeze = "Thailand's public debt sits at around " + DEBT_RATIO + "% of GDP against a legal ceiling of 70%. " +
+      "That ceiling is what limits how much the government could borrow to spend its way out of a downturn \u2014 " +
+      "which is one reason monetary policy carries so much of the load.";
+  }
+  return { cls:cls, mood:mood, fiscal:fiscal, squeeze:squeeze };
+}
+
+/* ---------------- growth chart ---------------- */
+function chartSVG(){
+  var W = 720, H = 250, L = 48, R = 16, T = 16, B = 34;
+  var lo = -8, hi = 8;
+  var h = (S.hist && S.hist.length) ? S.hist : [{ q:0, g:economy().growth, ch:false }];
+  var maxQ = Math.max(8, h[h.length-1].q);
+  var X = function(q){ return L + (q / maxQ) * (W - L - R); };
+  var Y = function(v){ return T + (1 - (clamp(v,lo,hi) - lo) / (hi - lo)) * (H - T - B); };
+
+  var s = '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Economic growth over time">';
+  s += '<rect width="'+W+'" height="'+H+'" fill="#FFFFFF"/>';
+  [-8,-6,-4,-2,0,2,4,6,8].forEach(function(v){
+    s += '<line x1="'+L+'" y1="'+Y(v)+'" x2="'+(W-R)+'" y2="'+Y(v)+'" stroke="'+(v===0?"#9DB3C8":"#E9EFF5")+'" stroke-width="'+(v===0?2:1)+'"/>';
+    s += '<text x="'+(L-9)+'" y="'+(Y(v)+4)+'" font-size="12" fill="#5A6B7C" text-anchor="end">'+v+'%</text>';
+  });
+  s += '<line x1="'+L+'" y1="'+Y(POTENTIAL)+'" x2="'+(W-R)+'" y2="'+Y(POTENTIAL)+'" stroke="#1F7A4C" stroke-width="1.5" stroke-dasharray="6 5"/>';
+  s += '<text x="'+(W-R)+'" y="'+(Y(POTENTIAL)-7)+'" font-size="11.5" fill="#1F7A4C" text-anchor="end">potential growth</text>';
+  for(var q=0; q<=maxQ; q++){
+    s += '<text x="'+X(q)+'" y="'+(H-11)+'" font-size="11.5" fill="#5A6B7C" text-anchor="middle">Q'+q+'</text>';
+  }
+  if(h.length > 1){
+    var pts = h.map(function(p){ return X(p.q)+','+Y(p.g); }).join(' ');
+    s += '<polygon points="'+X(h[0].q)+','+Y(lo)+' '+pts+' '+X(h[h.length-1].q)+','+Y(lo)+'" fill="#008BCC" opacity="0.10"/>';
+    s += '<polyline points="'+pts+'" fill="none" stroke="#008BCC" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  }
+  h.forEach(function(p){
+    s += '<circle cx="'+X(p.q)+'" cy="'+Y(p.g)+'" r="'+(p.ch?6:4.5)+'" fill="'+(p.ch?"#FF8F1C":"#002F6C")+'" stroke="#fff" stroke-width="2"/>';
+  });
+  var last = h[h.length-1], right = last.q > maxQ*0.80;
+  s += '<text x="'+(X(last.q) + (right ? -13 : 13))+'" y="'+(Y(last.g)+5)+'" font-size="15" font-weight="700" fill="#002F6C" text-anchor="'+(right?"end":"start")+'">'+last.g.toFixed(1)+'%</text>';
+  s += '</svg>';
+  s += '<p class="muted" style="margin:8px 0 0;font-size:.82rem">Orange points mark the quarters in which you changed the rate. The dashed line is potential growth \u2014 what the economy could sustain.</p>';
+  return s;
+}
+
+/* ---------------- chain ---------------- */
+function chainData(){
+  var c = cfg(), e = economy();
+  var dir = S.rate < c.startRate ? -1 : (S.rate > c.startRate ? 1 : 0);
+  var cut = dir < 0;
+  /* one link per quarter since the decision was made \u2014 the chain walks across */
+  var since = S.quarter - (S.lastChange === undefined ? 0 : S.lastChange);
+
+  if(dir === 0){
+    return { since:-1, steps:[
+      { n:"Step 1", p:"You have held the rate. Nothing has been set in motion." },
+      { n:"Step 2", p:"Waiting on a decision \u2014 commercial bank rates are unchanged." },
+      { n:"Step 3", p:"Waiting \u2014 households have no reason to change their borrowing." },
+      { n:"Step 4", p:"Waiting \u2014 firms' investment plans are unchanged." },
+      { n:"Step 5", p:"Waiting \u2014 total spending is unchanged." },
+      { n:"Step 6", p:"Waiting \u2014 output, jobs and prices are unchanged." }
+    ]};
+  }
+  var steps = [
+    { n:"Step 1",
+      p: cut ? "You cut the interest rate. Borrowing from the BOT is cheaper for banks."
+             : "You raised the interest rate. Borrowing from the BOT costs banks more." },
+    { n:"Step 2",
+      p: cut ? "Commercial banks lower the rates they charge on loans and pay on savings."
+             : "Commercial banks raise the rates they charge on loans and pay on savings." },
+    { n:"Step 3", blocker: c.debt,
+      p: cut ? "Households borrow and spend more. Existing borrowers repay less each month."
+             : "Households borrow and spend less. Existing borrowers repay more each month.",
+      why:"Household debt is about 86% of GDP. Many families will not borrow more however cheap loans become \u2014 so this link is weak." },
+    { n:"Step 4", blocker: c.debt,
+      p: cut ? "Firms borrow more cheaply, so more investment projects become worth doing."
+             : "Firms face higher borrowing costs, so fewer investment projects are worth doing.",
+      why:"Banks stayed cautious with small firms. SME lending was still contracting, so the cut did not reach them." },
+    { n:"Step 5",
+      p: cut ? "Total spending in the economy rises." : "Total spending in the economy falls." },
+    { n:"Step 6", blocker: c.supply,
+      p: cut ? "Firms produce more and hire more workers \u2014 but prices may be pulled up."
+             : "Output and hiring slow \u2014 but the pressure on prices eases.",
+      why:"This inflation is coming from world energy prices, not from Thai spending. The interest rate barely touches it." }
+  ];
+  steps.forEach(function(st, i){
+    st.live  = i <= since;
+    st.block = st.live && st.blocker;
+  });
+  return { since:since, steps:steps };
+}
+
+function consData(){
+  var c = cfg();
+  var cut = S.rate < c.startRate;
+  var on  = Math.abs(S.rate - c.startRate) > 0.001 &&
+            Math.abs(S.transmitted - (NEUTRAL - c.startRate)) > 0.04;
+  return [
+    { on:on, b:"The money supply",
+      s:!on ? "No change yet. Move the rate and run a quarter."
+        : (cut ? "Cheaper borrowing means banks lend more and more credit is created, so the money supply expands. You did not have to buy a single bond."
+               : "Dearer borrowing means banks lend less and less credit is created, so the money supply contracts.") },
+    { on:on, b:"The exchange rate",
+      s:!on ? "No change yet. Move the rate and run a quarter."
+        : (cut ? "A lower rate makes holding baht less rewarding, so the baht tends to weaken. Exports get cheaper abroad \u2014 but imported fuel gets dearer."
+               : "A higher rate makes holding baht more rewarding, so the baht tends to strengthen. Imported fuel gets cheaper \u2014 but exports get dearer.") }
+  ];
+}
+
+function wlData(){
+  var c = cfg(), dir = S.rate < c.startRate ? -1 : (S.rate > c.startRate ? 1 : 0);
+  if(dir === 0) return { w:["Nobody yet \u2014 you have held the rate."],
+                         l:["Nobody yet. Holding is still a decision, but it changes nothing."] };
+  if(dir < 0) return {
+    w:["Khun Malee, the nurse with a home loan, a car loan and a credit card \u2014 her repayments fall.",
+       "Khun Prasert, the tuna exporter \u2014 a weaker baht means more baht for the same order.",
+       "Firms wanting to borrow to expand."],
+    l:["Khun Anong, retired, living on the interest from a fixed deposit \u2014 her income falls.",
+       "Every household buying imported fuel \u2014 a weaker baht makes energy dearer.",
+       "The MPC itself \u2014 each cut uses up ammunition it may need next year."] };
+  return {
+    w:["Khun Anong and every other saver \u2014 deposits now pay more.",
+       "Households buying imported fuel \u2014 a stronger baht makes energy cheaper.",
+       "Anyone worried about prices rising \u2014 inflationary pressure eases."],
+    l:["Khun Malee \u2014 every loan she holds costs more to service each month.",
+       "Khun Prasert \u2014 a stronger baht makes his exports dearer and less competitive.",
+       "Firms and SMEs that wanted to invest \u2014 borrowing is now more expensive."] };
+}
+
+function verdict(){
+  var c = cfg(), e = economy(), m = metrics();
+  var sts = [growthStatus(e.growth)].concat(m.map(function(x){ return x.st; }));
+  var greens = sts.filter(function(x){ return x==="ok"; }).length;
+  var reds   = sts.filter(function(x){ return x==="bad"; }).length;
+  var dir = S.rate < c.startRate ? -1 : (S.rate > c.startRate ? 1 : 0);
+  var settled = Math.abs((NEUTRAL - S.rate) - S.transmitted) < 0.06;
+  var body = [], cls = "", h;
+
+  if(dir === 0 && S.quarter === 0)
+    return { cls:"", h:"Make a decision",
+      body:["Cut the rate, raise it, or hold it \u2014 then run the quarters. Watch which aims move together and which move against each other."] };
+
+  if(!settled)
+    return { cls:"mixed", h:"The effect is still arriving",
+      body:["You have changed the rate but the economy has not finished responding. In reality a rate change can take up to eighteen months to have its full effect. Run more quarters before you judge it."] };
+
+  if(S.id === "thai2026"){
+    cls = "mixed";
+    h = greens >= 4 ? "Something is wrong \u2014 check the model" : "There is no good answer here. That is the lesson.";
+    body.push("You have " + greens + " of the four aims in the green. Whatever you do with the rate, you cannot get all four \u2014 and that was the real position the MPC faced in 2026.");
+    if(dir < 0){
+      body.push("Cutting helped growth, but two things blocked it. Household debt near 86% of GDP means families will not borrow however cheap loans get, and banks stayed cautious with small firms. Meanwhile inflation barely responded, because it is coming from world energy prices \u2014 a Thai interest rate cannot lower the world oil price.");
+      if(S.rate <= 0.50) body.push("Notice where the rate is now. You have cut almost to zero. If something worse arrives next year \u2014 another energy shock, a collapse in exports \u2014 you have nothing left to cut. That is the interest rate floor, and it is why a central bank does not spend its ammunition lightly.");
+    } else if(dir > 0){
+      body.push("Raising the rate to fight inflation was the textbook move, but it did almost nothing here. This inflation is supply-side. All you achieved was to slow growth, push unemployment up, and add to the burden on already indebted households.");
+    } else {
+      body.push("You held \u2014 which is exactly what the MPC did, unanimously, in April, June and August 2026. It judged that an accommodative stance plus targeted measures was already doing what it could, and that the rise in inflation came from supply-side factors a rate change cannot fix.");
+    }
+    body.push("<b>So what would work?</b> Not the interest rate. Targeted lending schemes for SMEs, debt restructuring for households, energy subsidies, or supply-side policy to raise productivity. That is the judgement an 8-mark answer needs: <i>it depends on the cause of the inflation.</i>");
+    return { cls:cls, h:h, body:body };
+  }
+
+  if(e.drag > 3){
+    h = "You have cut past the point where cutting helps";
+    body.push("Inflation is at " + e.infl.toFixed(1) + "% and it is now doing the damage itself. Firms cannot price contracts or plan investment, so output is falling even though borrowing has never been cheaper. Rising prices and falling output at the same time is called <b>stagflation</b>, and an interest rate cut cannot fix it \u2014 a cut is what caused it.");
+    body.push("Look at the growth chart. Output rose as you cut, peaked, and then turned back down. Find the top of that curve: that is as much growth as monetary policy could buy you, and every cut past it bought inflation instead.");
+    return { cls:cls, h:h, body:body };
+  }
+  if(e.squeeze > 1.0){
+    h = "You have tightened into a slump";
+    body.push("The rate is above 4% and the squeeze has gone well beyond cooling demand. Firms are failing, unemployment is at " + e.unemp.toFixed(1) + "%, and inflation is now below the target band rather than inside it. Controlling inflation is not the same as crushing the economy \u2014 the aim is the 1\u20133% band, not the lowest possible number.");
+    return { cls:cls, h:h, body:body };
+  }
+  if(greens >= 3 && reds === 0){
+    cls = "good"; h = "Well judged";
+    body.push("You have " + greens + " of the four aims in the green with none in the red. Now be honest about the cost \u2014 look at the losers panel above. There is always someone paying for this decision.");
+  } else if(reds >= 2){
+    h = "This has gone too far";
+    body.push("Two or more aims are in the red. Monetary policy is a blunt tool: pushed hard in one direction it will damage an aim you were not aiming at. Try a smaller move.");
+  } else {
+    cls = "mixed"; h = "A trade-off, not a solution";
+    body.push("You have " + greens + " of the four aims in the green. This is normal. Lower rates help growth and employment but risk inflation; higher rates control inflation but cost growth and jobs. A central bank chooses which aim matters most right now \u2014 it cannot maximise all of them at once.");
+  }
+  body.push("<b>Write this down:</b> name one aim your decision helped, one aim it damaged, and the mechanism connecting them. That sentence is the core of an 8-mark answer.");
+  return { cls:cls, h:h, body:body };
+}
+
+/* ---------------- render ---------------- */
+function el(id){ return document.getElementById(id); }
+
+function renderScenarios(){
+  var row = el("scnRow"); row.innerHTML = "";
+  Object.keys(SCENARIOS).forEach(function(k){
+    var c = SCENARIOS[k];
+    var b = document.createElement("button");
+    b.className = "scn" + (k===S.id ? " on" : "");
+    b.innerHTML = "<strong>"+c.name+"</strong>"+c.tag;
+    b.onclick = function(){ loadScenario(k); };
+    row.appendChild(b);
+  });
+  el("brief").innerHTML = cfg().brief;
+}
+
+function renderRate(){
+  var c = cfg();
+  el("rateNum").textContent = S.rate.toFixed(2) + "%";
+  var d = S.rate - c.startRate;
+  el("rateFrom").textContent = Math.abs(d) < 0.001
+    ? "unchanged from " + c.startRate.toFixed(2) + "%"
+    : (d < 0 ? "cut " : "raised ") + Math.abs(d).toFixed(2) + " points from " + c.startRate.toFixed(2) + "%";
+
+  el("qBig").textContent = "Quarter " + S.quarter;
+  var months = S.quarter * 3;
+  var yrs = months / 12;
+  el("qYears").textContent = S.quarter === 0 ? "no time has passed yet"
+    : (months < 12 ? months + " months since you started"
+       : yrs.toFixed(months % 12 === 0 ? 0 : 1) +
+         (Math.abs(yrs - 1) < 0.001 ? " year" : " years") + " since you started");
+
+  var dots = "", shown = Math.min(S.quarter, 12);
+  for(var i=0;i<12;i++) dots += '<span class="dot'+(i<shown?" done":"")+'"></span>';
+  el("qDots").innerHTML = dots;
+
+  var gap = Math.abs((NEUTRAL - S.rate) - S.transmitted);
+  var pill = el("lagPill");
+  if(!S.moved && S.quarter === 0){ pill.className = "lag settled"; pill.textContent = "No change yet"; }
+  else if(gap > 0.06){ pill.className = "lag arriving"; pill.textContent = "Effect still arriving \u2014 run another quarter"; }
+  else { pill.className = "lag settled"; pill.textContent = "Effect has fully worked through"; }
+
+  el("btnCut").disabled   = S.rate <= 0.0001;
+  el("btnRaise").disabled = S.rate >= 5.9999;
+}
+
+function deltaTag(now, before, unit, goodIsUp){
+  if(before === undefined || before === null) return "";
+  var d = now - before;
+  if(Math.abs(d) < 0.05) return '<span class="delta flat">no change</span>';
+  var better = goodIsUp ? d > 0 : d < 0;
+  return '<span class="delta ' + (better ? "up" : "down") + '">' +
+         (d > 0 ? "\u25b2 +" : "\u25bc \u2212") + Math.abs(d).toFixed(1) + unit +
+         '</span>';
+}
+
+function renderAims(){
+  var e = economy(), p = S.prev;
+  var tiles = [{
+    name:"Economic growth", st:growthStatus(e.growth), num:e.growth.toFixed(1) + "%",
+    dlt: deltaTag(e.growth, p && p.g, "", true),
+    lbl: growthLabel(e.growth), p: pos(e.growth, -8, 8), lo:"\u22128%", hi:"+8%"
+  }].concat(metrics());
+  if(p){
+    tiles[1].dlt = deltaTag(e.unemp, p.u, "", false);
+    tiles[2].dlt = deltaTag(e.infl,  p.i, "", false);
+  }
+
+  var box = el("aims"); box.innerHTML = "";
+  tiles.forEach(function(t){
+    var band = t.band ? '<div class="band" style="left:'+t.band[0]+'%;width:'+(t.band[1]-t.band[0])+'%"></div>' : "";
+    var pillTxt = t.st==="ok" ? "On track" : (t.st==="wa" ? "Watch" : "Off track");
+    var d = document.createElement("div");
+    d.className = "a";
+    d.innerHTML =
+      '<span class="pill '+t.st+'">'+pillTxt+'</span>'+
+      '<div class="an">'+t.name+'</div>'+
+      '<div class="av num'+t.st+'"'+(t.numSmall?' style="font-size:1.35rem"':'')+'>'+t.num+
+        (t.dlt || "")+'</div>'+
+      '<div class="al">'+t.lbl+'</div>'+
+      '<div class="track'+(t.grad?" grad":"")+'">'+band+'<div class="mark" style="left:calc('+t.p+'% - 2px)"></div></div>'+
+      '<div class="scale"><span>'+t.lo+'</span><span>'+t.hi+'</span></div>';
+    box.appendChild(d);
+  });
+}
+
+function renderGrowth(){
+  el("chartWrap").innerHTML = chartSVG();
+
+  var e = economy(), w = el("gWarn"), html = "";
+  if(e.drag > 0.25){
+    html = '<div style="margin-top:12px;background:var(--redbg);border:1px solid #EFBEB8;'+
+      'border-radius:9px;padding:13px 17px;font-size:.9rem">'+
+      '<b style="color:var(--red)">The brake is on.</b> Inflation has reached <b>'+e.infl.toFixed(1)+
+      '%</b>. Above about 5%, firms and households cannot plan \u2014 contracts are hard to price and '+
+      'investment gets postponed. That uncertainty is pulling growth down by <b>'+e.drag.toFixed(1)+
+      ' percentage points</b>. Cutting the rate again will now make growth <i>worse</i>, not better.</div>';
+  } else if(e.squeeze > 0.25){
+    html = '<div style="margin-top:12px;background:var(--redbg);border:1px solid #EFBEB8;'+
+      'border-radius:9px;padding:13px 17px;font-size:.9rem">'+
+      '<b style="color:var(--red)">The squeeze is severe.</b> The interest rate is above 4%. Debt servicing '+
+      'costs are now so high that firms are failing rather than simply postponing investment. That is '+
+      'costing an extra <b>'+e.squeeze.toFixed(1)+' percentage points</b> of growth on top of the '+
+      'normal effect of dearer borrowing.</div>';
+  }
+  w.innerHTML = html;
+}
+
+function renderCost(){
+  var box = el("cost"); box.innerHTML = "";
+  costData().tiles.forEach(function(t){
+    var pillTxt = t.st==="ok" ? "Fine" : (t.st==="wa" ? "Watch" : "Serious");
+    var d = document.createElement("div");
+    d.className = "m";
+    d.innerHTML =
+      '<span class="pill '+t.st+'">'+pillTxt+'</span>'+
+      '<div class="name">'+t.name+'</div>'+
+      '<div class="num num'+t.st+'" style="font-size:2.1rem">'+t.num+'</div>'+
+      '<div class="sub">'+t.sub+'</div>'+
+      '<div class="lbl" style="min-height:0">'+t.lbl+'</div>';
+    box.appendChild(d);
+  });
+  var n = costNote();
+  el("costNote").innerHTML =
+    '<div class="'+(n.cls || "")+'" style="border-radius:9px;padding:14px 17px;font-size:.92rem;'+
+    (n.cls ? '' : 'background:#F4F7FA;border:1px solid #D3DEE8;')+'">'+
+    '<p style="margin:0 0 8px">'+n.mood+'</p>'+
+    '<p style="margin:0 0 8px">'+n.fiscal+'</p>'+
+    '<p style="margin:0">'+n.squeeze+'</p></div>';
+}
+
+function renderLog(){
+  var rows = S.log || [];
+  if(!rows.length){ el("logWrap").innerHTML = '<p class="muted">Run a quarter to start your record.</p>'; return; }
+  var h = '<table class="log"><tr><th>Quarter</th><th>Interest rate</th><th>Growth</th>'+
+          '<th>Unemployment</th><th>Inflation</th><th>Exports</th><th>What you did</th></tr>';
+  rows.forEach(function(r){
+    var cls = r.ch ? ' class="ch"' : '';
+    h += '<tr>'+
+      '<td'+cls+'>Q'+r.q+'</td>'+
+      '<td'+cls+'>'+r.rate.toFixed(2)+'%</td>'+
+      '<td'+cls+'>'+r.g.toFixed(1)+'%</td>'+
+      '<td'+cls+'>'+r.u.toFixed(1)+'%</td>'+
+      '<td'+cls+'>'+r.i.toFixed(1)+'%</td>'+
+      '<td'+cls+'>'+r.b+'</td>'+
+      '<td'+cls+'>'+(r.ch ? r.act : "waited") + '</td>'+
+      '</tr>';
+  });
+  el("logWrap").innerHTML = h + '</table>';
+}
+
+function renderChain(){
+  var box = el("chain"), d = chainData(), steps = d.steps;
+  /* Build the six panels once, then only swap classes \u2014 rebuilding the DOM
+     every render is what stopped the transition from ever being visible.     */
+  if(box.children.length !== steps.length){
+    box.innerHTML = "";
+    steps.forEach(function(){
+      var el2 = document.createElement("div");
+      el2.className = "step";
+      el2.innerHTML = '<div class="n"></div><p></p><div class="why"></div>';
+      box.appendChild(el2);
+    });
+  }
+  steps.forEach(function(st, i){
+    var node = box.children[i];
+    node.className = "step" + (st.block ? " block" : (st.live ? " live" : ""));
+    node.children[0].textContent = st.n;
+    node.children[1].textContent = st.p;
+    node.children[2].innerHTML = st.block ? st.why : "";
+    node.children[2].style.display = st.block ? "block" : "none";
+  });
+
+  var note = el("chainNote");
+  if(d.since < 0){
+    note.innerHTML = '<span class="muted">Make a decision, then run the quarters and watch the chain travel across.</span>';
+  } else if(d.since + 1 >= steps.length){
+    note.innerHTML = '<span style="color:var(--green);font-weight:700">All six links have now worked through.</span>' +
+      '<span class="muted"> That took ' + steps.length + ' quarters \u2014 about eighteen months, which is exactly how long a real rate change takes.</span>';
+  } else {
+    note.innerHTML = '<span style="color:var(--amber);font-weight:700">Link ' + (d.since + 1) +
+      ' of ' + steps.length + '.</span><span class="muted"> Run another quarter to carry the change one step further.</span>';
+  }
+}
+
+function renderCons(){
+  var box = el("cons"); box.innerHTML = "";
+  consData().forEach(function(c){
+    var d = document.createElement("div");
+    d.className = "cbox" + (c.on ? " on" : "");
+    d.innerHTML = "<b>"+c.b+"</b><span>"+c.s+"</span>";
+    box.appendChild(d);
+  });
+}
+
+function renderWL(){
+  var w = wlData();
+  el("wl").innerHTML =
+    '<div class="win"><b>Who gains</b><ul><li>'+w.w.join("</li><li>")+'</li></ul></div>'+
+    '<div class="lose"><b>Who loses</b><ul><li>'+w.l.join("</li><li>")+'</li></ul></div>';
+}
+
+function renderVerdict(){
+  var v = verdict(), box = el("verdict");
+  if(!S.revealed){ el("gate").style.display = "block"; box.style.display = "none"; }
+  else { el("gate").style.display = "none"; box.style.display = "block"; }
+  box.className = v.cls;
+  box.innerHTML = "<h4>"+v.h+"</h4><p>"+v.body.join("</p><p>")+"</p>";
+}
+
+function showPane(id){
+  var tabs = document.querySelectorAll(".tab");
+  for(var i=0;i<tabs.length;i++){
+    var on = tabs[i].getAttribute("data-pane") === id;
+    tabs[i].className = "tab" + (on ? " on" : "");
+  }
+  var panes = document.querySelectorAll(".pane");
+  for(var j=0;j<panes.length;j++){
+    panes[j].className = "pane" + (panes[j].id === id ? " on" : "");
+  }
+}
+
+function renderBadges(){
+  var d = chainData(), e = economy(), c = costData();
+  var b = el("bChain");
+  if(d.since < 0){ b.className = "badge"; b.textContent = ""; }
+  else if(d.since + 1 >= d.steps.length){ b.className = "badge done"; b.textContent = "6/6"; }
+  else { b.className = "badge"; b.textContent = (d.since + 1) + "/6"; }
+
+  var bc = el("bCost");
+  if(c.deficit > 1100 || e.unemp > 3.2){ bc.className = "badge warn"; bc.textContent = "!"; }
+  else { bc.className = "badge"; bc.textContent = ""; }
+
+  var bl = el("bLog");
+  bl.className = "badge"; bl.textContent = (S.log && S.log.length > 1) ? String(S.log.length) : "";
+
+  var bv = el("bVerdict"), settled = Math.abs((NEUTRAL - S.rate) - S.transmitted) < 0.06;
+  if(S.moved && settled){ bv.className = "badge done"; bv.textContent = "ready"; }
+  else { bv.className = "badge"; bv.textContent = ""; }
+}
+
+function render(){
+  renderScenarios(); renderRate(); renderAims(); renderGrowth();
+  renderCost(); renderChain(); renderLog(); renderBadges(); renderCons(); renderWL(); renderVerdict();
+}
+
+/* ---------------- actions ---------------- */
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function restore(){
+  try{
+    var o = JSON.parse(localStorage.getItem(KEY));
+    if(o && SCENARIOS[o.id] && Object.prototype.toString.call(o.hist) === "[object Array]" && o.hist.length){
+      S = o; return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+function loadScenario(id){
+  var c = SCENARIOS[id];
+  S = { id:id, rate:c.startRate, quarter:0, transmitted:(NEUTRAL - c.startRate),
+        moved:false, hist:[], changedAt:[], lastChange:0,
+        log:[], prev:null, revealed:false };
+  S.hist = [{ q:0, g:economy().growth, ch:false }];
+  logRow(false, "");
+  render(); save();
+}
+
+function logRow(changed, act){
+  var e = economy();
+  S.log.push({ q:S.quarter, rate:S.rate, g:e.growth, u:e.unemp, i:e.infl,
+               b:(e.bop >= 0.35 ? "competitive" : (e.bop >= -0.35 ? "neutral" : "uncompetitive")),
+               ch:changed, act:act });
+  if(S.log.length > 40) S.log.shift();
+}
+
+function move(step){
+  S.rate = Math.round(clamp(S.rate + step, 0, 6.0) * 100) / 100;
+  S.moved = true;
+  S.lastChange = S.quarter;      /* the chain restarts from this quarter */
+  S.changedAt.push(S.quarter + 1);
+  S.revealed = false;                      /* new decision, write a new answer */
+  render(); save();
+}
+
+function nextQuarter(){
+  var was = economy();
+  S.prev = { g:was.growth, u:was.unemp, i:was.infl, b:was.bop };
+  var target = NEUTRAL - S.rate;
+  S.transmitted += (target - S.transmitted) * SPEED;
+  if(Math.abs(target - S.transmitted) < 0.02) S.transmitted = target;
+  S.quarter += 1;
+  S.hist.push({ q:S.quarter, g:economy().growth, ch: S.changedAt.indexOf(S.quarter) > -1 });
+  if(S.hist.length > 25) S.hist.shift();
+  var chg = S.changedAt.indexOf(S.quarter) > -1;
+  logRow(chg, chg ? (S.rate < (S.log.length ? S.log[S.log.length-1].rate : S.rate) ? "cut the rate" : "raised the rate") : "");
+  render(); save();
+}
+
+(function(){
+  var tabs = document.querySelectorAll(".tab");
+  for(var i=0;i<tabs.length;i++){
+    tabs[i].onclick = (function(t){
+      return function(){ showPane(t.getAttribute("data-pane")); };
+    })(tabs[i]);
+  }
+})();
+
+el("btnCut").onclick   = function(){ move(-0.25); };
+el("btnRaise").onclick = function(){ move(0.25); };
+el("btnQ").onclick     = nextQuarter;
+el("btnReset").onclick = function(){ loadScenario(S.id); };
+el("btnGate").onclick  = function(){ S.revealed = true; render(); save(); };
+
+if(!restore()) loadScenario("recession"); else render();
+</script>
+</body>
+</html>
