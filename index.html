@@ -119,15 +119,16 @@ const UNITS = [
     {code:'1.4', name:'Production Possibility Curves', notebook:'https://notebooklm.google.com/notebook/629ac9c2-9472-40d6-9001-72c73cd945a9', video:'https://youtu.be/xBqbHbP4kIg', activity:null},
   ]},
   { num:2, title:'The Allocation of Resources', topics:[
-    {code:'2.1', name:'Demand', notebook:'https://notebooklm.google.com/notebook/06a20054-8e6b-43d0-a9b7-6c9b7dd5dcd2', video:'https://youtu.be/36Oc7HF8rrI', activity:null},
-    {code:'2.2', name:'Supply', notebook:'https://notebooklm.google.com/notebook/9d7de4e3-20e6-4888-86b1-d928ab5e64d0', video:'https://youtu.be/FcsTQDhF_n0', activity:null},
-    {code:'2.3', name:'Price Determination', notebook:'https://notebooklm.google.com/notebook/738baa5f-52f6-448e-b8e5-f52567228947', video:'https://youtu.be/1WSpdvbpHjw', activity:null},
-    {code:'2.4', name:'Price Changes', notebook:'https://notebooklm.google.com/notebook/62049490-ae15-4caa-b2d0-1614bab429bb', video:'https://youtu.be/eK4WdeeUMQY', activity:null},
-    {code:'2.5', name:'Price Elasticity of Demand', notebook:'https://notebooklm.google.com/notebook/ed0b46ec-8e50-47ba-ba06-ff8521e7b085', video:'https://youtu.be/ZDlrIghc0vk', activity:null},
-    {code:'2.6', name:'Price Elasticity of Supply', notebook:'https://notebooklm.google.com/notebook/7fa50724-0acb-47a2-907e-2305a431fa08', video:'https://youtu.be/e20Daygcot4', activity:null},
-    {code:'2.7', name:'Market Economic System', notebook:'https://notebooklm.google.com/notebook/a1bb7a27-23e6-4a19-8671-d48824ea2ac9', video:'https://youtu.be/FbVYbtu75vw', activity:null},
-    {code:'2.8', name:'Market Failure', notebook:'https://notebooklm.google.com/notebook/1f817eb2-046d-40e9-aa59-a87a69333497', video:'https://youtu.be/mZpCqLQI4DU', activity:null},
-    {code:'2.9', name:'Mixed Economic System', notebook:'https://notebooklm.google.com/notebook/ab73f610-5c71-4d6a-86a6-0baf0c042ecb', video:'https://youtu.be/CBkHWoNSD2o', activity:null},
+    {code:'2.1', name:'The Role of Markets in Allocating Resources', notebook:null, video:null, activity:null},
+    {code:'2.2', name:'Demand', notebook:'https://notebooklm.google.com/notebook/06a20054-8e6b-43d0-a9b7-6c9b7dd5dcd2', video:'https://youtu.be/36Oc7HF8rrI', activity:null},
+    {code:'2.3', name:'Supply', notebook:'https://notebooklm.google.com/notebook/9d7de4e3-20e6-4888-86b1-d928ab5e64d0', video:'https://youtu.be/FcsTQDhF_n0', activity:null},
+    {code:'2.4', name:'Price Determination', notebook:'https://notebooklm.google.com/notebook/738baa5f-52f6-448e-b8e5-f52567228947', video:'https://youtu.be/1WSpdvbpHjw', activity:null},
+    {code:'2.5', name:'Price Changes', notebook:'https://notebooklm.google.com/notebook/62049490-ae15-4caa-b2d0-1614bab429bb', video:'https://youtu.be/eK4WdeeUMQY', activity:null},
+    {code:'2.6', name:'Price Elasticity of Demand', notebook:'https://notebooklm.google.com/notebook/ed0b46ec-8e50-47ba-ba06-ff8521e7b085', video:'https://youtu.be/ZDlrIghc0vk', activity:null},
+    {code:'2.7', name:'Price Elasticity of Supply', notebook:'https://notebooklm.google.com/notebook/7fa50724-0acb-47a2-907e-2305a431fa08', video:'https://youtu.be/e20Daygcot4', activity:null},
+    {code:'2.8', name:'Market Economic System', notebook:'https://notebooklm.google.com/notebook/a1bb7a27-23e6-4a19-8671-d48824ea2ac9', video:'https://youtu.be/FbVYbtu75vw', activity:null},
+    {code:'2.9', name:'Market Failure', notebook:'https://notebooklm.google.com/notebook/1f817eb2-046d-40e9-aa59-a87a69333497', video:'https://youtu.be/mZpCqLQI4DU', activity:null},
+    {code:'2.10', name:'Mixed Economic System', notebook:'https://notebooklm.google.com/notebook/ab73f610-5c71-4d6a-86a6-0baf0c042ecb', video:'https://youtu.be/CBkHWoNSD2o', activity:null},
   ]},
   { num:3, title:'Microeconomic Decision Makers', topics:[
     {code:'3.1', name:'Money & Banking', notebook:'https://notebooklm.google.com/notebook/81f03ffc-76c3-4932-bf9e-30d98f6ab78d', video:'https://youtu.be/8vL7ycyX3Ns', activity:null},
@@ -181,8 +182,12 @@ function build(){
             '<div class="topic-code">'+t.code+'</div>' +
             '<div class="topic-name">'+t.name+'</div>' +
             '<div class="topic-links">' +
-              '<a class="pill pill-video" href="'+t.video+'" target="_blank" rel="noopener">▶ Video</a>' +
-              '<a class="pill pill-note" href="'+t.notebook+'" target="_blank" rel="noopener">📓 Notes</a>' +
+              (t.video
+                ? '<a class="pill pill-video" href="'+t.video+'" target="_blank" rel="noopener">▶ Video</a>'
+                : '<span class="pill pill-soon">No video yet</span>') +
+              (t.notebook
+                ? '<a class="pill pill-note" href="'+t.notebook+'" target="_blank" rel="noopener">📓 Notes</a>'
+                : '<span class="pill pill-soon">No notes yet</span>') +
               (t.activity
                 ? '<a class="pill pill-launch" href="'+t.activity+'">Launch activity →</a>'
                 : '<span class="pill pill-soon">Coming soon</span>') +
