@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2.1 The Role of Markets in Allocating Resources | SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --blue:#008BCC; --navy:#002F6C; --orange:#FF8F1C;
+  --grey-bg:#F2F6FA; --grey-2:#E4EDF5; --grey-3:#C8D8E8;
+  --text:#1A2B3C; --text-2:#456080; --text-3:#8098B0;
+  --ok-bg:#E6F6E8; --ok:#28A745; --ok-txt:#155724;
+  --bad-bg:#FEE8F0; --bad:#D63864; --bad-txt:#7A0830;
+  --warm:#FFF3E6; --radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--grey-bg);color:var(--text);min-height:100vh;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+/* Top bar (hub template) */
+.topbar{background:var(--navy);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.tb-logo{font-size:20px;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;line-height:1}
+.tb-logo .logo-i{display:inline-block;width:5px;height:.7em;background:var(--blue);border-radius:1px;margin:0 2px}
+.tb-logo small{font-size:10px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.6);margin-left:8px}
+.tb-div{width:1px;height:28px;background:rgba(255,255,255,.2)}
+.tb-title{font-size:13px;color:rgba(255,255,255,.85)}
+.tb-badge{margin-left:auto;background:var(--blue);font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap}
+
+/* Tabs */
+.tabbar{background:#fff;border-bottom:2px solid var(--grey-2);display:flex;padding:0 24px;position:sticky;top:56px;z-index:150;overflow-x:auto}
+.tab{padding:12px 18px;font-size:13px;font-weight:700;color:var(--text-3);background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.tab:hover{color:var(--navy)}
+.tab.active{color:var(--navy);border-bottom-color:var(--orange)}
+.tab .n{width:22px;height:22px;border-radius:50%;background:var(--grey-2);color:var(--text-2);display:grid;place-items:center;font-size:11px;font-weight:900}
+.tab.active .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--ok);color:#fff}
+
+/* Progress */
+.progress{background:#fff;border-bottom:1px solid var(--grey-2);padding:8px 24px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-2);position:sticky;top:104px;z-index:140}
+.pbar{flex:1;max-width:320px;height:8px;background:var(--grey-2);border-radius:8px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.progress b{color:var(--navy)}
+
+main{max-width:1060px;margin:0 auto;padding:24px 20px 60px}
+.panel{display:none}
+.panel.active{display:block}
+h2{font-size:24px;font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:6px}
+h3{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:8px}
+.lede{color:var(--text-2);max-width:70ch;margin-bottom:18px}
+.card{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);padding:20px;margin-bottom:18px}
+.src{font-size:11px;color:var(--text-3);font-style:italic;margin-top:8px}
+.btn{background:var(--navy);color:#fff;border:none;border-radius:6px;padding:9px 16px;font-size:13px;font-weight:700}
+.btn:hover{background:#01408f}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--grey-3)}
+.btn.orange{background:var(--orange)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.fb{border-radius:6px;padding:10px 14px;font-size:14px;margin-top:10px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-bg);color:var(--ok-txt);border-left:4px solid var(--ok)}
+.fb.bad{background:var(--bad-bg);color:var(--bad-txt);border-left:4px solid var(--bad)}
+.fb.info{background:#E6F3FA;color:var(--navy);border-left:4px solid var(--blue)}
+mark{background:#FFF176;padding:0 2px;border-radius:2px;font-weight:700;color:var(--text)}
+
+/* Tab 1 hero */
+.hero{background:var(--navy);color:#fff;border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:1.05fr 1fr;gap:26px;align-items:center;margin-bottom:18px}
+.hero h2{color:#fff;font-size:32px;margin-bottom:10px}
+.hero p{color:#D6E4F2;font-size:15px;max-width:48ch}
+.hero .src{color:#8FB3D9}
+.bars{display:flex;align-items:flex-end;gap:18px;height:210px;padding-top:10px;border-bottom:2px solid rgba(255,255,255,.35)}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar .col{width:100%;border-radius:6px 6px 0 0;background:var(--orange);transform-origin:bottom;animation:grow .9s ease-out both}
+.bar:nth-child(1) .col{background:#6FA8DC}
+.bar:nth-child(3) .col{animation-delay:.25s}
+.bar .val{font-weight:900;font-size:18px;margin-bottom:6px}
+.bar .val small{display:block;font-size:11px;font-weight:400;color:#B9CDE3;text-align:center}
+.bar-lab{display:flex;gap:18px;margin-top:8px}
+.bar-lab span{flex:1;text-align:center;font-size:12px;color:#D6E4F2}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.bar .col{animation:none}}
+.think{display:grid;gap:14px}
+.think .q{font-weight:700;color:var(--navy);margin-bottom:6px}
+textarea{width:100%;min-height:70px;border:1.5px solid var(--grey-3);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;resize:vertical}
+textarea:focus{border-color:var(--blue);outline:none}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.oi{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--grey-2)}
+.oi:last-child{border-bottom:none}
+.seg{display:inline-flex;border:1.5px solid var(--grey-3);border-radius:6px;overflow:hidden}
+.seg button{background:#fff;border:none;padding:7px 12px;font-size:12px;font-weight:700;color:var(--text-2)}
+.seg button+button{border-left:1.5px solid var(--grey-3)}
+.seg button.pick-ok{background:var(--ok);color:#fff}
+.seg button.pick-bad{background:var(--bad);color:#fff}
+.oi .why{grid-column:1/-1;font-size:13px;color:var(--text-2);display:none}
+.oi .why.show{display:block}
+
+/* Tab 2 simulator */
+.sim{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}
+.chartwrap{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);padding:10px}
+svg text{font-family:'Lato',sans-serif}
+.dots{display:flex;gap:6px;margin-bottom:12px}
+.dots span{width:28px;height:6px;border-radius:4px;background:var(--grey-2)}
+.dots span.on{background:var(--orange)}
+.dots span.done{background:var(--ok)}
+.step{font-size:13px;font-weight:700;color:var(--text-2);margin:12px 0 6px}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.readout div{background:var(--grey-bg);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--text-2)}
+.readout b{display:block;font-size:20px;color:var(--navy);font-weight:900}
+.gap{grid-column:1/-1;text-align:center;font-weight:900;font-size:15px!important}
+.gap.short{background:var(--ok-bg)!important;color:var(--ok-txt)!important}
+.gap.surp{background:var(--bad-bg)!important;color:var(--bad-txt)!important}
+.gap.eq{background:#E6F3FA!important;color:var(--navy)!important}
+input[type=range]{width:100%;accent-color:var(--orange);height:28px}
+.pricebig{font-size:28px;font-weight:900;color:var(--orange)}
+
+/* Tab 3 sort */
+.bank{min-height:90px;background:#fff;border:2px dashed var(--grey-3);border-radius:var(--radius);padding:12px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bin{background:#fff;border:2px solid var(--grey-2);border-radius:var(--radius);min-height:230px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.bin h4{font-size:15px;font-weight:900;color:#fff;background:var(--navy);margin:-10px -10px 4px;padding:10px;border-radius:6px 6px 0 0}
+.bin h4 small{display:block;font-weight:400;font-size:11px;color:#C9DAEC}
+.bin.hot{border-color:var(--orange);background:var(--warm)}
+.chip{background:#fff;border:1.5px solid var(--grey-3);border-radius:6px;padding:8px 10px;font-size:13px;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;max-width:320px}
+.bank .chip{flex:1 1 260px}
+.chip.sel{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,143,28,.3)}
+.chip.right{border-color:var(--ok);background:var(--ok-bg)}
+.chip.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.chip.ghost{position:fixed;z-index:999;pointer-events:none;opacity:.92;box-shadow:0 8px 24px rgba(0,47,108,.25);transform:rotate(-1.5deg)}
+.chip.lifted{opacity:.3}
+
+/* Tab 4 quick-fire */
+.qf{max-width:720px}
+.scen{font-size:19px;font-weight:700;color:var(--navy);line-height:1.4;min-height:84px}
+.qf-count{font-size:12px;color:var(--text-3);margin-bottom:8px}
+.choice{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.choice button{flex:1;min-width:140px;background:#fff;border:2px solid var(--grey-3);border-radius:8px;padding:12px;font-size:15px;font-weight:900;color:var(--navy)}
+.choice button:disabled{cursor:default}
+.choice button.pick-ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.choice button.pick-bad{background:var(--bad);border-color:var(--bad);color:#fff}
+
+/* Tab 5 exam */
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--grey-3);border-radius:6px;padding:10px 12px;margin-top:8px;font-size:14px;color:var(--text)}
+.opt b{color:var(--orange);margin-right:8px}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt.pick-ok{background:var(--ok-bg);border-color:var(--ok)}
+.opt.pick-bad{background:var(--bad-bg);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.slots{display:grid;gap:8px;margin:12px 0}
+.slot{display:grid;grid-template-columns:110px 1fr;border:1.5px dashed var(--grey-3);border-radius:6px;min-height:52px;overflow:hidden;background:#fff}
+.slot .lab{background:var(--grey-bg);font-size:12px;font-weight:900;color:var(--text-2);display:grid;place-items:center;text-align:center;padding:4px}
+.slot .txt{padding:8px 10px;font-size:13px}
+.slot.ok{border-style:solid;border-color:var(--ok)}
+.slot.bad{border-style:solid;border-color:var(--bad)}
+.pool{display:grid;gap:8px}
+.pool button{text-align:left;background:#fff;border:1.5px solid var(--grey-3);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--text)}
+.pool button:disabled{opacity:.35}
+.frame{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.frame div{border-radius:8px;padding:12px;color:#fff;font-size:13px}
+.frame h4{font-size:13px;font-weight:900;margin-bottom:6px}
+.frame p{font-style:italic;opacity:.95;margin:3px 0}
+.f1{background:#1E7B34}.f2{background:#B3264E}.f3{background:var(--navy)}
+.model{background:#FFFDF0;border-left:5px solid var(--orange);border-radius:6px;padding:14px 16px;margin-top:12px;display:none;line-height:1.7}
+.model.show{display:block}
+
+@media (max-width:820px){
+  .hero,.sim{grid-template-columns:1fr}
+  .bins,.frame{grid-template-columns:1fr}
+  .tb-title{display:none}
+  .hero h2{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-logo">S<span class="logo-i"></span>SB<small>SCHOOL</small></div>
+  <div class="tb-div"></div>
+  <div class="tb-title">IGCSE Economics 0455 &nbsp;|&nbsp; 2.1 The Role of Markets in Allocating Resources</div>
+  <div class="tb-badge">Grade 9</div>
+</header>
+
+<nav class="tabbar" role="tablist">
+  <button class="tab active" data-tab="t1" role="tab"><span class="n">1</span>The problem</button>
+  <button class="tab" data-tab="t2" role="tab"><span class="n">2</span>Be the market</button>
+  <button class="tab" data-tab="t3" role="tab"><span class="n">3</span>What, how, for whom?</button>
+  <button class="tab" data-tab="t4" role="tab"><span class="n">4</span>Shortage or surplus?</button>
+  <button class="tab" data-tab="t5" role="tab"><span class="n">5</span>Exam practice</button>
+</nav>
+<div class="progress"><div class="pbar"><i id="pfill"></i></div><span><b id="pcount">0</b> / 5 activities complete</span></div>
+
+<main>
+
+<!-- ═════════ TAB 1 ═════════ -->
+<section class="panel active" id="t1">
+  <div class="hero">
+    <div>
+      <h2>Why did Labubu prices crash?</h2>
+      <p>After Lisa of BLACKPINK was seen with one, Labubu toys sold out across Thailand and resale prices shot far above the shop price. Then, in 2025, Pop Mart said it had raised plush toy production about ten times, to around 30 million a month. Resale prices fell fast. One Thai reseller told Reuters that prices in the Thai resale market were dropping extremely quickly.</p>
+      <p class="src">Sources: Reuters (Oct 2025); Yicai (Jun and Dec 2025). The chart shows the “Luck” figure; baht values are approximate.</p>
+    </div>
+    <div>
+      <div class="bars" aria-label="Bar chart of Luck figure prices">
+        <div class="bar"><div class="val">¥99<small>≈ ฿450</small></div><div class="col" style="height:17%"></div></div>
+        <div class="bar"><div class="val">¥500+<small>≈ ฿2,300</small></div><div class="col" style="height:88%"></div></div>
+        <div class="bar"><div class="val">¥108<small>≈ ฿500</small></div><div class="col" style="height:19%"></div></div>
+      </div>
+      <div class="bar-lab"><span>Shop price</span><span>Resale, June 2025</span><span>Resale, Oct 2025</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Think first</h3>
+    <p class="lede">Write your own answer before you look. There are no definitions yet — that is the point.</p>
+    <div class="think" id="think"></div>
+  </div>
+
+  <div class="card">
+    <h3>Observation or inference?</h3>
+    <p class="lede">An <b>observation</b> is something that was measured or reported. An <b>inference</b> is an explanation someone has worked out from the evidence. Economists keep them apart.</p>
+    <div id="oi"></div>
+    <div class="fb" id="oi-fb"></div>
+  </div>
+</section>
+
+<!-- ═════════ TAB 2 ═════════ -->
+<section class="panel" id="t2">
+  <h2>Be the market</h2>
+  <p class="lede">In a market system nobody sets the price. Buyers and sellers push it up or down until the quantity demanded equals the quantity supplied. In each round, predict first, then move the price until the market clears.</p>
+  <div class="sim">
+    <div class="chartwrap"><svg id="chart" viewBox="0 0 560 380" role="img" aria-label="Demand and supply diagram"></svg></div>
+    <div class="card" style="margin:0">
+      <div class="dots" id="dots"></div>
+      <h3 id="r-title"></h3>
+      <p id="r-story" style="font-size:14px"></p>
+      <div class="step">Step 1 — At this price there is a…</div>
+      <div class="seg" id="p-gap"><button data-v="shortage">Shortage</button><button data-v="surplus">Surplus</button></div>
+      <div class="step">Step 2 — So the price will…</div>
+      <div class="seg" id="p-dir"><button data-v="up">Rise</button><button data-v="down">Fall</button></div>
+      <div class="fb" id="p-fb"></div>
+      <div class="step">Step 3 — Move the price until the market clears</div>
+      <div class="pricebig" id="pval"></div>
+      <input type="range" id="slider" disabled aria-label="Price">
+      <div class="readout">
+        <div>Quantity demanded<b id="qd"></b></div>
+        <div>Quantity supplied<b id="qs"></b></div>
+        <div class="gap" id="gap"></div>
+      </div>
+      <div class="fb" id="r-fb"></div>
+      <div class="row"><button class="btn orange" id="next" style="display:none">Next round</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ TAB 3 ═════════ -->
+<section class="panel" id="t3">
+  <h2>What, how, for whom?</h2>
+  <p class="lede">Every economy must answer three questions (textbook p. 20). Drag each Thai example into the question it answers — or tap a card, then tap a column.</p>
+  <div class="bank" id="bank"></div>
+  <div class="bins">
+    <div class="bin" data-bin="what"><h4>What to produce?<small>Which goods and services, and how many</small></h4></div>
+    <div class="bin" data-bin="how"><h4>How to produce?<small>Which factors and methods</small></h4></div>
+    <div class="bin" data-bin="whom"><h4>For whom?<small>Who gets the goods</small></h4></div>
+  </div>
+  <div class="row" style="margin-top:14px"><button class="btn" id="sort-check">Check my answers</button><button class="btn ghost" id="sort-reset">Start again</button></div>
+  <div class="fb" id="sort-fb"></div>
+</section>
+
+<!-- ═════════ TAB 4 ═════════ -->
+<section class="panel" id="t4">
+  <h2>Shortage or surplus?</h2>
+  <p class="lede">Eight real situations from around Thailand. Decide what exists at the current price, then which way the price mechanism will push the price.</p>
+  <div class="card qf">
+    <div class="qf-count" id="qf-count"></div>
+    <div class="scen" id="qf-scen"></div>
+    <div class="step">At the current price, there is a…</div>
+    <div class="choice" id="qf-gap"><button data-v="shortage">Shortage</button><button data-v="surplus">Surplus</button></div>
+    <div class="step">So the price will…</div>
+    <div class="choice" id="qf-dir"><button data-v="up" disabled>Rise ↑</button><button data-v="down" disabled>Fall ↓</button></div>
+    <div class="fb" id="qf-fb"></div>
+    <div class="row"><button class="btn orange" id="qf-next" style="display:none">Next</button></div>
+  </div>
+</section>
+
+<!-- ═════════ TAB 5 ═════════ -->
+<section class="panel" id="t5">
+  <h2>Exam practice</h2>
+  <p class="lede">Paper 1 multiple choice, a 4-mark chain builder with a model answer, and an 8-mark question to take home.</p>
+
+  <div class="card">
+    <h3>Multiple choice</h3>
+    <div class="qf-count" id="mc-count"></div>
+    <div id="mc-stem" style="font-weight:700;color:var(--navy);font-size:16px"></div>
+    <div id="mc-opts"></div>
+    <div class="fb" id="mc-fb"></div>
+    <div class="row"><button class="btn orange" id="mc-next" style="display:none">Next question</button></div>
+  </div>
+
+  <div class="card">
+    <h3>Build the 4-mark answer</h3>
+    <p style="font-weight:700">Explain, with a relevant example, how a shortage is removed in a market system. [4]</p>
+    <p class="lede" style="margin:4px 0 0">Tap the sentences in the right order: Define → Example → Explain → Develop.</p>
+    <div class="slots" id="slots"></div>
+    <div class="pool" id="pool"></div>
+    <div class="row"><button class="btn" id="ch-check">Check order</button><button class="btn ghost" id="ch-reset">Reset</button></div>
+    <div class="fb" id="ch-fb"></div>
+    <div class="model" id="ch-model">
+      <mark>A shortage means</mark> the quantity demanded is greater than the quantity supplied at a given price.
+      <mark>For example,</mark> during Songkran week almost every hotel room in Phuket is booked and many tourists cannot find a room.
+      <mark>This happens because</mark> tourists compete for the few rooms left, so hotels raise their prices.
+      <mark>Therefore,</mark> the higher price makes some tourists stay fewer nights or go elsewhere, while more homestays offer rooms, until the quantity demanded equals the quantity supplied.
+      <div class="src" style="font-style:normal;color:var(--text-2);margin-top:10px"><b style="color:var(--ok-txt)">Why this scores well:</b> one mark each for a precise definition, a real Thai example, a “because” explanation, and an outcome that answers the question (the shortage is removed).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Take-home: 8 marks</h3>
+    <p style="font-weight:700">Discuss whether the price mechanism always removes a shortage quickly. [8]</p>
+    <div class="frame">
+      <div class="f1"><h4>Paragraph 1 — FOR</h4><p>“One advantage of [X] is …”</p><p>“This means that …”</p><p>“For example, [case study] …”</p><p>“This can lead to …”</p></div>
+      <div class="f2"><h4>Paragraph 2 — AGAINST</h4><p>“However, [X] is not always beneficial because …”</p><p>“One problem is …”</p><p>“This can cause …”</p><p>“Another disadvantage is …”</p></div>
+      <div class="f3"><h4>Paragraph 3 — JUDGMENT</h4><p>“Overall, [X] tends to … when …”</p><p>“This depends on …”</p><p>“If [condition], then …”</p><p>“Therefore, I conclude that …”</p></div>
+    </div>
+    <p class="lede" style="font-size:13px">Idea bank: Labubu (supply rose about ten times within months); concert seats at Rajamangala (fixed); new durian trees take years to fruit; face masks on a bad PM2.5 day. Pop Mart itself compared Labubu to concert tickets — use that contrast.</p>
+    <textarea id="essay" style="min-height:200px" placeholder="Write your answer here. It is not saved — copy it into your book or Google Doc before you close this page."></textarea>
+    <div class="row"><button class="btn ghost" id="copy">Copy my answer</button><span id="wc" style="font-size:12px;color:var(--text-3)">0 words</span></div>
+  </div>
+</section>
+</main>
+
+<script>
+/* ───────── Tracker (hub) ───────── */
+const UNIT='Unit 2', TOPIC='2.1 The Role of Markets in Allocating Resources';
+function track(detail){ try{ const t=window.SISB_TRACKER||window.SISBTracker; if(t&&t.log) t.log(UNIT,TOPIC,detail); }catch(e){} }
+
+/* ───────── Tabs & progress ───────── */
+const done=new Set();
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===t.dataset.tab));
+  window.scrollTo({top:0});
+}));
+function complete(tabId,detail){
+  if(done.has(tabId)) return;
+  done.add(tabId);
+  document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('done');
+  document.getElementById('pcount').textContent=done.size;
+  document.getElementById('pfill').style.width=(done.size/5*100)+'%';
+  track(detail);
+  if(done.size===5) track('All 5 activities complete');
+}
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function fb(el,type,html){el.className='fb show '+type;el.innerHTML=html;}
+
+/* ───────── TAB 1: Think first ───────── */
+const THINK=[
+  ['Why were some fans willing to pay far more than the shop price?','At the shop price, demand was much greater than supply — a <b>shortage</b>. Fans who wanted a Labubu most, and who were able to pay, competed for the few available. The resale price rose to decide who got one.'],
+  ['The high resale price was a signal. Who received it, and what did they do?','The <b>seller</b>, Pop Mart. A high price tells producers that a good is scarce and that more profit is possible. Pop Mart responded by making about ten times more plush toys.'],
+  ['Nobody in the Thai government decided how many Labubus to make. So who did decide?','<b>Buyers and sellers</b>, through the price mechanism. Consumers’ demand and Pop Mart’s supply decisions settled what was produced and who got it. This is the <b>market system</b>.'],
+];
+const thinkEl=document.getElementById('think');
+THINK.forEach(([q,a],i)=>{
+  const d=document.createElement('div');
+  d.innerHTML=`<div class="q">${i+1}. ${q}</div><textarea aria-label="Your answer"></textarea>
+  <div class="row"><button class="btn ghost" disabled>Compare with an economist</button><span style="font-size:12px;color:var(--text-3)">Write at least a sentence first</span></div>
+  <div class="fb info">${a}</div>`;
+  const ta=d.querySelector('textarea'), b=d.querySelector('button'), f=d.querySelector('.fb');
+  ta.addEventListener('input',()=>{b.disabled=ta.value.trim().split(/\s+/).length<6;});
+  b.addEventListener('click',()=>f.classList.add('show'));
+  thinkEl.appendChild(d);
+});
+
+/* Observation vs inference */
+const OI=shuffle([
+  ['The resale price of the “Luck” figure fell from over 500 yuan to about 108 yuan.','o','Measured on a resale platform — an observation.'],
+  ['Pop Mart said it makes around 30 million plush toys a month.','o','Reported by the company — an observation (a reported fact).'],
+  ['Fans in Thailand are getting bored of Labubu.','i','Nobody measured boredom. This is a guess to explain falling prices — an inference.'],
+  ['Resale prices fell because Pop Mart increased supply.','i','This explains the evidence — an inference (Pop Mart’s own explanation).'],
+  ['Some Labubus sold for less than the shop price.','o','Seen in resale listings — an observation.'],
+  ['Demand for Labubu has collapsed.','i','Investors worked this out from falling prices. Rising supply would also lower prices — an inference.'],
+]);
+const oiEl=document.getElementById('oi'); let oiRight=0;
+OI.forEach(([t,k,why])=>{
+  const d=document.createElement('div'); d.className='oi';
+  d.innerHTML=`<div>${t}</div><div class="seg"><button data-v="o">Observation</button><button data-v="i">Inference</button></div><div class="why">${why}</div>`;
+  const seg=d.querySelector('.seg'); let solved=false;
+  seg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    if(solved) return;
+    seg.querySelectorAll('button').forEach(x=>x.classList.remove('pick-ok','pick-bad'));
+    if(b.dataset.v===k){b.classList.add('pick-ok');solved=true;oiRight++;d.querySelector('.why').classList.add('show');
+      if(oiRight===OI.length){fb(document.getElementById('oi-fb'),'ok','<b>All six correct.</b> Notice the trap: falling prices alone cannot tell you whether demand fell or supply rose. You also need to know what happened to the quantity sold.');complete('t1','Observation vs inference: 6/6');}}
+    else b.classList.add('pick-bad');
+  }));
+  oiEl.appendChild(d);
+});
+
+/* ───────── TAB 2: Be the market ───────── */
+const SCN={
+  durian:{pMin:60,pMax:200,qMax:200,step:5,px:'฿',unit:'t',xl:'Quantity of durian (tonnes per day)',yl:'Price (฿ per kg)',pt:[60,80,100,120,140,160,180,200],qt:[0,40,80,120,160,200],pfmt:v=>'฿'+v+' per kg'},
+  labubu:{pMin:0,pMax:3000,qMax:1000,step:50,px:'฿',unit:'toys',xl:'Quantity of Labubus (per week, illustrative)',yl:'Resale price (฿)',pt:[0,500,1000,1500,2000,2500,3000],qt:[0,200,400,600,800,1000],pfmt:v=>'฿'+v.toLocaleString()}
+};
+const ROUNDS=[
+  {s:'durian',title:'Round 1 — Talad Thai, 6 am',story:'The durian market opens with sellers asking ฿180 per kg.',D:{a:240,b:1},S:{c:-110,d:1.5},start:180,pe:140,gap:'surplus',dir:'down',
+   win:'At ฿180 sellers were left with unsold durian, which spoils. They cut the price until buyers took it all.'},
+  {s:'durian',title:'Round 2 — a different morning',story:'This time sellers open cheaply at ฿100 per kg.',D:{a:240,b:1},S:{c:-110,d:1.5},start:100,pe:140,gap:'shortage',dir:'up',
+   win:'At ฿100 buyers wanted far more than sellers offered. Buyers bid the price up, sellers offered more, and the shortage disappeared.'},
+  {s:'durian',title:'Round 3 — China rejects the containers',story:'January 2025: rejected containers come back and are sold in Thailand. Supply shifts right to S2. The price is still ฿140 per kg.',D:{a:240,b:1},S:{c:-60,d:1.5},S0:{c:-110,d:1.5},start:140,pe:120,gap:'surplus',dir:'down',
+   win:'The extra fruit created a surplus at the old price, so the price fell. In real life the export price fell from about ฿235 to about ฿115 per kg.'},
+  {s:'labubu',title:'Round 4 — Labubu fever',story:'A new series lands. Resellers start near the shop price, at ฿600.',D:{a:900,b:0.3},S:{c:-100,d:0.2},start:600,pe:2000,gap:'shortage',dir:'up',
+   win:'Fans competed for a handful of toys, so the resale price climbed to ฿2,000. That high price is the signal Pop Mart saw.'},
+  {s:'labubu',title:'Round 5 — Pop Mart makes ten times more',story:'Pop Mart responds to the signal and raises supply about tenfold. Supply shifts right to S2. The resale price is still ฿2,000.',D:{a:900,b:0.3},S:{c:500,d:0.2},S0:{c:-100,d:0.2},start:2000,pe:800,gap:'surplus',dir:'down',
+   win:'Resellers now held more toys than fans wanted at ฿2,000, so they cut prices. The price mechanism fixed the shortage by bringing more supply.'},
+];
+let ri=0, rstate={gap:false,dir:false,solved:false};
+const $=id=>document.getElementById(id);
+const qD=(r,p)=>r.D.a-r.D.b*p, qS=(S,p)=>S.c+S.d*p;
+
+function drawChart(r,price,solved){
+  const sc=SCN[r.s], L=66,R=530,T=20,B=320;
+  const X=q=>L+(q/sc.qMax)*(R-L), Y=p=>B-((p-sc.pMin)/(sc.pMax-sc.pMin))*(B-T);
+  let h='';
+  sc.pt.forEach(p=>{h+=`<line x1="${L}" x2="${R}" y1="${Y(p)}" y2="${Y(p)}" stroke="#E4EDF5"/><text x="${L-8}" y="${Y(p)+4}" font-size="11" fill="#456080" text-anchor="end">${p.toLocaleString()}</text>`;});
+  sc.qt.forEach(q=>{h+=`<line y1="${T}" y2="${B}" x1="${X(q)}" x2="${X(q)}" stroke="#E4EDF5"/><text y="${B+16}" x="${X(q)}" font-size="11" fill="#456080" text-anchor="middle">${q}</text>`;});
+  h+=`<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="#002F6C" stroke-width="1.5"/><line x1="${L}" y1="${T}" x2="${L}" y2="${B}" stroke="#002F6C" stroke-width="1.5"/>`;
+  h+=`<text x="${(L+R)/2}" y="${B+40}" font-size="12" font-weight="700" fill="#002F6C" text-anchor="middle">${sc.xl}</text>`;
+  h+=`<text transform="translate(16 ${(T+B)/2}) rotate(-90)" font-size="12" font-weight="700" fill="#002F6C" text-anchor="middle">${sc.yl}</text>`;
+  const curve=(f,col,dash,label)=>{
+    let pts=[]; const n=60;
+    for(let i=0;i<=n;i++){const p=sc.pMin+(sc.pMax-sc.pMin)*i/n, q=f(p); if(q>=0&&q<=sc.qMax) pts.push([X(q),Y(p)]);}
+    if(pts.length<2) return '';
+    const lp=f===null?null:pts[pts.length-1];
+    return `<polyline points="${pts.map(a=>a.join(',')).join(' ')}" fill="none" stroke="${col}" stroke-width="${dash?2:3}" ${dash?'stroke-dasharray="6 5" opacity=".55"':''}/>`+
+      `<text x="${lp[0]+6}" y="${lp[1]+(label==='D'?-4:4)}" font-size="14" font-weight="900" fill="${col}">${label}</text>`;
+  };
+  if(r.S0) h+=curve(p=>qS(r.S0,p),'#FF8F1C',true,'S1');
+  h+=curve(p=>qD(r,p),'#002F6C',false,'D');
+  h+=curve(p=>qS(r.S,p),'#FF8F1C',false,r.S0?'S2':'S');
+  // price line + gap
+  const d=qD(r,price), s=qS(r.S,price), y=Y(price);
+  h+=`<line x1="${L}" x2="${R}" y1="${y}" y2="${y}" stroke="#008BCC" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+  if(Math.abs(d-s)>0.01){
+    const col=d>s?'#28A745':'#D63864', a=Math.max(0,Math.min(d,s)), b=Math.min(sc.qMax,Math.max(d,s));
+    h+=`<line x1="${X(a)}" x2="${X(b)}" y1="${y}" y2="${y}" stroke="${col}" stroke-width="6" stroke-linecap="round" opacity=".8"/>`;
+    h+=`<text x="${(X(a)+X(b))/2}" y="${y-10}" font-size="12" font-weight="900" fill="${col}" text-anchor="middle">${d>s?'Shortage':'Surplus'} ${Math.round(Math.abs(d-s))}</text>`;
+  }
+  if(solved){h+=`<circle cx="${X(d)}" cy="${y}" r="7" fill="#008BCC" stroke="#fff" stroke-width="2"/><text x="${X(d)+10}" y="${y+18}" font-size="13" font-weight="900" fill="#008BCC">E</text>`;}
+  $('chart').innerHTML=h;
+}
+function renderReadout(r,price){
+  const sc=SCN[r.s], d=Math.round(qD(r,price)), s=Math.round(qS(r.S,price)), g=$('gap');
+  $('pval').textContent=sc.pfmt(price); $('qd').textContent=Math.max(0,d)+' '+sc.unit; $('qs').textContent=Math.max(0,s)+' '+sc.unit;
+  if(d>s){g.className='gap short';g.textContent='Shortage of '+(d-Math.max(0,s))+' '+sc.unit;}
+  else if(s>d){g.className='gap surp';g.textContent='Surplus of '+(s-Math.max(0,d))+' '+sc.unit;}
+  else {g.className='gap eq';g.textContent='Equilibrium — the market clears';}
+}
+function loadRound(){
+  const r=ROUNDS[ri], sc=SCN[r.s]; rstate={gap:false,dir:false,solved:false};
+  $('dots').innerHTML=ROUNDS.map((_,i)=>`<span class="${i<ri?'done':i===ri?'on':''}"></span>`).join('');
+  $('r-title').textContent=r.title; $('r-story').textContent=r.story;
+  ['p-gap','p-dir'].forEach(id=>$(id).querySelectorAll('button').forEach(b=>b.classList.remove('pick-ok','pick-bad')));
+  $('p-fb').className='fb'; $('r-fb').className='fb'; $('next').style.display='none';
+  const sl=$('slider'); sl.min=sc.pMin; sl.max=sc.pMax; sl.step=sc.step; sl.value=r.start; sl.disabled=true;
+  renderReadout(r,r.start); drawChart(r,r.start,false);
+}
+function predict(kind,btn){
+  const r=ROUNDS[ri]; if(rstate[kind]||rstate.solved) return;
+  const want=kind==='gap'?r.gap:r.dir, box=$(kind==='gap'?'p-gap':'p-dir');
+  box.querySelectorAll('button').forEach(b=>b.classList.remove('pick-bad'));
+  if(btn.dataset.v===want){btn.classList.add('pick-ok');rstate[kind]=true;}
+  else{btn.classList.add('pick-bad');fb($('p-fb'),'bad',kind==='gap'?'Compare the two readouts. Which is bigger at this price — quantity demanded or quantity supplied?':'Think about who is frustrated. Unsold stock makes sellers cut prices; disappointed buyers bid prices up.');return;}
+  if(rstate.gap&&rstate.dir){fb($('p-fb'),'ok','Correct. Now be the price mechanism: move the slider.');$('slider').disabled=false;$('slider').focus();}
+}
+$('p-gap').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>predict('gap',b)));
+$('p-dir').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>predict('dir',b)));
+$('slider').addEventListener('input',e=>{
+  const r=ROUNDS[ri], p=+e.target.value; renderReadout(r,p);
+  const ok=p===r.pe; drawChart(r,p,ok);
+  if(ok&&!rstate.solved){rstate.solved=true;$('slider').disabled=true;
+    fb($('r-fb'),'ok',`<b>Market cleared at ${SCN[r.s].pfmt(p)}.</b> ${r.win}`);
+    $('next').style.display='inline-block'; $('next').textContent=ri<ROUNDS.length-1?'Next round':'Finish';}
+});
+$('next').addEventListener('click',()=>{
+  if(ri<ROUNDS.length-1){ri++;loadRound();}
+  else{$('dots').innerHTML=ROUNDS.map(()=>'<span class="done"></span>').join('');$('next').style.display='none';
+    fb($('r-fb'),'ok','<b>All five markets cleared.</b> Notice that nobody set these prices. Shortages pushed prices up and surpluses pushed them down — that is the market system allocating scarce resources.');
+    complete('t2','Be the market: 5/5 rounds');}
+});
+loadRound();
+
+/* ───────── TAB 3: Sort (pointer drag + tap fallback) ───────── */
+const SORT=[
+  ['7-Eleven stocks more ready-made meals because more office workers want a quick lunch.','what'],
+  ['Café Amazon adds oat-milk drinks to its menu after customers ask for them.','what'],
+  ['Thai farmers plant more cassava when the world price of cassava rises.','what'],
+  ['Toyota’s Rayong plant uses robots to weld car bodies.','how'],
+  ['A Chatuchak stall owner sews her bags by hand instead of buying a machine.','how'],
+  ['Bangkok Airways lets passengers check in on an app instead of at a counter.','how'],
+  ['Business-class seats to Samui go to passengers who pay the higher fare.','whom'],
+  ['During Songkran, Phuket hotel rooms go to tourists willing to pay peak prices.','whom'],
+  ['Ringside seats at a Muay Thai night at Lumpinee go to the highest bidders.','whom'],
+];
+const bank=$('bank'), bins=[...document.querySelectorAll('.bin')];
+let selected=null;
+function select(c){ if(selected) selected.classList.remove('sel'); selected=(selected===c)?null:c; if(selected) selected.classList.add('sel'); }
+function place(c,target){ c.classList.remove('sel','right','wrong'); target.appendChild(c); selected=null; }
+function makeDraggable(c){
+  let start=null, ghost=null, moved=false;
+  c.addEventListener('pointerdown',e=>{ start={x:e.clientX,y:e.clientY}; moved=false; c.setPointerCapture(e.pointerId); });
+  c.addEventListener('pointermove',e=>{
+    if(!start) return;
+    if(!moved && Math.hypot(e.clientX-start.x,e.clientY-start.y)>6){
+      moved=true; ghost=c.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
+      ghost.style.width=c.offsetWidth+'px'; document.body.appendChild(ghost); c.classList.add('lifted');
+    }
+    if(moved){ ghost.style.left=(e.clientX-20)+'px'; ghost.style.top=(e.clientY-20)+'px';
+      const t=document.elementFromPoint(e.clientX,e.clientY); bins.forEach(b=>b.classList.toggle('hot',b.contains(t))); }
+  });
+  const end=e=>{
+    if(moved){ const t=document.elementFromPoint(e.clientX,e.clientY); const bin=t&&t.closest('.bin,.bank');
+      if(bin) place(c,bin); ghost.remove(); ghost=null; c.classList.remove('lifted'); bins.forEach(b=>b.classList.remove('hot')); c._dragged=true; }
+    start=null;
+  };
+  c.addEventListener('pointerup',end); c.addEventListener('pointercancel',end);
+  c.addEventListener('click',e=>{
+    e.stopPropagation();                         // stop the tap bubbling to the bin/bank handler
+    if(c._dragged){ c._dragged=false; return; }
+    if(selected && selected!==c && c.parentElement!==selected.parentElement){ place(selected,c.parentElement); return; }
+    select(c);
+  });
+}
+function buildSort(){
+  bank.innerHTML=''; bins.forEach(b=>b.querySelectorAll('.chip').forEach(x=>x.remove())); selected=null;
+  shuffle(SORT).forEach(([t,k])=>{ const c=document.createElement('div'); c.className='chip'; c.textContent=t; c.dataset.k=k; c.tabIndex=0; makeDraggable(c);
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}}); bank.appendChild(c); });
+  $('sort-fb').className='fb';
+}
+[...bins,bank].forEach(z=>{ z.addEventListener('click',()=>{ if(selected) place(selected,z); }); });
+bins.forEach(b=>{b.tabIndex=0;b.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&selected){e.preventDefault();place(selected,b);}});});
+$('sort-check').addEventListener('click',()=>{
+  let right=0, placed=0;
+  bins.forEach(b=>b.querySelectorAll('.chip').forEach(c=>{placed++; const ok=c.dataset.k===b.dataset.bin; c.classList.toggle('right',ok); c.classList.toggle('wrong',!ok); if(ok) right++;}));
+  if(right===SORT.length){fb($('sort-fb'),'ok','<b>9 / 9.</b> Look at the “For whom?” column: every example is price rationing — the good goes to whoever is willing and able to pay.');complete('t3','What/how/for whom sort: 9/9');}
+  else fb($('sort-fb'),'bad',`<b>${right} / ${SORT.length} correct</b>${placed<SORT.length?' — and some cards are still in the bank':''}. Red cards are in the wrong column. Ask: is this about <i>which</i> good, the <i>method</i>, or <i>who gets it</i>?`);
+});
+$('sort-reset').addEventListener('click',buildSort);
+buildSort();
+
+/* ───────── TAB 4: Quick-fire ───────── */
+const QF=shuffle([
+  ['Mango season in May: a huge harvest means stalls at Or Tor Kor Market cannot sell all their mangoes.','surplus','down','Quantity supplied is greater than quantity demanded. Sellers cut prices so the fruit does not rot.'],
+  ['A bad PM2.5 day: N95 masks sell out at pharmacies across Bangkok.','shortage','up','Quantity demanded jumps above quantity supplied, so sellers can charge more.'],
+  ['Songkran week: almost every hotel room in Phuket is booked and many tourists cannot find one.','shortage','up','Tourists compete for the few rooms left, so room prices rise.'],
+  ['Hundreds of new Bangkok condos stay empty because too few buyers want them at current prices.','surplus','down','Developers must offer discounts or lower prices to sell the unsold units.'],
+  ['6 pm, heavy rain on Sukhumvit: far more people want a Grab ride than there are drivers.','shortage','up','Surge pricing is the price mechanism at work — the price rises until enough riders drop out or drivers join.'],
+  ['After China rejected shipments, returned durians pile up at Talad Thai.','surplus','down','In January 2025 the price fell from about ฿235 to about ฿115 per kg.'],
+  ['A new Labubu series sells out within minutes at a Pop Mart store in Bangkok.','shortage','up','Fans who missed out pay more on the resale market, so the resale price rises.'],
+  ['The school canteen makes 200 mango sticky rice desserts, but only 120 students want one at ฿60.','surplus','down','Tomorrow the canteen will cut the price or make fewer — both are responses to a surplus.'],
+]);
+let qi=0, qscore=0, qstage='gap';
+function loadQF(){
+  const [s]=QF[qi]; $('qf-count').textContent=`Situation ${qi+1} of ${QF.length}  |  Score ${qscore}`; $('qf-scen').textContent=s;
+  qstage='gap'; $('qf-fb').className='fb'; $('qf-next').style.display='none';
+  $('qf-gap').querySelectorAll('button').forEach(b=>{b.disabled=false;b.className='';});
+  $('qf-dir').querySelectorAll('button').forEach(b=>{b.disabled=true;b.className='';});
+}
+let firstTry=true;
+$('qf-gap').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  if(qstage!=='gap') return; const [,g]=QF[qi];
+  $('qf-gap').querySelectorAll('button').forEach(x=>x.disabled=true);
+  b.classList.add(b.dataset.v===g?'pick-ok':'pick-bad');
+  if(b.dataset.v!==g){ firstTry=false; $('qf-gap').querySelector(`[data-v="${g}"]`).classList.add('pick-ok'); }
+  qstage='dir'; $('qf-dir').querySelectorAll('button').forEach(x=>x.disabled=false);
+}));
+$('qf-dir').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  if(qstage!=='dir') return; const [,,d,why]=QF[qi];
+  $('qf-dir').querySelectorAll('button').forEach(x=>x.disabled=true);
+  const ok=b.dataset.v===d; b.classList.add(ok?'pick-ok':'pick-bad');
+  if(!ok) $('qf-dir').querySelector(`[data-v="${d}"]`).classList.add('pick-ok');
+  if(ok&&firstTry) qscore++;
+  fb($('qf-fb'),ok&&firstTry?'ok':'info',why); firstTry=true; qstage='done';
+  $('qf-next').style.display='inline-block'; $('qf-next').textContent=qi<QF.length-1?'Next':'See my score';
+}));
+$('qf-next').addEventListener('click',()=>{
+  if(qi<QF.length-1){qi++;loadQF();}
+  else{ $('qf-scen').textContent=`You scored ${qscore} / ${QF.length}.`; $('qf-count').textContent='Finished';
+    $('qf-gap').querySelectorAll('button').forEach(b=>b.disabled=true); $('qf-next').style.display='none';
+    fb($('qf-fb'),qscore>=6?'ok':'info',qscore>=6?'Strong. The rule: shortage → price rises; surplus → price falls.':'Review the rule — shortage → price rises; surplus → price falls — then try the tab again by reloading the page.');
+    complete('t4',`Shortage or surplus: ${qscore}/${QF.length}`); }
+});
+loadQF();
+
+/* ───────── TAB 5: MCQ ───────── */
+const MCQ=shuffle([
+  ['What is a market?','any place where buyers and sellers engage in trade',['a building where goods are sold','a place where the government sets prices','the total quantity that consumers want to buy'],'A market needs no building — Shopee and the SET are markets.'],
+  ['What is the role of the price mechanism in a market economy?','to allocate scarce resources through the forces of demand and supply',['to make sure everyone can afford essential goods','to let the government decide what is produced','to guarantee that firms make a profit'],'Prices signal and ration; they do not guarantee fairness or profit.'],
+  ['A market is in equilibrium. What must be true?','The quantity demanded equals the quantity supplied.',['The price is at its lowest possible level.','There is a shortage.','Every consumer can afford the product.'],'Equilibrium says nothing about the price being low or affordable.'],
+  ['When does market disequilibrium occur?','when the market price is above or below the equilibrium price',['when demand equals supply','when the government provides a good for free','when there are many buyers and sellers'],'Above equilibrium → surplus; below → shortage.'],
+  ['At ฿60 per kg, buyers want 400 kg of mangoes a day but sellers offer 250 kg. What exists, and what happens to the price?','a shortage, and the price rises',['a shortage, and the price falls','a surplus, and the price rises','a surplus, and the price falls'],'Quantity demanded > quantity supplied, so buyers bid the price up.'],
+  ['In a free market, what happens when there is a surplus?','Sellers reduce the price.',['The price rises.','Buyers queue for the product.','The government must buy the surplus.'],'Unsold stock pushes sellers to cut prices.'],
+  ['Which is not one of the key economic questions? (Textbook p. 20)','Why should production take place?',['What production should take place?','How should production take place?','For whom should production take place?'],'The three questions are what, how and for whom.'],
+  ['Which example answers the question “for whom to produce”?','Concert tickets go to the fans who pay the highest price.',['A factory replaces workers with robots.','Farmers grow durian instead of rubber.','A carmaker builds a new EV factory in Rayong.'],'Robots = how. Durian and EVs = what.'],
+  ['Pop Mart raised supply of Labubu toys about ten times. Why did resale prices fall?','At the old price, quantity supplied became greater than quantity demanded.',['Demand rose, so the price fell.','The government set a maximum price.','The shop price is fixed, so resale prices had to fall.'],'More supply created a surplus at the old resale price.'],
+  ['Toyota hires workers at its Rayong factory. In this labour market, who is the buyer?','Toyota',['the workers','people who buy Toyota cars','the Thai government'],'In factor markets the firm buys labour and workers sell it.'],
+]);
+let mi=0, mscore=0;
+function loadMC(){
+  const [stem,ans,wrong]=MCQ[mi]; $('mc-count').textContent=`Question ${mi+1} of ${MCQ.length}  |  Score ${mscore}`;
+  $('mc-stem').textContent=stem; $('mc-fb').className='fb'; $('mc-next').style.display='none';
+  const opts=shuffle([ans,...wrong]); $('mc-opts').innerHTML='';
+  opts.forEach((o,i)=>{ const b=document.createElement('button'); b.className='opt'; b.innerHTML=`<b>${'ABCD'[i]}</b>${o}`; b.dataset.t=o;
+    b.addEventListener('click',()=>{ const [,a,,why]=MCQ[mi]; const ok=o===a; if(ok) mscore++;
+      $('mc-opts').querySelectorAll('.opt').forEach(x=>{x.disabled=true; if(x.dataset.t===a) x.classList.add('pick-ok');});
+      if(!ok) b.classList.add('pick-bad'); fb($('mc-fb'),ok?'ok':'bad',(ok?'<b>Correct.</b> ':'<b>Not quite.</b> ')+why);
+      $('mc-next').style.display='inline-block'; $('mc-next').textContent=mi<MCQ.length-1?'Next question':'See my score'; });
+    $('mc-opts').appendChild(b); });
+}
+$('mc-next').addEventListener('click',()=>{
+  if(mi<MCQ.length-1){mi++;loadMC();}
+  else{ $('mc-stem').textContent=`You scored ${mscore} / ${MCQ.length}.`; $('mc-opts').innerHTML=''; $('mc-count').textContent='Finished'; $('mc-next').style.display='none';
+    fb($('mc-fb'),'info','Reload the page for a fresh order of questions and answers.'); mcDone=true; exam(); }
+});
+loadMC();
+
+/* Chain builder */
+const CHAIN=[
+  ['Define','A shortage means the quantity demanded is greater than the quantity supplied at a given price.'],
+  ['Example','For example, during Songkran week almost every hotel room in Phuket is booked and many tourists cannot find a room.'],
+  ['Explain','This happens because tourists compete for the few rooms left, so hotels raise their prices.'],
+  ['Develop','Therefore, the higher price makes some tourists stay fewer nights or go elsewhere, while more homestays offer rooms, until quantity demanded equals quantity supplied.'],
+];
+let order=[], mcDone=false, chDone=false;
+function buildChain(){
+  order=[]; $('slots').innerHTML=CHAIN.map((c,i)=>`<div class="slot"><div class="lab">${i+1}. ${c[0]}</div><div class="txt"></div></div>`).join('');
+  $('pool').innerHTML=''; $('ch-fb').className='fb';
+  shuffle(CHAIN.map((c,i)=>i)).forEach(i=>{ const b=document.createElement('button'); b.textContent=CHAIN[i][1]; b.dataset.i=i;
+    b.addEventListener('click',()=>{ if(order.length>=4) return; order.push(i); b.disabled=true;
+      $('slots').children[order.length-1].querySelector('.txt').textContent=CHAIN[i][1]; });
+    $('pool').appendChild(b); });
+}
+$('ch-check').addEventListener('click',()=>{
+  if(order.length<4){fb($('ch-fb'),'bad','Place all four sentences first.');return;}
+  let ok=0; [...$('slots').children].forEach((s,k)=>{const r=order[k]===k; s.classList.toggle('ok',r); s.classList.toggle('bad',!r); if(r) ok++;});
+  if(ok===4){fb($('ch-fb'),'ok','<b>Perfect chain.</b> Here is the answer as one paragraph, with the sentence starters highlighted.');$('ch-model').classList.add('show');chDone=true;exam();}
+  else fb($('ch-fb'),'bad',`${ok} / 4 in the right place. A 4-mark answer always starts with the definition and ends with the outcome.`);
+});
+$('ch-reset').addEventListener('click',()=>{buildChain();$('ch-model').classList.remove('show');});
+buildChain();
+function exam(){ if(mcDone&&chDone) complete('t5',`Exam practice: MCQ ${mscore}/${MCQ.length}, chain builder complete`); }
+
+/* Essay tools */
+$('essay').addEventListener('input',e=>{const n=e.target.value.trim()?e.target.value.trim().split(/\s+/).length:0;$('wc').textContent=n+' words';});
+$('copy').addEventListener('click',()=>{ const t=$('essay').value; if(!t) return;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy my answer',1500);})
+  .catch(()=>{$('essay').select();document.execCommand('copy');}); });
+</script>
+</body>
+</html>
