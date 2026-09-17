@@ -23,9 +23,10 @@ button{font-family:inherit;cursor:pointer}
 
 /* Top bar (hub template) */
 .topbar{background:var(--navy);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-.tb-logo{font-size:20px;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;line-height:1}
-.tb-logo .logo-i{display:inline-block;width:5px;height:.7em;background:var(--blue);border-radius:1px;margin:0 2px}
-.tb-logo small{font-size:10px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.6);margin-left:8px}
+.tb-logo{display:flex;flex-direction:column;justify-content:center;line-height:1}
+.tb-logo .tb-word{font-size:22px;font-weight:900;letter-spacing:.01em;color:#fff}
+.tb-logo .tb-word i{color:var(--blue);font-style:normal}
+.tb-logo .tb-sub{font-size:9px;font-weight:700;letter-spacing:.34em;color:rgba(255,255,255,.65);margin-top:2px}
 .tb-div{width:1px;height:28px;background:rgba(255,255,255,.2)}
 .tb-title{font-size:13px;color:rgba(255,255,255,.85)}
 .tb-badge{margin-left:auto;background:var(--blue);font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap}
@@ -115,20 +116,37 @@ svg text{font-family:'Lato',sans-serif}
 input[type=range]{width:100%;accent-color:var(--orange);height:28px}
 .pricebig{font-size:28px;font-weight:900;color:var(--orange)}
 
-/* Tab 3 sort */
-.bank{min-height:90px;background:#fff;border:2px dashed var(--grey-3);border-radius:var(--radius);padding:12px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.bin{background:#fff;border:2px solid var(--grey-2);border-radius:var(--radius);min-height:230px;padding:10px;display:flex;flex-direction:column;gap:8px}
-.bin h4{font-size:15px;font-weight:900;color:#fff;background:var(--navy);margin:-10px -10px 4px;padding:10px;border-radius:6px 6px 0 0}
-.bin h4 small{display:block;font-weight:400;font-size:11px;color:#C9DAEC}
-.bin.hot{border-color:var(--orange);background:var(--warm)}
-.chip{background:#fff;border:1.5px solid var(--grey-3);border-radius:6px;padding:8px 10px;font-size:13px;line-height:1.35;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;max-width:320px}
-.bank .chip{flex:1 1 260px}
-.chip.sel{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,143,28,.3)}
-.chip.right{border-color:var(--ok);background:var(--ok-bg)}
-.chip.wrong{border-color:var(--bad);background:var(--bad-bg)}
-.chip.ghost{position:fixed;z-index:999;pointer-events:none;opacity:.92;box-shadow:0 8px 24px rgba(0,47,108,.25);transform:rotate(-1.5deg)}
-.chip.lifted{opacity:.3}
+/* Who decides? */
+.stmt{background:#fff;border:1px solid var(--grey-2);border-left:5px solid var(--navy);border-radius:var(--radius);padding:16px 20px;font-size:19px;font-weight:700;color:var(--navy);line-height:1.45;min-height:76px;display:flex;align-items:center}
+.steplbl{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);margin:16px 0 8px}
+.steplbl span{background:var(--navy);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chips button{flex:1;min-width:150px;background:#fff;border:2px solid var(--grey-3);border-radius:8px;padding:12px 10px;font-size:15px;font-weight:900;color:var(--navy)}
+.chips button:hover:not(:disabled){border-color:var(--blue)}
+.chips button:disabled{cursor:default;opacity:.5}
+.chips button.on{opacity:1;background:var(--navy);border-color:var(--navy);color:#fff}
+.gridwrap{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);padding:16px 18px;margin-top:20px;overflow-x:auto}
+.gridtbl{border-collapse:collapse;width:100%;min-width:620px;margin-top:10px}
+.gridtbl th,.gridtbl td{border:1px solid var(--grey-2);padding:8px;vertical-align:top}
+.gridtbl th{background:var(--navy);color:#fff;font-size:13px;font-weight:900}
+.gridtbl th.rowh{background:var(--grey-bg);color:var(--navy);text-align:left;width:22%}
+.gridtbl td{height:62px;background:#fff}
+.cellchip{display:inline-block;font-size:12px;font-weight:700;border-radius:4px;padding:4px 8px;border:1.5px solid}
+.cellchip.g{background:var(--ok-bg);border-color:var(--ok);color:var(--ok-txt)}
+.cellchip.a{background:var(--warm);border-color:var(--orange);color:#7A4A05}
+.cellchip.r{background:var(--bad-bg);border-color:var(--bad);color:var(--bad-txt)}
+.runscore{font-size:13px;font-weight:900;color:var(--navy);background:var(--grey-2);border-radius:20px;padding:4px 14px}
+
+/* Run the shop */
+.shop-tag{display:inline-block;background:var(--orange);color:#fff;font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+.ev{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.ev div{background:var(--grey-bg);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--text-2)}
+.ev b{display:block;font-size:22px;font-weight:900;color:var(--navy);margin-bottom:2px}
+.shop-sum{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.shop-sum div{background:#fff;border:1.5px solid var(--grey-2);border-radius:var(--radius);padding:14px}
+.shop-sum h4{font-size:13px;font-weight:900;color:var(--orange);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.shop-sum p{font-size:14px}
+@media (max-width:820px){.ev,.shop-sum{grid-template-columns:1fr}}
 
 /* Tab 4 quick-fire */
 .qf{max-width:720px}
@@ -146,6 +164,7 @@ input[type=range]{width:100%;accent-color:var(--orange);height:28px}
 .opt:hover:not(:disabled){border-color:var(--blue)}
 .opt.pick-ok{background:var(--ok-bg);border-color:var(--ok)}
 .opt.pick-bad{background:var(--bad-bg);border-color:var(--bad)}
+.opt.pick-info{background:#E6F3FA;border-color:var(--blue)}
 .opt:disabled{cursor:default}
 .slots{display:grid;gap:8px;margin:12px 0}
 .slot{display:grid;grid-template-columns:110px 1fr;border:1.5px dashed var(--grey-3);border-radius:6px;min-height:52px;overflow:hidden;background:#fff}
@@ -175,7 +194,7 @@ input[type=range]{width:100%;accent-color:var(--orange);height:28px}
 <body>
 
 <header class="topbar">
-  <div class="tb-logo">S<span class="logo-i"></span>SB<small>SCHOOL</small></div>
+  <div class="tb-logo"><span class="tb-word">S<i>I</i>SB</span><span class="tb-sub">SCHOOLS</span></div>
   <div class="tb-div"></div>
   <div class="tb-title">IGCSE Economics 0455 &nbsp;|&nbsp; 2.1 The Role of Markets in Allocating Resources</div>
   <div class="tb-badge">Grade 9</div>
@@ -184,11 +203,12 @@ input[type=range]{width:100%;accent-color:var(--orange);height:28px}
 <nav class="tabbar" role="tablist">
   <button class="tab active" data-tab="t1" role="tab"><span class="n">1</span>The problem</button>
   <button class="tab" data-tab="t2" role="tab"><span class="n">2</span>Be the market</button>
-  <button class="tab" data-tab="t3" role="tab"><span class="n">3</span>What, how, for whom?</button>
-  <button class="tab" data-tab="t4" role="tab"><span class="n">4</span>Shortage or surplus?</button>
-  <button class="tab" data-tab="t5" role="tab"><span class="n">5</span>Exam practice</button>
+  <button class="tab" data-tab="t3" role="tab"><span class="n">3</span>Who decides?</button>
+  <button class="tab" data-tab="tshop" role="tab"><span class="n">4</span>Run the shop</button>
+  <button class="tab" data-tab="t4" role="tab"><span class="n">5</span>Shortage or surplus?</button>
+  <button class="tab" data-tab="t5" role="tab"><span class="n">6</span>Exam practice</button>
 </nav>
-<div class="progress"><div class="pbar"><i id="pfill"></i></div><span><b id="pcount">0</b> / 5 activities complete</span></div>
+<div class="progress"><div class="pbar"><i id="pfill"></i></div><span><b id="pcount">0</b> / 6 activities complete</span></div>
 
 <main>
 
@@ -255,16 +275,38 @@ input[type=range]{width:100%;accent-color:var(--orange);height:28px}
 
 <!-- ═════════ TAB 3 ═════════ -->
 <section class="panel" id="t3">
-  <h2>What, how, for whom?</h2>
-  <p class="lede">Every economy must answer three questions (textbook p. 20). Drag each Thai example into the question it answers — or tap a card, then tap a column.</p>
-  <div class="bank" id="bank"></div>
-  <div class="bins">
-    <div class="bin" data-bin="what"><h4>What to produce?<small>Which goods and services, and how many</small></h4></div>
-    <div class="bin" data-bin="how"><h4>How to produce?<small>Which factors and methods</small></h4></div>
-    <div class="bin" data-bin="whom"><h4>For whom?<small>Who gets the goods</small></h4></div>
+  <h2>Who decides?</h2>
+  <p class="lede">Every economy must answer three questions: <b>what</b> to produce, <b>how</b> to produce it and <b>for whom</b> to produce it. For each statement, decide which question it answers — then decide who made that decision.</p>
+  <div class="row" style="margin:0 0 12px"><span class="qf-count" id="who-count" style="margin:0"></span><span class="runscore" id="who-score">Score: 0 / 18</span></div>
+  <div class="stmt" id="who-stmt"></div>
+  <div class="steplbl"><span>Step 1</span>Which question does this answer?</div>
+  <div class="chips" id="who-q"></div>
+  <div class="steplbl" id="who-l2" style="opacity:.35"><span>Step 2</span>And who made that decision?</div>
+  <div class="chips" id="who-w" style="display:none"></div>
+  <div class="fb" id="who-fb"></div>
+  <div class="row"><button class="btn orange" id="who-next" style="display:none">Next statement</button></div>
+  <div class="gridwrap">
+    <h3 style="margin:0">The three questions — and who decides</h3>
+    <p class="lede" id="who-sub" style="margin:4px 0 0;font-size:13px">Each statement lands in its correct box. Green = both right · orange = one right · red = neither.</p>
+    <table class="gridtbl" id="who-grid"></table>
   </div>
-  <div class="row" style="margin-top:14px"><button class="btn" id="sort-check">Check my answers</button><button class="btn ghost" id="sort-reset">Start again</button></div>
-  <div class="fb" id="sort-fb"></div>
+</section>
+
+<!-- ═════════ RUN THE SHOP ═════════ -->
+<section class="panel" id="tshop">
+  <h2>Run the shop</h2>
+  <p class="lede">You have taken over Nong&rsquo;s Bubble Tea on Ngamwongwan Road, near school. Every business — from a street stall to CP Group — must answer the same three questions. Read the evidence, decide, and see what happens.</p>
+  <div class="dots" id="shop-dots"></div>
+  <div class="card">
+    <div class="shop-tag" id="shop-tag"></div>
+    <h3 id="shop-title"></h3>
+    <p id="shop-story" style="font-size:15px"></p>
+    <div class="ev" id="shop-ev"></div>
+    <div id="shop-opts"></div>
+    <div class="fb" id="shop-fb"></div>
+    <div class="row"><button class="btn orange" id="shop-next" style="display:none">Next decision</button></div>
+  </div>
+  <div id="shop-summary" style="display:none"></div>
 </section>
 
 <!-- ═════════ TAB 4 ═════════ -->
@@ -346,9 +388,9 @@ function complete(tabId,detail){
   done.add(tabId);
   document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('done');
   document.getElementById('pcount').textContent=done.size;
-  document.getElementById('pfill').style.width=(done.size/5*100)+'%';
+  document.getElementById('pfill').style.width=(done.size/6*100)+'%';
   track(detail);
-  if(done.size===5) track('All 5 activities complete');
+  if(done.size===6) track('All 6 activities complete');
 }
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function fb(el,type,html){el.className='fb show '+type;el.innerHTML=html;}
@@ -488,63 +530,153 @@ $('next').addEventListener('click',()=>{
 });
 loadRound();
 
-/* ───────── TAB 3: Sort (pointer drag + tap fallback) ───────── */
-const SORT=[
-  ['7-Eleven stocks more ready-made meals because more office workers want a quick lunch.','what'],
-  ['Café Amazon adds oat-milk drinks to its menu after customers ask for them.','what'],
-  ['Thai farmers plant more cassava when the world price of cassava rises.','what'],
-  ['Toyota’s Rayong plant uses robots to weld car bodies.','how'],
-  ['A Chatuchak stall owner sews her bags by hand instead of buying a machine.','how'],
-  ['Bangkok Airways lets passengers check in on an app instead of at a counter.','how'],
-  ['Business-class seats to Samui go to passengers who pay the higher fare.','whom'],
-  ['During Songkran, Phuket hotel rooms go to tourists willing to pay peak prices.','whom'],
-  ['Ringside seats at a Muay Thai night at Lumpinee go to the highest bidders.','whom'],
+/* ───────── TAB 3: Who decides? ───────── */
+const QNS=['What to produce','How to produce','For whom to produce'];
+const DECIDERS=['Buyers','Sellers','The government'];
+/* [statement, question 0-2, decider 0-2, grid tag, explanation] */
+const WHO=[
+ ['Café Amazon adds oat-milk drinks after hundreds of customers ask for them.',0,0,'Oat milk',
+  'Customers\' spending is a signal. Firms produce what people are willing to buy, so buyers decided what is produced.'],
+ ['Pop Mart decides to make around 30 million Labubu plush toys a month.',0,1,'Labubu supply',
+  'The seller made the decision — but notice why: the high resale price told Pop Mart that buyers wanted more.'],
+ ['The Thai government builds a new high-speed railway to Nakhon Ratchasima.',0,2,'High-speed rail',
+  'No private firm chose to build this. The state decided this railway should be produced, and paid for it.'],
+ ['Shoppers at a Chatuchak stall pay extra for bags sewn by hand, so the owner keeps sewing instead of buying a machine.',1,0,'Hand-sewn bags',
+  'Buyers do not usually choose the production method — but here their willingness to pay for handmade work kept labour in and machines out.'],
+ ['Toyota’s Rayong plant uses robots instead of workers to weld car bodies.',1,1,'Toyota robots',
+  'The firm chose its mix of labour and capital to cut costs. That is a decision about how to produce.'],
+ ['By law, every new building in Bangkok must have fire exits and sprinklers.',1,2,'Fire rules',
+  'The developer still builds the tower, but the state sets part of the method. Both are deciding how to produce.'],
+ ['Ringside seats at a Muay Thai night at Lumpinee go to whoever pays the most.',2,0,'Lumpinee seats',
+  'Price rations the scarce seats, and it is buyers competing with each other that pushes it up. Ability and willingness to pay decides for whom.'],
+ ['A bakery gives its unsold bread to a temple at closing time instead of selling it cheaply.',2,1,'Unsold bread',
+  'Here the seller, not the price, decides who receives the goods. Firms can choose to give goods away.'],
+ ['Under Thailand’s 30-baht scheme, anyone can see a doctor for a small fixed fee, whatever their income.',2,2,'30-baht scheme',
+  'The state decides that healthcare goes to everyone, not only to those who could pay a market price.'],
 ];
-const bank=$('bank'), bins=[...document.querySelectorAll('.bin')];
-let selected=null;
-function select(c){ if(selected) selected.classList.remove('sel'); selected=(selected===c)?null:c; if(selected) selected.classList.add('sel'); }
-function place(c,target){ c.classList.remove('sel','right','wrong'); target.appendChild(c); selected=null; }
-function makeDraggable(c){
-  let start=null, ghost=null, moved=false;
-  c.addEventListener('pointerdown',e=>{ start={x:e.clientX,y:e.clientY}; moved=false; c.setPointerCapture(e.pointerId); });
-  c.addEventListener('pointermove',e=>{
-    if(!start) return;
-    if(!moved && Math.hypot(e.clientX-start.x,e.clientY-start.y)>6){
-      moved=true; ghost=c.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('sel');
-      ghost.style.width=c.offsetWidth+'px'; document.body.appendChild(ghost); c.classList.add('lifted');
-    }
-    if(moved){ ghost.style.left=(e.clientX-20)+'px'; ghost.style.top=(e.clientY-20)+'px';
-      const t=document.elementFromPoint(e.clientX,e.clientY); bins.forEach(b=>b.classList.toggle('hot',b.contains(t))); }
+let wi=0, wscore=0, wqPick=null; const wplaced=[]; const worder=shuffle(WHO.map((_,i)=>i));
+function drawWhoGrid(){
+  let h='<tr><th class="rowh"></th>'+DECIDERS.map(d=>`<th>${d}</th>`).join('')+'</tr>';
+  QNS.forEach((q,qi)=>{
+    h+=`<tr><th class="rowh">${q}</th>`;
+    DECIDERS.forEach((_,di)=>{
+      h+='<td>'+wplaced.filter(p=>p.q===qi&&p.d===di).map(p=>`<span class="cellchip ${p.cls}">${p.tag}</span>`).join(' ')+'</td>';
+    });
+    h+='</tr>';
   });
-  const end=e=>{
-    if(moved){ const t=document.elementFromPoint(e.clientX,e.clientY); const bin=t&&t.closest('.bin,.bank');
-      if(bin) place(c,bin); ghost.remove(); ghost=null; c.classList.remove('lifted'); bins.forEach(b=>b.classList.remove('hot')); c._dragged=true; }
-    start=null;
-  };
-  c.addEventListener('pointerup',end); c.addEventListener('pointercancel',end);
-  c.addEventListener('click',e=>{
-    e.stopPropagation();                         // stop the tap bubbling to the bin/bank handler
-    if(c._dragged){ c._dragged=false; return; }
-    if(selected && selected!==c && c.parentElement!==selected.parentElement){ place(selected,c.parentElement); return; }
-    select(c);
+  $('who-grid').innerHTML=h;
+}
+function lockChips(box){ box.querySelectorAll('button').forEach(b=>b.disabled=true); }
+function drawWho(){
+  const d=WHO[worder[wi]]; wqPick=null;
+  $('who-count').textContent=`Statement ${wi+1} of ${WHO.length}`;
+  $('who-stmt').textContent=d[0];
+  $('who-fb').className='fb'; $('who-next').style.display='none';
+  $('who-l2').style.opacity='.35'; $('who-w').style.display='none';
+  $('who-q').innerHTML=''; $('who-w').innerHTML='';
+  QNS.forEach((q,qi)=>{
+    const b=document.createElement('button'); b.textContent=q;
+    b.addEventListener('click',()=>{ wqPick=qi; lockChips($('who-q')); b.classList.add('on'); b.disabled=false;
+      $('who-l2').style.opacity='1'; $('who-w').style.display='flex'; });
+    $('who-q').appendChild(b);
+  });
+  DECIDERS.forEach((w,di)=>{
+    const b=document.createElement('button'); b.textContent=w;
+    b.addEventListener('click',()=>{
+      lockChips($('who-w')); b.classList.add('on'); b.disabled=false;
+      const okQ=wqPick===d[1], okD=di===d[2];
+      wscore+=(okQ?1:0)+(okD?1:0);
+      wplaced.push({q:d[1],d:d[2],tag:d[3],cls:(okQ&&okD)?'g':((okQ||okD)?'a':'r')});
+      drawWhoGrid();
+      let head;
+      if(okQ&&okD) head='<b>Both right.</b> ';
+      else if(okQ) head=`<b>Right question, wrong decider</b> — here it is <b>${DECIDERS[d[2]].toLowerCase()}</b>. `;
+      else if(okD) head=`<b>Right decider, wrong question</b> — this one is about <b>${QNS[d[1]].toLowerCase()}</b>. `;
+      else head=`<b>Not this time.</b> This is about <b>${QNS[d[1]].toLowerCase()}</b>, and here it is decided by <b>${DECIDERS[d[2]].toLowerCase()}</b>. `;
+      fb($('who-fb'),(okQ&&okD)?'ok':(okQ||okD)?'info':'bad',head+d[4]);
+      $('who-score').textContent=`Score: ${wscore} / ${WHO.length*2}`;
+      $('who-next').style.display='inline-block';
+      $('who-next').textContent=wi<WHO.length-1?'Next statement':'Finish';
+    });
+    $('who-w').appendChild(b);
   });
 }
-function buildSort(){
-  bank.innerHTML=''; bins.forEach(b=>b.querySelectorAll('.chip').forEach(x=>x.remove())); selected=null;
-  shuffle(SORT).forEach(([t,k])=>{ const c=document.createElement('div'); c.className='chip'; c.textContent=t; c.dataset.k=k; c.tabIndex=0; makeDraggable(c);
-    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}}); bank.appendChild(c); });
-  $('sort-fb').className='fb';
-}
-[...bins,bank].forEach(z=>{ z.addEventListener('click',()=>{ if(selected) place(selected,z); }); });
-bins.forEach(b=>{b.tabIndex=0;b.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&selected){e.preventDefault();place(selected,b);}});});
-$('sort-check').addEventListener('click',()=>{
-  let right=0, placed=0;
-  bins.forEach(b=>b.querySelectorAll('.chip').forEach(c=>{placed++; const ok=c.dataset.k===b.dataset.bin; c.classList.toggle('right',ok); c.classList.toggle('wrong',!ok); if(ok) right++;}));
-  if(right===SORT.length){fb($('sort-fb'),'ok','<b>9 / 9.</b> Look at the “For whom?” column: every example is price rationing — the good goes to whoever is willing and able to pay.');complete('t3','What/how/for whom sort: 9/9');}
-  else fb($('sort-fb'),'bad',`<b>${right} / ${SORT.length} correct</b>${placed<SORT.length?' — and some cards are still in the bank':''}. Red cards are in the wrong column. Ask: is this about <i>which</i> good, the <i>method</i>, or <i>who gets it</i>?`);
+$('who-next').addEventListener('click',()=>{
+  if(wi<WHO.length-1){ wi++; drawWho(); window.scrollTo({top:0}); return; }
+  $('who-count').textContent='Finished'; $('who-stmt').textContent=`You scored ${wscore} out of ${WHO.length*2}.`;
+  $('who-q').innerHTML=''; $('who-w').style.display='none';
+  document.querySelectorAll('#t3 .steplbl').forEach(e=>e.style.display='none');
+  $('who-next').style.display='none';
+  fb($('who-fb'),'ok','<b>Every box in the grid is full.</b> All nine combinations happen in Thailand every day. In a market system the answers come from buyers and sellers through prices; the government answers some of them too, which is why Thailand is a mixed economy. Copy the grid into your notes — every box is correct, whatever you answered.');
+  $('who-sub').textContent='Every box is correct, whatever you answered.';
+  complete('t3',`Who decides: ${wscore}/${WHO.length*2}`);
 });
-$('sort-reset').addEventListener('click',buildSort);
-buildSort();
+drawWhoGrid(); drawWho();
+
+/* ───────── RUN THE SHOP: the three questions ───────── */
+const SHOP=[
+ {tag:'Question 1 — What to produce?',
+  title:'Which new drink should you add to the menu?',
+  story:'You have space on the menu board for one more drink. Here is last month\'s evidence from your own shop.',
+  ev:[['Thai tea','sells out by 2 pm every day'],['Durian smoothie','3 customers asked for it'],['Hot coffee','0 customers asked; 4 cafés on the same road']],
+  opts:[
+   {t:'Make more Thai tea', ok:true, why:'<b>Good decision.</b> Selling out by 2 pm every day is a shortage — quantity demanded is greater than quantity supplied. That is the market signalling to you that customers want more of this drink. You answered the question <b>WHAT to produce</b>, and demand gave you the answer.'},
+   {t:'Add a durian smoothie', ok:false, why:'<b>Risky.</b> Three requests is a weak signal, and durian is expensive. Compare it with the Thai tea evidence: a product that sells out every single day is telling you much more loudly what customers want. In a market system, <b>demand answers the question WHAT to produce</b>.'},
+   {t:'Add hot coffee', ok:false, why:'<b>Weak decision.</b> Nobody asked for it and four cafés on the same road already sell it. Your scarce resources — money, fridge space, your staff\'s time — would go into something with no demand. Demand is the signal for <b>WHAT to produce</b>, and here there is none.'},
+  ]},
+ {tag:'Question 2 — How to produce?',
+  title:'The queue is too long. How will you produce faster?',
+  story:'Word spreads and the queue now reaches the 7-Eleven next door. Customers are walking away. You can produce more drinks by adding labour, or by adding capital.',
+  ev:[['Two extra staff','฿500 each per day = ฿1,000 a day'],['Sealing machine','฿40,000 once, lasts about 2 years'],['Do nothing','you lose about 30 customers a day']],
+  opts:[
+   {t:'Hire two more staff', ok:false, why:'<b>It works, but check the cost.</b> Two staff cost ฿1,000 <i>every day</i>. The machine costs ฿40,000 once and lasts about 730 days — roughly ฿55 a day. Both answer the question <b>HOW to produce</b>: they are different combinations of labour and capital. Here capital is far cheaper.'},
+   {t:'Buy the sealing machine', ok:true, why:'<b>Good decision.</b> ฿40,000 ÷ 730 days ≈ <b>฿55 a day</b>, against ฿1,000 a day for two staff. You chose a different mix of the factors of production — more capital, less labour. That is the question <b>HOW to produce</b>. (Real cost: one of your staff may no longer be needed.)'},
+   {t:'Change nothing and keep the queue', ok:false, why:'<b>You are choosing to lose sales.</b> The shortage stays, and customers take their money to the café next door. Doing nothing is still an answer to <b>HOW to produce</b> — just not a good one when losing 30 customers a day costs far more than ฿55.'},
+  ]},
+ {tag:'Question 3 — For whom to produce?',
+  title:'A limited-edition drink: 50 cups, 200 customers',
+  story:'You launch a Labubu-themed drink. You have ingredients for only 50 cups a day, but about 200 people want one. Who gets a cup? There is no wrong answer here — each method has a real consequence.',
+  ev:[['Cups available','50 a day'],['Customers who want one','about 200'],['Normal price','฿60']],
+  opts:[
+   {t:'Raise the price to ฿180', market:true, why:'<b>This is what a market system does.</b> The higher price rations the 50 cups to the customers who are willing and able to pay. The shortage disappears and your revenue rises — but some regular customers are priced out. <b>Price decides FOR WHOM.</b>'},
+   {t:'Keep ฿60, first come first served', why:'<b>A queue instead of a price.</b> The cups go to whoever can wait longest, so students with free time win and busy people lose. The shortage does not disappear — it just turns into queueing time. This rations the drink, but <b>not</b> the way a market system does.'},
+   {t:'Keep ฿60 and hold a lottery', why:'<b>Luck decides.</b> Everyone has an equal chance, which feels fair, but the 150 people who miss out still want a cup, so the shortage remains. Again this is a real way of answering <b>FOR WHOM</b> — just not the market\'s way, which is price.'},
+  ]},
+];
+let si=0, smarket=false; const schoice=[];
+function loadShop(){
+  const r=SHOP[si];
+  $('shop-dots').innerHTML=SHOP.map((_,i)=>`<span class="${i<si?'done':i===si?'on':''}"></span>`).join('');
+  $('shop-tag').textContent=r.tag; $('shop-title').textContent=r.title; $('shop-story').textContent=r.story;
+  $('shop-ev').innerHTML=r.ev.map(([a,b])=>`<div><b>${a}</b>${b}</div>`).join('');
+  $('shop-fb').className='fb'; $('shop-next').style.display='none';
+  $('shop-opts').innerHTML='';
+  r.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.innerHTML=`<b>${'ABC'[i]}</b>${o.t}`;
+    b.addEventListener('click',()=>{
+      $('shop-opts').querySelectorAll('.opt').forEach(x=>x.disabled=true);
+      b.classList.add(('ok' in o)?(o.ok?'pick-ok':'pick-bad'):(o.market?'pick-ok':'pick-info'));
+      fb($('shop-fb'), ('ok' in o)?(o.ok?'ok':'bad'):'info', o.why);
+      schoice[si]=o.t; if(si===2) smarket=!!o.market;
+      $('shop-next').style.display='inline-block';
+      $('shop-next').textContent=si<SHOP.length-1?'Next decision':'See your three answers';
+    });
+    $('shop-opts').appendChild(b);
+  });
+}
+$('shop-next').addEventListener('click',()=>{
+  if(si<SHOP.length-1){si++;loadShop();window.scrollTo({top:0});return;}
+  $('shop-dots').innerHTML=SHOP.map(()=>'<span class="done"></span>').join('');
+  document.querySelector('#tshop .card').style.display='none';
+  const labels=[['What to produce?','You decided: '],['How to produce it?','You decided: '],['For whom to produce it?','You decided: ']];
+  $('shop-summary').style.display='block';
+  $('shop-summary').innerHTML=`<div class="shop-sum">${labels.map(([h,p],i)=>`<div><h4>${h}</h4><p>${p}<b>${schoice[i]||'—'}</b></p></div>`).join('')}</div>
+    <div class="card"><h3>Every economy answers the same three questions</h3>
+    <p>You have just answered them for one bubble tea shop. Thailand answers them for millions of goods at once — and in a market system nobody is in charge. <b>Prices</b> did the work in all three rounds: a sell-out told you what to produce, costs told you how to produce it, and ${smarket?'a price of ฿180 decided who got the last 50 cups':'you chose to ration the last 50 cups without using price — so the shortage stayed'}.</p>
+    <p style="margin-top:10px;color:var(--text-2);font-size:14px">Next: worksheet Q17 asks you to spot which of the three questions nine Thai examples answer.</p></div>`;
+  complete('tshop','Run the shop: three questions answered');
+});
+loadShop();
 
 /* ───────── TAB 4: Quick-fire ───────── */
 const QF=shuffle([
