@@ -192,6 +192,88 @@ table.log td.ch{background:var(--cream) !important;font-weight:700;color:#9A5200
 .gate p{margin:0 0 14px;font-size:.95rem;color:#8A4B00}
 .gate b{color:var(--navy)}
 
+/* ---------- card builder ---------- */
+.modeRow{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+.mode{font-family:inherit;font-size:.85rem;font-weight:700;padding:8px 15px;border-radius:20px;
+  border:1.5px solid var(--line);background:#fff;color:var(--grey);cursor:pointer}
+.mode.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.pool{display:flex;flex-wrap:wrap;gap:10px;min-height:64px;padding:12px;background:#F4F7FA;
+  border:1.5px dashed var(--line);border-radius:10px;margin-bottom:18px}
+.crd{flex:0 1 240px;text-align:left;font-family:inherit;cursor:pointer;background:#fff;
+  border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;transition:.15s}
+.crd:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(0,139,204,.15)}
+.crd.sel{border-color:var(--orange);background:var(--cream);box-shadow:0 0 0 3px rgba(255,143,28,.25)}
+.crd .who{display:block;font-size:.66rem;font-weight:700;letter-spacing:.07em;color:var(--blue);text-transform:uppercase}
+.crd .txt{display:block;font-size:.82rem;line-height:1.4;margin-top:3px;color:var(--ink)}
+.crd.right{border-color:#2E8B57;background:var(--greenbg)}
+.crd.wrong{border-color:var(--red);background:var(--redbg)}
+.flowRow{display:flex;gap:12px;margin-bottom:10px;align-items:stretch}
+.slot{flex:1;min-height:74px;border:2px dashed #B9C7D6;border-radius:10px;background:#FBFCFD;
+  padding:8px;display:flex;align-items:center;justify-content:center;transition:.15s}
+.slot.hot{border-color:var(--orange);background:var(--cream)}
+.slot .ph{font-size:.8rem;color:#96A6B6;text-align:center}
+.slot .crd{flex:1 1 auto;cursor:pointer}
+.arrowRow{text-align:center;color:var(--blue);font-size:1.15rem;font-weight:700;margin:-2px 0 6px}
+.binRow{margin-top:18px}
+.bin{min-height:80px;border:2px dashed #E0A9A2;background:#FEF7F6;border-radius:10px;padding:10px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.why2{font-size:.76rem;color:var(--red);font-weight:700;margin-top:6px;display:block}
+.fb{margin-top:16px;border-radius:9px;padding:14px 18px;font-size:.92rem}
+.fb.good{background:var(--greenbg);border:1px solid #A9D6BC}
+.fb.bad{background:var(--redbg);border:1px solid #EFBEB8}
+
+/* ---------- definitions ---------- */
+.defGrid{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:11px 0}
+.defCol{width:50%;vertical-align:top;padding:0}
+.defCol h4{margin:0 0 10px;font-size:.84rem;text-transform:uppercase;letter-spacing:.06em;color:var(--blue)}
+.dItem{display:block;width:100%;text-align:left;font-family:inherit;background:#fff;cursor:pointer;
+  border:1.5px solid var(--line);border-radius:9px;padding:10px 13px;margin-bottom:9px;
+  font-size:.86rem;line-height:1.45;transition:.15s}
+.dItem:hover{border-color:var(--blue)}
+.dItem.sel{border-color:var(--orange);background:var(--cream);box-shadow:0 0 0 3px rgba(255,143,28,.22)}
+.dItem.done{border-color:#2E8B57;background:var(--greenbg);color:#1F6B42;cursor:default;opacity:.75}
+.dItem.miss{border-color:var(--red);background:var(--redbg)}
+.dItem b{color:var(--navy)}
+.dItem.done b{color:#1F6B42}
+.twoMark{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#fff}
+.tmOpt{display:block;width:100%;text-align:left;font-family:inherit;background:#fff;cursor:pointer;
+  border:1.5px solid var(--line);border-radius:9px;padding:10px 13px;margin-bottom:8px;font-size:.87rem;transition:.15s}
+.tmOpt:hover{border-color:var(--blue)}
+.tmOpt.pick{border-color:var(--orange);background:var(--cream)}
+.tmOpt.right{border-color:#2E8B57;background:var(--greenbg)}
+.tmOpt.wrong{border-color:var(--red);background:var(--redbg)}
+@media (max-width:760px){ .defGrid,.defGrid tbody,.defGrid tr{display:block} .defCol{display:block;width:100%} .defCol + .defCol{margin-left:0;margin-top:18px} .flowRow{display:block} .flowRow .slot{margin-bottom:10px} }
+
+/* ---------- three big stages ---------- */
+.stages{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.stage{flex:1 1 260px;text-align:left;font-family:inherit;cursor:pointer;background:#fff;
+  border:2px solid var(--line);border-radius:12px;padding:13px 16px 14px;transition:.15s;position:relative}
+.stage:hover{border-color:var(--blue)}
+.stage.on{border-color:var(--navy);background:var(--navy);color:#fff;box-shadow:0 4px 14px rgba(0,47,108,.22)}
+.stage .sn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+  border-radius:50%;background:var(--pale);color:var(--navy);font-weight:700;font-size:.82rem;margin-right:9px}
+.stage.on .sn{background:var(--orange);color:#3D2000}
+.stage .st{font-weight:700;font-size:1rem;color:var(--navy)}
+.stage.on .st{color:#fff}
+.stage small{display:block;margin-top:5px;font-size:.79rem;color:var(--grey);line-height:1.35}
+.stage.on small{color:#B9D3E8}
+.stageBody{display:none}
+.stageBody.on{display:block}
+
+/* ---------- what to do next ---------- */
+.next{display:flex;align-items:center;gap:14px;background:var(--cream);border:1.5px solid var(--orange);
+  border-radius:10px;padding:12px 18px;margin-bottom:18px}
+.next .lbl{flex:0 0 auto;font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:#fff;background:var(--orange);border-radius:20px;padding:4px 11px}
+.next .msg{font-size:.94rem;color:#8A4B00;line-height:1.45}
+.next .msg b{color:var(--navy)}
+.next.done{background:var(--greenbg);border-color:#A9D6BC}
+.next.done .lbl{background:var(--green)}
+.next.done .msg{color:#1F6B42}
+
+.tabs{margin-bottom:-1px}
+.tab{padding:11px 18px;font-size:.92rem}
+
 footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
 
 @media (max-width:980px){
@@ -218,6 +300,17 @@ footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
 </header>
 
 <div class="wrap">
+
+  <div class="stages">
+    <button class="stage on" data-stage="st-sim"><span class="sn">1</span><span class="st">Run the simulator</span>
+      <small>Set the interest rate and watch what happens to the four aims.</small></button>
+    <button class="stage" data-stage="st-build"><span class="sn">2</span><span class="st">Build the chain</span>
+      <small>Put the cards in order and reject the three that do not belong.</small></button>
+    <button class="stage" data-stage="st-terms"><span class="sn">3</span><span class="st">Key terms</span>
+      <small>Match the definitions and check your 2-mark answers.</small></button>
+  </div>
+
+<div class="stageBody on" id="st-sim">
 
   <div class="card" style="padding:16px 18px">
     <div class="scenarios" id="scnRow"></div>
@@ -248,14 +341,17 @@ footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
     </div>
   </div>
 
+  <div class="next" id="nextStep">
+    <span class="lbl">Next</span><span class="msg" id="nextMsg"></span>
+  </div>
+
   <!-- the four aims, always visible -->
   <div class="aims" id="aims"></div>
 
   <div class="tabs">
     <button class="tab on" data-pane="p-growth">Growth over time</button>
     <button class="tab" data-pane="p-chain">Chain of reasoning <span class="badge" id="bChain"></span></button>
-    <button class="tab" data-pane="p-cost">People &amp; the budget <span class="badge" id="bCost"></span></button>
-    <button class="tab" data-pane="p-side">Side effects &amp; who pays</button>
+    <button class="tab" data-pane="p-cost">Consequences <span class="badge" id="bCost"></span></button>
     <button class="tab" data-pane="p-log">Your record <span class="badge" id="bLog"></span></button>
     <button class="tab" data-pane="p-verdict">Verdict <span class="badge" id="bVerdict"></span></button>
   </div>
@@ -275,9 +371,7 @@ footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
     <p class="muted" style="margin:0 0 14px">Unemployment is not just a number on a dial. Every percentage point is people — and it lands on the government budget without anyone changing a single tax rate.</p>
     <div class="mrow" id="cost"></div>
     <div id="costNote" style="margin-top:16px"></div>
-  </div>
 
-  <div class="pane" id="p-side">
     <h3>The other two measures move too</h3>
     <p class="muted" style="margin:0 0 12px">You only touched the interest rate. These are consequences, not separate decisions.</p>
     <div class="cons" id="cons"></div>
@@ -297,6 +391,56 @@ footer{text-align:center;color:var(--grey);font-size:.82rem;padding:6px 0 0}
     </div>
     <div id="verdict" style="display:none"></div>
   </div>
+
+</div><!-- /st-sim -->
+
+<div class="stageBody" id="st-build">
+  <div class="card" id="p-build">
+    <div class="modeRow">
+      <button class="mode on" id="mCut">Interest rate CUT</button>
+      <button class="mode" id="mRise">Interest rate RISE</button>
+      <button class="act ghost" id="bShuffle" style="flex:0 0 auto;padding:8px 14px">Shuffle again</button>
+    </div>
+    <p class="muted" style="margin:0 0 14px">Click a card, then click the box you want it in. Click a placed card to take it back. <b>Three cards do not belong in the chain</b> &mdash; put those in the red box at the bottom.</p>
+    <div class="pool" id="pool"></div>
+    <div id="flow"></div>
+    <div class="binRow">
+      <h3 style="margin:0 0 8px">Not part of the chain</h3>
+      <div class="bin" id="bin"><span class="ph muted">Three cards belong here.</span></div>
+    </div>
+    <div class="btns" style="max-width:420px">
+      <button class="act primary" id="bCheck">Check my chain</button>
+      <button class="act ghost" id="bClear">Clear</button>
+    </div>
+    <div id="buildFb"></div>
+  </div>
+
+</div><!-- /st-build -->
+
+<div class="stageBody" id="st-terms">
+  <div class="card" id="p-defs">
+    <div class="modeRow">
+      <button class="mode on" id="dMatch">Match the terms</button>
+      <button class="mode" id="dTwo">Two-mark check</button>
+    </div>
+    <div id="defMatch">
+      <p class="muted" style="margin:0 0 14px">Click a term, then click its meaning. Correct pairs turn green and lock.</p>
+      <table class="defGrid" role="presentation"><tr>
+        <td class="defCol"><h4>Term</h4><div id="dTerms"></div></td>
+        <td class="defCol"><h4>Meaning</h4><div id="dDefs"></div></td>
+      </tr></table>
+      <div id="defFb"></div>
+    </div>
+    <div id="defTwo" style="display:none">
+      <p class="muted" style="margin:0 0 14px">A 2-mark definition needs <b>two</b> things: the core meaning, and a valid example or component. Choose the two statements that together earn both marks.</p>
+      <div class="twoMark" id="tmBox"></div>
+      <div class="btns" style="max-width:420px"><button class="act primary" id="tmCheck">Check</button>
+        <button class="act ghost" id="tmNext">Next term</button></div>
+      <div id="tmFb"></div>
+    </div>
+  </div>
+
+</div><!-- /st-terms -->
 
   <details class="tp">
     <summary>For teachers — how to run this</summary>
@@ -938,6 +1082,21 @@ function renderVerdict(){
   box.innerHTML = "<h4>"+v.h+"</h4><p>"+v.body.join("</p><p>")+"</p>";
 }
 
+function showStage(id){
+  var bs = document.querySelectorAll(".stage");
+  for(var i=0;i<bs.length;i++){
+    var on = bs[i].getAttribute("data-stage") === id;
+    bs[i].className = "stage" + (on ? " on" : "");
+  }
+  var bodies = document.querySelectorAll(".stageBody");
+  for(var j=0;j<bodies.length;j++){
+    var show = bodies[j].id === id;
+    bodies[j].className = "stageBody" + (show ? " on" : "");
+    bodies[j].style.display = show ? "block" : "none";   /* explicit: class alone is not reliable */
+  }
+  window.scrollTo(0, 0);
+}
+
 function showPane(id){
   var tabs = document.querySelectorAll(".tab");
   for(var i=0;i<tabs.length;i++){
@@ -946,8 +1105,31 @@ function showPane(id){
   }
   var panes = document.querySelectorAll(".pane");
   for(var j=0;j<panes.length;j++){
-    panes[j].className = "pane" + (panes[j].id === id ? " on" : "");
+    var vis = panes[j].id === id;
+    panes[j].className = "pane" + (vis ? " on" : "");
+    panes[j].style.display = vis ? "block" : "none";
   }
+}
+
+function renderNext(){
+  var settled = Math.abs((NEUTRAL - S.rate) - S.transmitted) < 0.06;
+  var box = el("nextStep"), msg = el("nextMsg"), done = false, t;
+
+  if(!S.moved && S.quarter === 0){
+    t = "Look at the four aims below \u2014 which are off track? Then <b>cut</b> or <b>raise</b> the interest rate in the blue bar.";
+  } else if(S.moved && S.quarter === 0){
+    t = "You have changed the rate, but no time has passed yet. Press <b>Run next quarter</b>.";
+  } else if(!settled){
+    t = "The effect is still arriving. Keep pressing <b>Run next quarter</b> until the badge says it has worked through.";
+  } else if(!S.revealed){
+    t = "The effect has fully worked through. Read the four aims, then open the <b>Verdict</b> tab and write your answer before you reveal it.";
+    done = true;
+  } else {
+    t = "Try a different interest rate, or a different situation \u2014 then move on to <b>2. Build the chain</b> at the top.";
+    done = true;
+  }
+  box.className = "next" + (done ? " done" : "");
+  msg.innerHTML = t;
 }
 
 function renderBadges(){
@@ -971,7 +1153,7 @@ function renderBadges(){
 
 function render(){
   renderScenarios(); renderRate(); renderAims(); renderGrowth();
-  renderCost(); renderChain(); renderLog(); renderBadges(); renderCons(); renderWL(); renderVerdict();
+  renderCost(); renderChain(); renderLog(); renderBadges(); renderNext(); renderCons(); renderWL(); renderVerdict();
 }
 
 /* ---------------- actions ---------------- */
@@ -1028,6 +1210,12 @@ function nextQuarter(){
 }
 
 (function(){
+  var st = document.querySelectorAll(".stage");
+  for(var n=0;n<st.length;n++){
+    st[n].onclick = (function(b){
+      return function(){ showStage(b.getAttribute("data-stage")); };
+    })(st[n]);
+  }
   var tabs = document.querySelectorAll(".tab");
   for(var i=0;i<tabs.length;i++){
     tabs[i].onclick = (function(t){
@@ -1041,6 +1229,315 @@ el("btnRaise").onclick = function(){ move(0.25); };
 el("btnQ").onclick     = nextQuarter;
 el("btnReset").onclick = function(){ loadScenario(S.id); };
 el("btnGate").onclick  = function(){ S.revealed = true; render(); save(); };
+
+
+/* ============================================================
+   BUILD THE CHAIN  —  card activity
+   ============================================================ */
+var CHAIN_SETS = {
+  cut: {
+    intro:"The BOT cuts the interest rate from 1.00% to 0.75%.",
+    cards:[
+      {id:"R", who:"Bank of Thailand",  txt:"The BOT cuts the interest rate from 1.00% to 0.75%.", slot:"s1"},
+      {id:"M", who:"Commercial banks",  txt:"Commercial banks can borrow more cheaply, so they cut their loan and savings rates.", slot:"s2"},
+      {id:"B", who:"Households",        txt:"Loans cost less and saving pays less. Existing borrowers repay less each month, so they have more to spend. Consumption rises.", slot:"s3"},
+      {id:"T", who:"Firms",             txt:"Borrowing costs fall, so more investment projects become profitable. Investment rises.", slot:"s4"},
+      {id:"F", who:"The whole economy", txt:"Total spending in the economy rises.", slot:"s5"},
+      {id:"W", who:"The gain",          txt:"Firms produce more and hire more workers.", slot:"s6"},
+      {id:"H", who:"The risk",          txt:"If firms cannot produce enough, prices are pulled up.", slot:"s7"},
+      {id:"D", who:"Households",        txt:"Saving pays more, so households save more and spend less.",
+        reject:"Wrong direction. A rate cut makes saving pay less, so households save less, not more."},
+      {id:"P", who:"Government",        txt:"The government spends more on new roads and schools.",
+        reject:"Wrong policy. Government spending is fiscal policy (Unit 4.2), not monetary policy."},
+      {id:"S", who:"Commercial banks",  txt:"Commercial banks must pay more to borrow, so they raise their loan rates.",
+        reject:"Wrong direction. After a cut, banks borrow more cheaply and cut their loan rates."}
+    ],
+    model:"The BOT cuts the interest rate from 1.00% to 0.75%. <b>This means that</b> commercial banks can borrow more cheaply, so they cut their loan and savings rates. <b>As a result</b>, borrowing becomes cheaper and saving less rewarding, and existing borrowers repay less each month, so household consumption rises. Firms also face lower borrowing costs, so more investment projects become profitable and investment rises. <b>Which in turn</b> increases total spending in the Thai economy. <b>Therefore</b> firms produce more and hire more workers, reducing unemployment. However, if firms cannot increase output quickly enough, the extra spending may pull prices up, causing inflation."
+  },
+  rise: {
+    intro:"The BOT raises the interest rate from 0.75% to 1.00%.",
+    cards:[
+      {id:"R2", who:"Bank of Thailand",  txt:"The BOT raises the interest rate from 0.75% to 1.00%.", slot:"s1"},
+      {id:"S2", who:"Commercial banks",  txt:"Commercial banks must pay more to borrow, so they raise their loan and savings rates.", slot:"s2"},
+      {id:"D2", who:"Households",        txt:"Loans cost more and saving pays more. Existing borrowers repay more each month, so they have less to spend. Consumption falls.", slot:"s3"},
+      {id:"T2", who:"Firms",             txt:"Borrowing costs rise, so fewer investment projects are profitable. Investment falls.", slot:"s4"},
+      {id:"F2", who:"The whole economy", txt:"Total spending in the economy falls.", slot:"s5"},
+      {id:"W2", who:"The gain",          txt:"Less pressure on prices, so inflation slows.", slot:"s6"},
+      {id:"H2", who:"The risk",          txt:"Firms produce less and may cut workers, so unemployment rises and growth slows.", slot:"s7"},
+      {id:"B2", who:"Households",        txt:"Loans cost less, so households borrow more and consumption rises.",
+        reject:"Wrong direction. A rate rise makes loans dearer, so consumption falls."},
+      {id:"P2", who:"Government",        txt:"The government raises income tax to cool the economy down.",
+        reject:"Wrong policy. Changing taxes is fiscal policy (Unit 4.2), not monetary policy."},
+      {id:"M2", who:"Commercial banks",  txt:"Commercial banks can borrow more cheaply, so they cut their loan rates.",
+        reject:"Wrong direction. After a rise, banks pay more to borrow and raise their loan rates."}
+    ],
+    model:"The BOT raises the interest rate from 0.75% to 1.00%. <b>This means that</b> commercial banks must pay more to borrow, so they raise their loan and savings rates. <b>As a result</b>, borrowing costs more and saving pays more, and existing borrowers repay more each month, so household consumption falls. Firms face higher borrowing costs, so fewer investment projects are profitable and investment falls. <b>Which in turn</b> reduces total spending in the Thai economy. <b>Therefore</b> there is less pressure on prices and inflation slows. However, firms may produce less and cut workers, so unemployment rises and growth slows."
+  }
+};
+var SLOTS = [
+  { row:["s1"], label:["Step 1"] },
+  { row:["s2"], label:["Step 2"] },
+  { row:["s3","s4"], label:["Step 3 \u2014 Households","Step 4 \u2014 Firms"] },
+  { row:["s5"], label:["Step 5"] },
+  { row:["s6","s7"], label:["Step 6 \u2014 the gain","Step 6 \u2014 the risk"] }
+];
+var B = { mode:"cut", placed:{}, binned:[], pool:[], sel:null, checked:false };
+
+function shuffle(a){
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function cardById(id){
+  var cs = CHAIN_SETS[B.mode].cards;
+  for(var i=0;i<cs.length;i++) if(cs[i].id===id) return cs[i];
+  return null;
+}
+function resetBuild(){
+  B.placed = {}; B.binned = []; B.sel = null; B.checked = false;
+  B.pool = shuffle(CHAIN_SETS[B.mode].cards.map(function(c){ return c.id; }));
+  el("buildFb").innerHTML = "";
+  renderBuild();
+}
+function cardHTML(c, cls){
+  return '<button class="crd'+(cls?" "+cls:"")+'" data-card="'+c.id+'">'+
+         '<span class="who">'+c.who+'</span><span class="txt">'+c.txt+'</span>'+
+         ((B.checked && c.reject && B.binned.indexOf(c.id)>-1) ? '<span class="why2">'+c.reject+'</span>' : '')+
+         '</button>';
+}
+function renderBuild(){
+  var set = CHAIN_SETS[B.mode];
+
+  var ph = el("pool");
+  ph.innerHTML = B.pool.length
+    ? B.pool.map(function(id){ return cardHTML(cardById(id), B.sel===id?"sel":""); }).join("")
+    : '<span class="ph muted">All cards placed. Press "Check my chain".</span>';
+
+  var h = "";
+  SLOTS.forEach(function(r, ri){
+    h += '<div class="flowRow">';
+    r.row.forEach(function(sid, i){
+      var id = B.placed[sid], c = id ? cardById(id) : null;
+      var cls = "";
+      if(B.checked && c) cls = (c.slot === sid) ? "right" : "wrong";
+      h += '<div class="slot'+(B.sel && !c ? " hot" : "")+'" data-slot="'+sid+'">'+
+           (c ? cardHTML(c, cls) : '<span class="ph">'+r.label[i]+'</span>')+'</div>';
+    });
+    h += '</div>';
+    if(ri < SLOTS.length-1) h += '<div class="arrowRow">\u25bc</div>';
+  });
+  el("flow").innerHTML = h;
+
+  el("bin").innerHTML = B.binned.length
+    ? B.binned.map(function(id){
+        var c = cardById(id);
+        var cls = B.checked ? (c.reject ? "right" : "wrong") : "";
+        return cardHTML(c, cls);
+      }).join("")
+    : '<span class="ph muted">Three cards belong here.</span>';
+
+  /* wire clicks */
+  var cds = document.querySelectorAll("#p-build .crd");
+  for(var i=0;i<cds.length;i++){
+    cds[i].onclick = (function(id){ return function(){ clickCard(id); }; })(cds[i].getAttribute("data-card"));
+  }
+  var sls = document.querySelectorAll("#p-build .slot");
+  for(var j=0;j<sls.length;j++){
+    sls[j].onclick = (function(sid){ return function(){ clickSlot(sid); }; })(sls[j].getAttribute("data-slot"));
+  }
+  el("bin").onclick = function(e){
+    if(e.target.closest && e.target.closest(".crd")) return;
+    if(B.sel){ takeBack(B.sel); B.binned.push(B.sel); B.pool.splice(B.pool.indexOf(B.sel),1); B.sel=null; B.checked=false; renderBuild(); }
+  };
+}
+function takeBack(id){
+  for(var k in B.placed) if(B.placed[k]===id) delete B.placed[k];
+  var bi = B.binned.indexOf(id); if(bi>-1) B.binned.splice(bi,1);
+}
+function clickCard(id){
+  if(B.pool.indexOf(id) > -1){ B.sel = (B.sel===id) ? null : id; }
+  else { takeBack(id); if(B.pool.indexOf(id)<0) B.pool.push(id); B.sel = null; B.checked = false; }
+  renderBuild();
+}
+function clickSlot(sid){
+  if(!B.sel){
+    if(B.placed[sid]) clickCard(B.placed[sid]);
+    return;
+  }
+  if(B.placed[sid]){ var old = B.placed[sid]; if(B.pool.indexOf(old)<0) B.pool.push(old); }
+  takeBack(B.sel);
+  B.placed[sid] = B.sel;
+  var pi = B.pool.indexOf(B.sel); if(pi>-1) B.pool.splice(pi,1);
+  B.sel = null; B.checked = false;
+  renderBuild();
+}
+function checkBuild(){
+  B.checked = true;
+  var set = CHAIN_SETS[B.mode];
+  var right = 0, wrong = [];
+  SLOTS.forEach(function(r){ r.row.forEach(function(sid){
+    var id = B.placed[sid];
+    if(!id){ wrong.push("empty"); return; }
+    if(cardById(id).slot === sid) right++; else wrong.push(sid);
+  }); });
+  var binOk = B.binned.length === 3 && B.binned.every(function(id){ return !!cardById(id).reject; });
+  var fb = el("buildFb");
+  if(right === 7 && binOk){
+    fb.className = "fb good";
+    fb.innerHTML = '<b style="color:var(--green)">All seven links in the right order, and all three distractors rejected.</b>'+
+      '<p style="margin:10px 0 0">Now read it as one paragraph. This is what a 6-mark answer sounds like \u2014 notice that every connective is doing work:</p>'+
+      '<p style="margin:10px 0 0;padding:12px 14px;background:#fff;border-radius:8px;border:1px solid #A9D6BC">'+set.model+'</p>';
+  } else {
+    fb.className = "fb bad";
+    fb.innerHTML = '<b style="color:var(--red)">'+right+' of 7 links are in the right place'+
+      (binOk ? ', and the three distractors are correctly rejected.' :
+       (B.binned.length === 3 ? ', but at least one card in the red box does belong in the chain.'
+                              : '. You need exactly three cards in the red box \u2014 you have '+B.binned.length+'.'))+'</b>'+
+      '<p style="margin:10px 0 0">Red cards are in the wrong box. Ask yourself: who acts first, and does this card point in the right direction for a rate '+
+      (B.mode==="cut"?"cut":"rise")+'?</p>';
+  }
+  renderBuild();
+}
+
+/* ============================================================
+   KEY TERMS
+   ============================================================ */
+var TERMS = [
+  ["Money supply","The total amount of money in the economy at a particular point in time, including coins, banknotes, bank deposits and central bank reserves."],
+  ["Monetary policy","The use of interest rates, exchange rates and the money supply to control macroeconomic objectives and the level of economic activity."],
+  ["Central bank","The institution responsible for monetary policy in a country. In Thailand this is the Bank of Thailand."],
+  ["Interest rate","The price of borrowing money, or the reward for saving money, usually shown as a percentage per year."],
+  ["Expansionary (loose) monetary policy","Lowering interest rates or expanding the money supply in order to boost economic activity."],
+  ["Contractionary (tight) monetary policy","Raising interest rates to reduce overspending and limit investment, usually in order to control inflation."],
+  ["Quantitative easing","A central bank creating new money and using it to buy bonds, putting money directly into the banking system."],
+  ["Inflation target","The rate of price rises a central bank is required to aim for. The Bank of Thailand's is a band of 1\u20133%."]
+];
+var D = { sel:null, selKind:null, done:[], order:[], dOrder:[] };
+
+function resetDefs(){
+  D.sel = null; D.selKind = null; D.done = [];
+  D.order  = shuffle(TERMS.map(function(_,i){ return i; }));
+  D.dOrder = shuffle(TERMS.map(function(_,i){ return i; }));
+  el("defFb").innerHTML = "";
+  renderDefs();
+}
+function renderDefs(){
+  var t = "", d = "";
+  D.order.forEach(function(i){
+    var done = D.done.indexOf(i) > -1;
+    t += '<button class="dItem'+(done?" done":(D.selKind==="t"&&D.sel===i?" sel":""))+'" data-t="'+i+'"><b>'+TERMS[i][0]+'</b></button>';
+  });
+  D.dOrder.forEach(function(i){
+    var done = D.done.indexOf(i) > -1;
+    d += '<button class="dItem'+(done?" done":(D.selKind==="d"&&D.sel===i?" sel":""))+'" data-d="'+i+'">'+TERMS[i][1]+'</button>';
+  });
+  el("dTerms").innerHTML = t; el("dDefs").innerHTML = d;
+
+  var bs = document.querySelectorAll("#defMatch .dItem");
+  for(var k=0;k<bs.length;k++){
+    (function(b){
+      var ti = b.getAttribute("data-t"), di = b.getAttribute("data-d");
+      var idx = parseInt(ti === null ? di : ti, 10);
+      var kind = ti === null ? "d" : "t";
+      if(D.done.indexOf(idx) > -1) return;
+      b.onclick = function(){ pickDef(idx, kind, b); };
+    })(bs[k]);
+  }
+  if(D.done.length === TERMS.length){
+    el("defFb").className = "fb good";
+    el("defFb").innerHTML = '<b style="color:var(--green)">All eight matched.</b> In the exam a definition is worth 2 marks: '+
+      'one for the core meaning and one for a valid example or component. Try the Two-mark check next.';
+  }
+}
+function pickDef(idx, kind, node){
+  if(D.sel === null){ D.sel = idx; D.selKind = kind; renderDefs(); return; }
+  if(D.selKind === kind){ D.sel = idx; renderDefs(); return; }
+  if(D.sel === idx){
+    D.done.push(idx); D.sel = null; D.selKind = null; renderDefs();
+  } else {
+    node.className = "dItem miss";
+    var was = D.sel; D.sel = null; D.selKind = null;
+    setTimeout(function(){ renderDefs(); }, 550);
+  }
+}
+
+var TWO = [
+  { term:"money supply",
+    opts:[
+      {t:"The amount of money in the economy at a particular point in time.", ok:true},
+      {t:"For example coins, banknotes, bank deposits and central bank reserves.", ok:true},
+      {t:"All the money the government has available to spend.", ok:false},
+      {t:"The total wealth of everyone in the country, including houses and gold.", ok:false}
+    ],
+    why:"Mark 1 is the core idea (an amount of money, at a point in time). Mark 2 is a valid component. \u201cAll the money the government has\u201d is the commonest wrong answer \u2014 the money supply includes every private bank account too."},
+  { term:"monetary policy",
+    opts:[
+      {t:"The use of interest rates, exchange rates and the money supply\u2026", ok:true},
+      {t:"\u2026to control macroeconomic objectives and the level of economic activity.", ok:true},
+      {t:"Changes to government spending and taxation.", ok:false},
+      {t:"Rules that require banks to lend responsibly to customers.", ok:false}
+    ],
+    why:"Mark 1 is the tools, mark 2 is the purpose. Option 3 is fiscal policy \u2014 the single most common confusion in this unit."},
+  { term:"contractionary (tight) monetary policy",
+    opts:[
+      {t:"Raising interest rates to reduce overspending and limit investment.", ok:true},
+      {t:"It is used to control inflation, but can harm growth and cost jobs.", ok:true},
+      {t:"Lowering interest rates to boost economic activity.", ok:false},
+      {t:"Cutting government spending to reduce the budget deficit.", ok:false}
+    ],
+    why:"Mark 1 is the mechanism, mark 2 is the aim (and a developed answer adds the cost). Option 3 is the opposite policy; option 4 is fiscal."},
+  { term:"quantitative easing",
+    opts:[
+      {t:"A central bank creates new money and uses it to buy bonds.", ok:true},
+      {t:"This increases the money supply and is meant to encourage lending and spending.", ok:true},
+      {t:"The government prints money in order to pay for its own spending.", ok:false},
+      {t:"A central bank cutting interest rates below zero.", ok:false}
+    ],
+    why:"Mark 1 is the action, mark 2 is the intended effect. Option 3 is the classic misconception: QE is done by the central bank and the money goes to financial institutions, not to the government."}
+];
+var T2 = { i:0, picks:[], checked:false };
+
+function renderTwo(){
+  var q = TWO[T2.i];
+  var h = '<p style="margin:0 0 12px"><b>Define <i>'+q.term+'</i>.</b> <span class="muted">[2]</span></p>';
+  q.opts.forEach(function(o, k){
+    var cls = "";
+    if(T2.checked) cls = o.ok ? "right" : (T2.picks.indexOf(k)>-1 ? "wrong" : "");
+    else if(T2.picks.indexOf(k)>-1) cls = "pick";
+    h += '<button class="tmOpt '+cls+'" data-o="'+k+'">'+o.t+'</button>';
+  });
+  el("tmBox").innerHTML = h;
+  var bs = el("tmBox").querySelectorAll(".tmOpt");
+  for(var k=0;k<bs.length;k++){
+    bs[k].onclick = (function(n){ return function(){
+      if(T2.checked) return;
+      var p = T2.picks.indexOf(n);
+      if(p>-1) T2.picks.splice(p,1); else if(T2.picks.length<2) T2.picks.push(n);
+      renderTwo();
+    }; })(k);
+  }
+  var fb = el("tmFb");
+  if(!T2.checked){ fb.innerHTML = ""; return; }
+  var ok = T2.picks.length===2 && T2.picks.every(function(n){ return q.opts[n].ok; });
+  fb.className = "fb " + (ok ? "good" : "bad");
+  fb.innerHTML = '<b style="color:var(--'+(ok?"green":"red")+')">'+(ok?"Both marks.":"Not both marks yet.")+'</b> '+q.why;
+}
+
+/* ---------------- wiring ---------------- */
+el("mCut").onclick   = function(){ B.mode="cut";  el("mCut").className="mode on"; el("mRise").className="mode"; resetBuild(); };
+el("mRise").onclick  = function(){ B.mode="rise"; el("mRise").className="mode on"; el("mCut").className="mode"; resetBuild(); };
+el("bShuffle").onclick = resetBuild;
+el("bClear").onclick   = resetBuild;
+el("bCheck").onclick   = checkBuild;
+
+el("dMatch").onclick = function(){ el("dMatch").className="mode on"; el("dTwo").className="mode";
+  el("defMatch").style.display="block"; el("defTwo").style.display="none"; };
+el("dTwo").onclick   = function(){ el("dTwo").className="mode on"; el("dMatch").className="mode";
+  el("defMatch").style.display="none"; el("defTwo").style.display="block"; T2={i:T2.i,picks:[],checked:false}; renderTwo(); };
+el("tmCheck").onclick = function(){ if(T2.picks.length===2){ T2.checked=true; renderTwo(); } };
+el("tmNext").onclick  = function(){ T2 = { i:(T2.i+1)%TWO.length, picks:[], checked:false }; renderTwo(); };
+
+resetBuild(); resetDefs(); renderTwo();
+showStage("st-sim"); showPane("p-growth");
 
 if(!restore()) loadScenario("recession"); else render();
 </script>
