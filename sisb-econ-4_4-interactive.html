@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supply-Side Policy Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+#u44{--navy:#002F6C;--blue:#008BCC;--orange:#FF8F1C;--pale:#E8F4FA;--paleo:#FFF3E6;--grey:#F2F4F7;--line:#D5DCE6;--ink:#1F2A37;--muted:#5B6B80;--good:#1E8E4E;--goodbg:#E6F5EC;--bad:#C0392B;--badbg:#FBEAE8;
+  font-family:Lato,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff;max-width:1040px;margin:0 auto;padding:16px;line-height:1.5;box-sizing:border-box}
+#u44 *,#u44 *::before,#u44 *::after{box-sizing:border-box}
+#u44 h1,#u44 h2,#u44 h3,#u44 p{margin:0}
+#u44 button{font-family:inherit;cursor:pointer}
+#u44 .hdr{background:var(--navy);color:#fff;border-radius:12px;padding:18px 20px}
+#u44 .hdr h1{font-size:24px;font-weight:900}
+#u44 .hdr .sub{font-size:14px;opacity:.85}
+#u44 .tabs{display:flex;gap:6px;margin:14px 0;flex-wrap:wrap}
+#u44 .tab{flex:1 1 160px;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:700;color:var(--navy);text-align:left}
+#u44 .tab small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+#u44 .tab[aria-selected="true"]{border-color:var(--navy);background:var(--pale)}
+#u44 .panel{display:none}
+#u44 .panel.on{display:block}
+#u44 .intro{background:var(--paleo);border-left:5px solid var(--orange);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:15px}
+#u44 .intro b{color:var(--navy)}
+#u44 .card{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px;background:#fff}
+#u44 .btn{border:0;border-radius:8px;padding:10px 16px;font-size:15px;font-weight:700;background:var(--navy);color:#fff}
+#u44 .btn.alt{background:var(--blue)}
+#u44 .btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+#u44 .btn.sm{padding:6px 12px;font-size:13px}
+#u44 .btn:disabled{opacity:.4;cursor:not-allowed}
+#u44 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#u44 .fb{margin-top:10px;border-radius:8px;padding:10px 12px;font-size:14px;display:none}
+#u44 .fb.show{display:block}
+#u44 .fb.good{background:var(--goodbg);color:#14532D}
+#u44 .fb.bad{background:var(--badbg);color:#7A1F16}
+#u44 .fb.info{background:var(--pale);color:var(--navy)}
+#u44 h2.sec{font-size:18px;font-weight:900;color:var(--navy);margin:4px 0 10px}
+/* planner */
+#u44 .budget{position:sticky;top:0;z-index:5;background:#fff;border:2px solid var(--navy);border-radius:10px;padding:10px 14px;margin-bottom:12px}
+#u44 .budget .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:14px}
+#u44 .budget b{color:var(--navy)}
+#u44 .meter{height:12px;background:var(--grey);border-radius:6px;overflow:hidden;margin-top:6px}
+#u44 .meter i{display:block;height:100%;background:var(--blue);width:0;transition:width .25s}
+#u44 .meter.over i{background:var(--bad)}
+#u44 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:16px;align-items:start}
+#u44 .m{border:2px solid var(--line);border-radius:10px;padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px}
+#u44 .m.sel{border-color:var(--orange);background:var(--paleo)}
+#u44 .m h3{font-size:15px;font-weight:900;color:var(--navy)}
+#u44 .tags{display:flex;flex-wrap:wrap;gap:5px}
+#u44 .tag{font-size:12px;border-radius:12px;padding:2px 8px;background:var(--grey);color:var(--ink)}
+#u44 .tag.f{background:var(--pale);color:var(--navy)}
+#u44 .tag.c{background:#FFE8CF;color:#7A4300}
+#u44 .tag.g{background:var(--goodbg);color:#14532D}
+#u44 .m details{font-size:13px}
+#u44 .m summary{cursor:pointer;font-weight:700;color:var(--blue)}
+#u44 .m details p{margin-top:5px}
+#u44 .m .foot2{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+#u44 .res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){#u44 .res{grid-template-columns:1fr}}
+#u44 .yearbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#u44 .yearbox .yr{font-size:30px;font-weight:900;color:var(--orange);min-width:80px}
+#u44 input[type=range]{flex:1;min-width:160px;accent-color:var(--navy)}
+#u44 svg.ppc{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+#u44 .capline{font-size:14px;margin:8px 0}
+#u44 .capline b{font-size:20px;color:var(--navy)}
+#u44 .gantt{font-size:12px;border:1px solid var(--line);border-radius:10px;padding:10px}
+#u44 .grow{display:grid;grid-template-columns:130px 1fr;gap:8px;align-items:center;margin-bottom:6px}
+#u44 .gname{font-weight:700;color:var(--navy);line-height:1.2}
+#u44 .gtrack{position:relative;height:18px;background:var(--grey);border-radius:4px;overflow:hidden}
+#u44 .gwait{position:absolute;top:0;bottom:0;left:0;background:repeating-linear-gradient(45deg,#C9D3E0,#C9D3E0 4px,#DDE4ED 4px,#DDE4ED 8px)}
+#u44 .gon{position:absolute;top:0;bottom:0;right:0;background:var(--orange)}
+#u44 .gnow{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--navy)}
+#u44 .gaxis{display:grid;grid-template-columns:130px 1fr;gap:8px;color:var(--muted)}
+#u44 .gaxis div:last-child{display:flex;justify-content:space-between}
+#u44 .key{display:flex;gap:12px;margin-top:6px;color:var(--muted)}
+#u44 .key span::before{content:"";display:inline-block;width:12px;height:10px;margin-right:4px;vertical-align:middle}
+#u44 .key .kw::before{background:#C9D3E0}
+#u44 .key .ko::before{background:var(--orange)}
+#u44 table.sc{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+#u44 table.sc th{background:var(--navy);color:#fff;text-align:left;padding:6px 8px}
+#u44 table.sc td{border-bottom:1px solid var(--line);padding:6px 8px;vertical-align:top}
+#u44 .chip{display:inline-block;border-radius:12px;padding:1px 9px;font-weight:700;font-size:12px;white-space:nowrap}
+#u44 .chip.up{background:var(--goodbg);color:var(--good)}
+#u44 .chip.dn{background:var(--badbg);color:var(--bad)}
+#u44 .chip.no{background:var(--grey);color:var(--muted)}
+#u44 .why2{color:var(--muted)}
+#u44 .challenge{border:2px dashed var(--orange);border-radius:10px;padding:10px 12px;margin:14px 0;font-size:14px}
+#u44 .challenge.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+#u44 .think details{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:14px}
+#u44 .think summary{cursor:pointer;font-weight:700;color:var(--navy)}
+#u44 .think details p{margin-top:6px;color:var(--ink)}
+#u44 .empty{color:var(--muted);font-size:13px;padding:6px 0}
+/* sort */
+#u44 .hl{display:flex;flex-direction:column;gap:8px}
+#u44 .hl .txt{font-weight:700;color:var(--navy)}
+#u44 .ctry{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;background:var(--navy);color:#fff;border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:2px}
+#u44 .opts{display:flex;flex-wrap:wrap;gap:6px}
+#u44 .opt{border:2px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--ink)}
+#u44 .opt[aria-pressed="true"]{border-color:var(--navy);background:var(--navy);color:#fff}
+#u44 .card.right{border-color:var(--good);background:var(--goodbg)}
+#u44 .card.wrong{border-color:var(--bad);background:var(--badbg)}
+#u44 .why{font-size:13px;margin-top:4px;display:none}
+#u44 .card.right .why,#u44 .card.wrong .why{display:block}
+/* chains */
+#u44 .aim{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:2px}
+#u44 .pol{font-size:14px;color:var(--ink);margin-bottom:10px}
+#u44 .chainOut{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:46px;background:var(--grey);border-radius:8px;padding:8px;margin-bottom:10px}
+#u44 .chainOut .ph{color:var(--muted);font-size:13px}
+#u44 .link{border:2px solid var(--blue);background:#fff;color:var(--navy);border-radius:8px;padding:8px 10px;font-size:14px;text-align:left}
+#u44 .chainOut .link{border-color:var(--navy);background:var(--navy);color:#fff}
+#u44 .arrow{color:var(--orange);font-weight:900}
+#u44 .pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+#u44 .pool .link[disabled]{opacity:.3;cursor:default}
+#u44 .step2{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+#u44 .step2.on{display:block}
+#u44 .step2 p.q{margin-bottom:8px}
+/* quiz */
+#u44 .q{font-weight:700;color:var(--navy);margin-bottom:8px}
+#u44 .ans{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;margin-bottom:6px;font-size:14px;color:var(--ink)}
+#u44 .ans.ok{border-color:var(--good);background:var(--goodbg)}
+#u44 .ans.no{border-color:var(--bad);background:var(--badbg)}
+#u44 .ans:disabled{cursor:default}
+#u44 .foot{font-size:12px;color:var(--muted);margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+#u44 .dash{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-bottom:10px}
+@media (max-width:600px){#u44 .dash{grid-template-columns:1fr}}
+#u44 .yearcard{background:var(--navy);color:#fff;border-radius:10px;padding:10px 16px;min-width:150px}
+#u44 .yearcard span,#u44 .money span{display:block;font-size:12px;opacity:.8}
+#u44 .yearcard b{font-size:34px;font-weight:900;color:var(--orange);line-height:1.1;display:block}
+#u44 .yearcard small{font-size:12px;opacity:.85}
+#u44 .money{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:600px){#u44 .money{grid-template-columns:1fr 1fr}}
+#u44 .money div{background:var(--grey);border-radius:10px;padding:10px 12px}
+#u44 .money span{color:var(--muted);opacity:1}
+#u44 .money b{font-size:20px;color:var(--navy)}
+#u44 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px;margin-bottom:14px}
+#u44 .tile{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff}
+#u44 .tile span{display:block;font-size:12px;color:var(--muted);line-height:1.25}
+#u44 .tile b{font-size:20px;color:var(--navy)}
+#u44 .tile i{font-style:normal;font-size:12px;font-weight:700;margin-left:4px}
+#u44 .tile i.up{color:var(--good)} #u44 .tile i.dn{color:var(--bad)}
+#u44 .tile small{display:block;font-size:11px;color:var(--muted)}
+#u44 .news{border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-height:430px;overflow:auto;font-size:14px}
+#u44 .news p{margin-bottom:8px;padding-left:10px;border-left:3px solid var(--line)}
+#u44 .news p.g{border-color:var(--good)} #u44 .news p.b{border-color:var(--bad)} #u44 .news p.o{border-color:var(--orange)}
+#u44 .news .lesson{display:block;font-size:12px;color:var(--blue);font-weight:700;margin-top:2px}
+#u44 .pipe{margin-top:10px;font-size:13px;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+#u44 .pipe b.h{display:block;color:var(--navy);margin-bottom:4px}
+#u44 .pipe div{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px dashed var(--line)}
+#u44 .pipe .ok{color:var(--good);font-weight:700;white-space:nowrap}
+#u44 .pipe .wait{color:var(--orange);font-weight:700;white-space:nowrap}
+#u44 .pipe .rev{color:var(--bad);font-weight:700;white-space:nowrap}
+#u44 .stagebox{border:2px solid var(--navy);border-radius:12px;padding:14px;margin-top:16px}
+#u44 .stagebox h2{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:6px}
+#u44 .m .dep{font-size:12px;color:#7A4300;background:#FFF3E6;border-radius:6px;padding:4px 8px}
+#u44 .endgrid td{font-size:13px}
+#u44 .notes{min-height:90px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px 10px;font-size:14px;margin-top:4px;outline:none}
+#u44 .notes:focus{border-color:var(--blue)}
+#u44 .notes:empty::before{content:attr(data-ph);color:var(--muted)}
+#u44 .printonly{display:none}
+@media print{
+  #u44 .hdr,#u44 .tabs,#u44 .intro,#u44 .dash,#u44 .tiles,#u44 .res,#u44 .foot,#u44 .noprint{display:none!important}
+  #u44 .printonly{display:block;margin-bottom:8px}
+  #u44 .stagebox{border:0;padding:0}
+  #u44 .notes{min-height:120px;border:1px solid #999}
+  #u44 .notes:empty::before{content:""}
+  #u44 table.sc th{background:#002F6C!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #u44 .chip,#u44 .card{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #u44 tr{page-break-inside:avoid}
+}
+</style>
+</head>
+<body style="margin:0;background:#fff">
+<div id="u44">
+  <div class="hdr">
+    <h1>Supply-Side Policy Lab</h1>
+    <p class="sub">Unit 4.4 · IGCSE Economics · Grade 10</p>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="0">1 · Policy Planner<small>Thailand 2026–2036</small></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="1">2 · Sort the Headlines<small>Thailand and ASEAN</small></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="2">3 · Chain Builder<small>The six aims</small></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="3">4 · Quick Quiz<small>8 questions</small></button>
+  </div>
+
+  <!-- ============ PANEL 1: PLANNER ============ -->
+  <section class="panel on" data-panel="0">
+    <div class="intro"><b>It is 2026. You are Thailand's Minister of Finance until 2036.</b> Growth was only 2.4% in 2025, employers can't find skilled technicians, and Thai 15-year-olds scored 394 in PISA maths (OECD average 472). Every two years you get <b>80 billion baht</b> to invest in supply-side policy. You can choose up to two measures per round, or save money for later. Read the <b>Details</b>. Measures depend on each other, and some only pay off after years.</div>
+
+    <div class="dash">
+      <div class="yearcard"><span>Year</span><b id="u44-yr">2026</b><small id="u44-round">Round 1 of 5</small></div>
+      <div class="money">
+        <div><span>Available to invest</span><b id="u44-bud">80bn</b></div>
+        <div><span>Invested so far</span><b id="u44-inv">0bn</b></div>
+        <div><span>Extra tax revenue from growth</span><b id="u44-rev">0bn</b></div>
+      </div>
+    </div>
+    <div class="tiles" id="u44-tiles"></div>
+
+    <div class="res">
+      <div>
+        <svg class="ppc" id="u44-svg" viewBox="0 0 440 370" role="img" aria-label="Thailand's production possibility curve in 2026 and now"></svg>
+        <div class="pipe" id="u44-pipe"></div>
+      </div>
+      <div>
+        <h2 class="sec" id="u44-newsh">News</h2>
+        <div class="news" id="u44-news" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div id="u44-stage"></div>
+  </section>
+
+  
+<!-- ============ PANEL 2: SORT ============ -->
+  <section class="panel" data-panel="1">
+    <div class="intro"><b>Supply-side, fiscal or monetary?</b> These are real policies from Thailand and its ASEAN neighbours. Choose one label for each headline, then press <b>Check</b>. Watch out for traps: not every tax cut is supply-side.</div>
+    <div id="u44-sort"></div>
+    <div class="row"><button class="btn" id="u44-sortCheck">Check my answers</button><button class="btn ghost" id="u44-sortReset">Try again</button></div>
+    <div class="fb" id="u44-sortFb"></div>
+  </section>
+
+  <!-- ============ PANEL 3: CHAINS ============ -->
+  <section class="panel" data-panel="2">
+    <div class="intro"><b>Build the chain, then evaluate it.</b> Each aim has a real Thai or ASEAN policy. <b>Step 1:</b> click three links in the right order (one link does not belong). <b>Step 2:</b> choose the best <b>"But…"</b> for that policy.</div>
+    <div id="u44-chains"></div>
+  </section>
+
+  <!-- ============ PANEL 4: QUIZ ============ -->
+  <section class="panel" data-panel="3">
+    <div class="intro"><b>Quick quiz.</b> One try per question. Read the feedback after each answer.</div>
+    <div id="u44-quiz"></div>
+    <div class="row"><button class="btn ghost" id="u44-quizReset">Reset quiz</button></div>
+  </section>
+
+  <p class="foot">Sources: NESDC (2025 GDP growth 2.4%; factory capacity use ≈59%; public debt ≈65% of GDP), OECD PISA 2022, State Railway of Thailand, Thai Revenue Department, Thai Board of Investment, and ASEAN government announcements. The Policy Planner's costs, time lags, effects and tax revenue are simplified for teaching.</p>
+</div>
+
+<script src="sisb-tracker.js"></script>
+<script>
+(function () {
+  var root = document.getElementById('u44');
+  var $ = function (id) { return document.getElementById('u44-' + id); };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function track(detail) { try { if (window.SISB_TRACKER && typeof window.SISB_TRACKER.log === 'function') window.SISB_TRACKER.log('Unit 4', '4.4 Supply-Side Policy', detail); } catch (e) {} }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  var tabs = root.querySelectorAll('.tab'), panels = root.querySelectorAll('.panel');
+  tabs.forEach(function (t) { t.addEventListener('click', function () {
+    tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.classList.toggle('on', p.dataset.panel === t.dataset.tab); });
+  }); });
+
+  /* ================= 1. POLICY PLANNER (5 rounds) ================= */
+  var ROUND_BUDGET = 80, REV_PER_POINT = 3, YEARS = [2026, 2028, 2030, 2032, 2034];
+  var IND = [
+    ['cap', 'Productive capacity', 'higher is better', 1, 'Economic growth'],
+    ['skills', 'Skills shortage', 'lower is better', -1, 'Low unemployment'],
+    ['costs', 'Business costs', 'lower is better', -1, 'Stable prices'],
+    ['exports', 'Exports', 'higher is better', 1, 'Balance of payments'],
+    ['gap', 'Income gap', 'lower is better', -1, 'Redistribution of income'],
+    ['emis', 'Carbon emissions', 'lower is better', -1, 'Environmental sustainability'],
+    ['support', 'Public support', '%; below 40 means protests', 1, '']
+  ];
+  var M = [
+    { id: 'train', name: 'Upskilling courses for EEC workers', cost: 40, lag: 2, factor: 'Labour (quality)',
+      how: 'Free robotics, EV and electronics courses turn factory workers into technicians.', ex: 'Like Singapore\'s SkillsFuture credits.', dep: 'Makes tax holidays for investors work much better.',
+      fx: { cap: 3, skills: -15, gap: -3 } },
+    { id: 'school', name: 'School reform: maths and reading', cost: 80, lag: 8, factor: 'Labour (quality)',
+      how: 'Teacher training and better maths and reading teaching in state schools.', ex: 'Vietnam scores far higher than Thailand in PISA, with lower income per head.', dep: 'Biggest long-run gain, but today\'s students only join the workforce years from now.',
+      fx: { cap: 8, skills: -20, gap: -6, support: 3 } },
+    { id: 'rail', name: 'High-speed rail and logistics', cost: 120, lag: 6, factor: 'Capital',
+      how: 'Finish the Bangkok–Korat line and link it to the Laos–China railway.', ex: 'The real line began in 2017 and was about 57% built in August 2026.', dep: 'Costs more than one round\'s budget, so you must save. Big projects often run late.',
+      fx: { cap: 6, exports: 6, emis: -4, costs: -4, support: 5 } },
+    { id: 'boi', name: 'Tax holidays for EV and chip makers', cost: 50, lag: 2, factor: 'Capital, enterprise',
+      how: 'Up to 8 years without corporate income tax for firms that build factories in the EEC.', ex: 'BYD opened an EV plant in Rayong in 2024. Malaysia\'s Johor zone offers 5% tax.', dep: 'Needs skilled workers. Without upskilling, only half the factories open.',
+      fx: { cap: 6, exports: 10, gap: 3, emis: -2 } },
+    { id: 'toptax', name: 'Cut top income tax 35% → 25%', cost: 50, lag: 1, factor: 'Labour, enterprise',
+      how: 'High earners keep more of each extra baht they earn.', ex: 'Singapore\'s top rate is 24%.', dep: 'Unpopular with most voters. The gain mostly goes to the richest.',
+      fx: { cap: 1, gap: 6 }, now: { support: -5 } },
+    { id: 'lowtax', name: 'Raise the tax-free threshold', cost: 60, lag: 1, factor: 'Labour (quantity)',
+      how: 'Lift the 0% band above the current 150,000 baht a year.', ex: 'About half of Thai workers are informal and pay no income tax.', dep: 'Very popular, but it hardly changes anyone\'s incentive to work.',
+      fx: { cap: 0, gap: -1 }, now: { support: 8 } },
+    { id: 'dereg', name: 'Deregulate electricity and licences', cost: 10, lag: 2, factor: 'Enterprise',
+      how: 'Let private firms compete to supply power, and cut business licence red tape.', ex: 'Indonesia\'s 2020 Job Creation Law cut the rules for business licences.', dep: 'Cheap. It also stops a privatised firm from becoming a private monopoly.',
+      fx: { cap: 3, costs: -6 } },
+    { id: 'priv', name: 'Privatise a state enterprise', cost: -40, lag: 2, factor: 'Capital, enterprise',
+      how: 'Sell government shares to private investors. This <b>raises</b> 40bn baht now.', ex: 'PTT sold shares in 2001. Vietnam sold part of its stake in Vinamilk.', dep: 'Without deregulation first, the new owner faces no competition.',
+      fx: { cap: 2, gap: 2 }, now: { support: -5 } },
+    { id: 'labour', name: 'Labour market reform', cost: 0, lag: 1, factor: 'Labour',
+      how: 'Freeze the minimum wage and make hiring and firing easier.', ex: 'Indonesia\'s Job Creation Law cut severance pay and sparked mass protests.', dep: 'Free, but deeply unpopular. If support falls below 40%, protests can force a U-turn.',
+      fx: { cap: 3, skills: -5, gap: 6 }, now: { support: -12 } },
+    { id: 'solar', name: 'Solar and wind grants', cost: 50, lag: 3, factor: 'Capital',
+      how: 'Guaranteed prices for clean power encourage firms to build solar and wind farms.', ex: 'Vietnam\'s 2019–20 solar boom.', dep: 'Vietnam\'s grid could not carry all the new power. It needs a grid upgrade.',
+      fx: { cap: 3, emis: -8, costs: -2, exports: 2 } },
+    { id: 'grid', name: 'Upgrade the power grid', cost: 40, lag: 2, factor: 'Capital',
+      how: 'New transmission lines and battery storage.', ex: 'Infrastructure is often the hidden bottleneck.', dep: 'Small effect alone. It unlocks the full value of solar and wind.',
+      fx: { cap: 1, emis: -1, costs: -1 } }
+  ];
+  var byId = {}; M.forEach(function (m) { byId[m.id] = m; });
+  var CHECKS = [
+    { q: 'It is 2028. You have invested money, but capacity has barely moved. Why?', a: ['The money has been wasted', 'Most supply-side measures have a time lag before they raise productive capacity', 'Supply-side policies only affect total demand'], c: 1,
+      e: 'The spending is an <b>investment</b>. Workers must finish training, factories must be built, railways take years. This time lag is the main criticism of supply-side policy.' },
+    { q: 'Tax holidays attract factories, but firms also need skilled technicians. What does this show?', a: ['Supply-side measures often work best in combination', 'Tax holidays never work', 'Education is a demand-side policy'], c: 0,
+      e: 'Capital and labour are complements. The same applies to solar and the grid, and to privatisation and deregulation.' },
+    { q: 'Why does public support matter for supply-side reform?', a: ['Popular policies always raise capacity the most', 'Unpopular reforms can be reversed before they ever pay off', 'Public support sets the interest rate'], c: 1,
+      e: 'Labour market reform and cuts in top tax rates can raise capacity, but they hurt many voters. A policy that is reversed delivers nothing. Compare the protests against Indonesia\'s Job Creation Law.' },
+    { q: 'Every baht you spend on one measure cannot be spent on another. This is…', a: ['inflation', 'opportunity cost', 'privatisation'], c: 1,
+      e: 'Choosing the railway means giving up school reform or training, at least for now. The real question is which measure gives the most capacity per baht, and how soon.' },
+    { q: 'It is 2036. Capacity is higher, but Thai factories used only about 59% of their capacity in 2025. What must also happen for real GDP to rise?', a: ['Demand must grow enough to use the extra capacity', 'The government must cut all spending', 'Nothing: higher capacity automatically means higher output'], c: 0,
+      e: 'Supply-side policy raises what Thailand <i>can</i> produce. Output only rises if there is enough demand. That is why governments combine supply-side policy with fiscal and monetary policy.' }
+  ];
+  var st;
+  function fresh() {
+    return { r: 0, year: 2026, budget: ROUND_BUDGET, invested: 0, revenue: 0,
+      ind: { cap: 100, skills: 100, costs: 100, exports: 100, gap: 100, emis: 100, support: 50 }, prev: null,
+      chosen: {}, picks: [], log: [], phase: 'decide', news: [['o', 'Welcome, Minister. Choose up to two measures for 2026–2027, or save your budget for a bigger project later.', '']], oil: false };
+  }
+  function addFx(fx, sign) { for (var k in fx) st.ind[k] = Math.round((st.ind[k] + fx[k] * (sign || 1)) * 10) / 10; }
+  function news(cls, txt, lesson) { st.news.push([cls, txt, lesson || '']); }
+  function isPaid(id, byYear) { var c = st.chosen[id]; return c && !c.rev && c.paid && c.payYear <= byYear; }
+
+  function payoff(id, y) {
+    var c = st.chosen[id], m = byId[id], fx = Object.assign({}, m.fx);
+    if (id === 'boi') {
+      if (st.chosen.train && st.chosen.train.round <= c.round) { c.result = 'Full effect: upskilled workers were ready'; news('g', '<b>' + y + ': EV and chip factories open in Rayong.</b> Your upskilling courses supplied the technicians they needed.', 'Capital + skilled labour = full effect.'); }
+      else { c.result = 'Half effect: not enough skilled workers'; fx = { cap: 3, exports: 5, gap: 3, emis: -1 }; news('b', '<b>' + y + ': Only half the promised factories open.</b> Investors could not find enough skilled technicians.', 'Tax incentives alone are not enough. Firms also need skilled labour.'); }
+    } else if (id === 'solar') {
+      if (st.chosen.grid && st.chosen.grid.payYear <= c.payYear) { c.result = 'Full effect: the grid could carry the power'; } if (c.result) news('g', '<b>' + y + ': Solar and wind farms go online</b> and the upgraded grid carries all their power.', 'Infrastructure unlocks other investment.');
+      else { c.result = 'Half effect: the grid could not carry the power'; fx = { cap: 1, emis: -4, costs: -1, exports: 1 }; news('b', '<b>' + y + ': Solar farms built, but the grid cannot carry the power.</b> Much of it is wasted, as happened in Vietnam.', 'Without a grid upgrade, the policy delivers only half its benefit.'); }
+    } else if (id === 'priv') {
+      if (isPaid('dereg', y)) { c.result = 'Full effect: competition after deregulation'; } if (c.result) news('g', '<b>' + y + ': The privatised firm faces new competitors</b> and cuts waste to survive.', 'Privatisation works best with competition.');
+      else { c.result = 'Became a private monopoly and raised prices'; fx = { cap: 1, gap: 2, costs: 4 }; news('b', '<b>' + y + ': The privatised firm is now a private monopoly</b> and raises its prices.', 'Selling a monopoly doesn\'t create competition. Deregulate first.'); }
+    } else if (id === 'rail') news('g', '<b>' + y + ': The high-speed railway finally opens.</b> Freight to Laos and China is faster and cheaper.', 'A long time lag, but a big gain in capital.');
+    else if (id === 'school') news('g', '<b>' + y + ': The first students from reformed schools join the workforce</b> with much stronger maths and reading.', 'Education has the longest lag and among the biggest long-run gains.');
+    else if (id === 'lowtax') news('o', '<b>' + y + ': The higher tax-free threshold starts.</b> Voters are pleased, but few people work more: most low earners already paid no income tax.', 'Popular is not the same as effective.');
+    else if (id === 'toptax') news('o', '<b>' + y + ': The top tax rate is cut.</b> There is a small rise in effort and enterprise, and the income gap widens.', 'Incentives to work versus fairness.');
+    else if (id === 'labour') news('o', '<b>' + y + ': Labour reform takes effect.</b> Firms hire more easily, but the lowest-paid lose protection.', 'Flexibility versus security.');
+    else if (id === 'train') news('g', '<b>' + y + ': The first upskilled technicians graduate.</b> Firms in the EEC fill vacancies faster, and workers move into better-paid jobs.', 'Better-quality labour raises productivity and reduces structural unemployment.');
+    else if (id === 'dereg') news('g', '<b>' + y + ': New firms enter the electricity market</b> and licences take days, not months. Competition pushes costs down.', 'Removing barriers to entry increases competition and efficiency.');
+    else if (id === 'grid') news('g', '<b>' + y + ': New power lines and batteries come online.</b> On its own, the effect is small.', 'Some investments matter most because they enable others.');
+    else news('g', '<b>' + y + ': ' + m.name + ' pays off.</b>', '');
+    if (!c.result) c.result = ({ lowtax: 'Popular, but almost no extra capacity', toptax: 'Small gain, wider income gap', labour: 'Took effect; income gap widened', train: 'Full effect: technicians filled EEC vacancies', dereg: 'Full effect: new firms entered and costs fell', grid: 'Small effect alone; it enabled clean energy', rail: 'Opened: cheaper, faster freight', school: 'Full effect: better-skilled school leavers' })[id] || 'Paid off';
+    c.fxApplied = fx; addFx(fx);
+  }
+
+  function advance() {
+    st.prev = Object.assign({}, st.ind); st.news = [];
+    var y0 = st.year, budStart = st.budget, pickNames = st.picks.map(function (id) { var m = byId[id]; return m.name + (m.cost > 0 ? ' (' + m.cost + 'bn)' : m.cost < 0 ? ' (raised 40bn)' : ' (no cost)'); });
+    news('o', '<b>' + y0 + '–' + (y0 + 1) + ' decisions:</b> ' + (st.picks.length ? st.picks.map(function (id) { return byId[id].name; }).join(' + ') : 'no new measures. You saved your budget.'), '');
+    st.picks.forEach(function (id) {
+      var m = byId[id]; st.budget -= m.cost; if (m.cost > 0) st.invested += m.cost;
+      st.chosen[id] = { round: st.r, payYear: y0 + m.lag, paid: false, rev: false };
+      if (m.now) addFx(m.now);
+      if (id === 'priv') news('o', 'Shares sold: <b>+40bn baht</b> for your budget. Some voters are unhappy.', 'Privatisation raises money once. The state loses the firm\'s future profits.');
+      if (id === 'labour') news('b', 'Workers protest against the labour reform. Public support falls.', '');
+    });
+    // rail delay: one round after it starts
+    if (st.chosen.rail && !st.chosen.rail.delayed && st.chosen.rail.round < st.r) {
+      st.chosen.rail.delayed = true; st.chosen.rail.payYear += 2; st.chosen.rail.note = 'Delayed by 2 years';
+      news('b', '<b>Railway delay:</b> land disputes and redesigns push the opening back two years, to ' + st.chosen.rail.payYear + '.', 'Big infrastructure projects often run late. The real Bangkok–Korat line was about 28 points behind schedule in 2026.');
+    }
+    for (var y = y0 + 1; y <= y0 + 2; y++) {
+      M.forEach(function (m) { var c = st.chosen[m.id]; if (c && !c.paid && !c.rev && c.payYear <= y) { c.paid = true; payoff(m.id, y); } });
+      if (y === 2031 && !st.oil) {
+        st.oil = true; var cut = (isPaid('solar', y) ? 3 : 0) + (isPaid('grid', y) ? 1 : 0);
+        addFx({ costs: 5 - cut });
+        news('b', '<b>2031: A global oil price shock</b> raises business costs by ' + (5 - cut) + ' points.' + (cut ? ' Your clean-energy investment softened the blow.' : ''), 'Thailand imports most of its oil. Home-grown clean energy reduces the risk of cost-push inflation.');
+      }
+      st.revenue += Math.max(0, st.ind.cap - 100) * REV_PER_POINT;
+    }
+    if (st.ind.support < 40) {
+      if (st.chosen.labour && !st.chosen.labour.rev) {
+        var c = st.chosen.labour; c.rev = true; c.result = 'Reversed after mass protests: no lasting benefit';
+        if (c.fxApplied) addFx(c.fxApplied, -1);
+        addFx({ support: 8 });
+        news('b', '<b>Mass protests!</b> With public support below 40%, the government reverses the labour reform. Its benefits are lost.', 'An unpopular reform that is reversed delivers nothing. Pair tough reforms with popular ones.');
+      } else news('b', '<b>Public support is below 40%.</b> Further unpopular reforms may be impossible.', '');
+    }
+    var strip = function (h) { return h.replace(/<[^>]+>/g, ''); };
+    st.log.push({ y0: y0, picks: pickNames, budStart: budStart, events: st.news.slice(1).map(function (n) { return strip(n[1]); }), before: st.prev, after: Object.assign({}, st.ind) });
+    st.picks = []; st.year += 2; st.r++;
+    if (st.r < 5) st.budget += ROUND_BUDGET;
+    st.phase = 'check';
+    renderPlan();
+  }
+
+  function tiles() {
+    $('tiles').innerHTML = IND.map(function (d) {
+      var v = st.ind[d[0]], p = st.prev ? st.prev[d[0]] : v, ch = Math.round((v - p) * 10) / 10, good = ch * d[3] > 0;
+      var arrow = ch ? '<i class="' + (good ? 'up' : 'dn') + '">' + (ch > 0 ? '▲' : '▼') + Math.abs(ch) + '</i>' : '';
+      return '<div class="tile"><span>' + d[1] + '</span><b>' + v + (d[0] === 'support' ? '%' : '') + '</b>' + arrow + '<small>' + (d[0] === 'support' ? d[2] : '2026 = 100 · ' + d[2]) + '</small></div>';
+    }).join('');
+  }
+  var X0 = 60, Y0 = 320, RX = 230, RY = 200;
+  function arc(c) { var d = ''; for (var i = 0; i <= 40; i++) { var a = (Math.PI / 2) * i / 40; d += (i ? 'L' : 'M') + (X0 + RX * c * Math.cos(a)).toFixed(1) + ',' + (Y0 - RY * c * Math.sin(a)).toFixed(1); } return d; }
+  function drawPPC() {
+    var c = st.ind.cap / 100, s = '<defs><marker id="u44ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#002F6C"/></marker></defs>';
+    s += '<line x1="' + X0 + '" y1="' + Y0 + '" x2="428" y2="' + Y0 + '" stroke="#002F6C" stroke-width="2.5" marker-end="url(#u44ah)"/><line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X0 + '" y2="10" stroke="#002F6C" stroke-width="2.5" marker-end="url(#u44ah)"/>';
+    s += '<text x="245" y="352" text-anchor="middle" font-size="14" fill="#002F6C">Output of services</text><text x="24" y="175" text-anchor="middle" font-size="14" fill="#002F6C" transform="rotate(-90 24 175)">Output of goods</text><text x="' + (X0 - 14) + '" y="' + (Y0 + 16) + '" font-size="13" fill="#002F6C">0</text>';
+    s += '<path d="' + arc(1) + '" fill="none" stroke="#002F6C" stroke-width="' + (c > 1 ? 2 : 3.5) + '"' + (c > 1 ? ' stroke-dasharray="6 5" opacity=".6"' : '') + '/>';
+    s += '<text x="' + (X0 + RX * 0.62 - 40).toFixed(1) + '" y="' + (Y0 - RY * 0.62 + 40).toFixed(1) + '" font-size="13" font-weight="700" fill="#002F6C">PPC 2026</text>';
+    if (c > 1) {
+      s += '<path d="' + arc(c) + '" fill="none" stroke="#008BCC" stroke-width="3.5"/><text x="' + (X0 + RX * c * Math.cos(0.9) + 8).toFixed(1) + '" y="' + (Y0 - RY * c * Math.sin(0.9) - 8).toFixed(1) + '" font-size="13" font-weight="700" fill="#008BCC">PPC ' + st.year + '</text>';
+      if (c > 1.04) s += '<line x1="' + (X0 + RX * .71).toFixed(1) + '" y1="' + (Y0 - RY * .71).toFixed(1) + '" x2="' + (X0 + RX * c * .71 - 6).toFixed(1) + '" y2="' + (Y0 - RY * c * .71 + 6).toFixed(1) + '" stroke="#FF8F1C" stroke-width="3" marker-end="url(#u44ah)"/>';
+    }
+    $('svg').innerHTML = s;
+  }
+  function pipe() {
+    var ids = Object.keys(st.chosen);
+    if (!ids.length) { $('pipe').innerHTML = '<b class="h">Your measures</b><span class="why2">None yet.</span>'; return; }
+    $('pipe').innerHTML = '<b class="h">Your measures</b>' + ids.map(function (id) {
+      var c = st.chosen[id], s = c.rev ? '<span class="rev">Reversed</span>' : c.paid ? '<span class="ok">Paying off since ' + c.payYear + '</span>' : '<span class="wait">Pays off ' + c.payYear + (c.payYear > 2036 ? ' (after your term)' : '') + '</span>';
+      return '<div><span>' + byId[id].name + '</span>' + s + '</div>';
+    }).join('');
+  }
+  function renderPlan() {
+    $('yr').textContent = st.year; $('round').textContent = st.r < 5 ? 'Round ' + (st.r + 1) + ' of 5' : 'End of your term';
+    var pend = st.picks.reduce(function (a, id) { return a + byId[id].cost; }, 0);
+    $('bud').textContent = st.budget + 'bn' + (st.picks.length && st.phase === 'decide' ? ' → ' + (st.budget - pend) + 'bn' : '');
+    $('inv').textContent = st.invested + 'bn'; $('rev').textContent = st.revenue + 'bn';
+    tiles(); drawPPC(); pipe();
+    $('newsh').textContent = st.r === 0 ? 'News' : 'What happened in ' + (st.year - 2) + '–' + (st.year - 1);
+    $('news').innerHTML = st.news.map(function (n) { return '<p class="' + n[0] + '">' + n[1] + (n[2] ? '<span class="lesson">Lesson: ' + n[2] + '</span>' : '') + '</p>'; }).join('');
+    if (st.phase === 'decide') stageDecide(pend); else if (st.phase === 'check') stageCheck(); else stageEnd();
+  }
+  function stageDecide(pend) {
+    var h = '<div class="stagebox"><h2>Your decision for ' + st.year + '–' + (st.year + 1) + '</h2><p class="why2" style="margin-bottom:10px">Choose up to <b>two</b> measures (' + st.picks.length + '/2 chosen), or none to save your budget. Unspent money carries over.</p><div class="mgrid">';
+    h += M.map(function (m) {
+      var done = !!st.chosen[m.id], on = st.picks.indexOf(m.id) > -1;
+      var afford = st.budget - pend - m.cost >= 0 || on;
+      var dis = done || (!on && (st.picks.length >= 2 || !afford));
+      var cost = m.cost < 0 ? '<span class="tag g">Raises ' + (-m.cost) + 'bn</span>' : m.cost === 0 ? '<span class="tag g">No budget cost</span>' : '<span class="tag c">Costs ' + m.cost + 'bn</span>';
+      var pay = st.year + m.lag;
+      return '<div class="m' + (on ? ' sel' : '') + '"' + (done ? ' style="opacity:.5"' : '') + '><h3>' + m.name + '</h3><div class="tags"><span class="tag f">' + m.factor + '</span>' + cost + '<span class="tag">Pays off ' + (m.id === 'rail' ? 'about ' : '') + pay + '</span></div>' +
+        '<div class="dep">' + m.dep + '</div>' +
+        '<details><summary>Details</summary><p><b>What it is:</b> ' + m.how + '</p><p><b>Real example:</b> ' + m.ex + '</p></details>' +
+        '<div class="foot2"><span class="why2">' + (done ? 'Already chosen' : (!afford && !on ? 'Not enough budget' : '')) + '</span><button class="btn sm' + (on ? ' ghost' : '') + '" data-p="' + m.id + '"' + (dis ? ' disabled' : '') + '>' + (on ? 'Remove' : 'Choose') + '</button></div></div>';
+    }).join('');
+    h += '</div><button class="btn alt" id="u44-go">Advance two years ▶</button></div>';
+    $('stage').innerHTML = h;
+    $('stage').querySelectorAll('[data-p]').forEach(function (b) { b.addEventListener('click', function () {
+      var id = b.dataset.p, i = st.picks.indexOf(id); if (i > -1) st.picks.splice(i, 1); else st.picks.push(id); renderPlan();
+    }); });
+    $('go').addEventListener('click', advance);
+  }
+  function stageCheck() {
+    var k = CHECKS[st.r - 1];
+    var h = '<div class="stagebox"><h2>Checkpoint · ' + st.year + '</h2><p class="q">' + k.q + '</p>' + k.a.map(function (a, j) { return '<button class="ans" data-c="' + j + '">' + String.fromCharCode(65 + j) + '. ' + a + '</button>'; }).join('') + '<div class="fb" id="u44-ckfb"></div></div>';
+    $('stage').innerHTML = h;
+    $('stage').querySelectorAll('[data-c]').forEach(function (b) { b.addEventListener('click', function () {
+      var j = +b.dataset.c, fb = $('ckfb');
+      if (j === k.c) {
+        b.classList.add('ok'); $('stage').querySelectorAll('[data-c]').forEach(function (x) { x.disabled = true; });
+        fb.className = 'fb show good'; fb.innerHTML = '<b>Correct.</b> ' + k.e + '<div class="row" style="margin-top:10px"><button class="btn" id="u44-next">' + (st.r < 5 ? 'Continue to ' + st.year + ' decisions ▶' : 'See your final report ▶') + '</button></div>';
+        $('next').addEventListener('click', function () { st.phase = st.r < 5 ? 'decide' : 'end'; renderPlan(); });
+      } else { b.classList.add('no'); b.disabled = true; fb.className = 'fb show bad'; fb.innerHTML = '<b>Not quite. Look at the news above and try again.</b>'; }
+    }); });
+  }
+  function stageEnd() {
+    var rows = IND.slice(0, 6).map(function (d) {
+      var v = st.ind[d[0]], ch = Math.round((v - 100) * 10) / 10, g = ch * d[3];
+      var chip = g > 0 ? '<span class="chip up">▲ Better</span>' : g < 0 ? '<span class="chip dn">▼ Worse</span>' : '<span class="chip no">– No change</span>';
+      return '<tr><td><b>' + d[4] + '</b></td><td>' + d[1] + ': ' + v + '</td><td>' + chip + '</td></tr>';
+    }).join('');
+    var net = st.revenue - st.invested;
+    var later = Object.keys(st.chosen).filter(function (id) { var c = st.chosen[id]; return !c.paid && !c.rev; }).map(function (id) { return byId[id].name + ' (' + st.chosen[id].payYear + ')'; });
+    var best = null, bestV = -1;
+    Object.keys(st.chosen).forEach(function (id) { var c = st.chosen[id], m = byId[id]; if (c.paid && !c.rev && c.fxApplied && m.cost > 0) { var v = c.fxApplied.cap / m.cost; if (v > bestV) { bestV = v; best = m.name; } } });
+    var h = '<div class="stagebox" id="u44-report"><h2>Final report · 2036</h2><p class="printonly">Name: ____________________   Class: ________</p>' +
+      '<table class="sc endgrid"><thead><tr><th>Aim</th><th>Indicator (2026 = 100)</th><th>Verdict</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<p style="margin-top:12px"><b>Money:</b> you invested <b>' + st.invested + 'bn baht</b>. Higher output brought in about <b>' + st.revenue + 'bn baht</b> of extra tax revenue by 2036 (simplified). ' +
+      (net >= 0 ? 'Your investment has already paid for itself.' : 'You have recovered ' + Math.round(st.revenue / Math.max(1, st.invested) * 100) + '% so far. The extra revenue continues every year after 2036, so a supply-side investment can pay back over time.') + '</p>' +
+      (best ? '<p style="margin-top:8px"><b>Best value for money:</b> ' + best + '. It added the most capacity per baht invested.</p>' : '') +
+      (later.length ? '<p style="margin-top:8px"><b>Still in the pipeline:</b> ' + later.join(', ') + '. These benefits arrive after your term, so a future government gets the credit.</p>' : '') +
+      '<p style="margin-top:8px"><b>Public support:</b> ' + st.ind.support + '%.</p>' +
+      recap() + planner8() +
+      '<div class="row noprint" style="margin-top:14px"><button class="btn" id="u44-print">Print or save as PDF</button><button class="btn alt" id="u44-again">Play again with a different strategy</button></div></div>';
+    $('stage').innerHTML = h;
+    if (!st.logged) { st.logged = true; track('Policy Planner complete: invested ' + st.invested + 'bn, revenue ' + st.revenue + 'bn, support ' + st.ind.support + '%'); }
+    $('again').addEventListener('click', function () { if (confirm('Start a new game? Your report and notes will be lost unless you have printed them.')) { st = fresh(); renderPlan(); } });
+    $('print').addEventListener('click', function () { window.print(); });
+  }
+
+  function chg(before, after) {
+    var out = [];
+    IND.forEach(function (d) { var k = d[0], v = Math.round((after[k] - before[k]) * 10) / 10; if (!v) return;
+      var good = v * d[3] > 0; out.push('<span class="chip ' + (good ? 'up' : 'dn') + '">' + d[1] + ' ' + (v > 0 ? '+' : '') + v + '</span>'); });
+    return out.length ? out.join(' ') : '<span class="why2">No change</span>';
+  }
+  function recap() {
+    var h = '<h2 style="margin-top:16px">Your decisions, round by round</h2><table class="sc endgrid"><thead><tr><th>Years</th><th>Your decision</th><th>What happened</th><th>Change in indicators</th></tr></thead><tbody>';
+    st.log.forEach(function (L) {
+      h += '<tr><td><b>' + L.y0 + '–' + (L.y0 + 1) + '</b><br><span class="why2">' + L.budStart + 'bn available</span></td><td>' + (L.picks.length ? L.picks.join('<br>') : '<i>Saved the budget</i>') + '</td><td>' +
+        (L.events.length ? L.events.map(function (e) { return '• ' + esc(e); }).join('<br>') : '<span class="why2">Nothing paid off yet</span>') + '</td><td>' + chg(L.before, L.after) + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    h += '<h2 style="margin-top:16px">Your measures: results</h2><table class="sc endgrid"><thead><tr><th>Measure</th><th>Chosen</th><th>Result by 2036</th><th>Capacity added</th></tr></thead><tbody>';
+    Object.keys(st.chosen).forEach(function (id) {
+      var c = st.chosen[id], m = byId[id], res = c.rev ? c.result : c.paid ? c.result : 'Not yet: pays off in ' + c.payYear;
+      if (c.note) res += ' (' + c.note + ')';
+      var capAdd = c.rev ? 0 : (c.paid && c.fxApplied ? c.fxApplied.cap : 0);
+      h += '<tr><td><b>' + m.name + '</b></td><td>' + YEARS[c.round] + '</td><td>' + res + '</td><td>+' + capAdd + '</td></tr>';
+    });
+    if (!Object.keys(st.chosen).length) h += '<tr><td colspan="4">You chose no measures.</td></tr>';
+    return h + '</tbody></table>';
+  }
+  function planner8() {
+    var wins = [], probs = [];
+    Object.keys(st.chosen).forEach(function (id) {
+      var c = st.chosen[id], m = byId[id];
+      if (c.paid && !c.rev && c.fxApplied && c.fxApplied.cap >= 3 && /Full|Paid off|Took effect|Opened/.test(c.result)) wins.push(m.name + ' (+' + c.fxApplied.cap + ' capacity)');
+      if (c.rev || /Half|monopoly|almost no|wider/.test(c.result || '')) probs.push(m.name + ': ' + c.result);
+      if (!c.paid && !c.rev) probs.push(m.name + ': time lag, only pays off in ' + c.payYear);
+      if (c.note) probs.push(m.name + ': ' + c.note.toLowerCase());
+    });
+    if (st.ind.gap > 100) probs.push('The income gap widened (' + st.ind.gap + ')');
+    if (st.ind.costs > 100) probs.push('Business costs rose (' + st.ind.costs + '), partly due to the 2031 oil shock');
+    if (st.invested && st.revenue < st.invested * 0.9) probs.push('By 2036 only ' + Math.round(st.revenue / st.invested * 100) + '% of the ' + st.invested + 'bn invested had been paid back in extra tax revenue. That money had an opportunity cost.');
+    if (st.ind.support < 45) probs.push('Public support fell to ' + st.ind.support + '%');
+    var li = function (a, none) { return a.length ? '<ul style="margin:4px 0 8px 18px;padding:0">' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '<p class="why2" style="margin:4px 0 8px">' + none + '</p>'; };
+    var box = function (ph) { return '<div class="notes" contenteditable="true" data-ph="' + ph + '"></div>'; };
+    return '<div class="card" style="margin-top:16px;background:var(--paleo);border-color:var(--orange)">' +
+      '<h2>Prepare your 8-mark answer</h2>' +
+      '<p style="margin:6px 0 10px"><b>Question:</b> Discuss whether supply-side policies are the best way for the Thai government to achieve its macroeconomic aims. <b>[8]</b></p>' +
+      '<p class="why2" style="margin-bottom:10px">Use your own game as evidence. Write in full sentences with a chain of reasoning: <b>measure → factor of production → productive capacity → aim</b>.</p>' +
+      '<p><b>1 · Why they may be the best way.</b> Evidence from your game:</p>' + li(wins, 'None of your measures fully paid off. Use this as evidence in paragraph 2.') +
+      box('Explain two chains of reasoning, one for each of two of your successful measures. Say which aim each one helped.') +
+      '<p style="margin-top:12px"><b>2 · Why they may not be.</b> Evidence from your game:</p>' + li(probs, 'Think about time lags, cost and opportunity cost, fairness, and whether there is enough demand.') +
+      box('Explain two limitations. Use your game: time lags, measures that needed other measures, public support, the income gap, cost.') +
+      '<p style="margin-top:12px"><b>3 · Conclusion.</b> Give a clear judgement that <i>depends on</i> something.</p>' +
+      box('For example: Supply-side policy is the best way to raise long-run growth, but only if… because… In the short run, fiscal or monetary policy…') +
+      '<p class="why2" style="margin-top:10px"><b>Levels:</b> 1–2 marks: one side, limited explanation. 3–4: developed analysis of one side, or limited analysis of both. 5–6: developed analysis of both sides. 7–8: as 5–6, plus a justified conclusion.</p>' +
+      '<p class="why2 noprint"><b>Note:</b> your notes are not saved. Print or save as PDF before leaving this page.</p></div>';
+  }
+  st = fresh(); renderPlan();
+
+  
+/* ================= 2. SORT ================= */
+  var LABELS = ['Supply-side', 'Fiscal (demand)', 'Monetary', 'Both S and F', 'Neither / opposite of S'];
+  var HEAD = [
+    ['Thailand', 'Board of Investment gives EV and chip makers up to 8 years without corporate income tax in the Eastern Economic Corridor', [0], '<b>Supply-side:</b> an incentive to invest in capital, in an enterprise zone.'],
+    ['Singapore', 'Every adult gets SkillsFuture credits to pay for training courses', [0, 3], '<b>Supply-side:</b> training raises the quality of labour. It is also government spending, so "Both" is accepted.'],
+    ['Thailand', '10,000-baht digital wallet payments to get people spending', [1], '<b>Fiscal (demand):</b> it boosts spending quickly but adds no skills, machines or new firms.'],
+    ['Malaysia', 'Bank Negara Malaysia raises its interest rate to slow inflation', [2], '<b>Monetary:</b> a central bank changing the interest rate.'],
+    ['Vietnam', 'Corporate income tax cut from 25% to 20%', [0], '<b>Supply-side:</b> a lower direct tax on profits raises the incentive to invest.'],
+    ['Indonesia', 'Job Creation Law makes business licences faster and cuts severance pay for dismissed workers', [0], '<b>Supply-side:</b> deregulation plus labour market reform. It was controversial because workers lost protection.'],
+    ['Thailand', '"Easy E-Receipt": shoppers deduct up to 50,000 baht of purchases from their taxable income', [1], '<b>Fiscal (demand)! A trap.</b> It is a tax cut, but it only rewards <i>spending</i>, so it boosts demand. It does not raise productive capacity.'],
+    ['Philippines', '"Build Better More" programme spends billions on roads, bridges, airports and railways', [3, 0], '<b>Both:</b> government spending now (fiscal) and more capital later (supply-side). The difference is time.'],
+    ['Singapore', 'GST (Singapore\'s VAT) raised from 8% to 9%', [1], '<b>Fiscal:</b> a higher indirect tax reduces spending power. Changes to VAT/GST are demand-side.'],
+    ['Vietnam', 'Government sells part of its shares in the dairy firm Vinamilk to private investors', [0], '<b>Supply-side:</b> privatisation, which aims to make the firm more efficient.'],
+    ['Thailand', 'Minimum wage raised to 400 baht a day in Bangkok', [4], '<b>Opposite of supply-side:</b> it adds a labour market rigidity and raises firms\' costs. It may still be good for fairness.'],
+    ['Malaysia & Singapore', 'Johor–Singapore Special Economic Zone offers qualifying firms a 5% corporate tax rate', [0], '<b>Supply-side:</b> an enterprise zone. Tax incentives attract investment into a chosen area.']
+  ];
+  var pick = {};
+  function buildSort() {
+    $('sort').innerHTML = HEAD.map(function (x, i) {
+      return '<div class="card hl" id="u44-h' + i + '"><div class="txt"><span class="ctry">' + x[0] + '</span>' + esc(x[1]) + '</div><div class="opts">' +
+        LABELS.map(function (l, j) { return '<button class="opt" aria-pressed="false" data-h="' + i + '" data-o="' + j + '">' + l + '</button>'; }).join('') +
+        '</div><div class="why">' + x[3] + '</div></div>';
+    }).join('');
+    $('sort').querySelectorAll('.opt').forEach(function (b) { b.addEventListener('click', function () {
+      var i = +b.dataset.h; pick[i] = +b.dataset.o;
+      $('h' + i).querySelectorAll('.opt').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      $('h' + i).classList.remove('right', 'wrong');
+    }); });
+  }
+  $('sortCheck').addEventListener('click', function () {
+    var n = 0, done = 0;
+    HEAD.forEach(function (x, i) {
+      var c = $('h' + i); c.classList.remove('right', 'wrong');
+      if (pick[i] === undefined) return; done++;
+      var ok = x[2].indexOf(pick[i]) > -1; if (ok) n++;
+      c.classList.add(ok ? 'right' : 'wrong');
+    });
+    if (done === HEAD.length) track('Sort the Headlines: ' + n + '/' + HEAD.length);
+    var fb = $('sortFb'); fb.className = 'fb show ' + (n === HEAD.length ? 'good' : 'info');
+    fb.innerHTML = '<b>' + n + ' of ' + HEAD.length + ' correct.</b> ' + (done < HEAD.length ? (HEAD.length - done) + ' still to answer. ' : '') + 'Read the explanation under each headline. <b>Think:</b> which headline would a supply-side economist most like to reverse, and why?';
+  });
+  $('sortReset').addEventListener('click', function () { pick = {}; buildSort(); $('sortFb').className = 'fb'; });
+  buildSort();
+
+  /* ================= 3. CHAINS ================= */
+  var CH = [
+    { aim: 'Economic growth', country: 'Vietnam', pol: 'Corporate income tax cut from 25% to 20%',
+      links: ['Firms keep more of each baht of profit', 'Firms invest more in factories and machinery', 'Productive capacity rises, so real GDP can grow'],
+      bad: 'Households spend more in shops, so demand rises',
+      buts: ['Firms may pay the extra profit to shareholders instead of investing it', 'Vietnam\'s exports will fall', 'Inflation will rise straight away'], best: 0,
+      butWhy: 'A tax cut only raises capacity if firms <b>invest</b> the extra profit. The other two do not follow from this policy.' },
+    { aim: 'Low unemployment', country: 'Singapore', pol: 'SkillsFuture credits for every adult to spend on training',
+      links: ['Workers in declining industries retrain in digital and technical skills', 'Their skills now match the jobs firms are offering', 'Structural unemployment falls'],
+      bad: 'Wages fall, so firms hire more workers',
+      buts: ['Training makes workers too expensive to employ', 'Many people use the credits on hobby courses that do not lead to jobs', 'It increases imports of computers'], best: 1,
+      butWhy: 'This was a real criticism in Singapore. The credits only reduce unemployment if people choose job-relevant courses.' },
+    { aim: 'Stable prices', country: 'Thailand', pol: 'High-speed rail from Bangkok to Korat, linked to the Laos–China railway',
+      links: ['Moving goods becomes faster and cheaper', 'Firms\' costs fall and productivity rises', 'Output can grow without demand-pull or cost-push inflation'],
+      bad: 'The Bank of Thailand lowers the interest rate',
+      buts: ['Construction spending in the short run adds to demand, and benefits come only after the line opens (target about 2031)', 'Rail always raises prices', 'Lorries will become more expensive'], best: 0,
+      butWhy: 'Time lag again. While it is being built, the railway is a big government spending project that <b>adds</b> to demand.' },
+    { aim: 'Balance of payments stability', country: 'Thailand', pol: 'BOI tax holidays for EV makers such as BYD in Rayong',
+      links: ['Foreign carmakers build EV factories in Thailand', 'Thailand produces more EVs to export around ASEAN and beyond', 'Export revenue rises, improving the current account'],
+      bad: 'Thai consumers import more cars from China',
+      buts: ['EVs cannot be exported', 'Many parts are imported and profits are sent back to the parent company abroad, so the gain is smaller', 'The baht will certainly fall'], best: 1,
+      butWhy: 'Imported components and profits paid abroad are outflows on the current account, so they cancel out part of the export gain.' },
+    { aim: 'Redistribution of income', country: 'Thailand', pol: 'Equitable Education Fund scholarships for students from poor families',
+      links: ['Students from low-income families stay in school and gain qualifications', 'They can get skilled, better-paid jobs', 'The gap between rich and poor narrows over time'],
+      bad: 'Top earners pay less income tax',
+      buts: ['Scholarships make rich people poorer', 'It may take a generation before the income gap narrows', 'It will cause demand-pull inflation'], best: 1,
+      butWhy: 'Education has the longest time lag. Today\'s students earn more only in 10–20 years.' },
+    { aim: 'Environmental sustainability', country: 'Vietnam', pol: 'Guaranteed high prices for electricity from solar farms',
+      links: ['Firms have an incentive to invest in solar farms', 'Much more electricity comes from renewable sources', 'The economy can grow with lower carbon emissions'],
+      bad: 'Coal becomes cheaper to import',
+      buts: ['Solar panels do not work in Vietnam', 'The grid could not carry all the new power, so some solar output was wasted', 'Electricity became free'], best: 1,
+      butWhy: 'This really happened after the 2019–2020 solar boom. Supply-side policy needs the right infrastructure, such as the grid, alongside it.' }
+  ];
+  var cs = {}, cp = {}, cdone = {}, cLogged = false;
+  function buildChains() {
+    $('chains').innerHTML = CH.map(function (c, i) {
+      cs[i] = []; cp[i] = shuffle(c.links.concat([c.bad]));
+      return '<div class="card" id="u44-c' + i + '"><p class="aim">' + (i + 1) + '. ' + c.aim + '</p>' +
+        '<p class="pol"><span class="ctry">' + c.country + '</span>' + esc(c.pol) + '</p>' +
+        '<div class="chainOut" id="u44-co' + i + '"></div><div class="pool" id="u44-cp' + i + '"></div>' +
+        '<div class="row"><button class="btn sm" data-chk="' + i + '">Check chain</button><button class="btn ghost sm" data-clr="' + i + '">Clear</button></div>' +
+        '<div class="fb" id="u44-cf' + i + '"></div>' +
+        '<div class="step2" id="u44-s2' + i + '"><p class="q">Step 2 · What is the best "But…" for this policy?</p>' +
+        c.buts.map(function (b, j) { return '<button class="ans" data-b="' + i + '" data-j="' + j + '">' + esc(b) + '</button>'; }).join('') +
+        '<div class="fb" id="u44-bf' + i + '"></div></div></div>';
+    }).join('');
+    CH.forEach(function (c, i) { renderChain(i); });
+    $('chains').querySelectorAll('[data-chk]').forEach(function (b) { b.addEventListener('click', function () { checkChain(+b.dataset.chk); }); });
+    $('chains').querySelectorAll('[data-clr]').forEach(function (b) { b.addEventListener('click', function () { var i = +b.dataset.clr; cs[i] = []; $('cf' + i).className = 'fb'; renderChain(i); }); });
+    $('chains').querySelectorAll('[data-b]').forEach(function (b) { b.addEventListener('click', function () {
+      var i = +b.dataset.b, j = +b.dataset.j, c = CH[i], fb = $('bf' + i);
+      $('s2' + i).querySelectorAll('.ans').forEach(function (x, k) { x.classList.remove('ok', 'no'); if (k === j) x.classList.add(k === c.best ? 'ok' : 'no'); });
+      fb.className = 'fb show ' + (j === c.best ? 'good' : 'bad');
+      if (j === c.best) { cdone[i] = 1; if (!cLogged && Object.keys(cdone).length === CH.length) { cLogged = true; track('Chain Builder: all ' + CH.length + ' chains complete'); } }
+      fb.innerHTML = (j === c.best ? '<b>Yes.</b> ' : '<b>Not the best choice. Try again.</b> ') + (j === c.best ? c.butWhy : 'A good "But…" is a realistic reason why <i>this</i> policy might not achieve <i>this</i> aim.');
+    }); });
+  }
+  function renderChain(i) {
+    var out = $('co' + i), pool = $('cp' + i);
+    out.innerHTML = cs[i].length ? cs[i].map(function (t, k) { return (k ? '<span class="arrow">→</span>' : '') + '<span class="link">' + esc(t) + '</span>'; }).join('') : '<span class="ph">Click three links below in order…</span>';
+    pool.innerHTML = cp[i].map(function (t, k) { var u = cs[i].indexOf(t) > -1; return '<button class="link" data-i="' + i + '" data-k="' + k + '"' + (u || cs[i].length >= 3 ? ' disabled' : '') + '>' + esc(t) + '</button>'; }).join('');
+    pool.querySelectorAll('.link').forEach(function (b) { b.addEventListener('click', function () { if (b.disabled) return; cs[i].push(cp[i][+b.dataset.k]); renderChain(i); }); });
+  }
+  function checkChain(i) {
+    var c = CH[i], s = cs[i], fb = $('cf' + i);
+    if (s.length < 3) { fb.className = 'fb show info'; fb.textContent = 'Choose three links first.'; return; }
+    var ok = s.join('|') === c.links.join('|');
+    fb.className = 'fb show ' + (ok ? 'good' : 'bad');
+    fb.innerHTML = ok ? '<b>Correct chain.</b> Now evaluate it in Step 2.'
+      : (s.indexOf(c.bad) > -1 ? '<b>Not quite.</b> "' + esc(c.bad) + '" is not an effect of this supply-side policy.' : '<b>Right links, wrong order.</b> Start with what the policy does directly, and end with the aim.');
+    if (ok) $('s2' + i).classList.add('on');
+  }
+  buildChains();
+
+  /* ================= 4. QUIZ ================= */
+  var QZ = [
+    ['Which of these is <b>not</b> a supply-side policy?', ['deregulation of markets', 'investment in human capital', 'progressive income tax policies', 'tax reforms that create incentives to work'], 2, 'A progressive income tax raises tax rates as income rises, so it reduces incentives to work.'],
+    ['Supply-side policies aim to…', ['increase total demand in the short run', 'increase the productive capacity of the economy', 'reduce the money supply', 'reduce the value of the baht'], 1, 'They improve the quantity or quality of factors of production, so the PPC shifts outwards.'],
+    ['On a PPC diagram, a successful supply-side policy is shown by…', ['a movement from inside the PPC towards it', 'a movement along the PPC', 'an outward shift of the PPC', 'an inward shift of the PPC'], 2, 'More or better factors of production mean the economy can produce more, so the whole curve shifts out.'],
+    ['What is the main criticism of supply-side policies?', ['They always cause inflation', 'They take a long time to work', 'They reduce exports', 'They cannot be used in ASEAN countries'], 1, 'The time lag. The Bangkok–Korat railway began in 2017 and may open around 2031.'],
+    ['Thailand\'s Eastern Economic Corridor and the Johor–Singapore Special Economic Zone are examples of…', ['free-trade agreements', 'enterprise zones offering incentives such as lower taxes to attract investment', 'areas with higher minimum wages', 'state-owned monopolies'], 1, 'Both use tax incentives to attract firms to a chosen area.'],
+    ['Thailand\'s "Easy E-Receipt" lets shoppers deduct purchases from their taxable income. Why is it <b>not</b> really a supply-side policy?', ['It is a monetary policy', 'It rewards spending, so it boosts demand rather than productive capacity', 'It increases the minimum wage', 'It is a form of privatisation'], 1, 'Not every tax cut is supply-side. This one is designed to raise consumer spending.'],
+    ['Why might a supply-side policy help to keep prices stable better than a big increase in government spending?', ['It lowers interest rates', 'It raises output without creating demand-pull inflation', 'It reduces imports', 'It raises tax revenue immediately'], 1, 'Capacity rises alongside output, so demand does not exceed what the economy can produce.'],
+    ['In 2025 Thai factories used only about 59% of their capacity. What does this suggest?', ['Thailand needs no economic policy', 'Weak demand is also a problem, so fiscal or monetary policy may raise output faster in the short run', 'Supply-side policies have already failed', 'Inflation must be very high'], 1, 'With lots of spare capacity, the short-run problem is partly demand. Supply-side policy is a long-run tool.']
+  ];
+  var qdone = {}, qscore = 0;
+  function buildQuiz() {
+    qdone = {}; qscore = 0;
+    $('quiz').innerHTML = QZ.map(function (q, i) {
+      return '<div class="card" id="u44-q' + i + '"><p class="q">' + (i + 1) + '. ' + q[0] + '</p>' +
+        q[1].map(function (a, j) { return '<button class="ans" data-q="' + i + '" data-a="' + j + '">' + String.fromCharCode(65 + j) + '. ' + esc(a) + '</button>'; }).join('') +
+        '<div class="fb" id="u44-qf' + i + '"></div></div>';
+    }).join('') + '<div class="fb" id="u44-qtotal"></div>';
+    $('quiz').querySelectorAll('.ans').forEach(function (b) { b.addEventListener('click', function () {
+      var i = +b.dataset.q, a = +b.dataset.a, q = QZ[i]; if (qdone[i]) return; qdone[i] = 1;
+      $('q' + i).querySelectorAll('.ans').forEach(function (x, j) { x.disabled = true; if (j === q[2]) x.classList.add('ok'); else if (j === a) x.classList.add('no'); });
+      var fb = $('qf' + i); fb.className = 'fb show ' + (a === q[2] ? 'good' : 'bad');
+      fb.innerHTML = '<b>' + (a === q[2] ? 'Correct.' : 'Not quite.') + '</b> ' + q[3];
+      if (a === q[2]) qscore++;
+      if (Object.keys(qdone).length === QZ.length) {
+        var t = $('qtotal'); t.className = 'fb show ' + (qscore >= 6 ? 'good' : 'info');
+        t.innerHTML = '<b>Your score: ' + qscore + ' / ' + QZ.length + '.</b> ' + (qscore >= 6 ? 'Well done.' : 'Read the feedback on the questions you missed, then press Reset quiz and try again.');
+        track('Quick Quiz: ' + qscore + '/' + QZ.length);
+      }
+    }); });
+  }
+  $('quizReset').addEventListener('click', buildQuiz);
+  buildQuiz();
+})();
+</script>
+</body>
+</html>
