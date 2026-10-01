@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.5 Economic Growth · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+/* ---- 4.5 additions ---- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{border-radius:10px;padding:9px 12px;background:var(--ltblue)}
+.tile.o{background:var(--ltorange)}
+.tile > b{display:block;color:var(--navy);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:21px;font-weight:900;color:var(--ink)}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.meter{height:7px;background:rgba(0,47,108,.12);border-radius:4px;margin-top:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.pol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pol{grid-template-columns:1fr}}
+.pc{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:left;font:400 14px Lato,sans-serif;color:var(--ink);position:relative}
+.pc:hover{border-color:var(--blue)}
+.pc.sel{border-color:var(--orange);background:#FFFBF5}
+.pc:disabled{opacity:.45;cursor:not-allowed}
+.pc .nm{display:block;font-weight:900;color:var(--navy);font-size:15px;padding-right:70px;margin-bottom:4px}
+.pc .cost{position:absolute;right:11px;top:11px;font-weight:900;color:var(--dkorange);font-size:14px}
+.pc .d{display:block;margin:6px 0 4px}
+.pc .lag{display:block;color:var(--muted);font-size:13px}
+.pc .w{display:block;color:var(--bad);font-size:13px}
+.pill.g{background:var(--goodbg);color:var(--good)}
+.budget{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:14px}
+@media (max-width:700px){.budget{grid-template-columns:1fr}}
+.aim{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.aim:first-child{border-top:0}
+.light{flex:0 0 14px;height:14px;border-radius:50%;margin-top:4px}
+.light.g{background:var(--good)}.light.a{background:#E0A526}.light.r{background:var(--bad)}
+textarea{width:100%;min-height:100px;font:400 15px Lato,sans-serif;border:2px solid var(--line);border-radius:10px;padding:10px}
+.scrollx{overflow-x:auto}
+@media (max-width:700px){.scrollx svg{min-width:640px}}
+@media print{header,footer,.noprint,.panel{display:none!important}#p3{display:block!important}#p3 .play{display:none!important}body{background:#fff}.card{break-inside:avoid}.card.write{break-inside:auto}.scrollx svg{min-width:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 4 · SISB Nonthaburi</div>
+    <h1>4.5 Economic Growth</h1>
+    <div class="sub">Textbook Chapter 26, pp. 333–347 · Measure growth, spot a recession and run Thailand’s economy</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two Thai stories</h2>
+  <p class="lead">Both stories are about how much Thailand produced. Answer the two questions under each story.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Story 1 · 2022</span>
+      <h3 style="margin-top:8px">A record GDP in baht</h3>
+      <p>In 2022 Thailand’s GDP, measured in baht at that year’s prices, rose by <b>7.4%</b>. It was the biggest rise for years. But prices in Thailand also rose quickly that year: inflation was about <b>6%</b>.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Story 2 · 2020</span>
+      <h3 style="margin-top:8px">The tourists disappear</h3>
+      <p>In 2019 Thailand had <b>39.8 million</b> foreign tourists. In April 2020 COVID-19 travel bans began, and the year ended with only <b>6.7 million</b>. Hotels in Phuket and Pattaya closed.</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what do the stories show?</h3>
+    <div class="grid2">
+      <div><div class="chartbox" id="hookA"></div><p><b>Story 1: nominal GDP is not output.</b> Nominal GDP rose 7.4%, but most of that was higher prices. <b>Real GDP</b>, which removes inflation, rose only <b>2.6%</b>. <b>Economic growth</b> is an increase in <b>real</b> GDP.</p></div>
+      <div><div class="chartbox" id="hookB"></div><p><b>Story 2: a recession.</b> Real GDP fell in three quarters in a row. A <b>recession</b> is a fall in real GDP over six months or more (two quarters in a row). Here a fall in <b>total demand</b> (tourists’ spending) caused it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: REAL OR NOMINAL ============ -->
+<section class="panel" id="p1">
+  <h2>Real or nominal? The GDP lab</h2>
+  <p class="lead">Country Z produced <b>18,000bn baht</b> of output this year. Change next year’s numbers and watch <b>real GDP</b> and <b>real GDP per head</b>. Only real GDP tells you whether there was economic growth.</p>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="chartbox" id="rnChart"></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>This year</span><span><i style="background:#9DB3D3"></i>Next year: nominal</span><span><i style="background:var(--blue)"></i>Next year: real</span></div>
+      <div class="readout">
+        <div class="ro"><b>Economic growth rate</b><span id="roG"></span></div>
+        <div class="ro o"><b>Real GDP per head</b><span id="roH"></span></div>
+      </div>
+      <div id="rnVerd"></div>
+    </div>
+    <div class="card">
+      <p class="muted" style="margin-top:0">This year: nominal GDP 18,000bn baht · price index 100 · population 66.0 million</p>
+      <div class="sl"><div class="top"><b>Next year: nominal GDP</b><span class="val" id="vN"></span></div><input type="range" id="sN" min="16800" max="21000" step="60" value="18900" aria-label="Nominal GDP next year"></div>
+      <div class="sl"><div class="top"><b>Next year: price index</b><span class="val" id="vPI"></span></div><input type="range" id="sPI" min="94" max="115" step="1" value="102" aria-label="Price index next year"></div>
+      <div class="sl"><div class="top"><b>Next year: population</b><span class="val" id="vPop"></span></div><input type="range" id="sPop" min="62" max="70" step="0.1" value="66" aria-label="Population next year"></div>
+      <div class="chain" id="rnWork"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Missions: can you make these happen?</h3>
+    <div class="missions" id="rnMissions"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: RECESSION DETECTOR ============ -->
+<section class="panel" id="p2">
+  <h2>Recession detector</h2>
+  <p class="lead">Each bar is the change in real GDP on the quarter before. Decide: recession or not? If it is a recession, decide what caused it.</p>
+  <div class="card">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="rcNum"></span><span class="score" id="rcScore"></span></div>
+    <p class="qtext" id="rcTitle"></p>
+    <p class="prod" id="rcStory"></p>
+    <div class="chartbox" id="rcChart"></div>
+    <div style="margin-top:8px"><b>Step 1: was this a recession?</b><div class="opts" id="rcO1"></div></div>
+    <div id="rcStep2" class="hide"><b>Step 2: what was the main cause?</b><div class="opts" id="rcO2"></div></div>
+    <div id="rcFb"></div>
+    <button class="btn hide" id="rcNext" style="margin-top:10px">Next</button>
+  </div>
+</section>
+
+<!-- ============ TAB 4: GROWTH PLANNER ============ -->
+<section class="panel" id="p3">
+  <div class="play">
+  <h2>Growth planner 2027–2034</h2>
+  <p class="lead">You are Thailand’s economic planning team. There are four rounds of two years. Each round you may borrow up to <b>150bn baht</b> for new policies. Public debt starts at <b>66.9% of GDP</b> and the law does not allow it above <b>70%</b>. There is no overall score: at the end you must defend your choices.</p>
+  <div class="tiles" id="tiles"></div>
+  <div class="card">
+    <div class="chartbox scrollx" id="gChart"></div>
+    <div class="legend"><span><i style="background:var(--navy)"></i>Real GDP (output)</span><span><i style="background:var(--blue)"></i>Productive capacity (dashed)</span><span><i style="background:var(--orange);height:10px"></i>Quarter when real GDP fell</span><span><i style="background:var(--badbg);height:10px;border:1px solid var(--bad)"></i>Recession</span></div>
+  </div>
+  <div id="roundBox">
+    <div class="card story b" id="news"></div>
+    <h3 style="color:var(--navy);margin:0 0 10px" id="rHead"></h3>
+    <div class="pol" id="pol"></div>
+    <div class="card budget">
+      <div><div class="sl" style="margin:0"><div class="top"><b>Borrowing this round</b><span class="val" id="spent"></span></div></div><div class="meter"><i id="spentBar"></i></div></div>
+      <div><div class="sl" style="margin:0"><div class="top"><b>Public debt after this round</b><span class="val" id="projDebt"></span></div></div><div class="meter"><i id="debtBar"></i></div></div>
+      <button class="btn orange" id="go"></button>
+    </div>
+    <div id="bMsg"></div>
+  </div>
+  <div id="resultBox" class="hide">
+    <div class="card" id="roundRes"></div>
+    <div class="card" id="check"></div>
+    <button class="btn" id="next"></button>
+  </div>
+  </div>
+  <div id="report" class="hide">
+    <h2>Your report: Thailand 2027–2034</h2>
+    <p class="lead">Name: ______________________ &nbsp; Class: ________</p>
+    <div class="tiles" id="rTiles"></div>
+    <div class="card"><div class="chartbox scrollx" id="rChart"></div></div>
+    <div class="card"><h3>How did you do on each aim?</h3><div id="aims"></div></div>
+    <div class="card"><h3>Your decisions</h3><table class="sched" id="recap"></table></div>
+    <div class="card write">
+      <h3>Plan an 8-mark answer from your results</h3>
+      <p><b>Discuss whether or not an increase in government spending will lead to economic growth. [8]</b></p>
+      <p style="margin-bottom:4px"><b>1  Why it might</b></p><div class="fb info" id="h1" style="margin-top:0"></div><textarea aria-label="Why it might"></textarea>
+      <p style="margin:12px 0 4px"><b>2  Why it might not</b></p><div class="fb info" id="h2" style="margin-top:0"></div><textarea aria-label="Why it might not"></textarea>
+      <p style="margin:12px 0 4px"><b>3  Judgement:</b> It depends on… because…</p><div class="fb info" id="h3" style="margin-top:0"></div><textarea aria-label="Judgement"></textarea>
+    </div>
+    <div class="flex noprint"><button class="btn orange" onclick="window.print()">Print or save my report</button><button class="btn alt" id="again">Play again</button></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5: QUICK-FIRE ============ -->
+<section class="panel" id="p4">
+  <h2>Quick-fire: what happens to the PPC?</h2>
+  <p class="lead">Ten events in Thailand. First decide what happens on the PPC. If the curve shifts, decide whether the <b>quantity</b> or the <b>quality</b> of resources changed.</p>
+  <div class="card" id="qfCard">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="qfNum"></span><span class="score" id="qfScore"></span></div>
+    <p class="qtext" id="qfEvent"></p>
+    <div id="qfStep1"><b>Step 1: what happens on Thailand’s PPC?</b><div class="opts" id="qfOpts1"></div></div>
+    <div id="qfStep2" class="hide"><b>Step 2: which resources changed?</b><div class="opts" id="qfOpts2"></div></div>
+    <div id="qfFb"></div>
+    <div class="grid2 hide" id="qfDiag" style="margin-top:8px"><div class="chartbox" id="qfChart"></div><div></div></div>
+    <button class="btn hide" id="qfNext" style="margin-top:10px">Next</button>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse how an increase in investment by firms may lead to economic growth in Thailand. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 4.5 Economic Growth · Thai figures from NESDC; the growth planner is a simplified model for teaching.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',BAD='#B3264E',GOOD='#1E7B34',GREY='#6B7280',LINE='#D6DEE9';
+const $=id=>document.getElementById(id);
+const fmt=(x,d=1)=>(x<0?'−':'')+Math.abs(x).toFixed(d);
+const sgn=(x,d=1)=>(x>0?'+':x<0?'−':'')+Math.abs(x).toFixed(d);
+const th=n=>Math.round(n).toLocaleString('en-US');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+// Thailand Growth Planner model — quarterly, 4 rounds x 8 quarters (2027–2034)
+const GDP_BN = 19700; // nominal GDP, bn baht (NESDC 2026 projection)
+const POLICIES = {
+  wallet:  { name: 'Digital wallet payment', cost: 90 },
+  rateCut: { name: 'Cut interest rate 0.5 pt', cost: 0 },
+  rateUp:  { name: 'Raise interest rate 0.5 pt', cost: 0 },
+  rail:    { name: 'Railways and ports', cost: 100 },
+  skills:  { name: 'Vocational and EEC skills training', cost: 40 },
+  eec:     { name: 'EEC investment tax holiday', cost: 30 },
+  coal:    { name: 'Coal power station', cost: 60 },
+  solar:   { name: 'Solar farms and grid upgrade', cost: 70 },
+  cut:     { name: 'Cut government spending', cost: -60 },
+};
+const BUDGET = 150, DEBT_LIMIT = 70;
+
+function newGame() {
+  const N = 48;
+  return { dD: Array(N).fill(0), dP: Array(N).fill(0), inf: Array(N).fill(0),
+    D: 98.5, P: 100, Y: 98.5, rate: 1.0, debt: 66.9, env: 60, solar: 0, coal: 0,
+    q: 0, round: 0, hist: [], picks: [], recessionLast: false };
+}
+const ramp = (a, s, n, tot) => { for (let i = 0; i < n; i++) a[s + i] += tot / n; };
+const temp = (a, s, up, hold, fade, tot) => { ramp(a, s, up, tot); ramp(a, s + up + hold, fade, -tot); };
+
+function shocks(g, round) {
+  const s = round * 8;
+  if (round === 1) { // 2029: world recession hits Thai exports
+    g.dD[s] -= 1.4; g.dD[s + 1] -= 1.0; ramp(g.dD, s + 4, 4, 0.8);
+  }
+  if (round === 2) { // 2031: world oil price spike (supply-side shock)
+    g.dP[s] -= 1.2; g.dP[s + 1] -= 0.6; ramp(g.dP, s + 3, 4, 1.8);
+    for (let i = 0; i < 4; i++) g.inf[s + i] += 2.5; g.inf[s + 4] += 1.5; g.inf[s + 5] += 0.8;
+  }
+}
+
+function projectedDebt(g, picks) {
+  const cost = picks.reduce((t, k) => t + POLICIES[k].cost, 0);
+  return g.debt + 0.1 + cost * 100 / GDP_BN; // 2 years of baseline drift
+}
+
+function playRound(g, picks) {
+  const s = g.round * 8;
+  const weak = g.recessionLast || g.round === 1; // low business confidence
+  for (const k of picks) {
+    if (k === 'wallet') { temp(g.dD, s, 2, 2, 4, 1.5); }
+    if (k === 'rateCut') { ramp(g.dD, s, 4, 0.6); g.rate = Math.max(0, g.rate - 0.5); }
+    if (k === 'rateUp') { ramp(g.dD, s, 4, -0.6); g.rate += 0.5; for (let i = 2; i < 8; i++) g.inf[s + i] -= 0.5; }
+    if (k === 'rail') { temp(g.dD, s, 2, 6, 4, 0.6); ramp(g.dP, s + 16, 4, 1.6); }
+    if (k === 'skills') { ramp(g.dP, s + 8, 8, 0.8); }
+    if (k === 'eec') { const f = weak ? 0.5 : 1; ramp(g.dD, s + 1, 4, 0.4 * f); ramp(g.dP, s + 8, 4, 0.6 * f); }
+    if (k === 'coal') { ramp(g.dP, s + 8, 4, 1.2); ramp(g.dD, s + 8, 4, -0.3); g.coal++; }
+    if (k === 'solar') { ramp(g.dP, s + 8, 8, 0.8); g.solar++; }
+    if (k === 'cut') { ramp(g.dD, s, 4, -0.9); }
+    g.debt += POLICIES[k].cost * 100 / GDP_BN;
+  }
+  if (picks.includes('coal')) g.env -= 18;
+  if (picks.includes('solar')) g.env += 6;
+  shocks(g, g.round);
+  g.picks.push(picks.slice());
+  let negRun = 0, recQs = [];
+  for (let i = 0; i < 8; i++) {
+    const q = s + i;
+    g.D *= 1 + (0.45 + g.dD[q] + 12 * (g.P / g.D - 1)) / 100; // demand slowly catches up with capacity
+    g.P *= 1 + (0.35 + g.dP[q]) / 100;
+    const Yp = g.Y;
+    g.Y = g.D <= g.P ? g.D : g.P + 0.25 * (g.D - g.P);
+    const growth = Math.round((g.Y / Yp - 1) * 1000) / 10; // 1 d.p., as published
+    const gap = g.Y / g.P - 1, over = Math.max(0, (g.D - g.P) / g.P);
+    const infl = Math.max(-1, 1.2 + 150 * over - 25 * Math.max(0, -gap) + g.inf[q]);
+    const unemp = Math.max(0.5, 0.8 + 25 * Math.max(0, -gap));
+    const dirty = Math.max(0.3, 1 - 0.15 * g.solar) * (1 + 0.15 * g.coal);
+    g.env = Math.max(0, Math.min(100, g.env - 0.35 * Math.max(0, growth) * dirty));
+    g.debt += 0.01 - 0.05 * (4 * growth - 2) + (growth < 0 ? 0.25 : 0);
+    negRun = growth < 0 ? negRun + 1 : 0;
+    const label = `Q${(q % 4) + 1} ${2027 + Math.floor(q / 4)}`;
+    g.hist.push({ q, label, Y: g.Y, P: g.P, D: g.D, growth, infl, unemp, gap, debt: g.debt, env: g.env, rec: false });
+    if (negRun >= 2) { g.hist[g.hist.length - 1].rec = true; g.hist[g.hist.length - 2].rec = true; }
+  }
+  const roundHist = g.hist.slice(s);
+  g.recessionLast = roundHist.some(h => h.rec);
+  g.round++;
+  return roundHist;
+}
+
+function summary(g) {
+  const h = g.hist;
+  const yr = []; for (let y = 0; y < h.length / 4; y++) yr.push(h.slice(y * 4, y * 4 + 4));
+  const annual = yr.map((qs, i) => {
+    const prev = i === 0 ? 98.5 * Math.pow(1.0045, -2) : yr[i - 1].reduce((t, x) => t + x.Y, 0) / 4;
+    const avg = qs.reduce((t, x) => t + x.Y, 0) / 4; return (avg / prev - 1) * 100; });
+  return {
+    avgGrowth: (Math.pow(h[h.length - 1].Y / 98.5, 1 / 8) - 1) * 100,
+    capGrowth: (Math.pow(h[h.length - 1].P / 100, 1 / 8) - 1) * 100,
+    recQs: h.filter(x => x.rec).map(x => x.label),
+    peakInfl: Math.max(...h.map(x => x.infl)),
+    endUnemp: h[h.length - 1].unemp, endDebt: g.debt, maxDebt: Math.max(...h.map(x => x.debt)), env: g.env, annual,
+  };
+}
+
+/* ---------- tracker ---------- */
+function track(detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('Unit 4','4.5 Economic Growth',detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','Real or nominal?','Recession detector','Growth planner','Quick-fire','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(detail);if(done.size===6)track('All 6 activities complete');}
+show(0);
+
+/* ---------- bar chart (site style) ---------- */
+// cfg: {values,labels,colors?,yLabel,W,H,rec:[i..],showVals,yStep}
+function bars(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?560:720),H=cfg.H||(vw<600?280:300),L=58,R=14,T=22,B=cfg.xLabel?52:34;
+  const vals=cfg.values;let lo=Math.min(0,...vals),hi=Math.max(0,...vals);const pad=(hi-lo)*.15||1;
+  const step=cfg.yStep||((hi-lo)>12?4:(hi-lo)>6?2:(hi-lo)>2.5?1:0.5);
+  lo=Math.floor((lo-(lo<0?pad:0))/step)*step;hi=Math.ceil((hi+pad)/step)*step;
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B),n=vals.length,slot=(W-L-R)/n,bw=Math.min(54,slot*.55),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Bar chart'}">`;
+  (cfg.rec||[]).forEach(i=>{s+=`<rect x="${X(i)-slot/2}" y="${T}" width="${slot}" height="${H-T-B}" fill="#FBE9EC"/>`;});
+  for(let v=lo;v<=hi+1e-9;v+=step){s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${Math.abs(v)<1e-9?NAVY:'#EEF2F7'}" stroke-width="${Math.abs(v)<1e-9?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${v<0?'−'+fmt(-v,step<1?1:0):fmt(v,step<1?1:0)}</text>`;}
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  vals.forEach((v,i)=>{const c=cfg.colors?cfg.colors[i]:(v<0?ORANGE:NAVY);
+    s+=`<rect x="${X(i)-bw/2}" y="${Math.min(Y(0),Y(v))}" width="${bw}" height="${Math.max(1.5,Math.abs(Y(v)-Y(0)))}" rx="2" fill="${c}"/>`;
+    if(cfg.showVals!==false)s+=`<text x="${X(i)}" y="${v>=0?Y(v)-6:Y(v)+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${c}">${cfg.valFmt?cfg.valFmt(v):sgn(v)}</text>`;
+    s+=`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.labels[i]}</text>`;});
+  if(cfg.xLabel)s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* ---------- PPC diagram (site style) ---------- */
+function ppc(el,kind,opt={}){
+  const W=opt.W||400,H=opt.H||300,L=58,R=26,T=18,B=52;
+  const X=q=>L+q/100*(W-L-R),Y=p=>T+(1-p/100)*(H-T-B);
+  const arc=(r)=>{const pts=[];for(let k=0;k<=40;k++){const a=k/40*Math.PI/2;pts.push(X(r*Math.sin(a))+','+Y(r*Math.cos(a)));}return pts.join(' ');};
+  const r1=68,r2=kind==='out'?86:kind==='in'?52:68;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="PPC diagram"><defs><marker id="pa${opt.id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="${ORANGE}"/></marker></defs>`;
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R+4}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><line x1="${L}" y1="${H-B}" x2="${L}" y2="${T-4}" stroke="${NAVY}" stroke-width="2"/>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-12}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">Consumer goods</text><text transform="translate(18 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">Capital goods</text>`;
+  s+=`<polyline points="${arc(r1)}" fill="none" stroke="${BLUE}" stroke-width="3"/><text x="${X(r1)-4}" y="${Y(4)}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">PPC1</text>`;
+  if(kind==='out'||kind==='in'){s+=`<polyline points="${arc(r2)}" fill="none" stroke="${ORANGE}" stroke-width="3"/><text x="${X(r2)+(kind==='out'?4:-4)}" y="${Y(10)}" text-anchor="${kind==='out'?'start':'end'}" font-size="13" font-weight="900" fill="${NAVY}">PPC2</text>`;
+    const a=Math.PI/4;s+=`<line x1="${X(r1*Math.sin(a)+(kind==='out'?2:-2))}" y1="${Y(r1*Math.cos(a)+(kind==='out'?2:-2))}" x2="${X(r2*Math.sin(a)+(kind==='out'?-3:3))}" y2="${Y(r2*Math.cos(a)+(kind==='out'?-3:3))}" stroke="${ORANGE}" stroke-width="3" marker-end="url(#pa${opt.id})"/>`;}
+  else{const a=Math.PI/4,on=[r1*Math.sin(a),r1*Math.cos(a)],ins=[on[0]*.62,on[1]*.62];
+    const [from,to]=kind==='toward'?[ins,on]:[on,ins];
+    s+=`<line x1="${X(from[0]+(to[0]-from[0])*.12)}" y1="${Y(from[1]+(to[1]-from[1])*.12)}" x2="${X(from[0]+(to[0]-from[0])*.86)}" y2="${Y(from[1]+(to[1]-from[1])*.86)}" stroke="${ORANGE}" stroke-width="3" marker-end="url(#pa${opt.id})"/>`;
+    s+=`<circle cx="${X(from[0])}" cy="${Y(from[1])}" r="6" fill="${NAVY}" stroke="#fff" stroke-width="2"/><circle cx="${X(to[0])}" cy="${Y(to[1])}" r="6" fill="${ORANGE}" stroke="#fff" stroke-width="2"/>`;
+    s+=`<text x="${X(from[0])-10}" y="${Y(from[1])+5}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">A</text><text x="${X(to[0])-10}" y="${Y(to[1])+5}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">B</text>`;}
+  el.innerHTML=s+'</svg>';
+}
+
+/* ================= TAB 1: THINK FIRST ================= */
+const hookQs=[
+  {id:'s1',q1:'Did Thailand produce 7.4% more goods and services in 2022?',o1:['Yes: GDP rose 7.4%','No: much of the rise was higher prices','We cannot tell anything'],a1:1,
+   q2:'Which measure shows the real change in output?',o2:['Nominal GDP (current prices)','Real GDP (adjusted for inflation)'],a2:1,
+   fb:'Real GDP removes the effect of price changes. In 2022 Thailand’s real GDP rose by <b>2.6%</b>.'},
+  {id:'s2',q1:'What happened to Thailand’s output in the first half of 2020?',o1:['It rose','It fell','It stayed the same'],a1:1,
+   q2:'Real GDP fell in two or more quarters in a row. What is this called?',o2:['A slowdown','A recession','Inflation'],a2:1,
+   fb:'A <b>recession</b> is a fall in real GDP over six months or more. Real GDP fell in Q4 2019, Q1 2020 and Q2 2020.'},
+];
+const hookAns=[0,0];
+hookQs.forEach((h,k)=>{
+  const el=$(h.id);
+  el.innerHTML=`<p><b>1. ${h.q1}</b></p><div class="opts" data-s="1"></div><div class="hide" data-w="2"><p><b>2. ${h.q2}</b></p><div class="opts" data-s="2"></div></div><div data-fb></div>`;
+  const o1=el.querySelector('[data-s="1"]'),o2=el.querySelector('[data-s="2"]');
+  h.o1.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===h.a1?'ok':'no');if(i!==h.a1)o1.children[h.a1].classList.add('ok');
+    el.querySelector('[data-w="2"]').classList.remove('hide');};o1.appendChild(b);});
+  h.o2.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===h.a2?'ok':'no');if(i!==h.a2)o2.children[h.a2].classList.add('ok');
+    el.querySelector('[data-fb]').innerHTML=`<div class="fb info">${h.fb}</div>`;
+    hookAns[k]=1;if(hookAns[0]&&hookAns[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two Thai stories');}};o2.appendChild(b);});
+});
+function drawHook(){
+  bars($('hookA'),{W:420,H:280,values:[7.4,2.6],labels:['Nominal GDP','Real GDP'],colors:['#9DB3D3',NAVY],yLabel:'Change in 2022 (%)',yStep:2,aria:'Thailand 2022: nominal GDP +7.4%, real GDP +2.6%'});
+  bars($('hookB'),{W:420,H:280,values:[-0.2,-2.2,-9.7,6.5,1.3],labels:['Q4 19','Q1 20','Q2 20','Q3 20','Q4 20'],rec:[0,1,2],yLabel:'Real GDP, % change on quarter',yStep:4,aria:'Thailand quarterly real GDP 2019–2020 with recession shaded'});
+}
+
+/* ================= TAB 2: REAL OR NOMINAL ================= */
+const RNM=[
+  {t:'No growth',d:'Nominal GDP rises by at least 5%, but there is no economic growth.',ok:r=>r.gN>=5&&r.gR<=0.05},
+  {t:'Real growth',d:'Real GDP rises by more than 3%.',ok:r=>r.gR>3},
+  {t:'More output, poorer people',d:'Real GDP rises, but real GDP per head falls.',ok:r=>r.gR>0.05&&r.gH<-0.05},
+  {t:'Less output, richer people',d:'Real GDP falls, but real GDP per head rises.',ok:r=>r.gR<-0.05&&r.gH>0.05},
+];
+const rnDone=new Set();
+$('rnMissions').innerHTML=RNM.map((m,i)=>`<div class="mission" id="rm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function rn(){
+  const N=+$('sN').value,PI=+$('sPI').value,pop=+$('sPop').value,N0=18000,pop0=66;
+  const R=N*100/PI,gN=(N/N0-1)*100,gR=(R/N0-1)*100,h0=N0*1e9/(pop0*1e6),h1=R*1e9/(pop*1e6),gH=(h1/h0-1)*100;
+  $('vN').textContent=th(N)+'bn baht';$('vPI').textContent=PI;$('vPop').textContent=pop.toFixed(1)+' million';
+  bars($('rnChart'),{values:[N0,N,R],labels:['This year','Next: nominal','Next: real'],colors:[NAVY,'#9DB3D3',BLUE],yLabel:'GDP (bn baht)',yStep:4000,valFmt:v=>th(v),aria:'Nominal and real GDP'});
+  $('roG').textContent=`${sgn(gR)}% (nominal ${sgn(gN)}%)`;
+  $('roH').textContent=`${th(h0)} → ${th(h1)} baht (${sgn(gH)}%)`;
+  $('rnVerd').innerHTML=Math.abs(gR)<0.05?`<div class="fb info"><b>No economic growth.</b> Real GDP has not changed: any rise in nominal GDP is just higher prices.</div>`:
+    gR>0?`<div class="fb ok"><b>Economic growth.</b> Real GDP rose by ${fmt(gR)}%.</div>`:`<div class="fb no"><b>No economic growth.</b> Real GDP fell by ${fmt(-gR)}%.</div>`;
+  $('rnWork').innerHTML=`<b>Working</b><ol><li>Real GDP = nominal GDP × base-year price index ÷ current price index = ${th(N)} × 100 ÷ ${PI} = <b>${th(R)}bn baht</b></li><li>Growth rate = (${th(R)} − 18,000) ÷ 18,000 × 100 = <b>${sgn(gR)}%</b></li><li>Real GDP per head = real GDP ÷ population = ${th(R)}bn ÷ ${pop.toFixed(1)}m = <b>${th(h1)} baht</b></li></ol>`;
+  RNM.forEach((m,i)=>{if(m.ok({gN,gR,gH})&&!rnDone.has(i)){rnDone.add(i);$('rm'+i).classList.add('done');}});
+  if(rnDone.size===RNM.length)complete(1,'Real or nominal missions');
+}
+['sN','sPI','sPop'].forEach(id=>$(id).addEventListener('input',rn));
+rn();
+
+/* ================= TAB 3: RECESSION DETECTOR ================= */
+const CAUSES=['A fall in total demand','A fall in the quantity or quality of resources (supply-side)'];
+const RC=[
+  {t:'Thailand, Q4 2019 – Q4 2020',s:'COVID-19 travel bans: foreign tourists fell from 39.8 million in 2019 to 6.7 million in 2020.',v:[-0.2,-2.2,-9.7,6.5,1.3],l:['Q4 2019','Q1 2020','Q2 2020','Q3 2020','Q4 2020'],rec:true,c:0,
+   f:'Real GDP fell for three quarters in a row. Tourists stopped coming, so spending by foreigners collapsed: a fall in total demand. Thailand still had its hotels, workers and machines.'},
+  {t:'Thailand, Q3 2025 – Q2 2026',s:'Newspapers wrote “Thai economy shrinks!” twice in this period.',v:[-0.6,1.9,0.6,-0.2],l:['Q3 2025','Q4 2025','Q1 2026','Q2 2026'],rec:false,
+   f:'Real GDP fell in Q3 2025 and in Q2 2026, but never in two quarters in a row. One bad quarter is not a recession.'},
+  {t:'Country A',s:'The economy is slowing down. A politician says: “We are heading into recession.”',v:[1.2,0.9,0.5,0.2,0.1],l:['Q1','Q2','Q3','Q4','Q5'],rec:false,
+   f:'Every bar is positive, so output is still rising each quarter. A fall in the growth rate is not a fall in output.'},
+  {t:'Country B',s:'Consumers are worried about their jobs and high household debt, so they cut their spending.',v:[0.3,-0.1,-0.2,0.4],l:['Q1','Q2','Q3','Q4'],rec:true,c:0,
+   f:'Real GDP fell in Q2 and Q3: two quarters in a row. The falls are small, but size does not matter for the definition. Lower consumer spending is a fall in total demand.'},
+  {t:'Country C',s:'A huge flood closed hundreds of factories in one quarter. They reopened quickly.',v:[0.8,-6.5,4.2,2.1],l:['Q1','Q2','Q3','Q4'],rec:false,
+   f:'The fall was very large but lasted only one quarter. A recession needs real GDP to fall for six months or more.'},
+  {t:'Country D',s:'World oil prices doubled. Transport and electricity costs jumped, so many firms produced less. Prices rose quickly.',v:[0.5,-0.4,-0.8,-0.3],l:['Q1','Q2','Q3','Q4'],rec:true,c:1,
+   f:'Real GDP fell for three quarters in a row. Higher costs made firms produce less: a supply-side shock. Notice that prices rose, unlike in a demand recession.'},
+];
+let rcI=0,rcScore=0,rcMax=0;
+function recIdx(v){const out=new Set();for(let i=1;i<v.length;i++)if(v[i]<0&&v[i-1]<0){out.add(i);out.add(i-1);}return [...out];}
+function renderRC(){
+  if(rcI>=RC.length){$('rcNum').textContent='Finished';$('rcTitle').textContent=`You scored ${rcScore} / ${rcMax}.`;
+    $('rcStory').innerHTML=rcScore>=rcMax*.8?'Excellent. You can spot a recession and its cause.':'Remember: a recession needs <b>two negative quarters in a row</b>. Slower growth is not a recession.';
+    $('rcChart').innerHTML='';['rcO1','rcO2'].forEach(id=>$(id).innerHTML='');$('rcStep2').classList.add('hide');$('rcFb').innerHTML='';
+    $('rcNext').textContent='Try again';$('rcNext').classList.remove('hide');$('rcNext').onclick=()=>{rcI=0;rcScore=0;rcMax=0;$('rcNext').textContent='Next';$('rcNext').onclick=nextRC;renderRC();};
+    complete(2,`Recession detector: ${rcScore}/${rcMax}`);return;}
+  const c=RC[rcI];
+  $('rcNum').textContent=`Case ${rcI+1} of ${RC.length}`;$('rcScore').textContent=`Score: ${rcScore} / ${rcMax}`;
+  $('rcTitle').textContent=c.t;$('rcStory').textContent=c.s;
+  bars($('rcChart'),{values:c.v,labels:c.l,yLabel:'Real GDP, % change on quarter',aria:c.t});
+  $('rcStep2').classList.add('hide');$('rcFb').innerHTML='';$('rcNext').classList.add('hide');
+  const o1=$('rcO1');o1.innerHTML='';
+  ['Yes, a recession','No, not a recession'].forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);rcMax++;const right=(i===0)===c.rec;if(right)rcScore++;
+    b.classList.add(right?'ok':'no');if(!right)o1.children[c.rec?0:1].classList.add('ok');$('rcScore').textContent=`Score: ${rcScore} / ${rcMax}`;
+    if(c.rec){$('rcStep2').classList.remove('hide');const o2=$('rcO2');o2.innerHTML='';
+      CAUSES.forEach((t2,j)=>{const b2=document.createElement('button');b2.className='opt';b2.textContent=t2;b2.onclick=()=>{
+        o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);rcMax++;const r2=j===c.c;if(r2)rcScore++;b2.classList.add(r2?'ok':'no');if(!r2)o2.children[c.c].classList.add('ok');finishRC(c,right&&r2);};o2.appendChild(b2);});}
+    else finishRC(c,right);};o1.appendChild(b);});
+}
+function finishRC(c,right){$('rcScore').textContent=`Score: ${rcScore} / ${rcMax}`;
+  bars($('rcChart'),{values:c.v,labels:c.l,rec:recIdx(c.v),yLabel:'Real GDP, % change on quarter',aria:c.t});
+  $('rcFb').innerHTML=`<div class="fb ${right?'ok':'no'}"><b>${right?'Correct.':'Answer:'} ${c.rec?'A recession, caused by '+CAUSES[c.c].toLowerCase():'Not a recession'}.</b> ${c.f}</div>`;$('rcNext').classList.remove('hide');}
+function nextRC(){rcI++;renderRC();}
+$('rcNext').onclick=nextRC;renderRC();
+
+/* ================= TAB 4: GROWTH PLANNER ================= */
+const YEARS=['2027–2028','2029–2030','2031–2032','2033–2034'];
+const CARDS=[
+  {k:'wallet',p:[['','Demand · fiscal']],d:'Every adult gets money to spend in their local area. Shops and restaurants get busier within months.',lag:'Works: straight away',w:'Watch out: the boost is temporary. With no spare capacity, prices rise instead.'},
+  {k:'rateCut',p:[['g','Demand · monetary']],d:'The Bank of Thailand makes loans cheaper, so households and firms borrow and spend more.',lag:'Works: over about a year',w:'Watch out: household debt is high, so the effect is weak. The rate cannot go below 0%.'},
+  {k:'rateUp',p:[['g','Demand · monetary']],d:'The Bank of Thailand makes loans dearer to cool spending and bring inflation down.',lag:'Works: over about a year',w:'Watch out: slower growth and fewer jobs.'},
+  {k:'rail',p:[['o','Supply-side'],['','+ demand now']],d:'Build railways and ports. Construction firms hire workers now; transport becomes faster and cheaper later.',lag:'Capacity rises: after about 4 years',w:'Watch out: the most expensive option.'},
+  {k:'skills',p:[['o','Supply-side']],d:'Free courses in robotics, coding and engineering for workers in the EEC.',lag:'Capacity rises: after about 2 years',w:'Watch out: no effect on spending now.'},
+  {k:'eec',p:[['o','Supply-side']],d:'Firms that build new factories in the EEC pay no corporate tax for several years.',lag:'Capacity rises: after about 2 years',w:'Watch out: firms invest less when confidence is low, e.g. in a recession.'},
+  {k:'coal',p:[['o','Supply-side']],d:'A new coal power station on the southern coast gives cheap electricity to factories.',lag:'Capacity rises: after about 2 years',w:'Watch out: air and sea pollution; harms tourism and fishing.'},
+  {k:'solar',p:[['o','Supply-side']],d:'Solar farms and a stronger electricity grid give cleaner, cheaper energy.',lag:'Capacity rises: slowly, from about 2 years',w:'Watch out: costs more than coal and works more slowly.'},
+  {k:'cut',p:[['','Demand · fiscal']],d:'Cut government spending on projects and subsidies. This gives you 60bn baht more room to borrow for other policies.',lag:'Works: straight away',w:'Watch out: less spending means less demand and slower growth now.'},
+];
+const NEWS=[
+  '<span class="pill o">Briefing · 2027</span><p>Thailand grew by about 2% a year in 2025–26, slower than its neighbours. Many factories have <b>spare capacity</b>. The interest rate is 1.00%. Public debt is 66.9% of GDP.</p>',
+  '<span class="pill o">Breaking news · January 2029</span><p>A <b>world recession</b> has started. Orders for Thai exports from China and the USA are expected to fall sharply in the first half of 2029.</p>',
+  '<span class="pill o">Breaking news · January 2031</span><p><b>World oil prices have doubled.</b> Thai firms face much higher costs for transport and electricity, and some will produce less.</p>',
+  '<span class="pill o">Briefing · 2033</span><p>The final two years. Projects you started earlier may now be adding to Thailand’s productive capacity. Leave the economy in good shape for the next government.</p>',
+];
+const CHECKS=[
+  {q:'In 2027 Thailand had spare capacity. What does that mean for policies that raise total demand?',o:['They can raise output without much inflation','They will only cause inflation','They shift the PPC outwards'],a:0,f:'With unemployed workers and unused machines, extra spending lets firms produce more: a movement towards the PPC, not a shift of it.'},
+  {q:'Exports fell because of a world recession. Which cause of recession is this?',o:['A fall in total demand','A fall in the quantity of resources','A fall in the quality of resources'],a:0,f:'Foreigners bought fewer Thai goods, so total demand fell. Thailand still had the same workers and factories.'},
+  {q:'Oil prices doubled in 2031. Why could a digital wallet payment make things worse?',o:['Firms can produce less, so extra spending mainly pushes up prices','It would cause a world recession','It would shift the PPC inwards'],a:0,f:'An oil shock is a supply-side shock: capacity is squeezed and costs rise. More demand on top of that adds to inflation.'},
+  {q:'Which policies keep raising output in the long run?',o:['Policies that raise the quantity or quality of resources','Digital wallet payments every two years','Interest-rate cuts every year'],a:0,f:'Only more or better resources shift the PPC outwards. Demand boosts fade, and the interest rate cannot fall below 0%.'},
+];
+let G,sel;
+function lastYear(){const h=G.hist;if(h.length<4)return null;const a=h.slice(-4).reduce((t,x)=>t+x.Y,0)/4,b=h.length>=8?h.slice(-8,-4).reduce((t,x)=>t+x.Y,0)/4:98.5/Math.pow(1.0045,2.5);return (a/b-1)*100;}
+function drawTiles(id,final){
+  const h=G.hist,last=h[h.length-1],gap=last?last.gap*100:-1.5,ly=lastYear();
+  const T=[
+    ['Year',final?'2034':YEARS[Math.min(G.round,3)].slice(0,4),final?'end of the game':'start of round '+(G.round+1)],
+    ['Economic growth',ly===null?'≈2.0%':sgn(ly)+'%','real GDP, last 12 months'],
+    ['Inflation',(last?fmt(last.infl):'0.8')+'%','target 1–3%'],
+    ['Unemployment',(last?fmt(last.unemp):'1.2')+'%','of the labour force'],
+    ['Spare capacity',gap<-0.15?fmt(-gap)+'%':'None',gap<-0.15?'unused resources':'at full capacity'],
+    ['Interest rate',G.rate.toFixed(2)+'%','Bank of Thailand'],
+    ['Public debt',fmt(G.debt)+'%','of GDP · limit 70%',Math.min(100,G.debt/70*100),G.debt>69?BAD:BLUE],
+    ['Environment',Math.round(G.env)+' / 100','air, sea and land',G.env,G.env<40?BAD:GOOD],
+  ];
+  $(id).innerHTML=T.map((t,i)=>`<div class="tile${i>=6?' o':''}"><b>${t[0]}</b><div class="v num">${t[1]}</div><div class="s">${t[2]}</div>${t[3]!==undefined?`<div class="meter"><i style="width:${t[3]}%;background:${t[4]}"></i></div>`:''}</div>`).join('');
+}
+function drawGame(id){
+  const W=1000,H=340,l=58,r=14,t=18,mid=200,b=30,h=G.hist,n=32,slot=(W-l-r)/n;
+  const ys=[98.5,100,104,...h.map(x=>x.Y),...h.map(x=>x.P)];
+  const lo=Math.floor(Math.min(...ys)-1),hi=Math.ceil(Math.max(...ys)+1),st=hi-lo>12?4:2;
+  const y=v=>t+(hi-v)/(hi-lo)*(mid-t-14),x=i=>l+slot*(i+.5);
+  const gs=h.map(q=>q.growth),glo=Math.min(-2,Math.floor(Math.min(0,...gs))),ghi=Math.max(2,Math.ceil(Math.max(0,...gs)));
+  const yg=v=>mid+14+(ghi-v)/(ghi-glo)*(H-b-mid-14);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Thailand real GDP and productive capacity 2027 to 2034">`;
+  h.forEach((q,i)=>{if(q.rec)s+=`<rect x="${x(i)-slot/2}" y="${t}" width="${slot}" height="${H-b-t}" fill="#FBE9EC"/>`;});
+  for(let k=0;k<=4;k++){const xx=l+slot*k*8;s+=`<line x1="${xx}" x2="${xx}" y1="${t}" y2="${H-b}" stroke="${LINE}" stroke-dasharray="3 4"/>`;if(k<4)s+=`<text x="${xx+slot*4}" y="${H-9}" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${YEARS[k]}</text>`;}
+  for(let v=Math.ceil(lo/st)*st;v<=hi;v+=st)s+=`<line x1="${l}" x2="${W-r}" y1="${y(v)}" y2="${y(v)}" stroke="#EEF2F7"/><text x="${l-8}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${v}</text>`;
+  s+=`<line x1="${l}" y1="${t-4}" x2="${l}" y2="${H-b}" stroke="${NAVY}" stroke-width="2"/>`;
+  s+=`<text transform="translate(15 ${(t+mid)/2}) rotate(-90)" text-anchor="middle" font-size="12.5" font-weight="700" fill="${NAVY}">Index (2026 capacity = 100)</text>`;
+  if(h.length){const pl=(k,c,d)=>`<polyline fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" ${d?'stroke-dasharray="8 6"':''} points="${h.map((q,i)=>x(i)+','+y(q[k])).join(' ')}"/>`;s+=pl('P',BLUE,1)+pl('Y',NAVY,0);}
+  else s+=`<text x="${(l+W)/2}" y="${(t+mid)/2}" text-anchor="middle" font-size="15" fill="${GREY}">Choose your policies and run the first round.</text>`;
+  s+=`<line x1="${l}" x2="${W-r}" y1="${yg(0)}" y2="${yg(0)}" stroke="${NAVY}" stroke-width="1.5"/>`;
+  [glo,ghi].forEach(v=>s+=`<text x="${l-8}" y="${yg(v)+4}" text-anchor="end" font-size="11.5" fill="${GREY}">${v<0?'−'+Math.abs(v):v}</text>`);
+  s+=`<text transform="translate(15 ${(mid+14+H-b)/2}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="${NAVY}">% on quarter</text>`;
+  h.forEach((q,i)=>{const bw=slot*.6;s+=`<rect x="${x(i)-bw/2}" y="${Math.min(yg(0),yg(q.growth))}" width="${bw}" height="${Math.max(1,Math.abs(yg(q.growth)-yg(0)))}" fill="${q.growth<0?ORANGE:'#9DB3D3'}"/>`;});
+  $(id).innerHTML=s+'</svg>';
+}
+const cost=()=>[...sel].reduce((t,k)=>t+POLICIES[k].cost,0);
+const disabled=k=>k==='rateCut'&&G.rate<=0;
+function showRound(){
+  $('roundBox').classList.remove('hide');$('resultBox').classList.add('hide');
+  $('news').innerHTML=NEWS[G.round];$('rHead').textContent=`Round ${G.round+1} of 4 · ${YEARS[G.round]}: choose your policies`;$('go').textContent=`Run ${YEARS[G.round]} →`;
+  $('pol').innerHTML=CARDS.map(c=>{const p=POLICIES[c.k];return `<button class="pc" data-k="${c.k}" aria-pressed="false"><span class="cost">${p.cost>0?p.cost+'bn':p.cost<0?'+60bn room':'free'}</span><span class="nm">${p.name}</span>${c.p.map(x=>`<span class="pill ${x[0]}">${x[1]}</span> `).join('')}<span class="d">${c.d}</span><span class="lag">${c.lag}</span><span class="w">${c.w}</span></button>`;}).join('');
+  $('pol').querySelectorAll('.pc').forEach(el=>el.onclick=()=>{const k=el.dataset.k;if(disabled(k))return;if(sel.has(k))sel.delete(k);else{sel.add(k);if(k==='rateCut')sel.delete('rateUp');if(k==='rateUp')sel.delete('rateCut');}updateSel();});
+  updateSel();
+}
+function updateSel(){
+  const c=cost(),pd=projectedDebt(G,[...sel]);
+  document.querySelectorAll('.pc').forEach(el=>{const k=el.dataset.k;el.classList.toggle('sel',sel.has(k));el.disabled=disabled(k);el.setAttribute('aria-pressed',sel.has(k));});
+  $('spent').textContent=Math.max(0,c)+'bn of 150bn';$('spentBar').style.width=Math.min(100,Math.max(0,c)/150*100)+'%';$('spentBar').style.background=c>150?BAD:BLUE;
+  $('projDebt').textContent=fmt(pd)+'% of GDP';$('debtBar').style.width=Math.min(100,pd/70*100)+'%';$('debtBar').style.background=pd>70?BAD:pd>69?'#E0A526':BLUE;
+  let m='',ok=true;
+  if(c>150){m='Too expensive: you can borrow at most 150bn baht this round. Remove a policy, or cut government spending.';ok=false;}
+  else if(pd>70){m='Not allowed: this would push public debt above the 70% legal limit. Choose cheaper policies or cut spending.';ok=false;}
+  else if(sel.size===0)m='You can run a round with no new policies, but think about whether that is wise.';
+  $('bMsg').innerHTML=m?`<div class="fb ${ok?'info':'no'}" style="margin-top:0;margin-bottom:12px">${m}</div>`:'';$('go').disabled=!ok;
+}
+function wire(box,fb,ans,exp){const o=$(box);o.querySelectorAll('.opt').forEach((b,i)=>b.onclick=()=>{o.querySelectorAll('.opt').forEach(x=>x.disabled=true);const ok=i===ans;b.classList.add(ok?'ok':'no');if(!ok)o.children[ans].classList.add('ok');$(fb).innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'Correct.':'Answer:'}</b> ${exp}</div>`;});}
+$('go').onclick=()=>{
+  const picks=[...sel],r=G.round,before=G.debt,qs=playRound(G,picks);sel=new Set();drawGame('gChart');drawTiles('tiles');
+  const avgG=(Math.pow(qs[7].Y/(r===0?98.5:G.hist[r*8-1].Y),.5)-1)*100,pk=Math.max(...qs.map(q=>q.infl)),rec=qs.filter(q=>q.rec),negs=qs.filter(q=>q.growth<0).map(q=>q.label);
+  $('roundRes').innerHTML=`<h3>What happened in ${YEARS[r]}</h3><p class="prod">Your policies: <b>${picks.length?picks.map(k=>POLICIES[k].name).join(', '):'no new policies'}</b></p><div class="chartbox" id="rrChart"></div>
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);margin-top:10px"><div class="tile"><b>Average growth</b><div class="v num">${sgn(avgG)}%</div><div class="s">per year</div></div><div class="tile"><b>Highest inflation</b><div class="v num">${fmt(pk)}%</div><div class="s">${pk>3?'above the 1–3% target':'within or below target'}</div></div><div class="tile o"><b>Public debt</b><div class="v num">${fmt(G.debt)}%</div><div class="s">was ${fmt(before)}%</div></div></div>`;
+  bars($('rrChart'),{values:qs.map(q=>q.growth),labels:qs.map(q=>q.label.replace(' 20',' ’')),rec:qs.map((q,i)=>q.rec?i:-1).filter(i=>i>=0),yLabel:'Real GDP, % on quarter',aria:'Quarterly growth this round'});
+  const c=CHECKS[r];
+  $('check').innerHTML=`<h3>Checkpoint</h3><p><b>1. Was Thailand in a recession during ${YEARS[r]}?</b></p><div class="opts" id="ck1"><button class="opt">Yes</button><button class="opt">No</button></div><div id="ckf1"></div><p style="margin-top:12px"><b>2. ${c.q}</b></p><div class="opts" id="ck2">${c.o.map(o=>`<button class="opt">${o}</button>`).join('')}</div><div id="ckf2"></div>`;
+  wire('ck1','ckf1',rec.length?0:1,rec.length?`Real GDP fell in two or more quarters in a row (${rec.map(q=>q.label).join(', ')}).`:negs.length?`Real GDP fell in ${negs.join(' and ')}, but not in two quarters in a row.`:'Real GDP rose in every quarter.');
+  wire('ck2','ckf2',c.a,c.f);
+  $('next').textContent=G.round<4?'Next round →':'See your report →';
+  $('roundBox').classList.add('hide');$('resultBox').classList.remove('hide');$('resultBox').scrollIntoView({behavior:'smooth'});
+};
+$('next').onclick=()=>{if(G.round<4){showRound();$('p3').scrollIntoView({behavior:'smooth'});}else report();};
+function report(){
+  const S=summary(G);document.querySelector('#p3 .play').classList.add('hide');$('report').classList.remove('hide');drawTiles('rTiles',true);drawGame('rChart');
+  const L=[
+    ['Economic growth',S.avgGrowth>=2?'g':S.avgGrowth>=1.7?'a':'r',`Real GDP grew by an average of ${fmt(S.avgGrowth)}% a year (2025–26: about 2%). Productive capacity grew by ${fmt(S.capGrowth)}% a year.`],
+    ['Avoiding recession',S.recQs.length?'r':'g',S.recQs.length?`Recession in ${S.recQs.join(', ')}.`:'No recession: real GDP never fell for two quarters in a row.'],
+    ['Stable prices',S.peakInfl<=3.5?'g':S.peakInfl<=5.5?'a':'r',`Inflation peaked at ${fmt(S.peakInfl)}% (target 1–3%).`],
+    ['Low unemployment',S.endUnemp<=1.2?'g':S.endUnemp<=2?'a':'r',`Unemployment ended at ${fmt(S.endUnemp)}%.`],
+    ['Public debt',S.endDebt<69?'g':S.endDebt<=70?'a':'r',`Public debt ended at ${fmt(S.endDebt)}% of GDP (limit 70%).`],
+    ['Environment (sustainable growth)',S.env>=60?'g':S.env>=40?'a':'r',`Environment score ${Math.round(S.env)} / 100 (started at 60).`],
+  ];
+  $('aims').innerHTML=L.map(a=>`<div class="aim"><span class="light ${a[1]}"></span><div><b>${a[0]}.</b> ${a[2]}</div></div>`).join('')+'<p class="muted" style="margin:8px 0 0">There is no overall score. Doing well on one aim often meant doing worse on another: that trade-off is what your 8-mark answer should discuss.</p>';
+  $('recap').innerHTML='<tr><th>Years</th><th>Your policies</th><th>What happened</th></tr>'+G.picks.map((p,r)=>{const qs=G.hist.slice(r*8,r*8+8),g=(Math.pow(qs[7].Y/(r===0?98.5:G.hist[r*8-1].Y),.5)-1)*100,pk=Math.max(...qs.map(q=>q.infl)),rc=qs.some(q=>q.rec);
+    return `<tr><td><b>${YEARS[r]}</b></td><td class="l">${p.length?p.map(k=>POLICIES[k].name).join('<br>'):'<i>none</i>'}</td><td class="l">Growth ${sgn(g)}% a year · inflation peak ${fmt(pk)}%${rc?' · <b style="color:var(--bad)">recession</b>':''}</td></tr>`;}).join('');
+  let h1='Chain: government spending is part of total demand → firms receive more orders → they produce more and hire more workers → real GDP rises, if there is spare capacity. Spending on infrastructure or training also raises the quantity or quality of resources, so the PPC shifts out.';
+  const ri=G.picks.findIndex(p=>p.includes('rail')),wi=G.picks.findIndex(p=>p.includes('wallet'));
+  h1+=ri>=0?` <b>Your example:</b> you built railways and ports in ${YEARS[ri]}. Find on the chart when productive capacity started to rise faster.`:wi>=0?` <b>Your example:</b> your digital wallet payment in ${YEARS[wi]}. Look at the growth bars just after it.`:' <b>Your game:</b> you used little government spending. What happened to growth in 2029?';
+  let h2='Chain: if there is no spare capacity, extra spending pushes up prices instead of output. If it is paid for by borrowing, public debt rises towards the limit. Projects such as railways take years to add capacity (a time lag).';
+  h2+=G.picks[2]&&G.picks[2].includes('wallet')?` <b>Your example:</b> you chose a digital wallet payment during the 2031 oil shock, and inflation peaked at ${fmt(S.peakInfl)}%.`:S.endDebt>69?` <b>Your example:</b> public debt reached ${fmt(S.endDebt)}% of GDP, very close to the 70% limit, so you could not keep spending.`:S.peakInfl>3.5?` <b>Your example:</b> inflation peaked at ${fmt(S.peakInfl)}%. When was that, and why?`:' <b>Your example:</b> look for a policy whose benefits only arrived years later.';
+  $('h1').innerHTML=h1;$('h2').innerHTML=h2;$('h3').innerHTML='It depends on whether there is spare capacity · what the money is spent on (projects that raise capacity, or a one-off handout) · how it is paid for · how long the time lag is. Name the condition that mattered most in your game.';
+  $('p3').scrollIntoView({behavior:'smooth'});
+  complete(3,`Growth planner: avg growth ${fmt(S.avgGrowth)}%, recession quarters ${S.recQs.length}, debt ${fmt(S.endDebt)}%, env ${Math.round(S.env)}`);
+}
+function newPlanner(){G=newGame();sel=new Set();$('report').classList.add('hide');document.querySelector('#p3 .play').classList.remove('hide');document.querySelectorAll('#report textarea').forEach(t=>t.value='');showRound();drawGame('gChart');drawTiles('tiles');}
+$('again').onclick=()=>{newPlanner();window.scrollTo({top:0});};
+newPlanner();
+
+/* ================= TAB 5: QUICK-FIRE ================= */
+const SC=[
+  ['The Bank of Thailand cuts the interest rate and households borrow more to spend.','toward',null,'More spending uses spare capacity: a movement from inside the PPC towards it. Capacity has not changed.'],
+  ['The government gives every adult a 10,000-baht digital wallet payment to spend.','toward',null,'Higher total demand: firms use unemployed workers and machines, so output moves towards the PPC.'],
+  ['Private firms spend 13.4% more on new factories and machines.','out','QN','More capital goods increase the quantity of resources. (The extra spending also adds to demand now.)'],
+  ['Workers from Myanmar, Cambodia and Laos join Thai factories and farms.','out','QN','A bigger labour force increases the quantity of resources.'],
+  ['Vocational colleges in the EEC train many more robotics engineers.','out','QL','Better skills raise the quality of labour, so each worker can produce more.'],
+  ['A car factory in Rayong installs robots that build cars faster.','out','QL','New technology raises the quality (productivity) of capital.'],
+  ['Thailand’s working-age population shrinks as the country ages.','in','QN','Fewer workers means a fall in the quantity of resources, so the PPC shifts inwards (or grows more slowly).'],
+  ['Floods destroy hundreds of factories in Ayutthaya’s industrial estates.','in','QN','Capital is destroyed, so the quantity of resources falls.'],
+  ['Many skilled Thai engineers move abroad for higher pay.','in','QL','Losing skilled workers lowers the quality of the labour force.'],
+  ['A world recession cuts orders for Thai exports.','away',null,'Foreigners spend less on Thai goods: total demand falls, so output falls further inside the PPC. Capacity has not changed.'],
+  ['Thai households cut spending because their debts are very high.','away',null,'Lower consumer spending is a fall in total demand: a movement away from the PPC.'],
+  ['More women join the labour force as childcare becomes cheaper.','out','QN','More workers increase the quantity of labour.'],
+  ['Thai goods exports rise 17.6% as world demand for electronics grows.','toward',null,'Exports are part of total demand. Firms use more of their capacity.'],
+  ['Thailand builds a new deep-sea port at Laem Chabang that handles ships faster.','out','QL','Better infrastructure raises the quality and quantity of capital, making production faster and cheaper. Accept QN with this reason.'],
+];
+const S1=[['toward','Movement towards the PPC (more total demand)'],['away','Movement away from the PPC (less total demand)'],['out','PPC shifts out (more or better resources)'],['in','PPC shifts in (fewer or worse resources)']];
+const S2=[['QN','Quantity of resources changed'],['QL','Quality of resources changed']];
+let qfOrder=[],qi5=0,qfScore=0,qfMax=0;
+function startQF(){qfOrder=shuffle(SC.map((_,i)=>i)).slice(0,10);qi5=0;qfScore=0;qfMax=0;renderQF();}
+function renderQF(){
+  if(qi5>=qfOrder.length){$('qfCard').innerHTML=`<h3>Finished!</h3><p class="qtext">You scored ${qfScore} / ${qfMax}.</p><p>${qfScore>=qfMax*.8?'Excellent. You can tell a movement towards the PPC from a shift of it.':'Remember: <b>total demand</b> moves the economy towards or away from the PPC. Only a change in the <b>quantity or quality of resources</b> shifts it.'}</p><button class="btn" id="qfAgain">Try another set</button>`;
+    $('qfAgain').onclick=()=>{restoreQF();startQF();};complete(4,`Quick-fire: ${qfScore}/${qfMax}`);return;}
+  const s=SC[qfOrder[qi5]];
+  $('qfNum').textContent=`Event ${qi5+1} of ${qfOrder.length}`;$('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;$('qfEvent').textContent=s[0];
+  $('qfStep2').classList.add('hide');$('qfFb').innerHTML='';$('qfNext').classList.add('hide');$('qfDiag').classList.add('hide');
+  const o1=$('qfOpts1');o1.innerHTML='';
+  S1.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);qfMax++;const right=k===s[1];if(right)qfScore++;
+    b.classList.add(right?'ok':'no');if(!right)o1.children[S1.findIndex(x=>x[0]===s[1])].classList.add('ok');$('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;
+    if(s[2]){$('qfStep2').classList.remove('hide');const o2=$('qfOpts2');o2.innerHTML='';
+      S2.forEach(([k2,t2])=>{const b2=document.createElement('button');b2.className='opt';b2.textContent=t2;b2.onclick=()=>{
+        o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);qfMax++;const r2=k2===s[2];if(r2)qfScore++;b2.classList.add(r2?'ok':'no');if(!r2)o2.children[S2.findIndex(x=>x[0]===s[2])].classList.add('ok');finishQF(s,right&&r2);};o2.appendChild(b2);});}
+    else finishQF(s,right);};o1.appendChild(b);});
+}
+function finishQF(s,right){$('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;
+  $('qfFb').innerHTML=`<div class="fb ${right?'ok':'no'}"><b>${right?'Correct.':'Answer:'} ${S1.find(x=>x[0]===s[1])[1]}${s[2]?` · ${S2.find(x=>x[0]===s[2])[1]}`:''}.</b> ${s[3]}</div>`;
+  $('qfDiag').classList.remove('hide');ppc($('qfChart'),s[1],{id:'qf',W:380,H:270});$('qfNext').classList.remove('hide');}
+const qfHTML=$('qfCard').innerHTML;
+function restoreQF(){$('qfCard').innerHTML=qfHTML;$('qfNext').onclick=()=>{qi5++;renderQF();};}
+restoreQF();startQF();
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['What is economic growth?',['an increase in real GDP','an increase in nominal GDP','an increase in the price level','an increase in the population'],'Economic growth is an increase in real GDP: output adjusted for inflation.'],
+  ['A country’s nominal GDP rises by 6% and its price level rises by 6%. What happened to real GDP?',['it stayed the same','it rose by 12%','it rose by 6%','it fell by 6%'],'All of the rise in nominal GDP came from higher prices, so the quantity of output did not change.'],
+  ['Thailand’s growth rate fell from 2.9% in 2024 to 2.4% in 2025. Which statement is correct?',['Thailand’s output still rose in 2025','Thailand’s output fell in 2025','Thailand was in a recession in 2025','Thailand’s real GDP per head must have fallen'],'A positive growth rate means output rose. It just rose more slowly than before.'],
+  ['What is a recession?',['a fall in real GDP over a period of six months or more','any fall in the economic growth rate','a rise in unemployment above 5%','a fall in nominal GDP in one quarter'],'Real GDP must fall for two quarters in a row.'],
+  ['Consumer spending is $50bn, investment $15bn, government spending $20bn, exports $30bn and imports $25bn. What is GDP?',['$90bn','$140bn','$115bn','$65bn'],'50 + 15 + 20 + (30 − 25) = 90. Imports are subtracted because they were produced in other countries.'],
+  ['Which change is most likely to shift Thailand’s PPC outwards?',['better training for engineers','a 10,000-baht cash handout','a cut in the interest rate','a rise in consumer confidence'],'Better training raises the quality of labour. The other three raise demand: a movement towards the PPC.'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[],mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+startMCQ();
+
+const CH=[
+  ['Define','Investment is spending by firms on capital goods, such as new factories and machinery. Economic growth is an increase in real GDP.'],
+  ['Context','In Thailand, private investment rose by 13.4% in Q2 2026, much of it in the Eastern Economic Corridor (EEC).'],
+  ['Chain 1','One effect is that investment is part of total demand, so firms that make machinery and build factories receive more orders.'],
+  ['Chain 1','This leads to these firms producing more and employing more workers, so if there is spare capacity, real GDP rises in the short run.'],
+  ['Chain 2','Another effect is that investment increases the quantity of capital, so productive capacity rises and the PPC shifts outwards.'],
+  ['Overall','Overall, higher investment can cause economic growth both in the short run, through higher total demand, and in the long run, through more productive capacity.'],
+];
+let placed=[],chipOrder=shuffle(CH.map((_,i)=>i));
+function renderChain(){
+  $('chainSlots').innerHTML=CH.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?CH[placed[i]][1]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+  $('chainSlots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(placed[i]!==undefined){placed[i]=undefined;renderChain();}});
+  $('chainChips').innerHTML='';
+  chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=CH[k][1];b.disabled=placed.includes(k);
+    b.onclick=()=>{const e=CH.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;renderChain();};$('chainChips').appendChild(b);});
+}
+$('chainReset').onclick=()=>{placed=[];chipOrder=shuffle(CH.map((_,i)=>i));$('chainFb').innerHTML='';renderChain();};
+$('chainCheck').onclick=()=>{
+  if(placed.filter(x=>x!==undefined).length<CH.length){$('chainFb').innerHTML='<div class="fb no">Place all six sentences first.</div>';return;}
+  let ok=0;const slots=$('chainSlots').querySelectorAll('.slot');
+  placed.forEach((k,i)=>{const good=k===i;if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+  if(ok===CH.length){$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">Investment is</span> spending by firms on capital goods, such as new factories and machinery. <span class="hl">Economic growth is</span> an increase in real GDP. <span class="hl">In</span> Thailand, private investment rose by 13.4% in Q2 2026, much of it in the EEC.</p>
+      <p><span class="hl">One effect is</span> that investment is part of total demand, so firms that make machinery and build factories receive more orders. <span class="hl">This leads to</span> these firms producing more and employing more workers. <span class="hl">This increases</span> real GDP in the short run <span class="hl">because</span> the economy has spare capacity, so output moves towards the PPC.</p>
+      <p><span class="hl">Another effect is</span> that investment increases the quantity of capital. With more machines, each worker can produce more, so productive capacity rises. <span class="hl">As a result,</span> the PPC shifts outwards and Thailand can keep growing in the long run.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> higher investment can cause economic growth both in the short run, through higher total demand, and in the long run, through more productive capacity.</p></div>`;
+    chainDone=true;checkExam();}
+  else $('chainFb').innerHTML=`<div class="fb no">${ok} of 6 in the right place. Remember: define the key terms first, then the context, then build the chain (“One effect is… This leads to…”), then “Another effect”, and finish with “Overall”. Tap a red slot to send it back.</div>`;
+};
+renderChain();
+})();
+</script>
+</body>
+</html>
