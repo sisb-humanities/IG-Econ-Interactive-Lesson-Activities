@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.2 Demand · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 2 · SISB Nonthaburi</div>
+    <h1>2.2 Demand</h1>
+    <div class="sub">Textbook Chapter 6, pp. 22–26 · Move the sliders and see how demand works</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two Thai stories</h2>
+  <p class="lead">In both stories people bought more. Are they the same kind of change? Answer the two questions under each story.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Story 1 · Nonthaburi</span>
+      <h3 style="margin-top:8px">The ฿20 Purple Line</h3>
+      <p>Before October 2023 a long Purple Line trip cost up to <b>฿42</b>. From 16 October 2023 fares were capped at <b>฿20</b>. In the first ten months, trips on the Purple and Red Lines rose by about <b>26%</b> (21.3m → 26.9m).</p>
+      <p class="muted">The cap ended on 30 September 2025, and fares went back to ฿14–42.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Story 2 · Buriram</span>
+      <h3 style="margin-top:8px">Lisa’s favourite meatballs</h3>
+      <p>In September 2021 Lisa of BLACKPINK said on Thai TV that she missed the luk chin sold outside Buriram station. Vendors’ sales jumped from a few hundred baht a day to <b>over ฿10,000 a day</b>.</p>
+      <p class="muted">A skewer still cost ฿5–10.</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what is the difference?</h3>
+    <div class="grid2">
+      <div><div class="chartbox" id="hookA"></div><p><b>Story 1: movement along the curve.</b> The train’s <i>own price</i> fell, so passengers moved down the <i>same</i> demand curve. Economists call this an <b>extension in demand</b>.</p></div>
+      <div><div class="chartbox" id="hookB"></div><p><b>Story 2: the curve shifts.</b> The price did not change. A <i>non-price</i> factor (tastes and fashion) changed, so more is wanted at <i>every</i> price. This is an <b>increase in demand</b>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: MY DEMAND SCHEDULE ============ -->
+<section class="panel" id="p1">
+  <h2>My demand schedule</h2>
+  <p class="lead">You are buying <b>cha yen (Thai milk tea)</b> from Pa Noi’s stall on Ngamwongwan Road. Use the sliders to say how many cups <b>you</b> would buy per week at each price. Your demand curve draws itself.</p>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="chartbox" id="schedChart"></div>
+      <div class="legend"><span><i style="background:var(--blue)"></i>Your demand curve</span><span><i style="background:var(--bad)"></i>Breaks the law of demand</span><span><i style="background:var(--orange)"></i>You can’t afford it</span></div>
+    </div>
+    <div class="card">
+      <div class="sl"><div class="top"><b>Your pocket money for drinks per week</b><span class="val" id="budgetV"></span></div>
+        <input type="range" id="budget" min="100" max="600" step="20" value="400" aria-label="Pocket money per week"></div>
+      <table class="sched" id="schedTbl"></table>
+    </div>
+  </div>
+  <div class="card">
+    <div id="schedMsg" class="fb info">Move the sliders to make your schedule.</div>
+    <div class="flex" style="margin-top:10px"><button class="btn" id="schedCheck">Check my schedule</button><button class="btn alt" id="schedRandom">Show me a messy one</button></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: BUILD THE MARKET ============ -->
+<section class="panel" id="p2">
+  <h2>From individual demand to market demand</h2>
+  <p class="lead"><b>Market demand</b> is the sum of all individual demand at each price (textbook p. 24). Change what Vita, Khun and Lulu would buy, and watch the market curve update.</p>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="chartbox" id="mktChart"></div>
+      <div class="legend" id="mktLegend"></div>
+    </div>
+    <div class="card" id="mktSliders"></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Demand schedule (cups per week)</h3><table class="sched" id="mktTbl"></table></div>
+    <div class="card">
+      <h3>Check yourself</h3>
+      <p id="mktQ" class="qtext"></p>
+      <div class="flex"><input id="mktA" type="number" inputmode="numeric" style="font:700 18px Lato;width:120px;padding:8px 10px;border:2px solid var(--line);border-radius:10px" aria-label="Your answer"><button class="btn" id="mktGo">Check</button><button class="btn alt" id="mktNew">New question</button></div>
+      <div id="mktFb"></div>
+      <p class="muted" style="margin-top:12px">Tip: cover the “Market” column of the table first. Change the sliders, then ask a new question.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 4: MOVEMENT OR SHIFT LAB ============ -->
+<section class="panel" id="p3">
+  <h2>Movement or shift? The demand lab</h2>
+  <p class="lead">The <b>price slider</b> moves you <b>along</b> the curve. The <b>HIS AGE sliders</b> <b>shift</b> the whole curve. D1 stays on the chart so you can compare.</p>
+  <div class="flex" style="margin-bottom:14px"><span class="muted">Choose a market:</span><div class="seg" id="prodSeg"></div><button class="btn alt" id="labReset">Reset</button></div>
+  <div class="grid-lab">
+    <div>
+      <div class="card">
+        <div class="chartbox" id="labChart"><div class="tip" id="labTip"></div></div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>D1 (original)</span><span><i style="background:var(--orange)"></i>D2 (after HIS AGE changes)</span><span class="muted">Hover or touch the chart to read values.</span></div>
+        <div class="readout">
+          <div class="ro"><b>Price change → movement</b><span id="roMove">No change</span></div>
+          <div class="ro o"><b>Non-price change → shift</b><span id="roShift">No shift</span></div>
+        </div>
+      </div>
+      <div class="card"><div class="chain" id="chainBox"></div></div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="sl"><div class="top"><b id="priceLbl">Price</b><span class="val" id="priceV"></span></div>
+          <input type="range" id="priceS" aria-label="Price of the product"></div>
+        <div class="muted" style="margin:-4px 0 10px">Original price marked on the chart as P1.</div>
+        <div id="facBox"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Missions: can you make these happen?</h3>
+    <div class="missions" id="missions"></div>
+  </div>
+  <div class="card">
+    <h3>Demand schedule</h3>
+    <table class="sched" id="labTbl"></table>
+  </div>
+</section>
+
+<!-- ============ TAB 5: QUICK-FIRE ============ -->
+<section class="panel" id="p4">
+  <h2>Quick-fire: move or shift?</h2>
+  <p class="lead">Ten events. First decide what happens to the demand curve. If it shifts, choose the HIS AGE factor.</p>
+  <div class="card" id="qfCard">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="qfNum"></span><span class="score" id="qfScore"></span></div>
+    <p class="qtext" id="qfEvent"></p>
+    <p class="prod" id="qfProd"></p>
+    <div id="qfStep1"><b>Step 1: what happens to the demand for this product?</b><div class="opts" id="qfOpts1"></div></div>
+    <div id="qfStep2" class="hide"><b>Step 2: which factor caused the shift?</b><div class="opts" id="qfOpts2"></div></div>
+    <div id="qfFb"></div>
+    <div class="grid2 hide" id="qfDiag" style="margin-top:8px"><div class="chartbox" id="qfChart"></div><div></div></div>
+    <button class="btn hide" id="qfNext" style="margin-top:10px">Next</button>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse how a rise in the price of mangoes could affect the demand for sticky rice. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 2.2 Demand · Figures in the lab and schedules are simplified for teaching.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',BAD='#B3264E',GREY='#6B7280',LINE='#D6DEE9';
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+
+/* ---------- tracker ---------- */
+function track(detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('Unit 2','2.2 Demand',detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','My schedule','Market demand','Demand lab','Quick-fire','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(detail);if(done.size===6)track('All 6 activities complete');}
+show(0);
+
+/* ---------- generic SVG chart ---------- */
+// cfg: {W,H,xMax,yMax,xLabel,yLabel,xTicks,yTicks,curves:[{pts:[[q,p]..],color,w,dash,op,label}],dots:[{q,p,color,label,guide,r}],arrows:[{a:[q,p],b:[q,p],color}],guides:[{q,p,lq,lp}]}
+function chart(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?460:560),H=cfg.H||(vw<600?330:vw<1000?360:380),L=cfg.L||62,R=cfg.R||26,T=18,B=cfg.B||52;
+  const X=q=>L+q/cfg.xMax*(W-L-R), Y=p=>T+(1-p/cfg.yMax)*(H-T-B);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Demand diagram'}">`;
+  s+=`<defs><marker id="ah${cfg.id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="${ORANGE}"/></marker><marker id="ag${cfg.id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="${NAVY}"/></marker></defs>`;
+  (cfg.yTicks||[]).forEach(v=>{s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#EEF2F7"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${cfg.yFmt?cfg.yFmt(v):v}</text>`;});
+  (cfg.xTicks||[]).forEach(v=>{s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H-B}" stroke="#EEF2F7"/><text x="${X(v)}" y="${H-B+17}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.xFmt?cfg.xFmt(v):v}</text>`;});
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R+4}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><line x1="${L}" y1="${H-B}" x2="${L}" y2="${T-4}" stroke="${NAVY}" stroke-width="2"/>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text>`;
+  const usedQ=[];
+  (cfg.guides||[]).forEach(g=>{s+=`<path d="M${X(g.q)},${H-B}V${Y(g.p)}H${L}" fill="none" stroke="${GREY}" stroke-dasharray="4 4" stroke-width="1.2"/>`;
+    if(g.lp)s+=`<text x="${L+5}" y="${Y(g.p)-5}" font-size="12" font-style="italic" font-weight="700" fill="${NAVY}">${g.lp}</text>`;
+    if(g.lq){let ly=H-B-6;const x=X(g.q)+4;while(usedQ.some(u=>Math.abs(u[0]-x)<24&&u[1]===ly))ly-=16;usedQ.push([x,ly]);s+=`<text x="${x}" y="${ly}" font-size="12" font-style="italic" font-weight="700" fill="${NAVY}">${g.lq}</text>`;}});
+  (cfg.curves||[]).forEach(c=>{const pts=c.pts.filter(p=>p[0]>=0&&p[0]<=cfg.xMax*1.001);if(pts.length<2)return;
+    s+=`<polyline points="${pts.map(p=>X(p[0])+','+Y(p[1])).join(' ')}" fill="none" stroke="${c.color}" stroke-width="${c.w||3}" stroke-linecap="round" stroke-linejoin="round" ${c.dash?`stroke-dasharray="${c.dash}"`:''} opacity="${c.op??1}"/>`;
+    if(c.segs)c.segs.forEach(sg=>{s+=`<line x1="${X(sg[0][0])}" y1="${Y(sg[0][1])}" x2="${X(sg[1][0])}" y2="${Y(sg[1][1])}" stroke="${BAD}" stroke-width="4" stroke-dasharray="6 4" stroke-linecap="round"/>`;});
+    if(c.label){const e=c.labelAt||pts[pts.length-1];const lx=Math.min(X(e[0])+8,W-R-4);s+=`<rect x="${lx-3}" y="${Y(e[1])-10}" width="${c.label.length*8+8}" height="18" rx="4" fill="#fff" opacity=".85"/><text x="${lx}" y="${Y(e[1])+4}" font-size="13" font-weight="900" fill="${NAVY}">${c.label}</text>`;}});
+  (cfg.arrows||[]).forEach(a=>{s+=`<line x1="${X(a.a[0])}" y1="${Y(a.a[1])}" x2="${X(a.b[0])}" y2="${Y(a.b[1])}" stroke="${a.color||ORANGE}" stroke-width="3" marker-end="url(#${a.color===NAVY?'ag':'ah'}${cfg.id})"/>`;});
+  (cfg.dots||[]).forEach(d=>{s+=`<circle cx="${X(d.q)}" cy="${Y(d.p)}" r="${d.r||6}" fill="${d.color||NAVY}" stroke="#fff" stroke-width="2"/>`;if(d.label)s+=`<text x="${X(d.q)+9}" y="${Y(d.p)-8}" font-size="13" font-weight="900" fill="${NAVY}">${d.label}</text>`;});
+  if(cfg.hover)s+=`<line id="hl${cfg.id}" x1="${L}" x2="${W-R}" stroke="${NAVY}" stroke-width="1" stroke-dasharray="2 3" opacity="0"/><rect id="hz${cfg.id}" x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/>`;
+  s+='</svg>';
+  const tip=el.querySelector('.tip');el.innerHTML=s;if(tip)el.appendChild(tip);
+  return {X,Y,W,H,L,R,T,B};
+}
+const line=(f,p0,p1,n=40)=>{const a=[];for(let i=0;i<=n;i++){const p=p0+(p1-p0)*i/n;a.push([f(p),p]);}return a;};
+
+/* ================= TAB 1: HOOK ================= */
+const hookQs=[
+  {id:'s1',q1:'What happened to the price of a train trip?',a1:1,q2:'So, what made more people take the train?'},
+  {id:'s2',q1:'What happened to the price of a meatball skewer?',a1:0,q2:'So, what made more people buy meatballs?'},
+];
+const hookAns=[0,0];
+hookQs.forEach((h,k)=>{
+  const el=$(h.id);
+  el.innerHTML=`<p><b>1. ${h.q1}</b></p><div class="opts" data-s="1"></div><div class="hide" data-w="2"><p><b>2. ${h.q2}</b></p><div class="opts" data-s="2"></div></div><div data-fb></div>`;
+  const o1=el.querySelector('[data-s="1"]');
+  ['It stayed the same','It fell','It rose'].forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    b.classList.add(i===h.a1?'ok':'no');if(i!==h.a1)o1.children[h.a1].classList.add('ok');
+    el.querySelector('[data-w="2"]').classList.remove('hide');};o1.appendChild(b);});
+  const o2=el.querySelector('[data-s="2"]');
+  const c2=k===0?1:0;
+  ['Something other than price changed','The price changed'].forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+    b.classList.add(i===c2?'ok':'no');if(i!==c2)o2.children[c2].classList.add('ok');
+    el.querySelector('[data-fb]').innerHTML=k===0?`<div class="fb info">The <b>fare</b>, the product’s own price, fell from ฿42 to ฿20.</div>`:`<div class="fb info">The price stayed at ฿5–10. <b>Tastes and fashion</b> changed because of Lisa.</div>`;
+    hookAns[k]=1;if(hookAns[0]&&hookAns[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two stories');}
+  };o2.appendChild(b);});
+});
+function drawHook(){
+  const f=p=>98.2-10/11*p;
+  chart($('hookA'),{id:'ha',W:420,H:280,xMax:100,yMax:50,xLabel:'Trips per day (thousands)',yLabel:'Fare (฿)',xTicks:[0,20,40,60,80,100],yTicks:[0,10,20,30,40,50],
+    curves:[{pts:line(f,50,10),color:BLUE,label:'D'}],guides:[{q:60,p:42},{q:80,p:20}],dots:[{q:60,p:42,label:'฿42'},{q:80,p:20,label:'฿20'}],arrows:[{a:[66,40],b:[83,23]}],aria:'Extension along the Purple Line demand curve'});
+  const g=p=>Math.max(0,120-10*p),g2=p=>Math.max(0,190-10*p);
+  chart($('hookB'),{id:'hb',W:420,H:280,xMax:200,yMax:12,xLabel:'Skewers per day (Buriram stalls)',yLabel:'Price (฿)',xTicks:[0,50,100,150,200],yTicks:[0,2,4,6,8,10,12],
+    curves:[{pts:line(g,11,2),color:BLUE,label:'D1'},{pts:line(g2,11,2),color:ORANGE,label:'D2'}],guides:[{q:g(7),p:7},{q:g2(7),p:7}],arrows:[{a:[g(7)+6,7.6],b:[g2(7)-6,7.6]}],dots:[{q:g(7),p:7},{q:g2(7),p:7}],aria:'Demand for meatballs shifts right from D1 to D2'});
+}
+
+/* ================= TAB 2: MY SCHEDULE ================= */
+const SP=[20,30,40,50,60,70,80];
+let myQ=[12,10,8,6,4,2,1];
+const schedTbl=$('schedTbl');
+function buildSched(){
+  schedTbl.innerHTML=`<tr><th>Price</th><th style="width:48%">Cups per week</th><th>Qd</th><th>Spend</th></tr>`+
+    SP.map((p,i)=>`<tr id="sr${i}"><td class="num"><b>฿${p}</b></td><td><input type="range" min="0" max="15" step="1" value="${myQ[i]}" data-i="${i}" aria-label="Cups per week at ${p} baht"></td><td class="num" id="sq${i}"></td><td class="num" id="ss${i}"></td></tr>`).join('');
+  schedTbl.querySelectorAll('input').forEach(inp=>inp.oninput=e=>{myQ[+e.target.dataset.i]=+e.target.value;drawSched();});
+}
+function schedIssues(){const bad=[];for(let i=1;i<SP.length;i++)if(myQ[i]>myQ[i-1])bad.push(i);return bad;}
+function drawSched(){
+  const budget=+$('budget').value;$('budgetV').textContent='฿'+budget;
+  const bad=schedIssues();
+  SP.forEach((p,i)=>{$('sq'+i).textContent=myQ[i];$('ss'+i).textContent='฿'+(p*myQ[i]);
+    const r=$('sr'+i);r.classList.toggle('warn',bad.includes(i));r.classList.toggle('afford',!bad.includes(i)&&p*myQ[i]>budget);});
+  const pts=SP.map((p,i)=>[myQ[i],p]);
+  const segs=bad.map(i=>[[myQ[i-1],SP[i-1]],[myQ[i],SP[i]]]);
+  chart($('schedChart'),{id:'sc',xMax:16,yMax:90,xLabel:'Quantity demanded (cups per week)',yLabel:'Price (฿ per cup)',xTicks:[0,2,4,6,8,10,12,14,16],yTicks:[0,10,20,30,40,50,60,70,80,90],
+    curves:[{pts,color:BLUE,segs,label:'My demand',labelAt:pts[pts.length-1]}],
+    dots:SP.map((p,i)=>({q:myQ[i],p,color:bad.includes(i)?BAD:(p*myQ[i]>budget?ORANGE:NAVY),r:6})),aria:'Your demand curve for cha yen'});
+}
+$('budget').oninput=drawSched;
+$('schedCheck').onclick=()=>{
+  const bad=schedIssues(),budget=+$('budget').value,cant=SP.filter((p,i)=>p*myQ[i]>budget);
+  const m=$('schedMsg');
+  if(bad.length){m.className='fb no';m.innerHTML=`<b>Check the red line.</b> At ฿${SP[bad[0]]} you would buy <b>more</b> than at ฿${SP[bad[0]-1]}. That breaks the <b>law of demand</b>: as price rises, quantity demanded should fall. Real incomes fall as price rises, and fewer people are able to pay.`;return;}
+  if(myQ[0]===myQ[SP.length-1]){m.className='fb no';m.innerHTML='Your curve is flat: you buy the same at every price. Does a higher price really not change what you buy? Try again.';return;}
+  if(cant.length){m.className='fb no';m.innerHTML=`Your curve slopes the right way, but at <b>฿${cant[0]}</b> you would spend more than your ฿${budget} pocket money. You are <b>willing but not able</b>, so that is a <b>want</b>, not <b>effective demand</b>. Lower those rows, then check again.`;return;}
+  m.className='fb ok';m.innerHTML=`<b>Great.</b> Your schedule obeys the <b>law of demand</b>: an inverse relationship between price and quantity demanded. Every row is <b>effective demand</b> because you are willing <i>and</i> able to pay. Your curve slopes <b>downwards from left to right</b>, like Figure 6.1.`;
+  complete(1,'My demand schedule');
+};
+$('schedRandom').onclick=()=>{myQ=[6,9,5,7,3,5,2];buildSched();drawSched();$('schedMsg').className='fb info';$('schedMsg').textContent='This schedule has problems. Fix it with the sliders, then press Check.';};
+buildSched();drawSched();
+
+/* ================= TAB 3: MARKET ================= */
+const MP=[20,30,40,50,60,70,80];
+const people=[
+  {n:'Vita',c:ORANGE,max:10,stop:80},
+  {n:'Khun',c:NAVY,max:6,stop:100},
+  {n:'Lulu',c:'#8B6BB8',max:14,stop:70},
+];
+const qi=(pp,p)=>Math.max(0,Math.round(pp.max*(1-(p-20)/(pp.stop-20))));
+const mkt=p=>people.reduce((a,pp)=>a+qi(pp,p),0);
+$('mktSliders').innerHTML=people.map((pp,k)=>`<div style="margin-bottom:10px"><div class="flex"><span class="letter" style="background:${pp.c}">${pp.n[0]}</span><b style="color:var(--navy)">${pp.n}</b></div>
+  <div class="sl"><div class="top"><span>Cups per week at ฿20</span><span class="val" id="mv${k}"></span></div><input type="range" min="0" max="20" value="${pp.max}" data-k="${k}" data-f="max" aria-label="${pp.n} cups at 20 baht"></div>
+  <div class="sl"><div class="top"><span>Stops buying at</span><span class="val" id="ms${k}"></span></div><input type="range" min="40" max="120" step="10" value="${pp.stop}" data-k="${k}" data-f="stop" aria-label="${pp.n} stops buying price"></div></div>`).join('');
+$('mktSliders').querySelectorAll('input').forEach(i=>i.oninput=e=>{people[+e.target.dataset.k][e.target.dataset.f]=+e.target.value;drawMkt();});
+$('mktLegend').innerHTML=people.map(pp=>`<span><i style="background:${pp.c};height:3px"></i>${pp.n}</span>`).join('')+`<span><i style="background:${BLUE};height:5px"></i>Market demand</span>`;
+function drawMkt(){
+  people.forEach((pp,k)=>{$('mv'+k).textContent=pp.max+' cups';$('ms'+k).textContent='฿'+pp.stop;});
+  const xMax=Math.max(20,Math.ceil(mkt(20)/10)*10+5);
+  const curves=people.map(pp=>({pts:MP.map(p=>[qi(pp,p),p]),color:pp.c,w:2,op:.9}));
+  const mp=MP.map(p=>[mkt(p),p]);
+  curves.push({pts:mp,color:BLUE,w:4.5,label:'Market',labelAt:mp[0]});
+  const step=xMax>40?10:5;const xt=[];for(let v=0;v<=xMax;v+=step)xt.push(v);
+  chart($('mktChart'),{id:'mk',xMax,yMax:90,xLabel:'Quantity demanded (cups per week)',yLabel:'Price (฿ per cup)',xTicks:xt,yTicks:[0,10,20,30,40,50,60,70,80,90],curves,
+    dots:mp.map(d=>({q:d[0],p:d[1],color:BLUE,r:5})),aria:'Individual and market demand curves for cha yen'});
+  $('mktTbl').innerHTML=`<tr><th>Price</th>${people.map(pp=>`<th>${pp.n}</th>`).join('')}<th>Market</th></tr>`+MP.map(p=>`<tr><td><b>฿${p}</b></td>${people.map(pp=>`<td class="num">${qi(pp,p)}</td>`).join('')}<td class="num"><b>${mkt(p)}</b></td></tr>`).join('');
+}
+let mktP=50,mktRight=0;
+function newMktQ(){mktP=MP[1+Math.floor(Math.random()*5)];$('mktQ').innerHTML=`At <b>฿${mktP}</b> a cup, what is the <b>market demand</b> from these three students?`;$('mktA').value='';$('mktFb').innerHTML='';}
+$('mktNew').onclick=newMktQ;
+$('mktGo').onclick=()=>{const v=+$('mktA').value,ans=mkt(mktP);
+  if($('mktA').value!==''&&v===ans){mktRight++;$('mktFb').innerHTML=`<div class="fb ok"><b>Correct: ${ans} cups.</b> ${people.map(pp=>qi(pp,mktP)).join(' + ')} = ${ans}. You added the individual quantities at the same price, so the market curve is the individual curves added <b>sideways</b>.${mktRight<2?' Change a slider and try one more.':''}</div>`;if(mktRight>=2)complete(2,'Market demand');}
+  else $('mktFb').innerHTML=`<div class="fb no">Not quite. Find the ฿${mktP} row, read each student’s quantity, and add them together.</div>`;};
+drawMkt();newMktQ();
+
+/* ================= TAB 4: LAB ================= */
+// factor: [letter, label, sign, low, high, upMech, downMech, kind]
+const PRODUCTS={
+  purple:{name:'Purple Line trips',unit:'Trips per day (thousands)',pLbl:'Fare for a long trip',pMin:14,pMax:50,pStep:1,p0:42,xMax:130,yMax:55,xT:[0,20,40,60,80,100,120],yT:[0,10,20,30,40,50],
+    a:98.2,s:10/11,step:6,tp:[50,42,35,28,20,14],cur:v=>'฿'+v,qU:'thousand trips a day',thing:'Purple Line trips',
+    f:[
+      ['H','Tastes: wanting to avoid traffic jams',1,'Less','More','More commuters want to avoid Bangkok traffic','Fewer commuters mind the traffic'],
+      ['P','Population living near the line (new condos)',1,'Fewer','More','More people now live near Purple Line stations','Fewer people live near the stations'],
+      ['S','Price of Grab rides (a substitute)',1,'Cheaper','Dearer','Grab is a substitute, and dearer Grab rides make some riders switch to the train','Grab is a substitute, and cheaper Grab rides tempt some riders away from the train'],
+      ['S','Parking fee at park-and-ride (a complement)',-1,'Cheaper','Dearer','Park-and-ride parking is a complement, and a dearer fee puts drivers off using the train','Park-and-ride parking is a complement, and a cheaper fee encourages drivers to use the train'],
+      ['A','MRTA advertising campaign',1,'Less','More','More advertising informs and persuades people to use the line','Less advertising means fewer people are reminded to use the line'],
+      ['E','State of the economy',1,'Recession','Boom','In a boom more people have jobs to travel to','In a recession fewer people have jobs to travel to'],
+    ]},
+  iphone:{name:'iPhones in Thailand',unit:'iPhones sold per month (thousands)',pLbl:'Price of an iPhone',pMin:20000,pMax:60000,pStep:1000,p0:40000,xMax:110,yMax:65000,xT:[0,20,40,60,80,100],yT:[0,10000,20000,30000,40000,50000,60000],
+    a:90,s:0.0012,step:9,tp:[60000,50000,40000,30000,20000],cur:v=>'฿'+fmt(v),qU:'thousand iPhones a month',thing:'iPhones',yF:v=>v?(v/1000)+'k':'0',
+    f:[
+      ['H','Fashion: iPhones popular with teenagers',1,'Less','More','iPhones become more fashionable','iPhones go out of fashion'],
+      ['I','Consumer incomes',1,'Fall','Rise','With higher incomes more consumers are able to buy','With lower incomes fewer consumers are able to buy'],
+      ['S','Price of Samsung phones (a substitute)',1,'Cheaper','Dearer','Samsung phones are a substitute, and when they are dearer some buyers switch to iPhones','Samsung phones are a substitute, and when they are cheaper some buyers switch away from iPhones'],
+      ['S','Price of mobile data plans (a complement)',-1,'Cheaper','Dearer','Data plans are a complement, and dearer data makes smartphones less attractive','Data plans are a complement, and cheaper data makes smartphones more attractive'],
+      ['A','Samsung advertising (a rival)',-1,'Less','More','A rival’s advertising persuades some buyers to choose Samsung','Less rival advertising means fewer buyers are tempted away'],
+      ['E','State of the economy',1,'Recession','Boom','In a boom people feel confident and spend more','In a recession people lose confidence and spend less'],
+    ]},
+  cinema:{name:'Cinema tickets (Central WestGate)',unit:'Tickets per week',pLbl:'Ticket price',pMin:120,pMax:320,pStep:10,p0:200,xMax:2600,yMax:360,xT:[0,500,1000,1500,2000,2500],yT:[0,60,120,180,240,300,360],
+    a:2420,s:7.6,step:200,tp:[320,280,240,200,160,120],cur:v=>'฿'+v,qU:'tickets a week',thing:'cinema tickets',
+    f:[
+      ['H','Tastes: big blockbuster films showing',1,'Fewer','More','A big blockbuster makes more people want to go','Weak films make fewer people want to go'],
+      ['I','Consumer incomes',1,'Fall','Rise','With higher incomes more people are able to pay for tickets','With lower incomes fewer people are able to pay'],
+      ['S','Price of Netflix (a substitute)',1,'Cheaper','Dearer','Streaming is a substitute, and when it is dearer some people choose the cinema','Streaming is a substitute, and when it is cheaper some people stay at home'],
+      ['S','Price of popcorn (a complement)',-1,'Cheaper','Dearer','Popcorn is a complement, and dearer popcorn makes a cinema trip less attractive','Popcorn is a complement, and cheaper popcorn makes a cinema trip more attractive'],
+      ['A','Cinema advertising',1,'Less','More','More advertising persuades more people to go','Less advertising means fewer people hear about the films'],
+      ['W','Weather: rainy season',1,'Dry','Stormy','Stormy weather means more people want indoor entertainment','Dry, sunny weather tempts people outdoors'],
+    ]},
+};
+let prodKey='purple',P,fac,price;
+const segEl=$('prodSeg');
+Object.entries(PRODUCTS).forEach(([k,v])=>{const b=document.createElement('button');b.textContent=v.name.split(' (')[0];b.dataset.k=k;b.onclick=()=>{prodKey=k;setupLab();};segEl.appendChild(b);});
+const LV=['Falls a lot','Falls','No change','Rises','Rises a lot'];
+function setupLab(){
+  P=PRODUCTS[prodKey];fac=P.f.map(()=>0);price=P.p0;
+  segEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===prodKey));
+  const ps=$('priceS');ps.min=P.pMin;ps.max=P.pMax;ps.step=P.pStep;ps.value=price;$('priceLbl').textContent=P.pLbl+' (the product’s own price)';
+  $('facBox').innerHTML='<div style="font-weight:900;color:var(--navy);margin:4px 0 8px">Non-price factors (HIS AGE)</div>'+P.f.map((f,i)=>`<div class="fac" id="fc${i}"><div class="flex" style="gap:4px;flex-wrap:nowrap"><span class="letter">${f[0]}</span><span style="font-size:14.5px;flex:1">${f[1]}</span><span class="val" id="fv${i}" style="font-size:13px">No change</span></div>
+    <input type="range" min="-2" max="2" step="1" value="0" data-i="${i}" aria-label="${f[1]}"><div class="ticks"><span>${f[3]}</span><span>${f[4]}</span></div></div>`).join('');
+  $('facBox').querySelectorAll('input').forEach(inp=>inp.oninput=e=>{fac[+e.target.dataset.i]=+e.target.value;drawLab();});
+  drawLab();
+}
+$('priceS').oninput=e=>{price=+e.target.value;drawLab();};
+$('labReset').onclick=setupLab;
+const shiftAmt=()=>fac.reduce((a,v,i)=>a+v*P.f[i][2],0)*P.step;
+const q1=p=>P.a-P.s*p, q2=p=>q1(p)+shiftAmt();
+const r1=v=>Math.round(v*10)/10;
+function qStr(v){return prodKey==='cinema'?fmt(v):r1(v).toString();}
+const missionsDef=[
+  {t:'Extension',d:'Make an extension in demand happen, with no shift.',ok:()=>price<P.p0&&shiftAmt()===0},
+  {t:'Complement',d:'Cause a decrease in demand using a complement.',ok:()=>{const i=P.f.findIndex(f=>f[1].includes('complement'));return fac[i]>0&&shiftAmt()<0&&fac.every((v,j)=>j===i||v===0)&&price===P.p0;}},
+  {t:'No price change',d:'Make more be bought at the original price using two different factors.',ok:()=>price===P.p0&&fac.filter((v,i)=>v*P.f[i][2]>0).length>=2&&fac.every((v,i)=>v*P.f[i][2]>=0)},
+  {t:'Double trouble',d:'Show a contraction AND a decrease in demand at the same time.',ok:()=>price>P.p0&&shiftAmt()<0},
+];
+const mDone=new Set();
+$('missions').innerHTML=missionsDef.map((m,i)=>`<div class="mission" id="ms_${i}"><span class="t">${i+1}. ${m.t}</span>${m.d}</div>`).join('');
+let hoverP=null;
+function drawLab(){
+  $('priceV').textContent=P.cur(price);
+  fac.forEach((v,i)=>{$('fv'+i).textContent=LV[v+2];$('fc'+i).classList.toggle('active',v!==0);});
+  const sh=shiftAmt(),lo=P.pMin*0.85,hi=Math.min(P.pMax*1.12,P.yMax);
+  const curves=[{pts:line(q1,hi,lo),color:BLUE,label:'D1',w:3,op:sh?0.55:1}];
+  if(sh)curves.push({pts:line(q2,hi,lo),color:ORANGE,label:'D2',w:3.5});
+  const Qa=q1(P.p0),Qb=q2(price),Qs=q2(P.p0);
+  const guides=[{q:Qa,p:P.p0,lp:'P1',lq:'Q1'}];const dots=[{q:Qa,p:P.p0,color:NAVY}];const arrows=[];
+  if(sh){guides.push({q:Qs,p:P.p0,lq:'Q2'});dots.push({q:Qs,p:P.p0,color:ORANGE});if(Math.abs(Qs-Qa)>P.xMax*0.04)arrows.push({a:[Qa+(sh>0?1:-1)*P.xMax*0.012,P.p0+P.yMax*0.035],b:[Qs-(sh>0?1:-1)*P.xMax*0.012,P.p0+P.yMax*0.035]});}
+  if(price!==P.p0){guides.push({q:Qb,p:price,lp:'P2',lq:sh?'Q3':'Q2'});dots.push({q:Qb,p:price,color:NAVY});
+    const from=[Qs,P.p0],to=[Qb,price];const dx=to[0]-from[0],dy=to[1]-from[1];if(Math.abs(dy)>P.yMax*0.04)arrows.push({a:[from[0]+dx*0.12,from[1]+dy*0.12],b:[from[0]+dx*0.88,from[1]+dy*0.88],color:NAVY});}
+  const g=chart($('labChart'),{id:'lb',xMax:P.xMax,yMax:P.yMax,xLabel:P.unit,yLabel:'Price (฿)',xTicks:P.xT,yTicks:P.yT,yFmt:P.yF,xFmt:v=>fmt(v),curves,guides,dots,arrows,hover:true,L:P.yF?56:62,aria:'Demand lab diagram'});
+  // readouts
+  const mv=price<P.p0?'Extension':price>P.p0?'Contraction':null;
+  $('roMove').innerHTML=mv?`<b style="color:var(--navy)">${mv} in demand</b>: price ${price<P.p0?'fell':'rose'} ${P.cur(P.p0)} → ${P.cur(price)}, so quantity demanded ${price<P.p0?'rose':'fell'} along the curve.`:'Price unchanged: no movement along the curve.';
+  $('roShift').innerHTML=sh>0?`<b style="color:var(--dkorange)">Increase in demand</b>: the curve shifts right. At ${P.cur(P.p0)}, ${qStr(Qa)} → ${qStr(Qs)} ${P.qU}.`:sh<0?`<b style="color:var(--dkorange)">Decrease in demand</b>: the curve shifts left. At ${P.cur(P.p0)}, ${qStr(Qa)} → ${qStr(Qs)} ${P.qU}.`:(fac.some(v=>v)?'The changes cancel out, so there is no net shift.':'No non-price factor has changed.');
+  // chain of reasoning
+  const items=[];
+  fac.forEach((v,i)=>{if(!v)return;const f=P.f[i],eff=v*f[2];const dir=v>0?f[4].toLowerCase():f[3].toLowerCase();
+    items.push(`<li><b>${f[0]}</b>: ${f[1].replace(/ \(.*\)/,'')} → <i>${dir}</i>. ${v>0?f[5]:f[6]}. <b>This ${eff>0?'increases':'decreases'} demand</b> at every price (shift ${eff>0?'right':'left'}).</li>`);});
+  if(mv)items.unshift(`<li><b>Price</b>: the product’s own price ${price<P.p0?'falls':'rises'} (${P.cur(P.p0)} → ${P.cur(price)}). Consumers’ real income ${price<P.p0?'rises':'falls'} and ${price<P.p0?'more':'fewer'} buyers are able to pay, so there is a <b>${mv.toLowerCase()}</b> along the curve, <i>not</i> a shift.</li>`);
+  $('chainBox').innerHTML=items.length?`<b style="color:var(--purple)">Your chain of reasoning</b><ol>${items.join('')}</ol><div style="margin-top:6px"><b>Overall:</b> ${sh?`demand has ${sh>0?'increased':'decreased'} (D1 → D2)`:'no shift'}${mv?`${sh?' and ':', but '}there is a ${mv.toLowerCase()} because the price changed`:''}. Quantity demanded is now <b>${qStr(Math.max(0,Qb))}</b> ${P.qU} (was ${qStr(Qa)}).</div>`
+    :`<b style="color:var(--purple)">Your chain of reasoning</b><p style="margin:6px 0 0">Move a slider. Each change you make is written here as <i>cause → effect → outcome</i>, the same chain you need for a 6-mark answer.</p>`;
+  // schedule table
+  $('labTbl').innerHTML=`<tr><th>Price</th><th>Quantity demanded on D1</th><th>Quantity demanded now</th><th>Change</th></tr>`+P.tp.map(p=>{const a=Math.max(0,q1(p)),b=Math.max(0,q2(p)),d=b-a;
+    return `<tr${p===P.p0?' style="font-weight:700"':''}><td>${P.cur(p)}${p===P.p0?' (P1)':''}</td><td class="num">${qStr(a)}</td><td class="num">${qStr(b)}</td><td class="num" style="color:${d>0?'var(--good)':d<0?'var(--bad)':'var(--muted)'}">${d>0?'+':''}${qStr(d)}</td></tr>`;}).join('')+
+    `<tr><td colspan="4" class="l muted">Unit: ${P.qU}. A shift changes every row; a price change moves you to a different row.</td></tr>`;
+  // missions
+  missionsDef.forEach((m,i)=>{if(m.ok()&&!mDone.has(i)){mDone.add(i);$('ms_'+i).classList.add('done');}});
+  if(mDone.size===4)complete(3,'Demand lab missions');
+  // hover
+  const hz=$('hzlb'),hl=$('hllb'),tip=$('labTip'),box=$('labChart');
+  function onMove(ev){const svg=box.querySelector('svg'),rect=svg.getBoundingClientRect(),sc=g.H/rect.height;
+    const y=(ev.clientY-rect.top)*sc;const p=(1-(y-g.T)/(g.H-g.T-g.B))*P.yMax;if(p<0||p>P.yMax){tip.style.display='none';return;}
+    hl.setAttribute('y1',y);hl.setAttribute('y2',y);hl.setAttribute('opacity',1);
+    tip.style.display='block';tip.innerHTML=`<b>${P.cur(Math.round(p/P.pStep)*P.pStep)}</b><br>D1: ${qStr(Math.max(0,q1(p)))}${sh?`<br>D2: ${qStr(Math.max(0,q2(p)))}`:''}`;
+    const bx=box.getBoundingClientRect();let lx=ev.clientX-bx.left+14;if(lx>bx.width-130)lx=ev.clientX-bx.left-130;tip.style.left=lx+'px';tip.style.top=(ev.clientY-bx.top-20)+'px';}
+  function onLeave(){tip.style.display='none';hl.setAttribute('opacity',0);}
+  hz.addEventListener('pointermove',onMove);hz.addEventListener('pointerdown',onMove);hz.addEventListener('pointerleave',onLeave);
+}
+setupLab();
+
+/* ================= TAB 5: QUICK-FIRE ================= */
+const SC=[
+  ['Lisa says on Thai TV that she misses the luk chin (meatballs) at Buriram station.','Buriram luk chin','inc','H','A change in tastes and fashion: more people want them at every price.'],
+  ['The price of mangoes rises sharply.','Sticky rice','dec','S','Mango and sticky rice are complements. Dearer mango means fewer boxes of mango sticky rice, so less sticky rice is wanted.'],
+  ['Café Amazon cuts the price of its iced latte from ฿60 to ฿50.','Café Amazon iced lattes','ext',null,'The product’s own price fell, so we move down the same curve.'],
+  ['Grab raises its fares during rush hour.','Bolt rides','inc','S','Grab and Bolt are substitutes, so some Grab users switch to Bolt.'],
+  ['Thailand’s economy goes into recession and many people lose their jobs.','New cars','dec','E','In a recession people have lower incomes and less confidence.'],
+  ['A PM2.5 smog warning is issued for Bangkok.','Air purifiers','inc','W','Weather and air quality: people want clean air at home. (The textbook lists weather as another factor.)'],
+  ['Apple raises the price of the new iPhone.','iPhones','con',null,'The product’s own price rose, so we move up the same curve.'],
+  ['Samsung launches a very successful advertising campaign.','iPhones','dec','A','A rival’s advertising persuades some buyers to choose Samsung instead.'],
+  ['The government subsidy for buyers of electric cars falls from ฿75,000 to ฿50,000.','Electric cars','dec','G','Government policy: a smaller subsidy makes EVs less attractive to buy.'],
+  ['Kunlavut Vitidsarn wins an Olympic badminton medal and badminton becomes more popular with Thai teenagers.','Badminton rackets','inc','H','Habits, fashions and tastes.'],
+  ['Incomes rise in China.','Thai durian exported to China','inc','I','Chinese consumers are more able to buy.'],
+  ['The ฿20 Purple Line fare ends and a long trip costs ฿42 again.','Purple Line trips','con',null,'The fare is the train’s own price, so we move up the same curve.'],
+  ['Thailand’s population gets older.','Care homes for the elderly','inc','P','Population: more elderly people need care. (The textbook mentions population as another factor.)'],
+  ['The price of PlayStation 5 consoles falls.','PS5 games','inc','S','The console and its games are complements. More people own a PS5, so more want games.'],
+];
+const S1=[['ext','Extension (move down the curve)'],['con','Contraction (move up the curve)'],['inc','Increase in demand (shift right)'],['dec','Decrease in demand (shift left)']];
+const S2=[['H','H: Habits, fashions and tastes'],['I','I: Income'],['S','S: Substitutes and complements'],['A','A: Advertising'],['G','G: Government policies'],['E','E: Economy'],['W','Weather'],['P','Population']];
+let qfOrder=[],qi5=0,qfScore=0,qfMax=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQF(){qfOrder=shuffle(SC.map((_,i)=>i)).slice(0,10);qi5=0;qfScore=0;qfMax=0;renderQF();}
+function miniDiag(kind){
+  const f=p=>100-p,g=p=>(kind==='inc'?130:70)-p;
+  const cfg={id:'qf',W:380,H:250,xMax:140,yMax:100,xLabel:'Quantity',yLabel:'Price',xTicks:[],yTicks:[],curves:[{pts:line(f,90,20),color:BLUE,label:kind==='inc'||kind==='dec'?'D1':'D'}],aria:'Correct diagram'};
+  if(kind==='inc'||kind==='dec'){cfg.curves.push({pts:line(g,kind==='inc'?95:65,kind==='inc'?20:5),color:ORANGE,label:'D2'});cfg.arrows=[{a:[kind==='inc'?52:48,55],b:[kind==='inc'?80:22,55]}];cfg.guides=[{q:50,p:50,lp:'P1'},{q:g(50),p:50}];}
+  else{const a=kind==='ext'?[40,60]:[60,40],b=kind==='ext'?[60,40]:[40,60];cfg.guides=[{q:a[0],p:a[1],lp:'P1',lq:'Q1'},{q:b[0],p:b[1],lp:'P2',lq:'Q2'}];cfg.arrows=[{a:[a[0]+(b[0]-a[0])*.15,a[1]+(b[1]-a[1])*.15],b:[a[0]+(b[0]-a[0])*.85,a[1]+(b[1]-a[1])*.85],color:NAVY}];cfg.dots=[{q:a[0],p:a[1]},{q:b[0],p:b[1]}];}
+  chart($('qfChart'),cfg);
+}
+function renderQF(){
+  if(qi5>=qfOrder.length){$('qfCard').innerHTML=`<h3>Finished!</h3><p class="qtext">You scored ${qfScore} / ${qfMax}.</p><p>${qfScore>=qfMax*0.8?'Excellent. You can tell movements from shifts.':'Remember: only the product’s <b>own price</b> causes a movement. The price of a substitute or complement is a non-price factor, so it shifts the curve.'}</p><button class="btn" id="qfAgain">Try another set</button>`;
+    $('qfAgain').onclick=()=>{restoreQF();startQF();};complete(4,`Quick-fire: ${qfScore}/${qfMax}`);return;}
+  const s=SC[qfOrder[qi5]];
+  $('qfNum').textContent=`Event ${qi5+1} of ${qfOrder.length}`;$('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;
+  $('qfEvent').textContent=s[0];$('qfProd').innerHTML=`What happens to the demand for <b>${s[1]}</b>?`;
+  $('qfStep2').classList.add('hide');$('qfFb').innerHTML='';$('qfNext').classList.add('hide');$('qfDiag').classList.add('hide');
+  const o1=$('qfOpts1');o1.innerHTML='';
+  S1.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);qfMax++;
+    const right=k===s[2];if(right)qfScore++;b.classList.add(right?'ok':'no');if(!right)o1.children[S1.findIndex(x=>x[0]===s[2])].classList.add('ok');
+    $('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;
+    if(s[3]){$('qfStep2').classList.remove('hide');const o2=$('qfOpts2');o2.innerHTML='';
+      S2.forEach(([k2,t2])=>{const b2=document.createElement('button');b2.className='opt';b2.textContent=t2;b2.onclick=()=>{
+        o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);qfMax++;const r2=k2===s[3];if(r2)qfScore++;
+        b2.classList.add(r2?'ok':'no');if(!r2)o2.children[S2.findIndex(x=>x[0]===s[3])].classList.add('ok');finishQF(s,right&&r2);};o2.appendChild(b2);});}
+    else finishQF(s,right);
+  };o1.appendChild(b);});
+}
+function finishQF(s,right){
+  const name=S1.find(x=>x[0]===s[2])[1];
+  $('qfScore').textContent=`Score: ${qfScore} / ${qfMax}`;
+  $('qfFb').innerHTML=`<div class="fb ${right?'ok':'no'}"><b>${right?'Correct.':'Answer:'} ${name}${s[3]?` (${S2.find(x=>x[0]===s[3])[1]})`:''}.</b> ${s[4]}</div>`;
+  $('qfDiag').classList.remove('hide');miniDiag(s[2]);$('qfNext').classList.remove('hide');
+}
+const qfHTML=$('qfCard').innerHTML;
+function restoreQF(){$('qfCard').innerHTML=qfHTML;$('qfNext').onclick=()=>{qi5++;renderQF();};}
+restoreQF();startQF();
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['What is the law of demand?',['the inverse relationship between the price of a good or service and the quantity demanded of that product','the positive relationship between the price of a good or service and the quantity demanded of that product','the influence of non-price factors on the demand for a good or service','the assumption that both price and non-price factors affect the level of demand'],'The law of demand is only about price and quantity demanded, and the relationship is inverse (textbook p. 22).'],
+  ['What does a rightwards shift of the demand curve for a good or service show?',['a higher level of demand at all given price levels','a lower price charged for the product','a highly successful advertising campaign for the product','a reduction in the demand for the good or service'],'A shift right means more is demanded at every price. Advertising is one possible cause, not what the shift shows.'],
+  ['The price of mangoes rises sharply. What is the most likely effect on the demand curve for sticky rice?',['it shifts to the left','it shifts to the right','there is a contraction along it','there is an extension along it'],'Mango is a complement. Only sticky rice’s own price could cause a movement along its curve.'],
+  ['What would cause an extension in demand for Café Amazon iced lattes?',['Café Amazon cuts the price of its iced latte','Starbucks cuts the price of its coffee','incomes in Thailand rise','a very hot week in Bangkok'],'An extension is caused only by a fall in the product’s own price.'],
+  ['Which statement about market demand is correct?',['It is the sum of all individual demand at each price.','It is the demand of the largest buyer in the market.','It is the quantity demanded at the highest price.','It is the total amount that firms are willing to sell.'],'Market demand = the sum of all individual demand at each price (textbook p. 24).'],
+  ['Lulu’s family is wealthy, but she does not want an iPhone. Which is correct?',['Lulu has no demand for iPhones because she is not willing to buy one.','Lulu has effective demand for iPhones because she is able to pay.','Lulu has a want for iPhones but no demand.','Lulu’s demand is shown by a movement along the demand curve.'],'Demand needs willing AND able. Being able to pay is not enough.'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[];
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');
+    if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+let mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+startMCQ();
+
+const CH=[
+  ['Define','Complements are products that are demanded together, such as mango and sticky rice.'],
+  ['Context','In Bangkok markets, many consumers buy sticky rice to eat with mango as khao niao mamuang.'],
+  ['Chain 1','One effect is that when the price of mangoes rises, fewer mangoes are bought because they are less affordable.'],
+  ['Chain 1','This leads to fewer people buying sticky rice, so demand for sticky rice decreases and the curve shifts left from D1 to D2.'],
+  ['Chain 2','Another effect is that vendors must charge more for mango sticky rice, so fewer customers buy it.'],
+  ['Overall','Overall, a rise in the price of mangoes causes a decrease in demand for sticky rice: a shift left, not a movement along the curve.'],
+];
+let placed=[];
+function renderChain(){
+  $('chainSlots').innerHTML=CH.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?CH[placed[i]][1]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+  $('chainSlots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(placed[i]!==undefined){placed[i]=undefined;renderChain();}});
+  $('chainChips').innerHTML='';
+  chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=CH[k][1];b.disabled=placed.includes(k);
+    b.onclick=()=>{const e=CH.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;renderChain();};$('chainChips').appendChild(b);});
+}
+let chipOrder=shuffle(CH.map((_,i)=>i));
+$('chainReset').onclick=()=>{placed=[];chipOrder=shuffle(CH.map((_,i)=>i));$('chainFb').innerHTML='';renderChain();};
+$('chainCheck').onclick=()=>{
+  if(placed.filter(x=>x!==undefined).length<CH.length){$('chainFb').innerHTML='<div class="fb no">Place all six sentences first.</div>';return;}
+  let ok=0;const slots=$('chainSlots').querySelectorAll('.slot');
+  placed.forEach((k,i)=>{const good=k===i||(CH[k][0]===CH[i][0]&&CH[k][0]!=='Chain 1');if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+  if(ok===CH.length){$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">Complements are</span> products that are demanded together, such as mango and sticky rice in khao niao mamuang. <span class="hl">In</span> Bangkok markets, many <span class="hl">consumers</span> buy sticky rice to eat with mango.</p>
+      <p><span class="hl">One effect is</span> that when the price of mangoes rises, there is a contraction in the quantity of mangoes demanded, because they are less affordable. <span class="hl">This leads to</span> fewer people buying sticky rice to go with them. <span class="hl">This decreases</span> the demand for sticky rice <span class="hl">because</span> people want less of it at every price, so the curve shifts left from D1 to D2.</p>
+      <p><span class="hl">Another effect is</span> that vendors must charge more for each box of mango sticky rice, so fewer customers buy it. <span class="hl">As a result,</span> sticky rice sellers sell less, even though the price of sticky rice has not changed.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> a rise in the price of mangoes causes a decrease in demand for sticky rice. This is a shift to the left, not a movement along the curve.</p></div>`;
+    chainDone=true;checkExam();}
+  else $('chainFb').innerHTML=`<div class="fb no">${ok} of 6 in the right place. Remember: define the key term first, then the context, then build the chain (“One effect is… This leads to…”), then “Another effect”, and finish with “Overall”. Tap a red slot to send it back.</div>`;
+};
+renderChain();
+})();
+</script>
+</body>
+</html>
