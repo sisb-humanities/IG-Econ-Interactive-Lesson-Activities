@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2.4 Price Determination | SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --blue:#008BCC; --navy:#002F6C; --orange:#FF8F1C;
+  --grey-bg:#F2F6FA; --grey-2:#E4EDF5; --grey-3:#C8D8E8;
+  --text:#1A2B3C; --text-2:#456080; --text-3:#8098B0;
+  --red:#D64545; --green:#2E9E5B; --ok-bg:#E6F6E8; --bad-bg:#FDECEC;
+  --radius:10px; --shadow:0 2px 12px rgba(0,47,108,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--grey-bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer}
+/* top bar */
+.topbar{background:var(--navy);color:#fff;padding:0 20px;height:56px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.tb-logo{font-size:20px;font-weight:900;display:flex;align-items:center;line-height:1}
+.tb-logo .logo-i{display:inline-block;width:5px;height:.7em;background:var(--blue);border-radius:1px;margin:0 2px}
+.tb-logo small{font-size:10px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.6);margin-left:8px}
+.tb-div{width:1px;height:28px;background:rgba(255,255,255,.2)}
+.tb-title{font-size:13px;color:rgba(255,255,255,.85)}
+.tb-title b{color:#fff}
+.progress{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.pbar{width:120px;height:8px;border-radius:8px;background:rgba(255,255,255,.18);overflow:hidden}
+.pfill{height:100%;width:0;background:var(--orange);transition:width .4s}
+/* tabs */
+.tabbar{background:#fff;border-bottom:2px solid var(--grey-2);display:flex;padding:0 16px;position:sticky;top:56px;z-index:150;overflow-x:auto}
+.tab{padding:12px 16px;font-size:13px;font-weight:700;color:var(--text-3);border:0;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.tab .num{width:22px;height:22px;border-radius:50%;background:var(--grey-2);color:var(--text-2);display:grid;place-items:center;font-size:11px}
+.tab.active{color:var(--navy);border-bottom-color:var(--orange)}
+.tab.active .num{background:var(--navy);color:#fff}
+.tab.done .num{background:var(--green);color:#fff}
+main{flex:1;width:100%;max-width:1120px;margin:0 auto;padding:22px 16px 40px}
+.panel{display:none}.panel.active{display:block}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
+.card h2{font-size:20px;font-weight:900;color:var(--navy);margin-bottom:6px}
+.card h3{font-size:15px;font-weight:900;color:var(--navy);margin-bottom:8px}
+.lead{color:var(--text-2);font-size:14px;line-height:1.55;margin-bottom:10px}
+.kicker{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;margin-bottom:4px}
+.tag{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.08em;padding:2px 7px;border-radius:10px;margin-right:6px;vertical-align:middle}
+.tag.th{background:#FFF1E0;color:#A35400}.tag.gl{background:#E6F3FA;color:#005E8C}
+p{line-height:1.55}
+.btn{border:0;border-radius:8px;padding:10px 16px;font-weight:700;font-size:14px;background:var(--navy);color:#fff;transition:transform .1s,background .15s}
+.btn:active{transform:scale(.97)}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--grey-3)}
+.btn.orange{background:var(--orange)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.feedback{margin-top:10px;padding:10px 12px;border-radius:8px;font-size:14px;line-height:1.5;display:none}
+.feedback.show{display:block}
+.feedback.ok{background:var(--ok-bg);border-left:4px solid var(--green)}
+.feedback.bad{background:var(--bad-bg);border-left:4px solid var(--red)}
+.feedback.info{background:#E6F3FA;border-left:4px solid var(--blue)}
+/* hook */
+.hook{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+.story{border-left:5px solid var(--orange);padding:4px 0 4px 16px;font-size:15px;line-height:1.65}
+.choices{display:grid;gap:8px;margin-top:10px}
+.choice{text-align:left;border:2px solid var(--grey-3);background:#fff;border-radius:8px;padding:10px 12px;font-size:14px;font-weight:700;color:var(--text)}
+.choice.right{border-color:var(--green);background:var(--ok-bg)}
+.choice.wrong{border-color:var(--red);background:var(--bad-bg)}
+/* lab */
+.lab{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,1fr);gap:16px;align-items:start}
+.chart-wrap{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
+svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.controls .ctl{margin-bottom:14px}
+.ctl label{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.ctl label span{color:var(--text-2);font-weight:400}
+.ctl .ends{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3)}
+input[type=range]{width:100%;height:30px;accent-color:var(--blue)}
+input[type=range].price{accent-color:var(--orange)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.seg button{flex:1;min-width:80px;border:2px solid var(--grey-3);background:#fff;border-radius:8px;padding:8px 6px;font-size:13px;font-weight:700;color:var(--text-2)}
+.seg button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 12px}
+.stat{background:var(--grey-bg);border-radius:8px;padding:8px 10px}
+.stat .k{font-size:11px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.stat .v{font-size:18px;font-weight:900;color:var(--navy)}
+.status{border-radius:8px;padding:10px 12px;font-weight:900;font-size:15px;text-align:center;margin-bottom:8px}
+.status.eq{background:var(--ok-bg);color:#155724}
+.status.sh{background:#FFF1E0;color:#8A4500}
+.status.su{background:#E6F3FA;color:#004E75}
+.explain{font-size:13.5px;color:var(--text-2);line-height:1.55;min-height:62px}
+details{margin-top:6px}
+summary{font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;margin-bottom:8px}
+.missions{list-style:none;display:grid;gap:8px}
+.missions li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;padding:8px 10px;border-radius:8px;background:var(--grey-bg)}
+.missions li .tick{flex:0 0 22px;height:22px;border-radius:50%;border:2px solid var(--grey-3);display:grid;place-items:center;font-size:13px;color:#fff;font-weight:900}
+.missions li.done{background:var(--ok-bg)}
+.missions li.done .tick{background:var(--green);border-color:var(--green)}
+/* plot */
+.plot{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:16px;align-items:start}
+table.sched{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+table.sched th{background:var(--navy);color:#fff;font-size:12px;padding:7px;text-align:center}
+table.sched td{border:1px solid var(--grey-2);padding:6px;text-align:center}
+table.sched tr.hitD td:nth-child(2){background:#FDECEC}
+table.sched tr.hitS td:nth-child(3){background:var(--ok-bg)}
+.qrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0;font-size:14px}
+.qrow input{width:84px;padding:8px;border:2px solid var(--grey-3);border-radius:8px;font:inherit;font-weight:700;text-align:center}
+.qrow input.ok{border-color:var(--green);background:var(--ok-bg)}
+.qrow input.bad{border-color:var(--red);background:var(--bad-bg)}
+/* sort */
+.sortgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.case{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;border-top:4px solid var(--grey-3);display:flex;flex-direction:column;gap:10px}
+.case.sh{border-top-color:var(--orange)}.case.su{border-top-color:var(--blue)}
+.case p{font-size:14px}
+.case .row{display:flex;gap:8px}
+.case .row button{flex:1;border:2px solid var(--grey-3);background:#fff;border-radius:8px;padding:9px 6px;font-weight:700;font-size:13px;color:var(--text)}
+.case .row button.right{border-color:var(--green);background:var(--ok-bg)}
+.case .row button.wrong{border-color:var(--red);background:var(--bad-bg);animation:shake .3s}
+.case .q{font-size:12px;font-weight:900;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
+.case .why{font-size:13px;color:var(--text-2);background:var(--grey-bg);border-radius:8px;padding:8px 10px;display:none}
+.case .why.show{display:block}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+/* quiz */
+.qcard{max-width:760px}
+.qmeta{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.qstem{font-size:17px;font-weight:700;line-height:1.5;margin-bottom:12px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:2px solid var(--grey-3);background:#fff;border-radius:8px;padding:11px 12px;font-size:15px;color:var(--text);display:flex;gap:10px}
+.opt b{color:var(--navy)}
+.opt.right{border-color:var(--green);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--red);background:var(--bad-bg)}
+.score{font-size:40px;font-weight:900;color:var(--navy)}
+footer{background:var(--navy);color:rgba(255,255,255,.8);font-size:12px;padding:14px 20px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center}
+footer a{color:#fff;font-weight:700}
+@media (max-width:860px){.lab,.plot,.hook{grid-template-columns:1fr}.tb-title{display:none}.pbar{width:70px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-logo">S<span class="logo-i"></span>SB<small>SCHOOL</small></div>
+  <div class="tb-div"></div>
+  <div class="tb-title">IGCSE Economics 0455 &nbsp;·&nbsp; <b>2.4 Price Determination</b></div>
+  <div class="progress"><span id="ptext">0 / 4 activities</span><div class="pbar"><div class="pfill" id="pfill"></div></div></div>
+</header>
+
+<nav class="tabbar" role="tablist">
+  <button class="tab active" data-tab="hook"><span class="num">1</span>The problem</button>
+  <button class="tab" data-tab="lab"><span class="num">2</span>Market Lab</button>
+  <button class="tab" data-tab="plot"><span class="num">3</span>Plot it</button>
+  <button class="tab" data-tab="sort"><span class="num">4</span>Shortage or surplus?</button>
+  <button class="tab" data-tab="quiz"><span class="num">5</span>Quick quiz</button>
+</nav>
+
+<main>
+<!-- ═════════ 1. HOOK ═════════ -->
+<section class="panel active" id="panel-hook">
+  <div class="hook">
+    <div class="card">
+      <div class="kicker"><span class="tag th">TH</span> The problem in the world</div>
+      <h2>Why are people queuing for a toy?</h2>
+      <div class="story">
+        <p>In 2024, Lisa from BLACKPINK posted photos of a small toy monster called <b>Labubu</b>. Within weeks it became one of the most wanted products in Thailand.</p>
+        <p style="margin-top:8px">Pop Mart sells Labubu ‘blind boxes’ in its shops at a <b>fixed price</b> of a few hundred baht. Fans queued for hours outside Pop Mart stores in Bangkok malls. Some stores limited how many boxes each customer could buy, and new stock sold out within minutes.</p>
+        <p style="margin-top:8px">On resale websites, rare Labubu figures sold for <b>many times the shop price</b>.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker">Think first</div>
+      <h3>At the shop price, what is happening in the Labubu market?</h3>
+      <div class="choices" id="hookChoices"></div>
+      <div class="feedback" id="hookFb"></div>
+      <button class="btn orange" id="toLab" style="margin-top:12px;display:none">Test your idea in the Market Lab →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 2. MARKET LAB ═════════ -->
+<section class="panel" id="panel-lab">
+  <div class="card" style="padding:14px 18px">
+    <div class="kicker">Activity 1 · Market Lab</div>
+    <p class="lead" style="margin:0">Choose a market. Move the <b style="color:var(--orange)">price slider</b> above and below equilibrium and watch what happens to quantity demanded and quantity supplied. Then press <b>Let the market work</b>.</p>
+  </div>
+  <div class="lab">
+    <div class="chart-wrap">
+      <div class="seg" id="presetSeg"></div>
+      <svg id="labSvg" viewBox="0 0 600 440" aria-label="Demand and supply diagram"></svg>
+      <p style="font-size:11px;color:var(--text-3);margin-top:4px" id="presetNote"></p>
+    </div>
+    <div class="card controls" style="margin:0">
+      <div class="ctl">
+        <label for="sPrice">Price (P1) <span id="vPrice"></span></label>
+        <input type="range" class="price" id="sPrice">
+      </div>
+      <div class="status eq" id="status">Equilibrium</div>
+      <div class="readout">
+        <div class="stat"><div class="k">Quantity demanded</div><div class="v" id="rQd">–</div></div>
+        <div class="stat"><div class="k">Quantity supplied</div><div class="v" id="rQs">–</div></div>
+        <div class="stat"><div class="k">Equilibrium price</div><div class="v" id="rPe">–</div></div>
+        <div class="stat"><div class="k">Equilibrium quantity</div><div class="v" id="rQe">–</div></div>
+      </div>
+      <div class="explain" id="explain"></div>
+      <div style="display:flex;gap:8px;margin:10px 0 4px">
+        <button class="btn" id="btnWork" style="flex:1">▶ Let the market work</button>
+        <button class="btn alt" id="btnReset">Reset</button>
+      </div>
+      <details>
+        <summary>Move the curves (preview of 2.5 Price changes)</summary>
+        <div class="ctl"><label for="sD">Demand curve <span id="vD"></span></label><input type="range" id="sD" min="-30" max="30" step="1" value="0"><div class="ends"><span>← fall in demand</span><span>rise in demand →</span></div></div>
+        <div class="ctl"><label for="sS">Supply curve <span id="vS"></span></label><input type="range" id="sS" min="-30" max="30" step="1" value="0"><div class="ends"><span>← fall in supply</span><span>rise in supply →</span></div></div>
+        <div class="ctl"><label for="sDs">Demand steepness</label><input type="range" id="sDs" min="0.4" max="2.5" step="0.05" value="1"><div class="ends"><span>flatter</span><span>steeper</span></div></div>
+        <div class="ctl"><label for="sSs">Supply steepness</label><input type="range" id="sSs" min="0.4" max="2.5" step="0.05" value="1"><div class="ends"><span>flatter</span><span>steeper</span></div></div>
+      </details>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Missions – complete all three</h3>
+    <ul class="missions" id="missions"></ul>
+  </div>
+</section>
+
+<!-- ═════════ 3. PLOT IT ═════════ -->
+<section class="panel" id="panel-plot">
+  <div class="card" style="padding:14px 18px">
+    <div class="kicker">Activity 2 · Plot it <span class="tag th" style="margin-left:6px">TH</span></div>
+    <p class="lead" style="margin:0">Durian wholesale market in Chanthaburi (illustrative data – the same schedule as Part 3 of your worksheet). Choose <b>Demand</b> or <b>Supply</b>, then <b>tap the grid</b> to plot each point. Tap a point again to remove it.</p>
+  </div>
+  <div class="plot">
+    <div class="chart-wrap">
+      <div class="seg" id="plotMode">
+        <button class="on" data-m="D" style="--c:var(--red)">● Plot demand</button>
+        <button data-m="S">● Plot supply</button>
+      </div>
+      <svg id="plotSvg" viewBox="0 0 600 470" aria-label="Graph grid for plotting"></svg>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn" id="btnCheckPlot" style="flex:1">Check my plot</button>
+        <button class="btn alt" id="btnClearPlot">Clear</button>
+      </div>
+      <div class="feedback" id="plotFb"></div>
+    </div>
+    <div class="card" style="margin:0">
+      <h3>Schedule</h3>
+      <table class="sched" id="schedTable">
+        <thead><tr><th>Price<br>(baht/kg)</th><th>Qd<br>(tonnes/day)</th><th>Qs<br>(tonnes/day)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div id="plotQs" style="opacity:.4;pointer-events:none">
+        <h3 style="margin-top:12px">Read your diagram</h3>
+        <div class="qrow">Equilibrium price = <input id="pq1" inputmode="numeric"> baht/kg</div>
+        <div class="qrow">Equilibrium quantity = <input id="pq2" inputmode="numeric"> tonnes</div>
+        <div class="qrow">Excess demand at 140 baht = <input id="pq3" inputmode="numeric"> tonnes</div>
+        <div class="qrow">Excess supply at 200 baht = <input id="pq4" inputmode="numeric"> tonnes</div>
+        <button class="btn" id="btnPlotAns" style="margin-top:6px">Check answers</button>
+        <div class="feedback" id="plotAnsFb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 4. SORT ═════════ -->
+<section class="panel" id="panel-sort">
+  <div class="card" style="padding:14px 18px">
+    <div class="kicker">Activity 3 · Shortage or surplus?</div>
+    <p class="lead" style="margin:0">Real markets in Thailand and around the world. For each one decide: <b>shortage or surplus?</b> Then: if the market works freely, will the <b>price rise or fall</b>? <span id="sortScore" style="font-weight:900;color:var(--navy)"></span></p>
+  </div>
+  <div class="sortgrid" id="sortGrid"></div>
+</section>
+
+<!-- ═════════ 5. QUIZ ═════════ -->
+<section class="panel" id="panel-quiz">
+  <div class="card qcard" id="quizBox"></div>
+</section>
+</main>
+
+<footer>
+  <span>SISB Nonthaburi · Humanities</span>
+  <span>Textbook: Chapter 8 Price determination</span>
+  <a href="https://notebooklm.google.com/notebook/738baa5f-52f6-448e-b8e5-f52567228947" target="_blank" rel="noopener">NotebookLM revision notebook</a>
+  <a href="https://youtu.be/1WSpdvbpHjw" target="_blank" rel="noopener">Topic video</a>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const UNIT = 'Unit 2', TOPIC = '2.4 Price Determination';
+function log(detail){
+  try{
+    const T = window.SISB_TRACKER || window.SISBTracker;
+    if (T && typeof T.log === 'function') T.log(UNIT, TOPIC, detail);
+  }catch(e){}
+}
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs={}, parent){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; }
+const fmt = (n, dp=0) => Number(n).toLocaleString('en-GB',{minimumFractionDigits:dp,maximumFractionDigits:dp});
+
+/* ───────── progress ───────── */
+const ACTS = ['lab','plot','sort','quiz'];
+let done = {};
+try{ done = JSON.parse(localStorage.getItem('sisb-econ-2_4-done')||'{}'); }catch(e){ done = {}; }
+function complete(key, detail){
+  if (!done[key]) { done[key] = true; log(detail); try{ localStorage.setItem('sisb-econ-2_4-done', JSON.stringify(done)); }catch(e){} }
+  renderProgress();
+}
+function renderProgress(){
+  const n = ACTS.filter(a=>done[a]).length;
+  $('#ptext').textContent = `${n} / 4 activities`;
+  $('#pfill').style.width = (n/4*100)+'%';
+  ACTS.forEach(a=>{ const t=$(`.tab[data-tab="${a}"]`); if(t) t.classList.toggle('done', !!done[a]); });
+  if (n===4 && !done._all){ done._all = true; log('All 4 activities complete'); try{ localStorage.setItem('sisb-econ-2_4-done', JSON.stringify(done)); }catch(e){} }
+}
+
+/* ───────── tabs ───────── */
+function showTab(id){
+  $$('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===id));
+  $$('.panel').forEach(p=>p.classList.toggle('active', p.id==='panel-'+id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+
+/* ───────── 1. hook ───────── */
+const hookOpts = [
+  ['There are more Labubu toys for sale than people who want them.', false, 'If that were true, there would be no queues – shops would have toys left on the shelves.'],
+  ['More people want to buy Labubu than there are toys for sale.', true, 'Yes! At the shop price, <b>quantity demanded is greater than quantity supplied</b>. Economists call this <b>excess demand</b>, or a <b>shortage</b>. The queues and the high resale prices are the evidence.'],
+  ['The number of toys for sale is exactly the same as the number people want.', false, 'If that were true, everyone who wanted one could buy one without queuing for hours.'],
+  ['Pop Mart has run out of Labubu toys forever.', false, 'Pop Mart keeps making new stock – it sells out quickly <i>at that price</i>. A shortage is always a shortage at a particular price.'],
+];
+hookOpts.forEach(([t,ok,why])=>{
+  const b=document.createElement('button'); b.className='choice'; b.textContent=t;
+  b.addEventListener('click',()=>{
+    $$('#hookChoices .choice').forEach(c=>c.classList.remove('right','wrong'));
+    b.classList.add(ok?'right':'wrong');
+    const fb=$('#hookFb'); fb.className='feedback show '+(ok?'ok':'bad'); fb.innerHTML=why+(ok?'':' Try again.');
+    if(ok) $('#toLab').style.display='inline-block';
+  });
+  $('#hookChoices').appendChild(b);
+});
+$('#toLab').addEventListener('click',()=>{ showTab('lab'); setPreset('labubu'); });
+
+/* ───────── 2. market lab ───────── */
+// Linear model pivoting on the default equilibrium (P0, Q0):
+// Qd(P) = Q0 + shiftD - bD*fD*(P-P0);  Qs(P) = Q0 + shiftS + bS*fS*(P-P0)
+const PRESETS = {
+  durian:{ name:'Durian', tag:'th', unit:'baht/kg', qUnit:'tonnes per day', pLabel:'Price (baht per kg)', qLabel:'Quantity (tonnes per day)',
+    P0:160, Q0:40, bD:0.6, bS:0.5, pMin:80, pMax:240, pStep:5, pTick:20, qMax:100, qTick:10, start:160, shiftScale:0.6,
+    note:'Chanthaburi wholesale durian market – illustrative data from worksheet Part 3. Price axis starts at 80 baht.' },
+  labubu:{ name:'Labubu', tag:'th', unit:'baht', qUnit:'thousand boxes per week', pLabel:'Price (baht per box)', qLabel:'Quantity (thousand boxes per week)',
+    P0:1500, Q0:22.5, bD:0.025, bS:0.01, pMin:0, pMax:2500, pStep:25, pTick:500, qMax:70, qTick:10, start:500, shiftScale:0.45,
+    note:'Labubu blind boxes in Bangkok – illustrative numbers. The shop price starts at 500 baht.' },
+  mooncake:{ name:'Mooncakes', tag:'th', unit:'baht', qUnit:'hundred boxes per day', pLabel:'Price (baht per box)', qLabel:'Quantity (hundred boxes per day)',
+    P0:800, Q0:18, bD:0.04, bS:0.02, pMin:0, pMax:1300, pStep:10, pTick:200, qMax:60, qTick:10, start:1200, shiftScale:0.4,
+    note:'Mooncakes in Bangkok the day after the Mid-Autumn Festival – illustrative numbers. Bakeries still charge the festival price of 1,200 baht.' },
+  avocado:{ name:'Avocados', tag:'gl', unit:'US$', qUnit:'thousand boxes per day', pLabel:'Price (US$ per box)', qLabel:'Quantity (thousand boxes per day)',
+    P0:40, Q0:30, bD:0.75, bS:0.5, pMin:0, pMax:70, pStep:1, pTick:10, qMax:70, qTick:10, start:25, shiftScale:0.45,
+    note:'Wholesale avocado market (the Mexico case study in textbook Chapter 8) – illustrative numbers. Start price: US$25 a box.' },
+};
+const S = { key:'durian', P:160, sD:0, sS:0, fD:1, fS:1, anim:null, worked:{} };
+const M = () => PRESETS[S.key];
+const shiftQ = v => v/30 * M().qMax * M().shiftScale;
+function Qd(P){ const m=M(); return m.Q0 + shiftQ(S.sD) - m.bD/S.fD*(P-m.P0); }
+function Qs(P){ const m=M(); return m.Q0 + shiftQ(S.sS) + m.bS/S.fS*(P-m.P0); }
+// steepness: steeper = smaller slope dQ/dP, so divide by factor
+function eq(){ const m=M(); const B=m.bD/S.fD, D=m.bS/S.fS; const P=m.P0 + (shiftQ(S.sD)-shiftQ(S.sS))/(B+D); return {P, Q:Qs(P)}; }
+
+const svg = $('#labSvg');
+const L=70,R=20,T=18,B=58,PW=600-L-R,PH=440-T-B;
+const X = q => L + q/M().qMax*PW;
+const Y = p => T + PH - (p-M().pMin)/(M().pMax-M().pMin)*PH;
+
+Object.entries(PRESETS).forEach(([k,m])=>{
+  const b=document.createElement('button'); b.dataset.k=k; b.innerHTML=`<span class="tag ${m.tag}" style="margin:0 4px 0 0">${m.tag==='th'?'TH':'GLOBAL'}</span>${m.name}`;
+  b.addEventListener('click',()=>setPreset(k)); $('#presetSeg').appendChild(b);
+});
+const sPrice=$('#sPrice');
+function setPreset(k){
+  stopAnim();
+  S.key=k; const m=M();
+  S.sD=0;S.sS=0;S.fD=1;S.fS=1; $('#sD').value=0;$('#sS').value=0;$('#sDs').value=1;$('#sSs').value=1;
+  sPrice.min=m.pMin; sPrice.max=m.pMax; sPrice.step=m.pStep; S.P=m.start; sPrice.value=m.start;
+  $$('#presetSeg button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+  $('#presetNote').textContent=m.note;
+  draw();
+}
+sPrice.addEventListener('input',()=>{ stopAnim(); S.P=+sPrice.value; draw(); });
+$('#sD').addEventListener('input',e=>{ S.sD=+e.target.value; draw(); });
+$('#sS').addEventListener('input',e=>{ S.sS=+e.target.value; draw(); });
+$('#sDs').addEventListener('input',e=>{ S.fD=+e.target.value; draw(); });
+$('#sSs').addEventListener('input',e=>{ S.fS=+e.target.value; draw(); });
+$('#btnReset').addEventListener('click',()=>setPreset(S.key));
+
+function clipLine(fn){ // sample a straight line Q=fn(P) and keep points inside the box
+  const m=M(), pts=[]; const N=200;
+  for(let i=0;i<=N;i++){ const P=m.pMin+(m.pMax-m.pMin)*i/N; const q=fn(P); if(q>=0&&q<=m.qMax) pts.push([X(q),Y(P)]); }
+  return pts;
+}
+function draw(){
+  const m=M(); svg.innerHTML='';
+  const defs=el('defs',{},svg);
+  ['o','b','n'].forEach((id,i)=>{ const mk=el('marker',{id:'ar'+id,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs); el('path',{d:'M0,0 L10,5 L0,10 z',fill:['#FF8F1C','#008BCC','#002F6C'][i]},mk); });
+  // grid + ticks
+  for(let p=m.pMin;p<=m.pMax+1e-9;p+=m.pTick){ el('line',{x1:L,x2:L+PW,y1:Y(p),y2:Y(p),stroke:'#E4EDF5'},svg); const t=el('text',{x:L-8,y:Y(p)+4,'text-anchor':'end','font-size':12,fill:'#456080'},svg); t.textContent=fmt(p); }
+  for(let q=0;q<=m.qMax+1e-9;q+=m.qTick){ el('line',{x1:X(q),x2:X(q),y1:T,y2:T+PH,stroke:'#E4EDF5'},svg); const t=el('text',{x:X(q),y:T+PH+18,'text-anchor':'middle','font-size':12,fill:'#456080'},svg); t.textContent=fmt(q); }
+  el('line',{x1:L,y1:T,x2:L,y2:T+PH,stroke:'#002F6C','stroke-width':2},svg);
+  el('line',{x1:L,y1:T+PH,x2:L+PW,y2:T+PH,stroke:'#002F6C','stroke-width':2},svg);
+  let t=el('text',{x:L+PW/2,y:440-4,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#002F6C'},svg); t.textContent=m.qLabel;
+  t=el('text',{x:16,y:T+PH/2,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#002F6C',transform:`rotate(-90 16 ${T+PH/2})`},svg); t.textContent=m.pLabel;
+
+  const E=eq(); const P=S.P, qd=Qd(P), qs=Qs(P);
+  const eqOK = E.Q>=0 && E.Q<=m.qMax && E.P>=m.pMin && E.P<=m.pMax;
+  // shaded triangle
+  const gap=qd-qs; const state = Math.abs(gap) < m.qMax*0.004 ? 'eq' : (gap>0?'sh':'su');
+  if(state!=='eq' && eqOK){
+    const cq=v=>Math.max(0,Math.min(m.qMax,v));
+    el('polygon',{points:`${X(cq(qs))},${Y(P)} ${X(cq(qd))},${Y(P)} ${X(E.Q)},${Y(E.P)}`,fill:state==='sh'?'rgba(255,143,28,.22)':'rgba(0,139,204,.18)'},svg);
+  }
+  // curves
+  const dPts=clipLine(Qd), sPts=clipLine(Qs);
+  if(dPts.length>1){ el('polyline',{points:dPts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#D64545','stroke-width':3.5,'stroke-linecap':'round'},svg); const last=dPts[dPts.length-1], first=dPts[0]; const lab=first[0]>last[0]?first:last; t=el('text',{x:lab[0]+6,y:lab[1]+4,'font-size':16,'font-weight':900,fill:'#D64545'},svg); t.textContent='D'; }
+  if(sPts.length>1){ el('polyline',{points:sPts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#2E9E5B','stroke-width':3.5,'stroke-linecap':'round'},svg); const top=sPts.reduce((a,b)=>b[1]<a[1]?b:a); t=el('text',{x:top[0]+6,y:top[1]+6,'font-size':16,'font-weight':900,fill:'#2E9E5B'},svg); t.textContent='S'; }
+  // equilibrium guides
+  if(eqOK){
+    el('line',{x1:L,y1:Y(E.P),x2:X(E.Q),y2:Y(E.P),stroke:'#002F6C','stroke-dasharray':'3 4','stroke-width':1.3},svg);
+    el('line',{x1:X(E.Q),y1:Y(E.P),x2:X(E.Q),y2:T+PH,stroke:'#002F6C','stroke-dasharray':'3 4','stroke-width':1.3},svg);
+    el('circle',{cx:X(E.Q),cy:Y(E.P),r:5.5,fill:'#002F6C'},svg);
+    t=el('text',{x:L+6,y:Y(E.P)-6,'font-size':12,'font-weight':900,fill:'#002F6C'},svg); t.textContent='Pe';
+    t=el('text',{x:X(E.Q)+5,y:T+PH-6,'font-size':12,'font-weight':900,fill:'#002F6C'},svg); t.textContent='Qe';
+  }
+  // price line
+  if(state!=='eq'){
+    const right=Math.min(m.qMax,Math.max(qd,qs,0));
+    el('line',{x1:L,y1:Y(P),x2:X(right),y2:Y(P),stroke:'#FF8F1C','stroke-width':2.5},svg);
+    [qd,qs].forEach((q,i)=>{ if(q>=0&&q<=m.qMax){ el('line',{x1:X(q),y1:Y(P),x2:X(q),y2:T+PH,stroke:i?'#2E9E5B':'#D64545','stroke-dasharray':'5 4','stroke-width':1.6},svg); el('circle',{cx:X(q),cy:Y(P),r:4.5,fill:i?'#2E9E5B':'#D64545'},svg); const tt=el('text',{x:X(q),y:T+PH+32,'text-anchor':'middle','font-size':12,'font-weight':900,fill:i?'#2E9E5B':'#D64545'},svg); tt.textContent=i?'Qs':'Qd'; }});
+    t=el('text',{x:L-8,y:Y(P)-8,'text-anchor':'end','font-size':12,'font-weight':900,fill:'#FF8F1C'},svg); t.textContent='P1';
+    const a=Math.max(0,Math.min(qd,qs)), b=Math.min(m.qMax,Math.max(qd,qs));
+    if(b-a>m.qMax*0.04){
+      const col= state==='sh'?'o':'b';
+      const yy=Y(P)+(state==='sh'?16:-12);
+      el('line',{x1:X(a)+3,y1:yy,x2:X(b)-3,y2:yy,stroke:state==='sh'?'#FF8F1C':'#008BCC','stroke-width':2.2,'marker-start':`url(#ar${col})`,'marker-end':`url(#ar${col})`},svg);
+      t=el('text',{x:(X(a)+X(b))/2,y:yy+(state==='sh'?16:-7),'text-anchor':'middle','font-size':12,'font-weight':900,fill:state==='sh'?'#B35F00':'#006699'},svg);
+      t.textContent=(state==='sh'?'Excess demand = ':'Excess supply = ')+fmt(Math.abs(gap),m.qMax<80?1:0);
+    }
+  }
+  // readouts
+  const dp = m.qMax<80?1:0;
+  $('#vPrice').textContent = m.unit==='US$' ? `US$${fmt(P)}` : `${fmt(P)} ${m.unit}`;
+  $('#rQd').textContent = fmt(Math.max(0,qd),dp);
+  $('#rQs').textContent = fmt(Math.max(0,qs),dp);
+  $('#rPe').textContent = eqOK?fmt(E.P):'off chart';
+  $('#rQe').textContent = eqOK?fmt(E.Q,dp):'–';
+  $('#vD').textContent = S.sD===0?'':(S.sD>0?'shifted right':'shifted left');
+  $('#vS').textContent = S.sS===0?'':(S.sS>0?'shifted right':'shifted left');
+  const st=$('#status');
+  const units=m.qUnit;
+  if(state==='eq'){ st.className='status eq'; st.textContent='Market equilibrium – the market clears'; $('#explain').innerHTML=`At ${m.unit==='US$'?'US$'+fmt(P):fmt(P)+' '+m.unit}, quantity demanded <b>equals</b> quantity supplied. There is no shortage and no surplus.`; }
+  else if(state==='sh'){ st.className='status sh'; st.textContent=`Shortage: excess demand of ${fmt(gap,dp)}`; $('#explain').innerHTML=`P1 is <b>below</b> equilibrium. Consumers want ${fmt(Math.max(0,qd),dp)} but firms only supply ${fmt(Math.max(0,qs),dp)} (${units}). Expect queues, waiting lists and high resale prices. The price will tend to <b>rise</b>.`; }
+  else { st.className='status su'; st.textContent=`Surplus: excess supply of ${fmt(-gap,dp)}`; $('#explain').innerHTML=`P1 is <b>above</b> equilibrium. Firms supply ${fmt(Math.max(0,qs),dp)} but consumers only want ${fmt(Math.max(0,qd),dp)} (${units}). Expect unsold stock and discounts. The price will tend to <b>fall</b>.`; }
+  checkMissions(state, gap, E);
+}
+
+function stopAnim(){ if(S.anim){ cancelAnimationFrame(S.anim); S.anim=null; } $('#btnWork').disabled=false; }
+$('#btnWork').addEventListener('click',()=>{
+  const m=M(), E=eq(); if(E.P<m.pMin||E.P>m.pMax) return;
+  const start=S.P, end=Math.round(E.P/m.pStep)*m.pStep; if(start===end){ $('#explain').innerHTML='The market is already at equilibrium – nothing needs to change.'; return; }
+  const rising=end>start; const t0=performance.now(), dur=2400;
+  $('#btnWork').disabled=true;
+  const step=(now)=>{
+    const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+    S.P = k<1 ? start+(end-start)*e : end; sPrice.value=S.P; draw();
+    $('#explain').innerHTML = rising
+      ? '<b>Price rises ↑</b> → some consumers are no longer willing or able to buy, so <b>quantity demanded contracts</b>. Higher prices give firms a profit incentive, so <b>quantity supplied extends</b>. The shortage shrinks…'
+      : '<b>Price falls ↓</b> → more consumers are willing and able to buy, so <b>quantity demanded extends</b>. Lower prices mean less profit, so <b>quantity supplied contracts</b>. The surplus shrinks…';
+    if(k<1){ S.anim=requestAnimationFrame(step); }
+    else { S.anim=null; $('#btnWork').disabled=false; S.worked[S.key]=true;
+      $('#explain').innerHTML += '<br><b>Equilibrium reached:</b> quantity demanded = quantity supplied. The curves did not move – only the price changed.'; checkMissions('eq',0,eq()); }
+  };
+  S.anim=requestAnimationFrame(step);
+});
+
+const MISSIONS = [
+  { id:'m1', text:'<span class="tag th">TH</span><b>Durian:</b> set the price so there is an <b>excess demand of exactly 22 tonnes</b> (worksheet Part 3c).',
+    test:(st,gap)=> S.key==='durian' && st==='sh' && Math.abs(gap-22)<0.6 },
+  { id:'m2', text:'<span class="tag th">TH</span><b>Labubu:</b> find the price that would <b>end the queues</b> completely.',
+    test:(st)=> S.key==='labubu' && st==='eq' },
+  { id:'m3', text:'<span class="tag th">TH</span><b>Mooncakes:</b> start at the festival price, then press <b>Let the market work</b> to clear the surplus.',
+    test:(st)=> S.key==='mooncake' && st==='eq' && S.worked.mooncake },
+];
+const mDone={};
+MISSIONS.forEach(m=>{ const li=document.createElement('li'); li.id=m.id; li.innerHTML=`<span class="tick">✓</span><span>${m.text}</span>`; $('#missions').appendChild(li); });
+function checkMissions(st,gap){
+  MISSIONS.forEach(m=>{ if(!mDone[m.id] && m.test(st,gap)){ mDone[m.id]=true; $('#'+m.id).classList.add('done'); } });
+  if(MISSIONS.every(m=>mDone[m.id])) complete('lab','Market Lab: all 3 missions complete');
+}
+setPreset('durian');
+
+/* ───────── 3. plot it ───────── */
+const SCHED=[[100,76,10],[120,64,20],[140,52,30],[160,40,40],[180,28,50],[200,16,60],[220,4,70]];
+SCHED.forEach(r=>{ const tr=document.createElement('tr'); tr.dataset.p=r[0]; tr.innerHTML=`<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td>`; $('#schedTable tbody').appendChild(tr); });
+const ps=$('#plotSvg'); const pL=70,pR=20,pT=16,pB=60,pW=600-pL-pR,pH=470-pT-pB;
+const px=q=>pL+q/80*pW, py=p=>pT+pH-(p-80)/160*pH;
+let mode='D'; const pts={D:[],S:[]}; let plotChecked=false;
+$$('#plotMode button').forEach(b=>b.addEventListener('click',()=>{ mode=b.dataset.m; $$('#plotMode button').forEach(x=>x.classList.toggle('on',x===b)); }));
+function drawPlot(){
+  ps.innerHTML='';
+  el('rect',{x:pL,y:pT,width:pW,height:pH,fill:'#fff'},ps);
+  for(let q=0;q<=80;q+=5) el('line',{x1:px(q),x2:px(q),y1:pT,y2:pT+pH,stroke:q%10?'#E4EDF5':'#C8D8E8'},ps);
+  for(let p=80;p<=240;p+=10) el('line',{x1:pL,x2:pL+pW,y1:py(p),y2:py(p),stroke:p%20?'#E4EDF5':'#C8D8E8'},ps);
+  for(let q=0;q<=80;q+=10){ const t=el('text',{x:px(q),y:pT+pH+18,'text-anchor':'middle','font-size':12,fill:'#456080'},ps); t.textContent=q; }
+  for(let p=80;p<=240;p+=20){ const t=el('text',{x:pL-8,y:py(p)+4,'text-anchor':'end','font-size':12,fill:'#456080'},ps); t.textContent=p; }
+  el('line',{x1:pL,y1:pT,x2:pL,y2:pT+pH,stroke:'#002F6C','stroke-width':2},ps);
+  el('line',{x1:pL,y1:pT+pH,x2:pL+pW,y2:pT+pH,stroke:'#002F6C','stroke-width':2},ps);
+  el('path',{d:`M${pL-6},${pT+pH-8} l12,-5 M${pL-6},${pT+pH-14} l12,-5`,stroke:'#002F6C','stroke-width':1.5},ps);
+  let t=el('text',{x:pL+pW/2,y:470-14,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#002F6C'},ps); t.textContent='Quantity of durian (tonnes per day)';
+  t=el('text',{x:16,y:pT+pH/2,'text-anchor':'middle','font-size':13,'font-weight':700,fill:'#002F6C',transform:`rotate(-90 16 ${pT+pH/2})`},ps); t.textContent='Price (baht per kg)';
+  if(plotChecked){
+    ['D','S'].forEach(k=>{ const s=[...pts[k]].sort((a,b)=>a[1]-b[1]); el('polyline',{points:s.map(([q,p])=>`${px(q)},${py(p)}`).join(' '),fill:'none',stroke:k==='D'?'#D64545':'#2E9E5B','stroke-width':3},ps);
+      const lab=k==='D'?s[s.length-1]:s[s.length-1]; const tt=el('text',{x:px(lab[0])+8,y:py(lab[1])+2,'font-size':16,'font-weight':900,fill:k==='D'?'#D64545':'#2E9E5B'},ps); tt.textContent=k; });
+    el('line',{x1:pL,y1:py(160),x2:px(40),y2:py(160),stroke:'#002F6C','stroke-dasharray':'3 4'},ps);
+    el('line',{x1:px(40),y1:py(160),x2:px(40),y2:pT+pH,stroke:'#002F6C','stroke-dasharray':'3 4'},ps);
+  }
+  ['D','S'].forEach(k=>pts[k].forEach(([q,p])=>{
+    if(k==='D') el('circle',{cx:px(q),cy:py(p),r:6.5,fill:'#D64545',stroke:'#fff','stroke-width':1.5},ps);
+    else el('rect',{x:px(q)-6,y:py(p)-6,width:12,height:12,fill:'#2E9E5B',stroke:'#fff','stroke-width':1.5},ps);
+  }));
+  $$('#schedTable tbody tr').forEach(tr=>{ const p=+tr.dataset.p; tr.classList.toggle('hitD',pts.D.some(x=>x[1]===p)); tr.classList.toggle('hitS',pts.S.some(x=>x[1]===p)); });
+}
+ps.addEventListener('pointerdown',e=>{
+  if(plotChecked) return;
+  const pt=ps.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const loc=pt.matrixTransform(ps.getScreenCTM().inverse());
+  if(loc.x<pL-8||loc.x>pL+pW+8||loc.y<pT-8||loc.y>pT+pH+8) return;
+  const q=Math.max(0,Math.min(80,Math.round((loc.x-pL)/pW*80)));
+  const p=Math.max(80,Math.min(240,Math.round(((pT+pH-loc.y)/pH*160+80)/20)*20));
+  const arr=pts[mode]; const hit=arr.findIndex(([a,b])=>b===p&&Math.abs(a-q)<=3);
+  if(hit>=0) arr.splice(hit,1); else { const same=arr.findIndex(([,b])=>b===p); if(same>=0) arr.splice(same,1); arr.push([q,p]); }
+  drawPlot();
+});
+$('#btnClearPlot').addEventListener('click',()=>{ pts.D=[];pts.S=[];plotChecked=false; $('#plotFb').className='feedback'; $('#plotQs').style.cssText='opacity:.4;pointer-events:none'; drawPlot(); });
+$('#btnCheckPlot').addEventListener('click',()=>{
+  const fb=$('#plotFb'); const wrong=[];
+  SCHED.forEach(([p,qd,qs])=>{
+    const d=pts.D.find(x=>x[1]===p), s=pts.S.find(x=>x[1]===p);
+    if(!d||Math.abs(d[0]-qd)>2) wrong.push(`demand at ${p} baht`);
+    if(!s||Math.abs(s[0]-qs)>2) wrong.push(`supply at ${p} baht`);
+  });
+  if(wrong.length===0){
+    plotChecked=true; drawPlot(); fb.className='feedback show ok';
+    fb.innerHTML='All 14 points are correct. Your curves are drawn. Now read the diagram and answer the questions.';
+    $('#plotQs').style.cssText='';
+  } else {
+    fb.className='feedback show bad';
+    fb.innerHTML=`${14-wrong.length} / 14 points correct. Check: ${wrong.slice(0,4).join(', ')}${wrong.length>4?'…':''}. <br>Tip: every quantity in the schedule is between two grid lines – each small square is 5 tonnes.`;
+  }
+});
+$('#btnPlotAns').addEventListener('click',()=>{
+  const want={pq1:160,pq2:40,pq3:22,pq4:44}; let ok=0;
+  Object.entries(want).forEach(([id,v])=>{ const i=$('#'+id); const g=parseFloat(i.value); const r=g===v; i.className=r?'ok':'bad'; if(r) ok++; });
+  const fb=$('#plotAnsFb');
+  if(ok===4){ fb.className='feedback show ok'; fb.innerHTML='Perfect. Pe = 160 baht, Qe = 40 tonnes. At 140 baht: 52 − 30 = <b>22</b> tonnes excess demand. At 200 baht: 60 − 16 = <b>44</b> tonnes excess supply.'; complete('plot','Plot it: durian diagram and readings correct'); }
+  else { fb.className='feedback show bad'; fb.innerHTML=`${ok} / 4 correct. Remember: excess demand = Qd − Qs; excess supply = Qs − Qd. Read both quantities at the <b>same</b> price.`; }
+});
+drawPlot();
+
+/* ───────── 4. sort ───────── */
+const CASES=[
+  ['th','Jay Fai’s famous street-food restaurant in Bangkok, known for its crab omelette, has queues of several hours every day.','sh','The queue shows Qd > Qs at the current price. In a free market the price would rise – here customers pay with their time instead.'],
+  ['th','The day after the Mid-Autumn Festival, hotels and bakeries in Bangkok sell boxes of mooncakes at 50% off.','su','At the festival price Qs > Qd. The 50% discount <b>is</b> the price mechanism working to clear the surplus.'],
+  ['gl','In 2024, tickets for Taylor Swift’s concerts in Singapore sold out within hours at the official price, and tickets appeared on resale websites at much higher prices.','sh','The official price was below equilibrium. Resale prices show where the market price really was.'],
+  ['th','From 2011 to 2014, the Thai government bought rice from farmers at a guaranteed price well above the market price. Millions of tonnes piled up in warehouses.','su','The guaranteed price was above equilibrium, so Qs > Qd. The price should have fallen, but the government held it up – so the surplus stayed in warehouses.'],
+  ['gl','In summer 2024, many supermarkets in Japan had empty rice shelves and limited each customer to one bag.','sh','Empty shelves and limits per customer are classic signs of excess demand. Rice prices in Japan did rise sharply afterwards.'],
+  ['th','Some property developers in Bangkok have many new condominium units that nobody has bought, so they offer discounts and free furniture.','su','Unsold units = Qs > Qd. Discounts and free furniture are hidden price cuts.'],
+  ['th','A coconut ice cream stall at Chatuchak Weekend Market sells out by 2 p.m. every Saturday. Customers who arrive later go home without one.','sh','Selling out with customers turned away means Qd > Qs at that price.'],
+  ['gl','In the UK, clothes shops cut the price of summer clothes in the autumn because they have too many left.','su','The textbook example: too much stock at the old price, so shops cut prices to clear the surplus.'],
+  ['th','The day after Songkran ends, a stall on Khao San Road still has hundreds of water guns that nobody wants at the normal price.','su','After the festival, Qs > Qd at the old price. Expect a ‘sale’ sign very soon.'],
+  ['gl','When a new iPhone launches, many Apple Stores around the world have long queues and online delivery dates are weeks away.','sh','At the launch price Qd > Qs. Some phones are resold at above the shop price.'],
+];
+let sortFirst=0, sortDone=0;
+CASES.forEach(([tg,text,ans,why],i)=>{
+  const c=document.createElement('div'); c.className='case';
+  c.innerHTML=`<p><span class="tag ${tg}">${tg==='th'?'TH':'GLOBAL'}</span>${text}</p>
+    <div class="q">Step 1 · Is there a…</div>
+    <div class="row s1"><button data-v="sh">Shortage</button><button data-v="su">Surplus</button></div>
+    <div class="q s2q" style="display:none">Step 2 · If the market works freely, the price will…</div>
+    <div class="row s2" style="display:none"><button data-v="up">Rise ↑</button><button data-v="down">Fall ↓</button></div>
+    <div class="why"></div>`;
+  let tries=0, step1=false;
+  $$('.s1 button',c).forEach(b=>b.addEventListener('click',()=>{
+    if(step1) return; tries++;
+    if(b.dataset.v===ans){ step1=true; b.classList.add('right'); c.classList.add(ans); $('.s2q',c).style.display=''; $('.s2',c).style.display='flex'; }
+    else { b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong'); const w=$('.why',c); w.classList.add('show'); w.innerHTML='Not quite. Ask: at this price, is quantity demanded <b>bigger</b> or <b>smaller</b> than quantity supplied?'; }
+  }));
+  let step2=false;
+  $$('.s2 button',c).forEach(b=>b.addEventListener('click',()=>{
+    if(step2) return; tries++;
+    const right=(ans==='sh')?'up':'down';
+    if(b.dataset.v===right){ step2=true; b.classList.add('right'); const w=$('.why',c); w.classList.add('show'); w.innerHTML=(ans==='sh'?'<b>Shortage → price below equilibrium → price rises.</b> ':'<b>Surplus → price above equilibrium → price falls.</b> ')+why;
+      if(tries===2) sortFirst++; sortDone++; $('#sortScore').textContent=`${sortDone} / ${CASES.length} done · ${sortFirst} right first time`;
+      if(sortDone===CASES.length) complete('sort',`Shortage or surplus: ${sortFirst}/${CASES.length} first time`); }
+    else { b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong'); const w=$('.why',c); w.classList.add('show'); w.innerHTML= ans==='sh'?'Think again: with a shortage, buyers compete for too few goods.':'Think again: with a surplus, sellers have stock they cannot sell.'; }
+  }));
+  $('#sortGrid').appendChild(c);
+});
+
+/* ───────── 5. quiz ───────── */
+const POOL=[
+  ['What is meant by market equilibrium?',['Quantity demanded equals quantity supplied','Firms make the highest possible profit','The government sets a fair price','Every consumer can afford the product'],'Equilibrium is where Qd = Qs, so there is no shortage or surplus.'],
+  ['Which term has the same meaning as ‘equilibrium price’?',['Market clearing price','Maximum price','Cost price','Excess price'],'At the equilibrium price the market ‘clears’ – everything supplied is bought.'],
+  ['If the price of a product is set below the equilibrium price, the market will have…',['excess demand (a shortage)','excess supply (a surplus)','market equilibrium','a fall in demand'],'Below Pe, Qd > Qs.'],
+  ['If the price of a product is set above the equilibrium price, the market will have…',['excess supply (a surplus)','excess demand (a shortage)','market equilibrium','an increase in supply'],'Above Pe, Qs > Qd.'],
+  ['At 120 baht per kg, 64 tonnes of durian are demanded and 20 tonnes are supplied each day. What does the market show?',['Excess demand of 44 tonnes','Excess supply of 44 tonnes','Excess demand of 84 tonnes','Market equilibrium'],'Qd − Qs = 64 − 20 = 44 tonnes of excess demand.'],
+  ['At $30, quantity demanded is 6,000 units and quantity supplied is 8,000 units per week. How much excess will suppliers build up over 4 weeks?',['8,000 units','2,000 units','24,000 units','32,000 units'],'2,000 units of excess supply per week × 4 weeks = 8,000 units.'],
+  ['Which is NOT a feature of the price mechanism?',['The government decides how resources are allocated','Goods are allocated on the basis of price','Resources are allocated by financial incentives','Competition creates choice for consumers'],'The price mechanism relies on market forces, with no government interference.'],
+  ['Developers in Bangkok have thousands of unsold condominium units. If the market works freely, what will happen?',['Price falls, quantity demanded rises, quantity supplied falls','Price rises, quantity supplied rises','Price falls, quantity demanded falls','Nothing – the units are already built'],'A surplus pushes the price down: movements along both curves.'],
+  ['There is a shortage. As the price mechanism removes it, what happens?',['Quantity demanded contracts and quantity supplied extends','Quantity demanded extends and quantity supplied contracts','The demand curve shifts left','The supply curve shifts left'],'Price rises → Qd falls, Qs rises. The curves do not shift.'],
+  ['Concert tickets are resold online at double the official price. What does this suggest about the official price?',['It was below the equilibrium price','It was above the equilibrium price','It was the equilibrium price','It was set by the government'],'High resale prices show excess demand at the official price.'],
+  ['Bakeries cut the price of mooncakes by 50% after the Mid-Autumn Festival. Why?',['The old price was above equilibrium, creating a surplus','The old price was below equilibrium, creating a shortage','Mooncakes are in market equilibrium','The government ordered a lower price'],'Unsold stock at the old price = surplus. Cutting the price clears it.'],
+  ['Which is true at the equilibrium price?',['There is no shortage and no surplus','There is always a small shortage','Firms cannot make a profit','Quantity supplied is greater than quantity demanded'],'At Pe, Qd = Qs.'],
+  ['Thailand’s rice pledging scheme (2011–2014) paid farmers a price well above the market price. What was the result?',['Large stockpiles of unsold rice (a surplus)','Empty shelves (a shortage)','Market equilibrium','Lower rice prices for farmers'],'A price above equilibrium means Qs > Qd, so rice piled up in warehouses.'],
+  ['How is excess demand different from an increase in demand?',['Excess demand is a gap between Qd and Qs at one price; an increase in demand shifts the curve','They mean exactly the same thing','Excess demand shifts the demand curve to the right','An increase in demand only happens when there is a surplus'],'Excess demand = disequilibrium at a price. An increase in demand = a shift (topic 2.5).'],
+  ['Which statement about a shortage is correct?',['At the current price, quantity demanded is greater than quantity supplied','The product is no longer produced anywhere','Quantity supplied is greater than quantity demanded','It only happens to necessities such as rice'],'A shortage is always at a particular price.'],
+  ['At 70 baht a cup, bubble tea shops in Siam Square supply 500 cups a day, but consumers demand only 200. What does the market show?',['Excess supply of 300 cups','Excess demand of 300 cups','Excess supply of 700 cups','Excess demand of 200 cups'],'Qs − Qd = 500 − 200 = 300 cups.'],
+];
+const shuffle=a=>{ const b=[...a]; for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; };
+let Q=[], qi=0, qscore=0;
+function startQuiz(){ Q=shuffle(POOL).slice(0,10).map(([s,o,w])=>({s,correct:o[0],opts:shuffle(o),w})); qi=0; qscore=0; renderQ(); }
+function renderQ(){
+  const box=$('#quizBox');
+  if(qi>=Q.length){
+    box.innerHTML=`<div class="kicker">Activity 4 · Quick quiz</div><h2>Finished!</h2><div class="score">${qscore} / ${Q.length}</div>
+      <p class="lead">${qscore>=8?'Excellent – you are ready for the exam-style questions in Part 8.':qscore>=5?'Good. Look again at the questions you missed, then try a new set.':'Go back to the Market Lab and try again – watch what happens to Qd and Qs when the price moves.'}</p>
+      <button class="btn orange" id="again">Try a new set of 10</button>`;
+    $('#again').addEventListener('click',startQuiz);
+    complete('quiz',`Quick quiz: ${qscore}/${Q.length}`); return;
+  }
+  const q=Q[qi];
+  box.innerHTML=`<div class="kicker">Activity 4 · Quick quiz</div><div class="qmeta"><span>Question ${qi+1} of ${Q.length}</span><span>Score ${qscore}</span></div>
+    <div class="qstem">${q.s}</div><div class="opts">${q.opts.map((o,i)=>`<button class="opt" data-o="${encodeURIComponent(o)}"><b>${'ABCD'[i]}</b><span>${o}</span></button>`).join('')}</div>
+    <div class="feedback" id="qfb"></div><button class="btn" id="qnext" style="margin-top:12px;display:none">Next →</button>`;
+  let answered=false;
+  $$('.opt',box).forEach(b=>b.addEventListener('click',()=>{
+    if(answered) return; answered=true;
+    const pick=decodeURIComponent(b.dataset.o), ok=pick===q.correct; if(ok) qscore++;
+    $$('.opt',box).forEach(x=>{ if(decodeURIComponent(x.dataset.o)===q.correct) x.classList.add('right'); });
+    if(!ok) b.classList.add('wrong');
+    const fb=$('#qfb'); fb.className='feedback show '+(ok?'ok':'bad'); fb.innerHTML=(ok?'<b>Correct.</b> ':'<b>Not quite.</b> ')+q.w;
+    $('#qnext').style.display='inline-block';
+  }));
+  $('#qnext').addEventListener('click',()=>{ qi++; renderQ(); });
+}
+startQuiz();
+renderProgress();
+})();
+</script>
+</body>
+</html>
