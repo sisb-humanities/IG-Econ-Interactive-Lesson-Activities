@@ -2,249 +2,1089 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IGCSE Economics — Interactive Activities | SISB</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SISB Economics</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --blue:#008BCC; --navy:#002F6C; --orange:#FF8F1C;
-  --white:#FFFFFF; --grey-bg:#F2F6FA; --grey-2:#E4EDF5; --grey-3:#C8D8E8;
-  --text:#1A2B3C; --text-2:#456080; --text-3:#8098B0;
-  --green:#28A745; --green-bg:#E6F6E8; --green-txt:#155724;
-  --radius:10px; --shadow:0 2px 12px rgba(0,47,108,.10);
-}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Lato',sans-serif;background:var(--grey-bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+body{font-family:'Lato',sans-serif;background:#f0f4f8;min-height:100vh;color:#1a1a2e}
 
-/* top bar */
-.topbar{background:var(--navy);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-.tb-logo{font-size:20px;font-weight:900;letter-spacing:.02em;color:#fff;display:flex;align-items:center;line-height:1}
-.tb-logo .logo-i{display:inline-block;width:5px;height:.7em;background:var(--blue);border-radius:1px;margin:0 2px;align-self:center}
-.tb-div{width:1px;height:28px;background:rgba(255,255,255,.2);margin:0 6px}
-.tb-title{font-size:13px;font-weight:400;color:rgba(255,255,255,.85)}
-.tb-badge{margin-left:auto;background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
+.header{background:linear-gradient(135deg,#002F6C 0%,#008BCC 100%);color:#fff;padding:18px 24px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 12px rgba(0,47,108,.3);position:sticky;top:0;z-index:100}
+.header-logo{width:44px;height:44px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#002F6C;flex-shrink:0}
+.header-text h1{font-size:20px;font-weight:900;letter-spacing:.5px}
+.header-text p{font-size:12px;font-weight:300;opacity:.85;margin-top:1px}
 
-.wrap{max-width:960px;margin:0 auto;padding:30px 20px 70px;width:100%}
+.student-bar{background:#fff;border-bottom:2px solid #e0edf6;padding:10px 16px;display:none;align-items:center;gap:8px;flex-wrap:wrap}
+.student-bar.visible{display:flex}
+.student-chip{background:#e0edf6;color:#002F6C;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.student-chip.green{background:#e6f9ee;color:#1a6b35}
+.change-btn{font-size:12px;color:#008BCC;cursor:pointer;text-decoration:underline;font-weight:700;margin-left:auto;background:none;border:none;font-family:'Lato',sans-serif}
 
-/* hero */
-.hero{background:linear-gradient(135deg,var(--navy),#013a82);color:#fff;border-radius:14px;padding:30px 28px;margin-bottom:26px;box-shadow:var(--shadow)}
-.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8FCBEA;margin-bottom:8px}
-.hero h1{font-size:25px;font-weight:900;margin-bottom:10px}
-.hero p{font-size:14.5px;line-height:1.6;color:#CADCFC;max-width:640px}
-.hero .hero-note{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:24px;padding:8px 16px;font-size:12.5px;font-weight:700;margin-top:16px}
+.screen{display:none;max-width:800px;margin:0 auto;padding:24px 16px}
+.screen.active{display:block}
 
-/* progress link out */
-.paper1-link{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:26px}
-.paper1-link .icn{width:42px;height:42px;border-radius:9px;background:var(--orange-bg,#FFF5E6);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.paper1-link .txt{flex:1}
-.paper1-link .txt .t{font-weight:900;color:var(--navy);font-size:14.5px}
-.paper1-link .txt .s{font-size:12.5px;color:var(--text-2)}
-.paper1-link a.go{background:var(--navy);color:#fff;font-size:12.5px;font-weight:700;padding:9px 16px;border-radius:20px;text-decoration:none;white-space:nowrap}
-.paper1-link a.go:hover{background:#013a82}
+.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 16px rgba(0,47,108,.08);margin-bottom:20px}
+.card h2{font-size:20px;font-weight:900;color:#002F6C;margin-bottom:6px}
+.card .subtitle{font-size:13px;color:#5a6a7a;margin-bottom:22px}
 
-/* unit cards */
-.unit{background:#fff;border:1px solid var(--grey-2);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
-.unit-head{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}
-.unit-head:hover{background:var(--grey-bg)}
-.unit-num{width:38px;height:38px;border-radius:9px;background:var(--navy);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.unit-title{flex:1}
-.unit-title .t{font-weight:900;color:var(--navy);font-size:15px}
-.unit-title .s{font-size:12px;color:var(--text-3);margin-top:2px}
-.unit-count{font-size:11px;font-weight:700;color:var(--text-3);background:var(--grey-bg);padding:4px 10px;border-radius:12px;white-space:nowrap}
-.unit-chevron{font-size:13px;color:var(--text-3);transition:transform .15s;flex-shrink:0}
-.unit.open .unit-chevron{transform:rotate(90deg)}
-.unit-body{display:none;border-top:1px solid var(--grey-2)}
-.unit.open .unit-body{display:block}
+.form-group{margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:700;color:#002F6C;margin-bottom:6px;letter-spacing:.3px}
+select,input[type=tel]{width:100%;padding:11px 14px;border:2px solid #dde3ea;border-radius:9px;font-family:'Lato',sans-serif;font-size:14px;color:#1a1a2e;transition:border-color .2s;background:#fff;-webkit-appearance:none}
+select:focus,input[type=tel]:focus{outline:none;border-color:#008BCC}
+select:disabled,input[type=tel]:disabled{background:#f5f7fa;color:#9aabb8;cursor:not-allowed}
 
-.topic-row{display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--grey-bg)}
-.topic-row:last-child{border-bottom:none}
-.topic-code{font-size:12px;font-weight:900;color:var(--blue);width:38px;flex-shrink:0}
-.topic-name{flex:1;font-size:13.5px;color:var(--text);font-weight:700}
-.topic-links{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.pill{font-size:11px;font-weight:700;text-decoration:none;padding:6px 10px;border-radius:16px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-.pill-launch{background:var(--orange);color:#fff}
-.pill-launch:hover{background:#e67d09}
-.pill-soon{background:var(--grey-bg);color:var(--text-3)}
-.pill-note{background:var(--blue);color:#fff;text-decoration:none}
-.pill-note:hover{background:#0079b3}
-.pill-video{background:#fff;color:var(--text-2);border:1.5px solid var(--grey-3);text-decoration:none}
-.pill-video:hover{border-color:var(--blue);color:var(--blue)}
+.step-indicator{display:flex;gap:6px;margin-bottom:24px}
+.step{flex:1;height:4px;border-radius:4px;background:#e0edf6;transition:background .3s}
+.step.done{background:#008BCC}
+.step.active{background:#83E3DE}
 
-.foot-note{text-align:center;font-size:12px;color:var(--text-3);margin-top:30px}
+.confirm-box{background:#f0f8ff;border:2px solid #c8e6f7;border-radius:10px;padding:16px;margin-bottom:20px}
+.confirm-box h3{font-size:13px;font-weight:900;color:#002F6C;margin-bottom:10px}
+.confirm-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #ddeef8;font-size:13px;gap:12px}
+.confirm-row:last-child{border-bottom:none;padding-bottom:0}
+.confirm-label{color:#5a6a7a;font-weight:700}
+.confirm-value{color:#002F6C;font-weight:700;text-align:right;word-break:break-word}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:9px;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,#008BCC,#0073aa);color:#fff;box-shadow:0 3px 12px rgba(0,139,204,.3)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(0,139,204,.4)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-secondary{background:#f0f4f8;color:#002F6C;border:2px solid #dde3ea}
+.btn-secondary:hover{background:#e2eaf2;border-color:#008BCC}
+.btn-full{width:100%}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+
+.topic-section{margin-bottom:8px}
+.topic-header{background:linear-gradient(135deg,#002F6C,#003d8a);color:#fff;padding:12px 16px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;user-select:none}
+.topic-header:hover{opacity:.9}
+.topic-arrow{transition:transform .2s}
+.topic-header.open .topic-arrow{transform:rotate(90deg)}
+.topic-quizzes{display:none;padding:8px 0 4px}
+.topic-quizzes.open{display:block}
+.quiz-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-radius:9px;margin-bottom:6px;background:#f7fafd;border:2px solid #e8eef5;cursor:pointer;transition:all .2s}
+.quiz-item:hover{border-color:#008BCC;background:#eef6fc}
+.quiz-item-title{font-size:13px;font-weight:700;color:#002F6C}
+.quiz-item-badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:700}
+.badge-done{color:#37C563;background:#e6f9ee}
+.badge-new{color:#7a8fa0;background:#e0edf6}
+
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;border-radius:11px;overflow:hidden;margin-bottom:20px;background:#000}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+.quiz-video{margin-bottom:20px}
+.quiz-video .video-wrap{margin-bottom:0}
+.quiz-video-title{font-size:13px;font-weight:900;color:#002F6C;margin-bottom:8px}
+.quiz-meta{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.badge-blue{background:#e0edf6;color:#008BCC}
+.badge-teal{background:#e0f7f6;color:#1a7a76}
+
+.progress-bar-wrap{background:#e8eef5;border-radius:20px;height:7px;margin-bottom:20px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,#008BCC,#83E3DE);border-radius:20px;transition:width .4s}
+.question-num{font-size:12px;color:#7a8fa0;font-weight:700;margin-bottom:8px}
+.question-text{font-size:16px;font-weight:700;color:#002F6C;margin-bottom:20px;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.option{padding:13px 16px;border:2px solid #dde3ea;border-radius:10px;cursor:pointer;font-size:14px;color:#1a1a2e;transition:all .2s;display:flex;align-items:center;gap:12px;background:#fff}
+.option:hover:not(.disabled){border-color:#008BCC;background:#eef6fc}
+.option.correct{border-color:#37C563;background:#e6f9ee;color:#1a6b35;font-weight:700}
+.option.wrong{border-color:#FF801D;background:#fff3ec;color:#a04000}
+.option.disabled{cursor:default}
+.option-letter{width:28px;height:28px;border-radius:50%;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#002F6C;flex-shrink:0;border:2px solid #dde3ea;transition:all .2s}
+.option.correct .option-letter{background:#37C563;color:#fff;border-color:#37C563}
+.option.wrong .option-letter{background:#FF801D;color:#fff;border-color:#FF801D}
+.explanation{background:#f0f4f8;border-left:4px solid #008BCC;padding:14px 16px;border-radius:0 9px 9px 0;font-size:13px;color:#3a4a5a;margin-bottom:20px;line-height:1.6}
+.explanation strong{color:#002F6C}
+
+.score-circle{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;border:6px solid #008BCC;background:linear-gradient(135deg,#002F6C,#008BCC)}
+.score-num{font-size:36px;font-weight:900;color:#fff}
+.score-label{font-size:11px;color:rgba(255,255,255,.8);font-weight:700}
+.result-title{text-align:center;font-size:20px;font-weight:900;color:#002F6C;margin-bottom:6px}
+.result-sub{text-align:center;font-size:13px;color:#5a6a7a;margin-bottom:24px}
+.review-item{border:2px solid #e8eef5;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.review-item.correct-q{border-color:#37C563}
+.review-item.wrong-q{border-color:#FF801D}
+.review-q{font-size:13px;font-weight:700;color:#002F6C;margin-bottom:8px}
+.review-ans{font-size:12px;margin-bottom:4px;font-weight:700}
+.review-ans.correct{color:#37C563}
+.review-ans.wrong{color:#FF801D}
+.review-exp{font-size:12px;color:#5a6a7a;margin-top:8px;padding-top:8px;border-top:1px solid #e8eef5;line-height:1.5}
+
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 0;gap:16px}
+.spinner{width:36px;height:36px;border:4px solid #e0edf6;border-top-color:#008BCC;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{color:#5a6a7a;font-size:14px;font-weight:700}
+.error-box{background:#fff3ec;border:2px solid #FF801D;border-radius:10px;padding:14px 16px;color:#a04000;font-size:13px;font-weight:700;text-align:center;margin-top:8px}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#002F6C;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.2);opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:translateY(0)}
+
+.dob-input{letter-spacing:4px;font-size:18px;font-weight:700;text-align:center}
+.dob-error{display:none;color:#FF801D;font-size:13px;font-weight:700;margin-top:-10px;margin-bottom:14px}
+.dob-checking{display:none;color:#5a6a7a;font-size:13px;font-weight:700;margin-top:-10px;margin-bottom:14px}
+
+.return-tick{width:64px;height:64px;border-radius:50%;background:#e6f9ee;color:#1a6b35;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.return-card{text-align:center}
+.return-card .btn-full + .btn-full{margin-top:10px}
+
+/* My progress */
+.prog-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.prog-stat{background:#f7fafd;border:2px solid #e8eef5;border-radius:10px;padding:12px;text-align:center}
+.prog-num{font-size:24px;font-weight:900;color:#002F6C;line-height:1.1}
+.prog-num.warn{color:#c2410c}
+.prog-num.ok{color:#1a6b35}
+.prog-label{font-size:11px;font-weight:700;color:#5a6a7a;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+.prog-head{font-size:13px;font-weight:900;color:#002F6C;margin:18px 0 8px}
+.todo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:9px;border:2px solid #e8eef5;margin-bottom:6px;background:#fff}
+.todo.over{border-color:#f5c2b5;background:#fff7f4}
+.todo-title{flex:1 1 180px;font-size:13px;font-weight:700;color:#002F6C}
+.todo-btns{display:flex;gap:6px;flex-wrap:wrap}
+.mini-btn{font-family:'Lato',sans-serif;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.mini-quiz{background:#008BCC;color:#fff}
+.mini-act{background:#FF8F1C;color:#fff}
+.mini-btn:hover{opacity:.88}
+.uptodate{background:#e6f9ee;color:#1a6b35;border-radius:10px;padding:14px;font-size:14px;font-weight:700;text-align:center}
+.prog-note{font-size:12px;color:#7a8fa0;margin-top:10px}
+.chip{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:700;white-space:nowrap}
+.chip-over{background:#fde2dc;color:#a0300f}
+.chip-today{background:#fff1d6;color:#8a5a00}
+.chip-due{background:#e0edf6;color:#002F6C}
+.quiz-item-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.quiz-item{gap:10px;flex-wrap:wrap}
+.badge-act{color:#a04a00;background:#fff1e3;text-decoration:none}
+.badge-act:hover{background:#ffe2c4}
+.badge-act-done{color:#37C563;background:#e6f9ee;text-decoration:none}
+@media (max-width:520px){.prog-num{font-size:20px}.prog-stat{padding:10px 6px}}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="tb-logo">S<span class="logo-i"></span>SB</div>
-  <div class="tb-div"></div>
-  <div class="tb-title">IGCSE Economics (0455) · Interactive Activities</div>
-  <div class="tb-badge">Grade 9</div>
+
+<div class="header">
+  <div class="header-logo">SISB</div>
+  <div class="header-text">
+    <h1>SISB Economics</h1>
+    <p>Spirit of Excellence – IGCSE &amp; A Level</p>
+  </div>
 </div>
 
-<div class="wrap">
+<div class="student-bar" id="studentBar">
+  <span class="student-chip" id="barNickname"></span>
+  <span class="student-chip" id="barCampus"></span>
+  <span class="student-chip" id="barClass"></span>
+  <span class="student-chip green" id="barYear"></span>
+  <button class="change-btn" onclick="changeStudent()">✏️ Change student</button>
+</div>
 
-  <div class="hero">
-    <div class="kicker">Cambridge IGCSE Economics 0455</div>
-    <h1>Interactive activities, by unit</h1>
-    <p>Pick your unit below, then your topic. Each activity is a short, interactive task that goes with what we've covered in class. Some units are ready now — more are added through the year, so check back.</p>
-    <div class="hero-note">👤 First activity you open will ask for your name once — after that your progress is remembered automatically.</div>
-  </div>
+<div class="toast" id="toast"></div>
 
-  <div class="paper1-link">
-    <div class="icn">📝</div>
-    <div class="txt">
-      <div class="t">Paper 1 Practice Question Finder</div>
-      <div class="s">Search past exam questions by topic to build your own revision practice</div>
+<!-- ═══ SCREEN 1: Login ═══ -->
+<div class="screen active" id="screenLogin">
+  <div class="card">
+    <h2>Welcome to SISB Economics</h2>
+    <p class="subtitle">Select your campus, year group and class to find your name. You only need to do this once on each device.</p>
+
+    <div class="step-indicator">
+      <div class="step active" id="step1"></div>
+      <div class="step" id="step2"></div>
+      <div class="step" id="step3"></div>
+      <div class="step" id="step4"></div>
+      <div class="step" id="step5"></div>
     </div>
-    <a class="go" href="index__2_.html">Open tool →</a>
+
+    <div class="form-group">
+      <label>1. Campus</label>
+      <select id="selCampus" onchange="onCampusChange()">
+        <option value="">— Select your campus —</option>
+        <option value="NR">NR – Nonthaburi</option>
+        <option value="PU">PU – Pracha Uthit</option>
+        <option value="TR">TR – Thonburi</option>
+        <option value="CM">CM – Chiang Mai</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>2. Year Group</label>
+      <select id="selYear" onchange="onYearChange()" disabled>
+        <option value="">— Select your campus first —</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>3. Class</label>
+      <select id="selClass" onchange="onClassChange()" disabled>
+        <option value="">— Select your year group first —</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>4. Your Name</label>
+      <select id="selStudent" onchange="onStudentChange()" disabled>
+        <option value="">— Select your class first —</option>
+      </select>
+    </div>
+
+    <div id="loginLoading" style="display:none">
+      <div class="loading"><div class="spinner"></div><p>Loading student list…</p></div>
+    </div>
+    <div id="loginError" style="display:none" class="error-box"></div>
+
+    <!-- Step 5: DOB -->
+    <div id="dobBox" style="display:none">
+      <div class="form-group">
+        <label>5. Date of Birth <span style="font-weight:400;color:#7a8fa0">(6 digits — e.g. 251209 for 25 Dec 2009)</span></label>
+        <input type="tel" id="inputDob" class="dob-input" maxlength="6" placeholder="DDMMYY" oninput="onDobInput()" autocomplete="off">
+      </div>
+      <div class="dob-checking" id="dobChecking">Checking…</div>
+      <div class="dob-error" id="dobError"></div>
+    </div>
+
+    <!-- Confirm -->
+    <div id="confirmBox" style="display:none">
+      <div class="confirm-box">
+        <h3>✓ Confirm your details</h3>
+        <div class="confirm-row"><span class="confirm-label">Full Name</span><span class="confirm-value" id="cfFullName"></span></div>
+        <div class="confirm-row"><span class="confirm-label">Nickname</span><span class="confirm-value" id="cfNickname"></span></div>
+        <div class="confirm-row"><span class="confirm-label">Email</span><span class="confirm-value" id="cfEmail"></span></div>
+        <div class="confirm-row"><span class="confirm-label">Campus</span><span class="confirm-value" id="cfCampus"></span></div>
+        <div class="confirm-row"><span class="confirm-label">Class</span><span class="confirm-value" id="cfClass"></span></div>
+        <div class="confirm-row"><span class="confirm-label">Year Group</span><span class="confirm-value" id="cfYear"></span></div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="confirmLogin()">That's me — Start Learning →</button>
+    </div>
   </div>
+</div>
 
-  <div id="units"></div>
+<!-- ═══ SCREEN 1b: Logged in, sent here from an activity page ═══ -->
+<div class="screen" id="screenReturn">
+  <div class="card return-card">
+    <div class="return-tick">✓</div>
+    <h2>You're logged in</h2>
+    <p class="subtitle" id="returnMsg"></p>
+    <button class="btn btn-primary btn-full" onclick="goBack()">Back to the activity →</button>
+    <button class="btn btn-secondary btn-full" onclick="changeStudent()">Not me — change student</button>
+  </div>
+</div>
 
-  <div class="foot-note">SISB · Cambridge IGCSE Economics (0455) · Interactive Activities Hub</div>
+<!-- ═══ SCREEN 2: Catalogue ═══ -->
+<div class="screen" id="screenCatalogue">
+  <div class="card" id="progressCard" style="display:none">
+    <h2>My progress</h2>
+    <p class="subtitle" id="progressSub">What your teacher has set, and what you still need to do.</p>
+    <div id="progressBody"></div>
+  </div>
+  <div class="card">
+    <h2 id="catTitle"></h2>
+    <p class="subtitle">Choose a topic, watch the video, then complete the quiz and the interactive activity.</p>
+    <div id="catalogueList">
+      <div class="loading"><div class="spinner"></div><p>Loading quizzes…</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 3: Video ═══ -->
+<div class="screen" id="screenVideo">
+  <div class="card">
+    <div class="quiz-meta">
+      <span class="badge badge-blue" id="vTopicBadge"></span>
+      <span class="badge badge-teal" id="vQuizId"></span>
+    </div>
+    <h2 id="vTitle"></h2>
+    <p class="subtitle">Watch the video, then start the quiz when you're ready.</p>
+    <div class="video-wrap">
+      <iframe id="ytPlayer" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="showScreen('screenCatalogue')">← Back</button>
+      <button class="btn btn-primary" id="startQuizBtn" onclick="startQuiz()" disabled>Loading questions…</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 4: Quiz ═══ -->
+<div class="screen" id="screenQuiz">
+  <div class="card">
+    <div class="quiz-video">
+      <div class="quiz-video-title">Need to check the video again?</div>
+      <div class="video-wrap">
+        <iframe id="ytPlayerQuiz" src="" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="question-num" id="questionNum"></div>
+    <div class="question-text" id="questionText"></div>
+    <div class="options" id="optionsContainer"></div>
+    <div class="explanation" id="explanationBox" style="display:none"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">Next Question →</button>
+      <button class="btn btn-primary" id="finishBtn" onclick="finishQuiz()" style="display:none">See Results →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 5: Results ═══ -->
+<div class="screen" id="screenResults">
+  <div class="card">
+    <div class="score-circle">
+      <span class="score-num" id="scoreNum"></span>
+      <span class="score-label">SCORE</span>
+    </div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-sub" id="resultSub"></div>
+    <div class="btn-row" style="justify-content:center;margin-bottom:24px">
+      <button class="btn btn-secondary" onclick="retakeQuiz()">↺ Retake Quiz</button>
+      <button class="btn btn-primary" onclick="showScreen('screenCatalogue')">← All Quizzes</button>
+    </div>
+    <h3 style="font-size:15px;font-weight:900;color:#002F6C;margin-bottom:14px">Review Your Answers</h3>
+    <div id="reviewContainer"></div>
+  </div>
 </div>
 
 <script>
-/* ============================================================
-   UNIT / TOPIC DATA
-   To add a new activity later: set "activity" to the html
-   filename for that topic. Leave it as null for "Coming soon".
-   ============================================================ */
-const UNITS = [
-  { num:1, title:'The Basic Economic Problem', topics:[
-    {code:'1.1', name:'Nature of the Basic Economic Problem', notebook:'https://notebooklm.google.com/notebook/d7d8df4d-9d50-47e4-aa70-30654ac935ee', video:'https://youtu.be/rlO744yUiuI', activity:'sisb-econ-1_1-interactive.html'},
-    {code:'1.2', name:'Factors of Production', notebook:'https://notebooklm.google.com/notebook/0b32e0e4-1363-48ed-a92b-84207374b985', video:'https://youtu.be/bTZs5fag_s0', activity:null},
-    {code:'1.3', name:'Opportunity Cost', notebook:'https://notebooklm.google.com/notebook/5e147d05-bdbd-41b6-8669-06c5e1bc0bab', video:'https://youtu.be/9-CLG9RES5A', activity:null},
-    {code:'1.4', name:'Production Possibility Curves', notebook:'https://notebooklm.google.com/notebook/629ac9c2-9472-40d6-9001-72c73cd945a9', video:'https://youtu.be/xBqbHbP4kIg', activity:null},
-  ]},
-  { num:2, title:'The Allocation of Resources', topics:[
-    {code:'2.1', name:'The Role of Markets in Allocating Resources', notebook:'https://notebooklm.google.com/notebook/55d95a2c-d4c9-4b35-8fc1-c388294fc45b', video:'https://youtu.be/s_7fr4Gmx4Y', activity:null},
-    {code:'2.2', name:'Demand', notebook:'https://notebooklm.google.com/notebook/06a20054-8e6b-43d0-a9b7-6c9b7dd5dcd2', video:'https://youtu.be/36Oc7HF8rrI', activity:null},
-    {code:'2.3', name:'Supply', notebook:'https://notebooklm.google.com/notebook/9d7de4e3-20e6-4888-86b1-d928ab5e64d0', video:'https://youtu.be/FcsTQDhF_n0', activity:null},
-    {code:'2.4', name:'Price Determination', notebook:'https://notebooklm.google.com/notebook/738baa5f-52f6-448e-b8e5-f52567228947', video:'https://youtu.be/1WSpdvbpHjw', activity:null},
-    {code:'2.5', name:'Price Changes', notebook:'https://notebooklm.google.com/notebook/62049490-ae15-4caa-b2d0-1614bab429bb', video:'https://youtu.be/eK4WdeeUMQY', activity:null},
-    {code:'2.6', name:'Price Elasticity of Demand', notebook:'https://notebooklm.google.com/notebook/ed0b46ec-8e50-47ba-ba06-ff8521e7b085', video:'https://youtu.be/ZDlrIghc0vk', activity:null},
-    {code:'2.7', name:'Price Elasticity of Supply', notebook:'https://notebooklm.google.com/notebook/7fa50724-0acb-47a2-907e-2305a431fa08', video:'https://youtu.be/e20Daygcot4', activity:null},
-    {code:'2.8', name:'Market Economic System', notebook:'https://notebooklm.google.com/notebook/a1bb7a27-23e6-4a19-8671-d48824ea2ac9', video:'https://youtu.be/FbVYbtu75vw', activity:null},
-    {code:'2.9', name:'Market Failure', notebook:'https://notebooklm.google.com/notebook/1f817eb2-046d-40e9-aa59-a87a69333497', video:'https://youtu.be/mZpCqLQI4DU', activity:null},
-    {code:'2.10', name:'Mixed Economic System', notebook:'https://notebooklm.google.com/notebook/ab73f610-5c71-4d6a-86a6-0baf0c042ecb', video:'https://youtu.be/CBkHWoNSD2o', activity:null},
-  ]},
-  { num:3, title:'Microeconomic Decision Makers', topics:[
-    {code:'3.1', name:'Money & Banking', notebook:'https://notebooklm.google.com/notebook/81f03ffc-76c3-4932-bf9e-30d98f6ab78d', video:'https://youtu.be/8vL7ycyX3Ns', activity:null},
-    {code:'3.2', name:'Households', notebook:'https://notebooklm.google.com/notebook/20992856-2576-46ba-a811-30a80951cda3', video:'https://youtu.be/n51oBNDCOxM', activity:null},
-    {code:'3.3', name:'Workers', notebook:'https://notebooklm.google.com/notebook/52ffcaab-0d25-4e57-8a8b-6ea5c40dfff4', video:'https://youtu.be/uRqzi7CdD_k', activity:null},
-    {code:'3.4', name:'Firms', notebook:'https://notebooklm.google.com/notebook/6d0c73eb-2942-4538-b617-c27b8160f3e9', video:'https://youtu.be/cbDI0QUQyM0', activity:null},
-    {code:'3.5', name:'Firms & Production', notebook:'https://notebooklm.google.com/notebook/c1c3a595-1988-40de-bed7-49177fb20dbb', video:'https://youtu.be/SG6nbElpsRM', activity:null},
-    {code:'3.6', name:'Costs, Revenues & Objectives', notebook:'https://notebooklm.google.com/notebook/18b04dc5-ab7d-49ac-bef0-989542c8f09e', video:'https://youtu.be/WMSr2r5I_5k', activity:null},
-    {code:'3.7', name:'Types of Markets', notebook:'https://notebooklm.google.com/notebook/a883fe64-4c1a-4894-b7b0-7c7f2517e916', video:'https://youtu.be/yw-WMEm00pQ', activity:null},
-  ]},
-  { num:4, title:'Government and the Macroeconomy', topics:[
-    {code:'4.1', name:'Government Macroeconomic Intervention', notebook:'https://notebooklm.google.com/notebook/1b916912-3e22-4c5c-8f26-641bc93f8343', video:'https://youtu.be/ef1VKpbkQMM', activity:'sisb-econ-4_1-interactive.html'},
-    {code:'4.2', name:'Fiscal Policy', notebook:'https://notebooklm.google.com/notebook/f1d64d98-5727-437b-921a-7f5ba907e6f8', video:'https://youtu.be/mV5GXrXIsaM', activity:'sisb-econ-4_2-interactive.html'},
-    {code:'4.3', name:'Monetary Policy', notebook:'https://notebooklm.google.com/notebook/dbdba4fb-830a-48b2-9ce7-f3dc72816fd6', video:'https://youtu.be/2_36NDGcdnM', activity:null},
-    {code:'4.4', name:'Supply-Side Policy', notebook:'https://notebooklm.google.com/notebook/b2696df6-7fe7-47ac-a9f0-e7db406f704e', video:'https://youtu.be/fRr8R_YDMfM', activity:null},
-    {code:'4.5', name:'Economic Growth', notebook:'https://notebooklm.google.com/notebook/8b5c65f9-41a0-48a6-93fd-27079c479be3', video:'https://youtu.be/6ANHkivbXAs', activity:null},
-    {code:'4.6', name:'Employment & Unemployment', notebook:'https://notebooklm.google.com/notebook/d4d1977b-08ca-4934-a54a-fdcf224d725d', video:'https://youtu.be/PJf_LawzAXU', activity:null},
-    {code:'4.7', name:'Inflation', notebook:'https://notebooklm.google.com/notebook/15128c5f-2226-4c43-b630-0a82cc5201e4', video:'https://youtu.be/_zctycVDCoc', activity:null},
-  ]},
-  { num:5, title:'Economic Development', topics:[
-    {code:'5.1', name:'Living Standards', notebook:'https://notebooklm.google.com/notebook/423d6222-6ca9-49e9-8968-1529c8b774d7', video:'https://youtu.be/Zf0arjAJytI', activity:null},
-    {code:'5.2', name:'Poverty', notebook:'https://notebooklm.google.com/notebook/d3c67a14-2093-45b8-a190-bfd21b559967', video:'https://youtu.be/XwG1MYsC48M', activity:null},
-    {code:'5.3', name:'Population', notebook:'https://notebooklm.google.com/notebook/7d062195-dbb3-4ef9-ba9d-84e027a826ec', video:'https://youtu.be/PwQFfZvrl3E', activity:null},
-    {code:'5.4', name:'Differences in Economic Development', notebook:'https://notebooklm.google.com/notebook/cb566a5e-1441-4239-9bbf-0641957524fd', video:'https://youtu.be/Yc8GoHmm9Q4', activity:null},
-  ]},
-  { num:6, title:'International Trade and Globalisation', topics:[
-    {code:'6.1', name:'International Specialisation', notebook:'https://notebooklm.google.com/notebook/ffc62f7f-4b37-4ee1-989b-17a89632a51b', video:'https://youtu.be/8RyDI0g-ZJE', activity:null},
-    {code:'6.2', name:'Globalisation, Free Trade & Protection', notebook:'https://notebooklm.google.com/notebook/44a26582-bbac-43fd-87cd-3305edd59444', video:'https://youtu.be/tbeEyCB3FnI', activity:null},
-    {code:'6.3', name:'Foreign Exchange', notebook:'https://notebooklm.google.com/notebook/e8b5c44d-522e-4fc4-b673-e7c42d4ea0f1', video:'https://youtu.be/wQUNYmaswPU', activity:null},
-    {code:'6.4', name:'Current Account Balance of Payments', notebook:'https://notebooklm.google.com/notebook/4948dae8-adfb-41b1-8756-5f86b359aefa', video:'https://youtu.be/oRV_eQePB4g', activity:null},
-  ]},
+// ═══════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════
+// One Apps Script handles the class list, the DOB check and quiz results.
+// The student roster is NOT fetched by this page — it stays private.
+const API = 'https://script.google.com/macros/s/AKfycbwd_lpy7Rj_ltrhuai1SktAXT-KjFFUBIbby26f3_tZiCA_Ksd5fRTp4ncM5Xdl_EPQTQ/exec';
+const CATALOGUES = {
+  'IGCSE Economics':   'https://docs.google.com/spreadsheets/d/1M6QJOgDr5BYtsxpxLA-u1_RYRCugzlINQOUrVsTin-o/export?format=csv&gid=0',
+  'A Level Economics': 'https://docs.google.com/spreadsheets/d/1_lk12ve7rzt-jWd7j5gulij6z937hQ83ETbGP9EfPYg/export?format=csv&gid=0'
+};
+
+const YEAR_GROUPS = [
+  { label:'IGCSE Year 1',  course:'IGCSE Economics',   classes:['G9B','G9C','G9G','G9M','G9S'] },
+  { label:'IGCSE Year 2',  course:'IGCSE Economics',   classes:['G10L','G10M','G10P','G10VG'] },
+  { label:'AS Level',      course:'A Level Economics',  classes:['G11A','G11P','G11S','G11V'] },
+  { label:'A Level',       course:'A Level Economics',  classes:['G12G','G12M','G12P','G12U'] }
 ];
 
-function build(){
-  const wrap = document.getElementById('units');
-  wrap.innerHTML = '';
-  UNITS.forEach((u,idx)=>{
-    const built = u.topics.filter(t=>t.activity).length;
-    const card = document.createElement('div');
-    card.className = 'unit' + (built>0 ? ' open' : '');
-    card.innerHTML =
-      '<div class="unit-head" data-idx="'+idx+'">' +
-        '<div class="unit-num">'+u.num+'</div>' +
-        '<div class="unit-title"><div class="t">Unit '+u.num+' — '+u.title+'</div><div class="s">'+u.topics.length+' topics</div></div>' +
-        '<div class="unit-count">'+built+' / '+u.topics.length+' activities live</div>' +
-        '<div class="unit-chevron">▶</div>' +
-      '</div>' +
-      '<div class="unit-body">' +
-        u.topics.map(t=>
-          '<div class="topic-row">' +
-            '<div class="topic-code">'+t.code+'</div>' +
-            '<div class="topic-name">'+t.name+'</div>' +
-            '<div class="topic-links">' +
-              (t.video
-                ? '<a class="pill pill-video" href="'+t.video+'" target="_blank" rel="noopener">▶ Video</a>'
-                : '<span class="pill pill-soon">No video yet</span>') +
-              (t.notebook
-                ? '<a class="pill pill-note" href="'+t.notebook+'" target="_blank" rel="noopener">📓 Notes</a>'
-                : '<span class="pill pill-soon">No notes yet</span>') +
-              (t.activity
-                ? '<a class="pill pill-launch" href="'+t.activity+'">Launch activity →</a>'
-                : '<span class="pill pill-soon">Coming soon</span>') +
-            '</div>' +
-          '</div>'
-        ).join('') +
-      '</div>';
-    wrap.appendChild(card);
-  });
-  document.querySelectorAll('.unit-head').forEach(h=>{
-    h.addEventListener('click', ()=> h.closest('.unit').classList.toggle('open'));
-  });
+// The saved login is shared with the interactive websites on this domain
+// (same key is read by sisb-tracker.js). It lasts LOGIN_DAYS on a device.
+const LOGIN_KEY  = 'sisb_econ_student';
+const LOGIN_DAYS = 120;
+const SITE_ORIGIN = 'https://sisb-humanities.github.io';
+
+// Interactive activities count towards "due" only for topics due on or after
+// the day each activity site started saving progress. Must match the
+// ACTIVITY_EXPECTED_FROM setting in the Apps Script.
+const ACTIVITY_EXPECTED_FROM = { 'IGCSE Economics':'2026-10-27', 'A Level Economics':'2026-10-13' };
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let student={}, pendingStudent=null, studentList=[], catalogue=[], catalogueCourse='';
+let currentQuiz=null, questions=[], shuffledOptions=[], answers=[], currentQ=0;
+let verifying=false;
+let lastTopic=null;   // topic of the quiz just finished — opened automatically when the catalogue is redrawn
+
+const params=new URLSearchParams(location.search);
+let returnTo=safeReturn(params.get('return'));   // activity page that sent the student here
+let deepQuiz=params.get('quiz');                  // e.g. ?quiz=2.3 opens that quiz after login
+
+// ═══════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════
+function parseCSV(text){
+  const lines=text.trim().split('\n');
+  const headers=splitLine(lines[0]).map(h=>h.replace(/^"|"$/g,'').trim().toLowerCase().replace(/\s+/g,'_'));
+  return lines.slice(1).map(l=>{
+    const vals=splitLine(l).map(v=>v.replace(/^"|"$/g,'').trim());
+    const obj={};
+    headers.forEach((h,i)=>obj[h]=vals[i]||'');
+    return obj;
+  }).filter(r=>Object.values(r).some(v=>v));
 }
-build();
 
-/* ============================================================
-   AUTO-DETECT ACTIVITY FILES FROM THE GITHUB REPO
-   ------------------------------------------------------------
-   Naming rule: for topic "X.Y", the activity file must be named
-   exactly            sisb-econ-X_Y-interactive.html
-   (dot in the topic code becomes an underscore in the filename —
-   matches every file so far: 1.1 -> sisb-econ-1_1-interactive.html,
-   4.1 -> sisb-econ-4_1-interactive.html, 4.2 -> sisb-econ-4_2-interactive.html).
+function splitLine(line){
+  if(line.includes('\t')) return line.split('\t');
+  const vals=[]; let cur='',inQ=false;
+  for(let c of line){
+    if(c==='"'){inQ=!inQ;}
+    else if(c===','&&!inQ){vals.push(cur);cur='';}
+    else cur+=c;
+  }
+  vals.push(cur);
+  return vals;
+}
 
-   Upload a new file with that exact name to the repo root and it
-   appears here automatically next page load — no editing index.html.
+function toCSVUrl(url){
+  if(!url) return null;
+  if(url.includes('export?format=csv')) return url;
+  const m=url.match(/\/d\/([a-zA-Z0-9_-]+)/),gm=url.match(/gid=(\d+)/);
+  return m?`https://docs.google.com/spreadsheets/d/${m[1]}/export?format=csv${gm?'&gid='+gm[1]:''}`:url;
+}
 
-   This asks the GitHub API what files exist in the repo. If that
-   call fails (offline, or GitHub's rate limit is hit) the page
-   just keeps whatever was already hardcoded above — it never breaks.
-   ============================================================ */
-const REPO_OWNER = 'sisb-humanities';
-const REPO_NAME  = 'IG-Econ-Interactive-Lesson-Activities';
+function ytEmbed(url){
+  const m=(url||'').match(/(?:youtu\.be\/|v=|v\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+  return m?`https://www.youtube.com/embed/${m[1]}`:url;
+}
 
-async function autoDetectActivities(){
-  try{
-    const res = await fetch('https://api.github.com/repos/'+REPO_OWNER+'/'+REPO_NAME+'/contents/');
-    if(!res.ok) return; // e.g. rate-limited — silently keep existing links
-    const files = await res.json();
-    if(!Array.isArray(files)) return;
-    const names = new Set(files.filter(f=>f.type==='file').map(f=>f.name));
-    let changed = false;
-    UNITS.forEach(u=>{
-      u.topics.forEach(t=>{
-        const expected = 'sisb-econ-' + t.code.replace('.', '_') + '-interactive.html';
-        if(names.has(expected) && t.activity !== expected){
-          t.activity = expected;
-          changed = true;
-        }
-      });
-    });
-    if(changed) build(); // re-render with newly-detected activities
-  }catch(e){
-    /* offline or blocked — page still works with whatever was hardcoded */
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// "2.3", "2.03", "2.3 Supply" -> "2.3". Titles come first because the sheet stores 2.10 as 2.1.
+function topicCode(v){
+  const m=String(v||'').match(/(\d+)\.(\d+)/);
+  return m?m[1]+'.'+Number(m[2]):'';
+}
+
+// Due dates arrive as the sheet shows them: 27/10/2026, 2026-10-27 or 27 Oct 2026.
+function parseDue(v){
+  const s=String(v||'').trim();
+  if(!s) return null;
+  let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if(m){
+    let d=+m[1], mo=+m[2], y=+m[3];
+    if(y<100) y+=2000;
+    if(mo>12 && d<=12){ const t=d; d=mo; mo=t; }   // sheet set to US date order
+    return new Date(y,mo-1,d);
+  }
+  m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(m) return new Date(+m[1],m[2]-1,+m[3]);
+  const d=new Date(s);
+  return isNaN(d)?null:new Date(d.getFullYear(),d.getMonth(),d.getDate());
+}
+
+function fmtDue(d){
+  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+}
+
+function startOfToday(){
+  const n=new Date();
+  return new Date(n.getFullYear(),n.getMonth(),n.getDate());
+}
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function showScreen(id){
+  // Always redraw the catalogue when it is shown, so quizzes completed
+  // since it was last drawn display their green score badge.
+  if(id==='screenCatalogue' && catalogue.length && catalogueCourse===student.course) renderCatalogue();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+function setStep(n){
+  for(let i=1;i<=5;i++){
+    document.getElementById('step'+i).className='step'+(i<n?' done':i===n?' active':'');
   }
 }
-autoDetectActivities();
+
+function safeReturn(u){
+  if(!u) return null;
+  try{ const x=new URL(u); return x.origin===SITE_ORIGIN ? x.href : null; }catch(e){ return null; }
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVED LOGIN
+// ═══════════════════════════════════════════════════════
+function saveLogin(s){
+  try{ localStorage.setItem(LOGIN_KEY, JSON.stringify(Object.assign({}, s, {saved_at:Date.now()}))); }catch(e){}
+}
+function loadLogin(){
+  try{
+    const s=JSON.parse(localStorage.getItem(LOGIN_KEY)||'null');
+    if(!s||!s.email) return null;
+    if(Date.now()-(s.saved_at||0) > LOGIN_DAYS*864e5){ localStorage.removeItem(LOGIN_KEY); return null; }
+    return s;
+  }catch(e){ return null; }
+}
+function clearLogin(){
+  try{ localStorage.removeItem(LOGIN_KEY); }catch(e){}
+}
+
+function changeStudent(){
+  clearLogin();
+  goHome();
+}
+
+function goHome(){
+  document.getElementById('studentBar').classList.remove('visible');
+  ['selCampus','selYear','selClass','selStudent'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('selYear').disabled=true;
+  document.getElementById('selClass').disabled=true;
+  document.getElementById('selStudent').disabled=true;
+  document.getElementById('selYear').innerHTML='<option value="">— Select your campus first —</option>';
+  document.getElementById('selClass').innerHTML='<option value="">— Select your year group first —</option>';
+  document.getElementById('selStudent').innerHTML='<option value="">— Select your class first —</option>';
+  ['confirmBox','dobBox','dobError','dobChecking','loginError'].forEach(id=>document.getElementById(id).style.display='none');
+  student={}; pendingStudent=null;
+  setStep(1);
+  showScreen('screenLogin');
+}
+
+// ═══════════════════════════════════════════════════════
+// LOGIN FLOW
+// ═══════════════════════════════════════════════════════
+function onCampusChange(){
+  const campus=document.getElementById('selCampus').value;
+  const selYear=document.getElementById('selYear');
+  ['confirmBox','dobBox','loginError'].forEach(id=>document.getElementById(id).style.display='none');
+  selYear.innerHTML='<option value="">— Select your year group —</option>';
+  document.getElementById('selClass').innerHTML='<option value="">— Select your year group first —</option>';
+  document.getElementById('selStudent').innerHTML='<option value="">— Select your class first —</option>';
+  selYear.disabled=!campus;
+  document.getElementById('selClass').disabled=true;
+  document.getElementById('selStudent').disabled=true;
+  if(!campus){setStep(1);return;}
+  YEAR_GROUPS.forEach(yg=>{
+    const opt=document.createElement('option');
+    opt.value=yg.label; opt.textContent=yg.label;
+    selYear.appendChild(opt);
+  });
+  setStep(2);
+}
+
+function onYearChange(){
+  const yearLabel=document.getElementById('selYear').value;
+  const selClass=document.getElementById('selClass');
+  ['confirmBox','dobBox'].forEach(id=>document.getElementById(id).style.display='none');
+  selClass.innerHTML='<option value="">— Select your class —</option>';
+  document.getElementById('selStudent').innerHTML='<option value="">— Select your class first —</option>';
+  selClass.disabled=!yearLabel;
+  document.getElementById('selStudent').disabled=true;
+  if(!yearLabel){setStep(2);return;}
+  YEAR_GROUPS.find(y=>y.label===yearLabel).classes.forEach(cls=>{
+    const opt=document.createElement('option');
+    opt.value=cls; opt.textContent=cls;
+    selClass.appendChild(opt);
+  });
+  setStep(3);
+}
+
+async function onClassChange(){
+  const cls=document.getElementById('selClass').value;
+  const campus=document.getElementById('selCampus').value;
+  const selStudent=document.getElementById('selStudent');
+  const loginLoad=document.getElementById('loginLoading');
+  const loginErr=document.getElementById('loginError');
+  ['confirmBox','dobBox'].forEach(id=>document.getElementById(id).style.display='none');
+  loginErr.style.display='none';
+  selStudent.innerHTML='<option value="">Loading…</option>';
+  selStudent.disabled=true;
+  if(!cls){setStep(3);return;}
+  loginLoad.style.display='flex';
+  try{
+    const r=await fetch(`${API}?action=roster&campus=${encodeURIComponent(campus)}&cls=${encodeURIComponent(cls)}`);
+    if(!r.ok) throw new Error();
+    const data=await r.json();
+    if(data.status!=='ok') throw new Error(data.message||'');
+    // ignore a late reply if the student has already picked a different class
+    if(document.getElementById('selClass').value!==cls) return;
+    studentList=data.students||[];
+    selStudent.innerHTML='<option value="">— Select your name —</option>';
+    if(!studentList.length){
+      selStudent.innerHTML='<option value="">No students found for this class</option>';
+    } else {
+      studentList.forEach(s=>{
+        const opt=document.createElement('option');
+        opt.value=s.id; opt.textContent=s.nickname;
+        selStudent.appendChild(opt);
+      });
+      selStudent.disabled=false;
+    }
+    setStep(4);
+  }catch(e){
+    loginErr.textContent='⚠️ Could not load student list. Please check your connection or ask your teacher.';
+    loginErr.style.display='block';
+    selStudent.innerHTML='<option value="">— Could not load —</option>';
+  }finally{
+    loginLoad.style.display='none';
+  }
+}
+
+function onStudentChange(){
+  const id=document.getElementById('selStudent').value;
+  pendingStudent=null;
+  document.getElementById('confirmBox').style.display='none';
+  document.getElementById('dobError').style.display='none';
+  document.getElementById('inputDob').value='';
+  if(id===''){document.getElementById('dobBox').style.display='none';return;}
+  document.getElementById('dobBox').style.display='block';
+  document.getElementById('inputDob').focus();
+  setStep(5);
+}
+
+function onDobInput(){
+  const id=document.getElementById('selStudent').value;
+  if(id==='') return;
+  const input=document.getElementById('inputDob');
+  const val=input.value.replace(/\D/g,'');
+  input.value=val;
+  document.getElementById('dobError').style.display='none';
+  if(val.length===6) verifyDob(val);
+}
+
+function dobFail(msg){
+  const err=document.getElementById('dobError');
+  err.textContent='⚠️ '+msg;
+  err.style.display='block';
+  document.getElementById('inputDob').value='';
+  document.getElementById('confirmBox').style.display='none';
+}
+
+async function verifyDob(dob){
+  if(verifying) return;
+  verifying=true;
+  const input=document.getElementById('inputDob');
+  const checking=document.getElementById('dobChecking');
+  input.disabled=true; checking.style.display='block';
+  let ok=false;
+  try{
+    const r=await fetch(API,{method:'POST',body:JSON.stringify({
+      action:'login',
+      campus:document.getElementById('selCampus').value,
+      cls:document.getElementById('selClass').value,
+      id:Number(document.getElementById('selStudent').value),
+      dob:dob
+    })});
+    const data=await r.json();
+    if(data.status==='ok'){
+      ok=true;
+      pendingStudent=data.student;
+      document.getElementById('cfFullName').textContent=pendingStudent.full_name;
+      document.getElementById('cfNickname').textContent=pendingStudent.nickname;
+      document.getElementById('cfEmail').textContent=pendingStudent.email;
+      document.getElementById('cfCampus').textContent=pendingStudent.campus;
+      document.getElementById('cfClass').textContent=pendingStudent.class;
+      document.getElementById('cfYear').textContent=document.getElementById('selYear').value;
+      document.getElementById('confirmBox').style.display='block';
+    } else if(data.status==='nomatch'){
+      dobFail('Date of birth does not match.'+(data.remaining>0?` ${data.remaining} ${data.remaining===1?'try':'tries'} left.`:''));
+    } else {
+      dobFail(data.message||'Something went wrong. Please try again.');
+    }
+  }catch(e){
+    dobFail('Could not check your date of birth. Please check your connection and try again.');
+  }finally{
+    checking.style.display='none';
+    input.disabled=false;
+    verifying=false;
+    if(!ok) input.focus();
+  }
+}
+
+function confirmLogin(){
+  if(!pendingStudent){showToast('Please enter your date of birth.');return;}
+  const yg=YEAR_GROUPS.find(y=>y.label===document.getElementById('selYear').value);
+  student=Object.assign({}, pendingStudent, {year:yg.label, course:yg.course});
+  saveLogin(student);
+  afterLogin();
+}
+
+function afterLogin(){
+  document.getElementById('barNickname').textContent='👤 '+student.nickname;
+  document.getElementById('barCampus').textContent='🏫 '+student.campus;
+  document.getElementById('barClass').textContent=student.class;
+  document.getElementById('barYear').textContent=student.year;
+  document.getElementById('studentBar').classList.add('visible');
+  if(returnTo){
+    document.getElementById('returnMsg').textContent=
+      `Logged in as ${student.nickname} (${student.class}). Your progress on the activity will now be saved.`;
+    showScreen('screenReturn');
+  } else {
+    openCatalogue();
+  }
+}
+
+function goBack(){
+  const url=returnTo;
+  returnTo=null;
+  // If the activity opened this tab, close it — the activity page notices the login by itself.
+  if(window.opener && !window.opener.closed){ try{ window.close(); }catch(e){} }
+  setTimeout(()=>{ location.href=url; }, 300);
+}
+
+// ═══════════════════════════════════════════════════════
+// CATALOGUE
+// ═══════════════════════════════════════════════════════
+// Pull the student's best scores from the results sheet so the green ticks
+// are the same on every device. Merged with this device's saved scores
+// (higher score wins). If the lookup fails the page just uses local scores.
+async function syncProgress(){
+  const em=student.email, course=student.course, campus=student.campus;
+  if(!em||!course||!campus) return;
+  try{
+    const r=await fetch(`${API}?action=progress&campus=${encodeURIComponent(campus)}&course=${encodeURIComponent(course)}&email=${encodeURIComponent(em)}`);
+    if(!r.ok) return;
+    const data=await r.json();
+    if(data.status!=='ok'||!data.done) return;
+    if(student.email!==em) return;   // student was changed while waiting
+    if(data.activities){
+      try{ localStorage.setItem('sisb_act_'+em,JSON.stringify(data.activities)); }catch(e){}
+    }
+    const key='sisb_'+em;
+    let local={};
+    try{ local=JSON.parse(localStorage.getItem(key)||'{}'); }catch(e){}
+    let changed=false;
+    Object.entries(data.done).forEach(([id,pct])=>{
+      if(local[id]===undefined||pct>local[id]){ local[id]=pct; changed=true; }
+    });
+    if(changed){ try{ localStorage.setItem(key,JSON.stringify(local)); }catch(e){} }
+    if(catalogue.length && catalogueCourse===course &&
+       document.getElementById('screenCatalogue').classList.contains('active')){
+      renderCatalogue();
+    }
+  }catch(e){}
+}
+
+function openCatalogue(){
+  document.getElementById('catTitle').textContent=student.year+' — '+student.course;
+  showScreen('screenCatalogue');
+  syncProgress();
+  if(catalogueCourse!==student.course){
+    catalogue=[];
+    document.getElementById('catalogueList').innerHTML='<div class="loading"><div class="spinner"></div><p>Loading quizzes…</p></div>';
+    loadCatalogue();
+  } else {
+    renderCatalogue();
+    openDeepQuiz();
+  }
+}
+
+async function loadCatalogue(){
+  const course=student.course;
+  try{
+    const r=await fetch(CATALOGUES[course]);
+    const rows=parseCSV(await r.text());
+    catalogue=rows
+      .filter(q=>q.visible==='TRUE'&&q.quiz_title)
+      .map(q=>({...q,
+        topic: q.topic||q.unit_title||'',
+        code: topicCode(q.quiz_title)||topicCode(q.quiz_id),
+        due: parseDue(q.due_date),
+        activity: safeActivity(q.activity_url),
+        yearGroup: (q.year_group||'').trim()
+      }));
+    catalogueCourse=course;
+    renderCatalogue();
+    openDeepQuiz();
+  }catch(e){
+    document.getElementById('catalogueList').innerHTML='<div class="error-box">⚠️ Could not load quiz catalogue. Please check your connection.</div>';
+  }
+}
+
+// Only links to the SISB activity sites are opened.
+function safeActivity(u){
+  if(!u) return '';
+  try{ const x=new URL(u); return x.origin===SITE_ORIGIN ? x.href : ''; }catch(e){ return ''; }
+}
+
+function openDeepQuiz(){
+  if(!deepQuiz) return;
+  const id=deepQuiz; deepQuiz=null;
+  if(catalogue.some(q=>q.quiz_id===id)) selectQuiz(id);
+  else showToast('That quiz is not open yet — choose another below.');
+}
+
+// What one catalogue row means for this student.
+function itemState(q,done,acts){
+  const mine=q.yearGroup===student.year && !!q.due;
+  const today=startOfToday();
+  const actFrom=new Date((ACTIVITY_EXPECTED_FROM[student.course]||'2100-01-01')+'T00:00:00');
+  const quizDone=done[q.quiz_id]!==undefined;
+  const actDone=!!(q.code && acts[q.code] && acts[q.code].length);
+  const expectAct=!!(q.activity && mine && q.due>=actFrom);
+  return {
+    mine, quizDone, actDone, expectAct,
+    isDue: mine && q.due<=today,               // due today or earlier
+    overdue: mine && q.due<today,
+    complete: quizDone && (!expectAct || actDone),
+    pct: done[q.quiz_id]
+  };
+}
+
+function readDone(){
+  try{ return JSON.parse(localStorage.getItem('sisb_'+student.email)||'{}'); }catch(e){ return {}; }
+}
+function readActs(){
+  try{ return JSON.parse(localStorage.getItem('sisb_act_'+student.email)||'{}'); }catch(e){ return {}; }
+}
+
+function dueChip(q,st){
+  if(!st.mine) return '';
+  if(st.complete) return '';
+  if(st.overdue) return `<span class="chip chip-over">Overdue · ${fmtDue(q.due)}</span>`;
+  if(st.isDue)   return `<span class="chip chip-today">Due today</span>`;
+  return `<span class="chip chip-due">Due ${fmtDue(q.due)}</span>`;
+}
+
+function todoRow(q,st){
+  const btns=[];
+  if(!st.quizDone) btns.push(`<button class="mini-btn mini-quiz" onclick="selectQuiz('${esc(q.quiz_id)}')">▶ Video &amp; quiz</button>`);
+  if(st.expectAct && !st.actDone) btns.push(`<a class="mini-btn mini-act" href="${esc(q.activity)}" target="_blank" rel="noopener">✏️ Activity</a>`);
+  return `<div class="todo${st.overdue?' over':''}">
+    <span class="todo-title">${esc(q.quiz_title)}</span>
+    ${dueChip(q,st)}
+    <span class="todo-btns">${btns.join('')}</span>
+  </div>`;
+}
+
+function renderProgress(){
+  const card=document.getElementById('progressCard');
+  const body=document.getElementById('progressBody');
+  const done=readDone(), acts=readActs();
+  const mine=catalogue.filter(q=>q.yearGroup===student.year && q.due)
+                      .sort((a,b)=>a.due-b.due);
+  if(!mine.length){ card.style.display='none'; return; }
+  card.style.display='block';
+
+  let dueItems=0, dueDone=0, allItems=0, allDone=0;
+  const todo=[], coming=[], best=[];
+  mine.forEach(q=>{
+    const st=itemState(q,done,acts);
+    const n=1+(st.expectAct?1:0), d=(st.quizDone?1:0)+(st.expectAct&&st.actDone?1:0);
+    allItems+=n; allDone+=d;
+    if(st.quizDone) best.push(st.pct);          // average counts every quiz done, due or not
+    if(st.isDue){
+      dueItems+=n; dueDone+=d;
+      if(!st.complete) todo.push([q,st]);
+    } else if(!st.complete){
+      coming.push([q,st]);
+    }
+  });
+  const left=dueItems-dueDone;
+  const avg=best.length?Math.round(best.reduce((a,b)=>a+b,0)/best.length):null;
+
+  let html=`<div class="prog-stats">
+    <div class="prog-stat"><div class="prog-num${allItems&&allDone===allItems?' ok':''}">${allDone}<span style="font-size:14px;color:#7a8fa0"> / ${allItems}</span></div><div class="prog-label">Done so far</div></div>
+    <div class="prog-stat"><div class="prog-num${left?' warn':' ok'}">${left}</div><div class="prog-label">Due now</div></div>
+    <div class="prog-stat"><div class="prog-num">${avg===null?'–':avg+'%'}</div><div class="prog-label">Quiz average</div></div>
+  </div>
+  <div class="progress-bar-wrap" style="margin-bottom:6px"><div class="progress-bar" style="width:${allItems?Math.round(allDone/allItems*100):0}%"></div></div>`;
+
+  if(todo.length){
+    html+=`<div class="prog-head">Still to do</div>`+todo.map(([q,st])=>todoRow(q,st)).join('');
+  } else if(dueItems){
+    html+=`<div class="uptodate" style="margin-top:14px">🎉 You're up to date. Nice work!</div>`;
+  }
+  if(coming.length){
+    html+=`<div class="prog-head">Coming up</div>`+coming.slice(0,4).map(([q,st])=>todoRow(q,st)).join('');
+  }
+  html+=`<p class="prog-note">Activities finished on another device can take a minute to appear here. Reopen this page to refresh.</p>`;
+  body.innerHTML=html;
+}
+
+function renderCatalogue(){
+  renderProgress();
+  const topics={};
+  catalogue.forEach(q=>{
+    if(!topics[q.topic]) topics[q.topic]=[];
+    topics[q.topic].push(q);
+  });
+  // Keep topics the student already had open, and open the one they just finished.
+  const openTopics=new Set(
+    [...document.querySelectorAll('#catalogueList .topic-header.open > span:first-child')].map(e=>e.textContent)
+  );
+  if(lastTopic) openTopics.add(lastTopic);
+  lastTopic=null;
+  const done=readDone(), acts=readActs();
+  let html='';
+  Object.entries(topics).forEach(([topic,quizzes])=>{
+    const doneCt=quizzes.filter(q=>done[q.quiz_id]!==undefined).length;
+    const open=openTopics.has(topic)?' open':'';
+    html+=`<div class="topic-section">
+      <div class="topic-header${open}" onclick="toggleTopic(this)">
+        <span>${esc(topic)}</span>
+        <span style="display:flex;align-items:center;gap:10px">
+          ${doneCt?`<span style="font-size:11px;opacity:.8">${doneCt}/${quizzes.length} done</span>`:''}
+          <span class="topic-arrow">▶</span>
+        </span>
+      </div>
+      <div class="topic-quizzes${open}">`;
+    quizzes.forEach(q=>{
+      const st=itemState(q,done,acts);
+      const quizBadge=st.quizDone
+        ?`<span class="quiz-item-badge badge-done">✓ Quiz ${st.pct}%</span>`
+        :`<span class="quiz-item-badge badge-new">Quiz</span>`;
+      const actBadge=!q.activity?''
+        :st.actDone
+          ?`<a class="quiz-item-badge badge-act-done" href="${esc(q.activity)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">✓ Activity</a>`
+          :`<a class="quiz-item-badge badge-act" href="${esc(q.activity)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Activity ↗</a>`;
+      html+=`<div class="quiz-item" onclick="selectQuiz('${esc(q.quiz_id)}')">
+        <span class="quiz-item-title">${esc(q.quiz_title)}</span>
+        <span class="quiz-item-badges">${dueChip(q,st)}${quizBadge}${actBadge}</span>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+  document.getElementById('catalogueList').innerHTML=html||'<div class="error-box">No quizzes found.</div>';
+}
+
+function toggleTopic(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════
+// VIDEO
+// ═══════════════════════════════════════════════════════
+async function selectQuiz(quizId){
+  currentQuiz=catalogue.find(q=>q.quiz_id===quizId);
+  if(!currentQuiz) return;
+  const embedUrl=ytEmbed(currentQuiz.youtube_url);
+  document.getElementById('vTitle').textContent=currentQuiz.quiz_title;
+  document.getElementById('vTopicBadge').textContent=currentQuiz.topic;
+  document.getElementById('vQuizId').textContent='Quiz '+currentQuiz.quiz_id;
+  document.getElementById('ytPlayer').src=embedUrl;
+  document.getElementById('ytPlayerQuiz').src=embedUrl;
+  const btn=document.getElementById('startQuizBtn');
+  btn.disabled=true; btn.textContent='Loading questions…';
+  showScreen('screenVideo');
+  questions=[];
+  try{
+    const r=await fetch(toCSVUrl(currentQuiz.question_sheet_url));
+    questions=parseCSV(await r.text()).filter(q=>q.question);
+    btn.disabled=false;
+    btn.textContent=`Start Quiz (${questions.length} questions) →`;
+  }catch(e){btn.textContent='⚠️ Could not load questions';}
+}
+
+// ═══════════════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════════════
+function startQuiz(){
+  if(!questions.length) return;
+  answers=new Array(questions.length).fill(null);
+  shuffledOptions=questions.map(q=>shuffle([
+    {letter:'A',text:q.option_a},{letter:'B',text:q.option_b},
+    {letter:'C',text:q.option_c},{letter:'D',text:q.option_d}
+  ]));
+  currentQ=0;
+  showScreen('screenQuiz');
+  renderQuestion();
+}
+
+function retakeQuiz(){startQuiz();}
+
+function renderQuestion(){
+  const q=questions[currentQ];
+  document.getElementById('progressBar').style.width=(currentQ/questions.length*100)+'%';
+  document.getElementById('questionNum').textContent=`Question ${currentQ+1} of ${questions.length}`;
+  document.getElementById('questionText').textContent=q.question;
+  document.getElementById('explanationBox').style.display='none';
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('finishBtn').style.display='none';
+  const letters=['A','B','C','D'];
+  document.getElementById('optionsContainer').innerHTML=
+    shuffledOptions[currentQ].map((opt,i)=>
+      `<div class="option" id="opt${i}" onclick="selectAnswer(${i})">
+        <div class="option-letter">${letters[i]}</div><span>${opt.text}</span>
+      </div>`
+    ).join('');
+}
+
+function selectAnswer(idx){
+  const opts=document.querySelectorAll('.option');
+  if(opts[0].classList.contains('disabled')) return;
+  opts.forEach(o=>o.classList.add('disabled'));
+  const correct=String(questions[currentQ].correct_answer||'').trim().toUpperCase();
+  const letter=shuffledOptions[currentQ][idx].letter;
+  const isCorrect=letter===correct;
+  answers[currentQ]={chosen:letter,correct,isCorrect};
+  shuffledOptions[currentQ].forEach((opt,i)=>{
+    if(i===idx) opts[i].classList.add(isCorrect?'correct':'wrong');
+    if(opt.letter===correct&&i!==idx) opts[i].classList.add('correct');
+  });
+  const exp=document.getElementById('explanationBox');
+  exp.style.display='block';
+  exp.innerHTML=`<strong>${isCorrect?'✓ Correct!':'✗ Incorrect'}</strong> — ${questions[currentQ].explanation||''}`;
+  document.getElementById(currentQ<questions.length-1?'nextBtn':'finishBtn').style.display='inline-flex';
+}
+
+function nextQuestion(){currentQ++;renderQuestion();}
+
+// ═══════════════════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════════════════
+function finishQuiz(){
+  const correct=answers.filter(a=>a?.isCorrect).length;
+  const total=questions.length;
+  const pct=Math.round(correct/total*100);
+  const key='sisb_'+student.email;
+  try{
+    const done=JSON.parse(localStorage.getItem(key)||'{}');
+    const prev=done[currentQuiz.quiz_id];
+    done[currentQuiz.quiz_id]=prev===undefined?pct:Math.max(prev,pct);   // keep the best score
+    localStorage.setItem(key,JSON.stringify(done));
+  }catch(e){}
+  lastTopic=currentQuiz.topic;
+  document.getElementById('scoreNum').textContent=`${correct}/${total}`;
+  document.getElementById('progressBar').style.width='100%';
+  let title,sub;
+  if(pct>=90){title='🏆 Outstanding!';sub='Exceptional work — a true Scholar!';}
+  else if(pct>=70){title='🎓 Well Done!';sub='A solid understanding of this topic.';}
+  else if(pct>=50){title='📚 Keep Revising';sub='Good start — review the explanations and try again.';}
+  else{title='💡 More Practice Needed';sub='Rewatch the video and try the quiz again.';}
+  document.getElementById('resultTitle').textContent=title;
+  document.getElementById('resultSub').textContent=`${sub} | ${student.nickname} · ${student.class} · ${pct}%`;
+  document.getElementById('reviewContainer').innerHTML=questions.map((q,i)=>{
+    const a=answers[i]; if(!a) return '';
+    const chosenOpt=shuffledOptions[i].find(o=>o.letter===a.chosen);
+    const correctOpt=shuffledOptions[i].find(o=>o.letter===a.correct);
+    return `<div class="review-item ${a.isCorrect?'correct-q':'wrong-q'}">
+      <div class="review-q">${i+1}. ${q.question}</div>
+      ${!a.isCorrect?`<div class="review-ans wrong">✗ Your answer: ${chosenOpt?.text||a.chosen}</div>`:''}
+      <div class="review-ans correct">✓ Correct: ${correctOpt?.text||a.correct}</div>
+      <div class="review-exp">${q.explanation||''}</div>
+    </div>`;
+  }).join('');
+  showScreen('screenResults');
+  submitResults(correct,total,pct);
+}
+
+async function submitResults(correct,total,pct){
+  try{
+    await fetch(API,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        nickname:student.nickname, full_name:student.full_name,
+        email:student.email, course:student.course,
+        campus:student.campus, class:student.class,
+        year:student.year, quiz_id:currentQuiz.quiz_id,
+        quiz_title:currentQuiz.quiz_title, topic:currentQuiz.topic,
+        score:correct, total, percentage:pct,
+        timestamp:new Date().toISOString()
+      })
+    });
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════
+// START — skip the login if this device already has one
+// ═══════════════════════════════════════════════════════
+// Coming back from an activity tab: pull the latest progress.
+let lastSync=0;
+function refreshIfBack(){
+  if(document.visibilityState!=='visible' || !student.email) return;
+  if(!document.getElementById('screenCatalogue').classList.contains('active')) return;
+  if(Date.now()-lastSync<15000) return;
+  lastSync=Date.now();
+  syncProgress();
+}
+document.addEventListener('visibilitychange',refreshIfBack);
+window.addEventListener('focus',refreshIfBack);
+
+(function init(){
+  const saved=loadLogin();
+  if(saved && saved.course){
+    student=saved;
+    afterLogin();
+  }
+})();
 </script>
 </body>
 </html>
