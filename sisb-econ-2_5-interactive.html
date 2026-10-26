@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.5 Price Changes · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dorange:#B85C00; --red:#C8102E; --green:#1B7F3B;
+  --ink:#1F2937; --muted:#6B7280; --line:#D6DEE8; --bg:#F3F6FA; --card:#FFFFFF;
+  --pale-blue:#E6F3FA; --pale-orange:#FFF1E2; --pale-red:#FBEAEC; --pale-green:#E9F5EC; --pale-navy:#E8EDF4;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.5}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+header.top{background:var(--navy);color:#fff;padding:14px 16px 0}
+.wrap{max-width:1120px;margin:0 auto}
+.brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.wordmark{font-weight:900;font-size:26px;letter-spacing:1px;line-height:1}
+.wordmark i{display:inline-block;width:5px;height:20px;background:var(--blue);margin:0 3px;vertical-align:-2px}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9CC9EA;font-weight:700}
+h1{margin:2px 0 0;font-size:26px;font-weight:900}
+.sub{color:#C9D6E8;font-size:14px;margin:2px 0 10px}
+.tabs{display:flex;gap:4px;overflow-x:auto;margin-top:6px;-webkit-overflow-scrolling:touch}
+.tab{background:transparent;border:0;color:#C9D6E8;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;white-space:nowrap;display:flex;gap:8px;align-items:center}
+.tab .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);font-size:12px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--green);color:#fff}
+.progress{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.progress .wrap{display:flex;align-items:center;gap:12px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.bar{flex:1;height:8px;background:var(--pale-navy);border-radius:99px;overflow:hidden}
+.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width .4s}
+main{padding:18px 16px 60px}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--card);border-radius:14px;border:1px solid var(--line);padding:18px;margin-bottom:16px}
+.card h2{margin:0 0 6px;color:var(--navy);font-size:21px}
+.card h3{margin:0 0 6px;color:var(--navy);font-size:17px}
+.lead{color:var(--muted);margin:0 0 12px}
+.badge{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;padding:3px 8px;border-radius:99px;text-transform:uppercase}
+.b-th{background:var(--pale-orange);color:var(--dorange)}
+.b-int{background:var(--pale-blue);color:#005B87}
+.btn{border:2px solid var(--navy);background:#fff;color:var(--navy);padding:9px 14px;border-radius:10px;font-weight:700}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.orange{background:var(--orange);border-color:var(--orange);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:6px 10px;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--pale-green);border-left:5px solid var(--green)}
+.fb.no{background:var(--pale-red);border-left:5px solid var(--red)}
+.fb.info{background:var(--pale-blue);border-left:5px solid var(--blue)}
+.choice{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;color:var(--navy);min-width:120px}
+.choice.ok{border-color:var(--green);background:var(--pale-green)}
+.choice.no{border-color:var(--red);background:var(--pale-red)}
+/* problem tab */
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+.tl{border-left:5px solid var(--orange);background:var(--pale-orange);border-radius:10px;padding:12px}
+.tl b{color:var(--navy);display:block}
+.big{font-size:28px;font-weight:900;color:var(--navy)}
+/* shift lab */
+.lab{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.lab{grid-template-columns:1fr}}
+.cases{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.case{border:2px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:14px;font-weight:700;color:var(--navy)}
+.case.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.case .fl{font-size:10px;font-weight:900;margin-right:4px;color:var(--dorange)}
+.case.on .fl{color:var(--orange)}
+.chartbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}
+svg.chart{width:100%;height:auto;display:block;touch-action:manipulation}
+.steps{display:flex;gap:4px;margin:10px 0}
+.st{flex:1;text-align:center;font-size:12px;font-weight:700;color:var(--muted);padding:6px 2px;border-radius:8px;background:var(--pale-navy)}
+.st.on{background:var(--navy);color:#fff}
+.st.done{background:#CFE3F3;color:var(--navy)}
+.readout{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.ro{background:var(--pale-navy);border-radius:8px;padding:6px 8px;text-align:center}
+.ro small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.ro span{font-weight:900;color:var(--navy);font-size:17px}
+.ro.gap span{color:var(--red)}
+.steptext{min-height:150px}
+.steptext .label{font-size:12px;font-weight:900;letter-spacing:.06em;color:var(--orange);text-transform:uppercase}
+.steptext p{margin:6px 0}
+.q{background:var(--pale-blue);border-radius:10px;padding:10px 12px;margin-top:8px}
+.q .row{margin-top:6px}
+.q.nudge{animation:nudge .5s}
+@keyframes nudge{0%,100%{transform:none}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.choice:disabled{cursor:default}
+.fact{background:var(--pale-orange);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:14px}
+.missions{display:grid;gap:6px;margin-top:10px}
+.mi{display:flex;gap:8px;align-items:center;font-size:14px;padding:6px 10px;border-radius:8px;background:var(--pale-navy)}
+.mi .tick{width:20px;height:20px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font-size:12px;color:#fff;flex:none}
+.mi.done{background:var(--pale-green)}
+.mi.done .tick{background:var(--green);border-color:var(--green)}
+.free{display:none;gap:10px;flex-wrap:wrap;align-items:center;background:var(--pale-navy);border-radius:10px;padding:8px 10px;margin-bottom:10px;font-size:14px}
+.free.on{display:flex}
+.free select,.free input{font-family:inherit;font-size:14px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--navy)}
+/* sorter */
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;padding:10px;border:2px dashed var(--line);border-radius:12px;background:#fff}
+.chip{background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:10px;padding:8px 10px;font-weight:700;font-size:14px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;max-width:100%}
+.chip small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.chip.sel{outline:4px solid var(--orange);outline-offset:1px}
+.chip.ok{border-color:var(--green);background:var(--pale-green)}
+.chip.no{border-color:var(--red);background:var(--pale-red)}
+.chip.ghost{position:fixed;pointer-events:none;z-index:999;opacity:.9;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+@media (max-width:860px){.bins{grid-template-columns:repeat(2,1fr)}}
+.bin{border-radius:12px;padding:8px;min-height:150px;display:flex;flex-direction:column;gap:6px;border:2px solid var(--line)}
+.bin.hover{border-color:var(--orange)}
+.bin h4{margin:0 0 4px;font-size:15px;text-align:center}
+.bin.d{background:var(--pale-blue)} .bin.d h4{color:#005B87}
+.bin.s{background:var(--pale-orange)} .bin.s h4{color:var(--dorange)}
+.explain{font-size:14px;margin-top:10px}
+.explain li{margin-bottom:4px}
+/* order */
+.slots{display:grid;gap:6px;margin:10px 0}
+.slot{display:flex;gap:10px;align-items:center;min-height:44px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;background:#fff}
+.slot .num{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px;flex:none}
+.slot.filled{border-style:solid;border-color:var(--navy);cursor:pointer}
+.slot.ok{border-color:var(--green);background:var(--pale-green)}
+.slot.no{border-color:var(--red);background:var(--pale-red)}
+.pool{display:grid;gap:6px}
+.pcard{text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;color:var(--ink)}
+.pcard:disabled{opacity:.25}
+/* quiz */
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font-weight:700;color:var(--ink)}
+.opt .k{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--pale-navy);color:var(--navy);margin-right:8px;font-size:13px}
+.opt.ok{border-color:var(--green);background:var(--pale-green)}
+.opt.no{border-color:var(--red);background:var(--pale-red)}
+.score{font-size:40px;font-weight:900;color:var(--navy)}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="wordmark">S<i></i>SB</div>
+      <div>
+        <div class="kicker">IGCSE Economics 0455 · Unit 2 · Topic 2.5</div>
+        <h1>Price Changes</h1>
+      </div>
+    </div>
+    <p class="sub">Why prices change – and how a market gets back to equilibrium. Textbook Chapter 9, pp. 36–39.</p>
+    <nav class="tabs" role="tablist">
+      <button class="tab on" data-tab="0"><span class="n">1</span>The problem</button>
+      <button class="tab" data-tab="1" id="t1"><span class="n">2</span>Shift Lab</button>
+      <button class="tab" data-tab="2" id="t2"><span class="n">3</span>Which shift?</button>
+      <button class="tab" data-tab="3" id="t3"><span class="n">4</span>Order the story</button>
+      <button class="tab" data-tab="4" id="t4"><span class="n">5</span>Quick quiz</button>
+    </nav>
+  </div>
+</header>
+<div class="progress"><div class="wrap"><span id="progTxt">0 / 4 activities</span><div class="bar"><span id="progBar"></span></div></div></div>
+
+<main class="wrap">
+<!-- ============ TAB 1: THE PROBLEM ============ -->
+<section class="panel on" id="p0">
+  <div class="card">
+    <span class="badge b-th">Thailand</span>
+    <h2>One decision in New Delhi. One farmer in Suphan Buri.</h2>
+    <p class="lead">The rice in Suphan Buri did not change. Its price did – twice.</p>
+    <div class="timeline">
+      <div class="tl"><b>July 2023</b>India, the world's biggest rice exporter, bans exports of most white rice. Buyers in the Philippines, Indonesia and Africa look for rice somewhere else.</div>
+      <div class="tl"><b>August 2023</b>Thai white rice (5% broken) reaches about <strong>US$648 per tonne</strong> – the highest price since 2008.</div>
+      <div class="tl"><b>28 September 2024</b>India lifts the ban. The price Thai farmers get for paddy falls from about <strong>฿10,000</strong> to <strong>฿8,000–9,000 per tonne</strong>.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Think first</h3>
+    <p>For the market for <strong>Thai rice</strong>, what did India's ban in 2023 do?</p>
+    <div class="row" id="hookQ1"></div>
+    <div class="fb" id="hookFb1"></div>
+    <div id="hookPart2" style="display:none;margin-top:14px">
+      <p>And in September 2024, when India lifted the ban?</p>
+      <div class="row" id="hookQ2"></div>
+      <div class="fb" id="hookFb2"></div>
+    </div>
+    <div id="hookPart3" style="display:none;margin-top:14px">
+      <p><strong>Predict:</strong> the day after the ban, buyers wanted much more Thai rice than exporters had ready. What happened <em>first</em>?</p>
+      <div class="row" id="hookQ3"></div>
+      <div class="fb" id="hookFb3"></div>
+    </div>
+  </div>
+  <div class="card" id="hookKey" style="display:none">
+    <h3>The big idea of this topic</h3>
+    <p><span class="big">Shift → gap → price moves → new equilibrium</span></p>
+    <p>A change in a <strong>non-price factor</strong> shifts demand or supply. At the <strong>old price</strong> there is now a <strong>shortage</strong> or a <strong>surplus</strong>. The price moves, buyers and sellers move <strong>along</strong> the curves, and the gap closes at a new equilibrium.</p>
+    <button class="btn primary" onclick="goTab(1)">Watch it happen in the Shift Lab →</button>
+  </div>
+</section>
+
+<!-- ============ TAB 2: SHIFT LAB ============ -->
+<section class="panel" id="p1">
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div><h2>Shift Lab</h2><p class="lead" style="margin:0">Pick a real market. Predict the shift, then step through the story back to equilibrium.</p></div>
+      <label class="toggle"><input type="checkbox" id="freeToggle"> Free play</label>
+    </div>
+    <div class="free" id="freeBox">
+      <label>Change: <select id="freeKind"><option value="D+">Demand increases</option><option value="D-">Demand decreases</option><option value="S+">Supply increases</option><option value="S-">Supply decreases</option></select></label>
+      <label>Size of shift: <input type="range" id="freeSize" min="0.6" max="3" step="0.1" value="2"></label>
+      <label>Curve steepness: <input type="range" id="freeSlope" min="0.4" max="1.4" step="0.05" value="0.75"></label>
+    </div>
+    <div class="cases" id="cases"></div>
+  </div>
+  <div class="lab">
+    <div>
+      <div class="chartbox"><svg class="chart" id="chart" viewBox="0 0 560 420" role="img" aria-label="Demand and supply diagram"></svg></div>
+      <div class="steps" id="steps"></div>
+      <div class="readout">
+        <div class="ro"><small>Price</small><span id="roP">–</span></div>
+        <div class="ro"><small>Qty demanded</small><span id="roQd">–</span></div>
+        <div class="ro"><small>Qty supplied</small><span id="roQs">–</span></div>
+        <div class="ro gap"><small id="roGapL">Gap</small><span id="roGap">0</span></div>
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="steptext" id="stepText"></div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="backBtn">◀ Back</button>
+        <button class="btn primary" id="nextBtn">Next step ▶</button>
+        <button class="btn sm" id="resetBtn">Reset</button>
+      </div>
+      <h3 style="margin-top:16px">Missions</h3>
+      <div class="missions" id="missions"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: WHICH SHIFT ============ -->
+<section class="panel" id="p2">
+  <div class="card">
+    <h2>Which shift?</h2>
+    <p class="lead">Drag each event into the right box – or tap a card, then tap a box. The market is in brackets. Watch out for the ★ factors that are not in Chapter 9.</p>
+    <div class="bank" id="bank"></div>
+    <div class="bins">
+      <div class="bin d" data-bin="D+"><h4>Demand ↑<br><small>D shifts right</small></h4></div>
+      <div class="bin d" data-bin="D-"><h4>Demand ↓<br><small>D shifts left</small></h4></div>
+      <div class="bin s" data-bin="S+"><h4>Supply ↑<br><small>S shifts right</small></h4></div>
+      <div class="bin s" data-bin="S-"><h4>Supply ↓<br><small>S shifts left</small></h4></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn primary" id="sortCheck">Check</button>
+      <button class="btn" id="sortReset">Start again</button>
+    </div>
+    <div class="fb" id="sortFb"></div>
+    <ul class="explain" id="sortExplain"></ul>
+  </div>
+</section>
+
+<!-- ============ TAB 4: ORDER THE STORY ============ -->
+<section class="panel" id="p3">
+  <div class="card">
+    <h2>Order the story</h2>
+    <p class="lead">Tap the sentences in the right order to tell the full story from the shift to the new equilibrium. Tap a filled line to send it back. Complete both stories.</p>
+    <div class="row" id="storyPick"></div>
+    <div class="slots" id="slots"></div>
+    <div class="pool" id="pool"></div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn primary" id="orderCheck">Check</button>
+      <button class="btn" id="orderReset">Start again</button>
+    </div>
+    <div class="fb" id="orderFb"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5: QUIZ ============ -->
+<section class="panel" id="p4">
+  <div class="card" id="quizCard"></div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 2.5 Price Changes</footer>
+
+<script>
+/* ---------------- utilities ---------------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// The hub tracker records ONE row per (unit, activity label) per visit, so each activity gets its own label.
+function track(activity, detail) {
+  try {
+    const T = window.SISB_TRACKER;
+    if (T && typeof T.log === 'function') T.log('Unit 2', '2.5 Price Changes · ' + activity, detail);
+  } catch (e) { /* tracker unavailable – activity still works */ }
+}
+const done = { lab: false, sort: false, order: false, quiz: false };
+function markDone(key, tabId, activity, detail) {
+  if (done[key]) return;
+  done[key] = true;
+  const t = document.getElementById(tabId); if (t) t.classList.add('done');
+  const n = Object.values(done).filter(Boolean).length;
+  $('#progTxt').textContent = n + ' / 4 activities';
+  $('#progBar').style.width = (n * 25) + '%';
+  track(activity, detail);
+}
+/* ---------------- tabs ---------------- */
+function goTab(i) {
+  $$('.tab').forEach((t, k) => t.classList.toggle('on', k === i));
+  $$('.panel').forEach((p, k) => p.classList.toggle('on', k === i));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+$$('.tab').forEach((t) => t.addEventListener('click', () => goTab(+t.dataset.tab)));
+
+/* ---------------- TAB 1: hook ---------------- */
+function choiceSet(container, options, correct, fbEl, onRight) {
+  const box = document.getElementById(container), fb = document.getElementById(fbEl);
+  options.forEach(([val, label, msg]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.textContent = label;
+    b.addEventListener('click', () => {
+      const ok = val === correct;
+      b.classList.add(ok ? 'ok' : 'no');
+      fb.className = 'fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = msg;
+      if (ok) { $$('.choice', box).forEach((x) => (x.disabled = true)); onRight && onRight(); }
+    });
+    box.appendChild(b);
+  });
+}
+choiceSet('hookQ1', [
+  ['D+', 'Demand ↑', '<strong>Yes.</strong> Indian rice was a <strong>substitute</strong>. With it gone, buyers wanted more Thai rice at every price: demand for Thai rice shifted right. (For the <em>world</em> rice market, India\'s ban was a fall in supply – always name the market!)'],
+  ['D-', 'Demand ↓', 'Not quite. Did buyers want <em>less</em> Thai rice when Indian rice disappeared?'],
+  ['S+', 'Supply ↑', 'Think about Thai farmers – did India\'s ban give them more rice to sell? It changed what <strong>buyers</strong> wanted.'],
+  ['S-', 'Supply ↓', 'India\'s supply fell – but we are looking at the market for <strong>Thai</strong> rice. What happened to buyers of Thai rice?'],
+], 'D+', 'hookFb1', () => { $('#hookPart2').style.display = 'block'; });
+choiceSet('hookQ2', [
+  ['D+', 'Demand ↑', 'Cheaper Indian rice came back. Would buyers want more Thai rice, or less?'],
+  ['D-', 'Demand ↓', '<strong>Correct.</strong> The substitute returned, so demand for Thai rice shifted left and the price fell.'],
+  ['S+', 'Supply ↑', 'Thai farmers did not suddenly grow more. Look at the buyers.'],
+  ['S-', 'Supply ↓', 'Look at the buyers, not the farmers.'],
+], 'D-', 'hookFb2', () => { $('#hookPart3').style.display = 'block'; });
+choiceSet('hookQ3', [
+  ['short', 'A shortage at the old price', '<strong>Yes.</strong> At the old price, quantity demanded was greater than quantity supplied. That shortage is what pushed the price up – step by step, not in one day.'],
+  ['jump', 'The price jumped straight to the new level', 'Prices rarely jump in one go. Sellers notice orders piling up first – what does that tell them?'],
+  ['supply', 'Thai farmers planted more rice', 'That takes months. What exists at the old price on day one?'],
+], 'short', 'hookFb3', () => { $('#hookKey').style.display = 'block'; });
+
+/* ---------------- TAB 2: SHIFT LAB ---------------- */
+const CASES = [
+  { id: 'pm25', flag: 'TH', name: 'PM2.5 & air purifiers', kind: 'D+', market: 'air purifiers in Bangkok', x: 'Quantity of air purifiers', y: 'Price (฿)', cur: '฿',
+    event: 'Smoke season arrives. Families want clean air at every price, so demand for air purifiers increases.',
+    gapReal: 'Shops sell out and customers join waiting lists.', fact: 'Every January–March PM2.5 levels in Bangkok rise sharply and purifiers and N95 masks sell out.' },
+  { id: 'rice', flag: 'TH', name: 'Thai rice & India\'s ban', kind: 'D+', market: 'Thai rice', x: 'Quantity of Thai rice', y: 'Price (US$ per tonne)', cur: '$',
+    event: 'India bans most rice exports (July 2023). Indian rice is a substitute, so buyers want more Thai rice at every price.',
+    gapReal: 'Orders pile up faster than exporters can fill them.', fact: 'Thai 5% broken rice reached about US$648 per tonne in August 2023 – the highest since 2008.' },
+  { id: 'pork', flag: 'TH', name: 'Pork & swine fever', kind: 'S-', market: 'pork in Thailand', x: 'Quantity of pork (kg)', y: 'Price (฿ per kg)', cur: '฿',
+    event: 'African swine fever kills many pigs and at least 159,000 are culled. There are fewer pigs to sell at every price, so supply decreases.',
+    gapReal: 'Market stalls run out of pork early in the day.', fact: 'By January 2022 retail pork was about ฿250 per kg, and some buyers switched to crocodile meat.' },
+  { id: 'durian', flag: 'TH', name: 'Durian & China\'s dye test', kind: 'D-', market: 'Thai durian', x: 'Quantity of Thai durian', y: 'Price (฿ per kg)', cur: '฿',
+    event: 'China finds a banned dye (BY2) in some shipments and tests every container. Chinese buyers want less Thai durian at every price, so demand decreases.',
+    gapReal: 'About 100 containers are sent back and fruit is left unsold.', fact: 'At Talad Thai, returned durian fell from about ฿230–240 to ฿110–120 per kg (January 2025).' },
+  { id: 'sugar', flag: 'TH', name: 'Sugar tax 2025', kind: 'S-', market: 'sugary drinks in Thailand', x: 'Quantity of sugary drinks', y: 'Price (฿)', cur: '฿',
+    event: 'The sugar tax rises again. An indirect tax is a cost for producers, so supply decreases.',
+    gapReal: 'At the old price, firms no longer want to sell as many drinks as people want to buy.', fact: 'From 1 April 2025, drinks with 10–14 g of sugar per 100 ml pay ฿5 per litre.' },
+  { id: 'mango', flag: 'TH', name: 'Mango harvest', kind: 'S+', market: 'mangoes in Thailand', x: 'Quantity of mangoes', y: 'Price (฿ per kg)', cur: '฿',
+    event: 'The April–May harvest arrives. Farmers have far more mangoes to sell at every price, so supply increases.',
+    gapReal: 'Piles of mangoes are left unsold at the old price.', fact: 'Seasonal fruit is cheapest at the peak of its harvest – and dearest out of season.' },
+  { id: 'cars', flag: 'TH', name: 'Car loans rejected', kind: 'D-', market: 'new cars in Thailand', x: 'Quantity of new cars', y: 'Price (฿)', cur: '฿',
+    event: 'Banks reject many car loans because household debt is high. Fewer people are ABLE to buy, so demand decreases.',
+    gapReal: 'Unsold cars wait in showrooms.', fact: 'Thai vehicle sales fell 24% in January–April 2024, and pick-up sales fell 42%.' },
+  { id: 'ev', flag: 'TH', name: 'Chinese EV factories', kind: 'S+', market: 'electric cars in Thailand', x: 'Quantity of EVs', y: 'Price (฿)', cur: '฿',
+    event: 'BYD, GWM and other Chinese brands open factories in Thailand. More firms means supply increases.',
+    gapReal: 'Dealers hold more EVs than buyers want at the old price.', fact: 'New entrants and government subsidies led to an EV price war in Thailand in 2024.' },
+  { id: 'songkran', flag: 'TH', name: 'Songkran flights', kind: 'D+', market: 'flights Bangkok–Chiang Mai', x: 'Quantity of seats', y: 'Price (฿)', cur: '฿',
+    event: 'Songkran week: many people fly home or to the festival, so demand for seats increases.',
+    gapReal: 'Flights fill up quickly at the old fare.', fact: 'Fares to Chiang Mai rise sharply in the days before Songkran – a festival effect.' },
+  { id: 'ram', flag: 'INT', name: 'Memory chips & AI', kind: 'D+', market: 'memory chips (RAM)', x: 'Quantity of memory chips', y: 'Price (US$)', cur: '$',
+    event: 'AI data centres buy huge amounts of memory. Demand for memory chips increases.',
+    gapReal: 'Chip makers cannot fill all orders at the old price.', fact: 'In early 2026, memory chip contract prices were forecast to rise 90–95% in a single quarter.' },
+  { id: 'cocoa', flag: 'INT', name: 'Cocoa & West Africa', kind: 'S-', market: 'cocoa beans', x: 'Quantity of cocoa', y: 'Price (US$ per tonne)', cur: '$',
+    event: 'Bad weather and plant disease in Côte d\'Ivoire and Ghana destroy crops, so supply decreases.',
+    gapReal: 'Chocolate makers cannot buy all the cocoa they want.', fact: 'Cocoa prices passed US$10,000 per tonne in 2024 and chocolate became more expensive.' },
+  { id: 'hdd', flag: 'INT', name: 'Hard drives & 2011 floods', kind: 'S-', market: 'computer hard drives (world)', x: 'Quantity of hard drives', y: 'Price (US$)', cur: '$',
+    event: 'Floods in Ayutthaya close hard-drive factories that supply the whole world, so supply decreases.',
+    gapReal: 'Computer makers cannot get enough drives.', fact: 'A Thai flood raised a world price: some hard drives roughly doubled in price within weeks (2011).' },
+  { id: 'pepsi', flag: 'INT', name: 'Pepsi (textbook p.38)', kind: 'D-', market: 'Pepsi', x: 'Quantity of Pepsi', y: 'Price (US$)', cur: '$',
+    event: 'The price of Coca-Cola falls. Coca-Cola is a substitute, so demand for Pepsi decreases.',
+    gapReal: 'Pepsi stays on the shelves.', fact: 'Textbook Activity p. 38 (b).' },
+  { id: 'samsung', flag: 'INT', name: 'Samsung (textbook p.38)', kind: 'S+', market: 'Samsung smartphones', x: 'Quantity of smartphones', y: 'Price (US$)', cur: '$',
+    event: 'New technology raises productivity in Samsung\'s factories, so supply increases.',
+    gapReal: 'More phones are made than people want at the old price.', fact: 'Textbook Activity p. 38 (d).' },
+];
+const STEP_NAMES = ['Start', 'Shift', 'Gap at old price', 'Price adjusts', 'New equilibrium'];
+const A = 8.5, C0 = 1.0;
+let lab = { c: CASES[0], step: 0, size: 2, slope: 0.75, free: false, answered: {}, tries: {}, wrong: {}, msg: {}, okMsg: {}, p: null, anim: null };
+function clearAnswers() { lab.answered = {}; lab.tries = {}; lab.wrong = {}; lab.msg = {}; lab.okMsg = {}; }
+const missions = [
+  { id: 'dem', text: 'Finish a case where DEMAND shifts', test: (k) => k[0] === 'D', done: false },
+  { id: 'sup', text: 'Finish a case where SUPPLY shifts', test: (k) => k[0] === 'S', done: false },
+  { id: 'sur', text: 'Finish a case that creates a SURPLUS', test: (k) => k === 'D-' || k === 'S+', done: false },
+];
+function renderMissions() {
+  $('#missions').innerHTML = missions.map((m) => `<div class="mi ${m.done ? 'done' : ''}"><span class="tick">${m.done ? '✓' : ''}</span>${m.text}</div>`).join('');
+}
+function kindOf() { return lab.free ? $('#freeKind').value : lab.c.kind; }
+function model() {
+  const k = kindOf(), b = lab.slope, d = lab.slope, sz = lab.size;
+  const sd = k === 'D+' ? sz : k === 'D-' ? -sz : 0, ss = k === 'S+' ? sz : k === 'S-' ? -sz : 0;
+  const dP = (q, s) => A - b * (q - s), sP = (q, s) => C0 + d * (q - s);
+  const qD = (p, s) => (A - p) / b + s, qS = (p, s) => (p - C0) / d + s;
+  const eq = (a, c) => { const q = (A + b * a - C0 + d * c) / (b + d); return { q, p: dP(q, a) }; };
+  return { k, sd, ss, dP, sP, qD, qS, e1: eq(0, 0), e2: eq(sd, ss) };
+}
+// SVG mapping
+const X0 = 70, Y0 = 360, XS = 44, YS = 32;
+const X = (q) => X0 + q * XS, Y = (p) => Y0 - p * YS;
+function lineD(m, s, col, label) {
+  const qa = Math.max(0.5, s + 0.3), qb = Math.min(10.3, (A + lab.slope * s - 1.0) / lab.slope);
+  return `<line x1="${X(qa)}" y1="${Y(m.dP(qa, s))}" x2="${X(qb)}" y2="${Y(m.dP(qb, s))}" stroke="${col}" stroke-width="4" stroke-linecap="round"/>` +
+    `<text x="${X(qb) + 6}" y="${Y(m.dP(qb, s)) - 4}" fill="${col}" font-weight="900" font-size="17">${label}</text>`;
+}
+function lineS(m, s, col, label) {
+  const qa = Math.max(0.5, s + 0.3), qb = Math.min(10.0, (9.4 - C0) / lab.slope + s);
+  return `<line x1="${X(qa)}" y1="${Y(m.sP(qa, s))}" x2="${X(qb)}" y2="${Y(m.sP(qb, s))}" stroke="${col}" stroke-width="4" stroke-linecap="round"/>` +
+    `<text x="${X(qb) + 4}" y="${Y(m.sP(qb, s)) - 6}" fill="${col}" font-weight="900" font-size="17">${label}</text>`;
+}
+const sub = (t) => t.replace(/([PQDS])([12])/g, '$1<tspan font-size="11" dy="4">$2</tspan><tspan dy="-4"></tspan>').replace(/Q(d|s)\b/g, 'Q<tspan font-size="11" dy="4">$1</tspan><tspan dy="-4"></tspan>');
+function guide(q, p, pl, ql, col = '#555', dash = '5 4') {
+  return `<line x1="${X0}" y1="${Y(p)}" x2="${X(q)}" y2="${Y(p)}" stroke="${col}" stroke-dasharray="${dash}" stroke-width="1.5"/>` +
+    `<line x1="${X(q)}" y1="${Y(p)}" x2="${X(q)}" y2="${Y0}" stroke="${col}" stroke-dasharray="${dash}" stroke-width="1.5"/>` +
+    (pl ? `<text x="${X0 - 8}" y="${Y(p) + 5}" text-anchor="end" font-size="15" font-weight="700" fill="#1F2937">${sub(pl)}</text>` : '') +
+    (ql ? `<text x="${X(q)}" y="${Y0 + 20}" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2937">${sub(ql)}</text>` : '');
+}
+function draw() {
+  const m = model(), st = lab.step, dem = m.k[0] === 'D';
+  const c = lab.free ? { x: 'Quantity', y: 'Price' } : lab.c;
+  let s = `<rect x="0" y="0" width="560" height="420" fill="#fff"/>`;
+  s += `<line x1="${X0}" y1="${Y0}" x2="530" y2="${Y0}" stroke="#222" stroke-width="2.5"/><polygon points="534,${Y0} 524,${Y0 - 6} 524,${Y0 + 6}" fill="#222"/>`;
+  s += `<line x1="${X0}" y1="${Y0}" x2="${X0}" y2="22" stroke="#222" stroke-width="2.5"/><polygon points="${X0},18 ${X0 - 6},28 ${X0 + 6},28" fill="#222"/>`;
+  s += `<text x="${X0 + 8}" y="20" font-size="14" fill="#1F2937" font-weight="700">${c.y}</text>`;
+  s += `<text x="530" y="${Y0 + 44}" text-anchor="end" font-size="14" fill="#1F2937" font-weight="700">${c.x}</text>`;
+  s += `<text x="${X0 - 10}" y="${Y0 + 18}" text-anchor="end" font-size="14" fill="#1F2937">O</text>`;
+  // curves
+  s += lineD(m, 0, '#002F6C', st >= 1 && dem ? 'D₁' : 'D');
+  s += lineS(m, 0, '#FF8F1C', st >= 1 && !dem ? 'S₁' : 'S');
+  if (st >= 1) {
+    if (dem) {
+      s += lineD(m, m.sd, '#008BCC', 'D₂');
+      const q0 = m.sd > 0 ? 2.4 : 7.4, p0 = m.dP(q0, 0) + (m.sd > 0 ? 0.9 : 0.4);
+      s += arrow(X(q0), Y(p0), X(q0 + m.sd * 0.55), Y(p0), '#008BCC');
+    } else {
+      s += lineS(m, m.ss, '#B85C00', 'S₂');
+      const p0 = m.ss < 0 ? 7.8 : 7.0, q0 = (p0 - C0) / lab.slope + (m.ss > 0 ? 0.3 : -0.3);
+      s += arrow(X(q0), Y(p0), X(q0 + m.ss * 0.55), Y(p0), '#B85C00');
+    }
+  }
+  const e1 = m.e1, e2 = m.e2;
+  // equilibrium 1
+  s += guide(e1.q, e1.p, 'P1', st >= 2 ? '' : 'Q1');
+  // current price for steps 2-3
+  let p = lab.p == null ? e1.p : lab.p;
+  if (st <= 1) p = e1.p;
+  if (st === 4) p = e2.p;
+  const qd = m.qD(p, m.sd), qs = m.qS(p, m.ss);
+  if (st >= 2 && st <= 3) {
+    // price line at current p
+    const lo = Math.min(qd, qs), hi = Math.max(qd, qs);
+    if (st === 3 && Math.abs(p - e1.p) > 0.01) s += `<line x1="${X0}" y1="${Y(p)}" x2="${X(hi)}" y2="${Y(p)}" stroke="#1B7F3B" stroke-width="2" stroke-dasharray="6 4"/><text x="${X0 + 6}" y="${Y(p) - 6}" font-size="13" fill="#1B7F3B" font-weight="900">price ${p > e1.p ? 'rising' : 'falling'}</text>`;
+    if (hi - lo > 0.03) {
+      s += `<rect x="${X(lo)}" y="${Y(p) - 7}" width="${X(hi) - X(lo)}" height="14" fill="#C8102E" opacity=".22" rx="3"/>`;
+      const short = qd > qs;
+      s += `<line x1="${X(lo)}" y1="${Y(p) + (short ? 24 : -22)}" x2="${X(hi)}" y2="${Y(p) + (short ? 24 : -22)}" stroke="#C8102E" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)"/>`;
+      const showLabel = st === 3 || lab.answered.gap;
+      if (showLabel) s += `<text x="${(X(lo) + X(hi)) / 2}" y="${Y(p) + (short ? 42 : -30)}" text-anchor="middle" font-size="14" font-weight="900" fill="#C8102E" paint-order="stroke" stroke="#fff" stroke-width="4">${short ? 'Shortage' : 'Surplus'}</text>`;
+      else s += `<text x="${(X(lo) + X(hi)) / 2}" y="${Y(p) + (short ? 42 : -30)}" text-anchor="middle" font-size="14" font-weight="900" fill="#C8102E" paint-order="stroke" stroke="#fff" stroke-width="4">?</text>`;
+    }
+    s += `<line x1="${X(qd)}" y1="${Y(p)}" x2="${X(qd)}" y2="${Y0}" stroke="#008BCC" stroke-dasharray="3 4" stroke-width="1.5"/>`;
+    s += `<line x1="${X(qs)}" y1="${Y(p)}" x2="${X(qs)}" y2="${Y0}" stroke="#B85C00" stroke-dasharray="3 4" stroke-width="1.5"/>`;
+    const dlab = st === 2 ? 'Qd' : '', slab = st === 2 ? 'Qs' : '';
+    if (Math.abs(qd - qs) > 0.25) {
+      s += `<text x="${X(qd)}" y="${Y0 + 20}" text-anchor="middle" font-size="14" font-weight="900" fill="#008BCC">${sub('Qd')}</text>`;
+      s += `<text x="${X(qs)}" y="${Y0 + 20}" text-anchor="middle" font-size="14" font-weight="900" fill="#B85C00">${sub('Qs')}</text>`;
+    }
+    s += `<circle cx="${X(qd)}" cy="${Y(p)}" r="7" fill="#008BCC" stroke="#fff" stroke-width="2"/>`;
+    s += `<circle cx="${X(qs)}" cy="${Y(p)}" r="7" fill="#B85C00" stroke="#fff" stroke-width="2"/>`;
+  }
+  if (st === 4) {
+    s += guide(e2.q, e2.p, 'P2', 'Q2', '#1B7F3B', '6 4');
+    s += `<circle cx="${X(e2.q)}" cy="${Y(e2.p)}" r="8" fill="#1B7F3B" stroke="#fff" stroke-width="2"/>`;
+    s += `<text x="${X(e1.q)}" y="${Y0 + 20}" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2937">${Math.abs(e2.q - e1.q) > 0.45 ? sub('Q1') : ''}</text>`;
+  }
+  if (st < 2 || st === 4) s += `<circle cx="${X(e1.q)}" cy="${Y(e1.p)}" r="${st === 4 ? 5 : 8}" fill="${st === 4 ? '#9CA3AF' : '#002F6C'}" stroke="#fff" stroke-width="2"/>`;
+  s = `<defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C8102E"/></marker></defs>` + s;
+  $('#chart').innerHTML = s;
+  // readouts
+  const unit = (v) => v.toFixed(1);
+  const pp = st >= 2 ? p : e1.p, qdd = st >= 2 ? qd : (st === 1 ? m.qD(e1.p, m.sd) : e1.q), qss = st >= 2 ? qs : (st === 1 ? m.qS(e1.p, m.ss) : e1.q);
+  const show = st === 0 ? { P: e1.p, QD: e1.q, QS: e1.q } : st === 1 ? { P: e1.p, QD: e1.q, QS: e1.q } : st === 4 ? { P: e2.p, QD: e2.q, QS: e2.q } : { P: pp, QD: qdd, QS: qss };
+  $('#roP').textContent = unit(show.P);
+  $('#roQd').textContent = unit(show.QD);
+  $('#roQs').textContent = unit(show.QS);
+  const g = show.QD - show.QS;
+  $('#roGapL').textContent = Math.abs(g) < 0.05 ? 'Gap' : (g > 0 ? 'Shortage' : 'Surplus');
+  $('#roGap').textContent = Math.abs(g) < 0.05 ? '0' : Math.abs(g).toFixed(1);
+}
+function arrow(x1, y1, x2, y2, col) {
+  const dir = x2 > x1 ? 1 : -1;
+  return `<line x1="${x1}" y1="${y1}" x2="${x2 - dir * 8}" y2="${y2}" stroke="${col}" stroke-width="4"/><polygon points="${x2},${y2} ${x2 - dir * 12},${y2 - 7} ${x2 - dir * 12},${y2 + 7}" fill="${col}"/>`;
+}
+// lab steps: 0 start,1 shift,2 gap at old price,3 adjust (animated),4 new eq
+// Questions are plain buttons with data-q / data-v, handled by ONE delegated listener on #stepText,
+// and every state change re-renders immediately (no timers), so the lab can never get stuck.
+function qBox(id, title, opts) {
+  const wrong = lab.wrong[id] || [];
+  return `<div class="q" id="qbox"><strong>${title}</strong><div class="row">` +
+    opts.map(([v, l]) => `<button type="button" class="choice${wrong.includes(v) ? ' no' : ''}" data-q="${id}" data-v="${v}"${wrong.includes(v) ? ' disabled' : ''}>${l}</button>`).join('') +
+    `</div><div class="fb${lab.msg[id] ? ' show no' : ''}">${lab.msg[id] || ''}</div></div>`;
+}
+function qMeta() {
+  const m = model(), k = m.k, up = m.e2.p > m.e1.p, short = k === 'D+' || k === 'S-';
+  return {
+    predict: { correct: k, hint: (v) => v[0] !== k[0] ? 'Think again: is the change about what <strong>buyers</strong> want or what <strong>sellers</strong> can offer?' : `Right curve – but which direction? At every price, is there now more or less ${v[0] === 'D' ? 'wanted' : 'offered'}?`, ok: '✓ Correct prediction.' },
+    gap: { correct: short ? 'short' : 'surp', hint: (v) => v === 'eq' ? 'Not any more – the dots are apart. Which dot is further right?' : 'Compare the dots: which quantity is bigger at P₁ – the blue (demanded) or the orange (supplied)?', ok: '✓ Yes.' },
+    dir: { correct: up ? 'up' : 'down', hint: () => short ? 'With a shortage, buyers are queuing and stock sells out. Would sellers cut the price?' : 'With unsold stock, would raising the price help sellers get rid of it?', ok: '✓ Correct.' },
+  };
+}
+function stepCopy() {
+  const m = model(), k = m.k, dem = k[0] === 'D', up = m.e2.p > m.e1.p;
+  const short = k === 'D+' || k === 'S-';
+  const mk = lab.free ? 'this market' : lab.c.market;
+  const oldC = dem ? 'D₁ → D₂' : 'S₁ → S₂';
+  const qdAt = m.qD(m.e1.p, m.sd), qsAt = m.qS(m.e1.p, m.ss), gap = Math.abs(qdAt - qsAt).toFixed(1);
+  const st = lab.step, okLine = (id) => lab.okMsg[id] ? `<div class="fb show ok">${lab.okMsg[id]}</div>` : '';
+  let h = `<div class="label">Step ${st + 1} of 5 · ${STEP_NAMES[st]}</div>`;
+  if (!lab.free) h += `<span class="badge ${lab.c.flag === 'TH' ? 'b-th' : 'b-int'}">${lab.c.flag === 'TH' ? 'Thailand' : 'International'}</span> `;
+  if (st === 0) {
+    h += `<p>The market for <strong>${mk}</strong> starts in <strong>equilibrium</strong> at P₁ Q₁: quantity demanded equals quantity supplied, so there is no shortage and no surplus.</p>`;
+    if (!lab.free) { let ev = lab.c.event.replace(/[,.]?\s*(so |More firms means )?[^.,]*\b(demand|supply)\b[^.]*\b(increases|decreases)\.?$/i, ''); if (!/[.!]$/.test(ev)) ev += '.'; h += `<p><strong>What happens:</strong> ${ev}</p>`; }
+    if (!lab.free && !lab.answered.predict) h += qBox('predict', 'Predict: which curve shifts, and which way?', [['D+', 'Demand ↑'], ['D-', 'Demand ↓'], ['S+', 'Supply ↑'], ['S-', 'Supply ↓']]);
+  } else if (st === 1) {
+    h += okLine('predict');
+    h += `<p>${lab.free ? '' : lab.c.event + ' '}The ${dem ? 'demand' : 'supply'} curve shifts <strong>${(k === 'D+' || k === 'S+') ? 'right' : 'left'}</strong>: ${oldC}.</p>`;
+    h += `<p>The ${dem ? 'supply' : 'demand'} curve <strong>does not move</strong>. Nothing has happened to the price yet.</p>`;
+  } else if (st === 2) {
+    h += `<p>Look along the <strong>OLD price P₁</strong>. The blue dot is quantity demanded (on ${dem ? 'D₂' : 'D'}); the orange dot is quantity supplied (on ${dem ? 'S' : 'S₂'}).</p>`;
+    if (!lab.answered.gap) h += qBox('gap', 'At P₁, what exists?', [['short', 'Shortage (QD > QS)'], ['surp', 'Surplus (QS > QD)'], ['eq', 'Equilibrium']]);
+    else h += okLine('gap') + `<p>At P₁, quantity ${short ? 'demanded' : 'supplied'} is greater than quantity ${short ? 'supplied' : 'demanded'}: a <strong>${short ? 'shortage (excess demand)' : 'surplus (excess supply)'}</strong> of ${gap} units.${lab.free ? '' : ' ' + lab.c.gapReal}</p>`;
+  } else if (st === 3) {
+    if (!lab.answered.dir) {
+      h += `<p>There is a <strong>${short ? 'shortage' : 'surplus'}</strong> at P₁.</p>` + qBox('dir', 'What will sellers do?', [['up', 'Raise the price'], ['down', 'Cut the price']]);
+    } else {
+      h += okLine('dir');
+      h += `<p>Sellers <strong>${up ? 'raise' : 'cut'}</strong> the price. As it ${up ? 'rises' : 'falls'}:</p>`;
+      h += `<p>• quantity demanded <strong>${up ? 'contracts' : 'extends'}</strong> – a movement ${up ? 'up' : 'down'} along ${dem ? 'D₂' : 'D'};<br>• quantity supplied <strong>${up ? 'extends' : 'contracts'}</strong> – a movement ${up ? 'up' : 'down'} along ${dem ? 'S' : 'S₂'}.</p>`;
+      h += `<p>Watch the red ${short ? 'shortage' : 'surplus'} bar shrink. <button type="button" class="btn sm" data-act="replay">↻ Replay</button></p>`;
+    }
+  } else {
+    h += `<p>The gap has gone. New equilibrium at <strong>P₂ Q₂</strong>: price <strong>${up ? 'rose ↑' : 'fell ↓'}</strong> and quantity traded <strong>${m.e2.q > m.e1.q ? 'rose ↑' : 'fell ↓'}</strong>.</p>`;
+    h += `<p>Only the ${dem ? 'demand' : 'supply'} curve shifted. We moved <strong>along</strong> the ${dem ? 'supply' : 'demand'} curve – it never moved.</p>`;
+    if (!lab.free) h += `<div class="fact"><strong>Real world:</strong> ${lab.c.fact}</div>`;
+  }
+  $('#stepText').innerHTML = h;
+}
+function answer(id, v) {
+  const meta = qMeta()[id];
+  if (!meta || lab.answered[id]) return;
+  if (v === meta.correct) {
+    lab.answered[id] = true; lab.okMsg[id] = meta.ok;
+  } else {
+    lab.tries[id] = (lab.tries[id] || 0) + 1;
+    lab.wrong[id] = [...(lab.wrong[id] || []), v];
+    if (lab.tries[id] >= 2) {
+      lab.answered[id] = true;
+      const label = { 'D+': 'Demand ↑', 'D-': 'Demand ↓', 'S+': 'Supply ↑', 'S-': 'Supply ↓', short: 'Shortage', surp: 'Surplus', up: 'Raise the price', down: 'Cut the price' }[meta.correct];
+      lab.okMsg[id] = `The answer was <strong>${label}</strong>.`;
+    } else {
+      lab.msg[id] = meta.hint(v);
+    }
+  }
+  if (!lab.answered[id]) { stepCopy(); return; }
+  if (id === 'predict') go(1);
+  else if (id === 'gap') { stepCopy(); draw(); updateBtns(); }
+  else { stepCopy(); updateBtns(); animate(); }
+}
+$('#stepText').addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b || b.disabled) return;
+  if (b.dataset.q) answer(b.dataset.q, b.dataset.v);
+  else if (b.dataset.act === 'replay') animate();
+});
+function animate() {
+  const m = model(); cancelAnimationFrame(lab.anim);
+  const p1 = m.e1.p, p2 = m.e2.p, T = reduceMotion ? 1 : 2600; let t0 = null;
+  const tick = (t) => {
+    if (!t0) t0 = t; const f = Math.min(1, (t - t0) / T); const e = 0.5 - Math.cos(Math.PI * f) / 2;
+    lab.p = p1 + (p2 - p1) * e; draw();
+    if (f < 1) lab.anim = requestAnimationFrame(tick);
+  };
+  lab.anim = requestAnimationFrame(tick);
+}
+function updateBtns() {
+  $('#backBtn').disabled = lab.step === 0;
+  $('#nextBtn').disabled = lab.step === 4;
+  $('#nextBtn').textContent = lab.step === 3 ? 'Show new equilibrium ▶' : 'Next step ▶';
+  $('#steps').innerHTML = STEP_NAMES.map((n, i) => `<div class="st ${i === lab.step ? 'on' : i < lab.step ? 'done' : ''}">${i + 1}. ${n}</div>`).join('');
+}
+function go(st) {
+  cancelAnimationFrame(lab.anim);
+  lab.step = Math.max(0, Math.min(4, st));
+  const m = model();
+  lab.p = m.e1.p;
+  if (lab.free) lab.answered = { predict: true, gap: true, dir: true };
+  stepCopy(); draw(); updateBtns();
+  if (lab.step === 3 && lab.answered.dir) animate();
+  if (lab.step === 4 && !lab.free) {
+    let changed = false;
+    missions.forEach((mm) => { if (!mm.done && mm.test(lab.c.kind)) { mm.done = true; changed = true; } });
+    if (changed) renderMissions();
+    if (missions.every((mm) => mm.done)) markDone('lab', 't1', 'Shift Lab', 'All 3 missions complete');
+  }
+}
+function pickCase(c) {
+  lab.c = c; clearAnswers(); lab.free = false; $('#freeToggle').checked = false; $('#freeBox').classList.remove('on');
+  lab.size = 2; lab.slope = 0.75;
+  $$('.case').forEach((b) => b.classList.toggle('on', b.dataset.id === c.id));
+  go(0);
+}
+$('#cases').innerHTML = CASES.map((c) => `<button class="case" data-id="${c.id}"><span class="fl">${c.flag === 'TH' ? 'TH' : 'INT'}</span>${c.name}</button>`).join('');
+$$('.case').forEach((b) => b.addEventListener('click', () => pickCase(CASES.find((c) => c.id === b.dataset.id))));
+function pendingQ() {
+  if (lab.free) return null;
+  if (lab.step === 0 && !lab.answered.predict) return 'predict';
+  if (lab.step === 2 && !lab.answered.gap) return 'gap';
+  if (lab.step === 3 && !lab.answered.dir) return 'dir';
+  return null;
+}
+$('#nextBtn').onclick = () => {
+  const q = pendingQ();
+  if (q) {   // point at the question rather than silently doing nothing
+    lab.msg[q] = '<strong>Answer this question first</strong> – tap one of the buttons above.';
+    stepCopy();
+    const box = $('#qbox');
+    if (box) { box.classList.add('nudge'); box.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' }); }
+    return;
+  }
+  go(lab.step + 1);
+};
+$('#backBtn').onclick = () => go(lab.step - 1);
+$('#resetBtn').onclick = () => { if (!lab.free) clearAnswers(); go(0); };
+$('#freeToggle').onchange = (e) => {
+  lab.free = e.target.checked; $('#freeBox').classList.toggle('on', lab.free);
+  $$('.case').forEach((b) => b.classList.toggle('on', !lab.free && b.dataset.id === lab.c.id));
+  if (!lab.free) { clearAnswers(); lab.size = 2; lab.slope = 0.75; }
+  else { lab.size = +$('#freeSize').value; lab.slope = +$('#freeSlope').value; }
+  go(0);
+};
+['#freeKind', '#freeSize', '#freeSlope'].forEach((id) => $(id).addEventListener('input', () => { lab.size = +$('#freeSize').value; lab.slope = +$('#freeSlope').value; go(lab.step); }));
+renderMissions(); pickCase(CASES[0]);
+
+/* ---------------- TAB 3: WHICH SHIFT (pointer drag + tap) ---------------- */
+const CARDS = [
+  ['PM2.5 smoke season', 'air purifiers', 'D+', 'Seasons & weather: more wanted at every price.'],
+  ['Songkran week ★', 'flights to Chiang Mai', 'D+', 'Festival demand (★ seasons/festivals).'],
+  ['Pork price soars', 'crocodile meat', 'D+', 'Crocodile meat is a substitute for pork.'],
+  ['AI data centres expand', 'memory chips', 'D+', 'Firms buy far more chips at every price.'],
+  ['China\'s dye test ★', 'Thai durian', 'D-', 'A health scare cuts demand (★ health & safety news).'],
+  ['Banks reject car loans ★', 'new cars', 'D-', 'Buyers are no longer ABLE to buy (★ credit).'],
+  ['Incomes rise ★', 'instant noodles', 'D-', 'Instant noodles are an inferior good (★).'],
+  ['Coca-Cola price falls', 'Pepsi', 'D-', 'A cheaper substitute reduces demand for Pepsi (textbook p. 38).'],
+  ['April–May harvest', 'mangoes', 'S+', 'Natural factors: more to sell at every price.'],
+  ['Chinese EV factories open', 'electric cars', 'S+', 'More firms in the market.'],
+  ['New factory technology', 'Samsung phones', 'S+', 'Higher productivity lowers costs (textbook p. 38).'],
+  ['Government subsidy', 'rice farmers', 'S+', 'A subsidy lowers producers\' costs.'],
+  ['African swine fever ★', 'pork', 'S-', 'Disease reduces the number of pigs (★).'],
+  ['Sugar tax rises', 'sugary drinks', 'S-', 'An indirect tax is a cost for producers.'],
+  ['Floods close factories', 'hard drives', 'S-', 'Natural disaster (Ayutthaya, 2011).'],
+  ['Farmers switch rubber → durian ★', 'rubber', 'S-', 'Land moves to a more profitable crop (★ price of other goods).'],
+];
+let selChip = null;
+function buildSort() {
+  $('#bank').innerHTML = ''; $$('.bin').forEach((b) => $$('.chip', b).forEach((c) => c.remove()));
+  $('#sortFb').className = 'fb'; $('#sortExplain').innerHTML = '';
+  shuffle(CARDS).forEach(([ev, mkt, ans, why]) => {
+    const c = document.createElement('div'); c.className = 'chip'; c.dataset.ans = ans; c.dataset.why = why;
+    c.innerHTML = `${ev}<small>(${mkt})</small>`; makeDraggable(c); $('#bank').appendChild(c);
+  });
+}
+function clearSel() { if (selChip) selChip.classList.remove('sel'); selChip = null; }
+function dropInto(chip, target) { chip.classList.remove('ok', 'no'); target.appendChild(chip); clearSel(); }
+function makeDraggable(el) {
+  let sx, sy, ghost = null, moved = false, pid = null;
+  el.addEventListener('pointerdown', (e) => {
+    if (e.button && e.button !== 0) return;
+    sx = e.clientX; sy = e.clientY; moved = false; pid = e.pointerId;
+    try { el.setPointerCapture(pid); } catch (_) {}
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (pid !== e.pointerId) return;
+    if (!moved && Math.hypot(e.clientX - sx, e.clientY - sy) > 8) {
+      moved = true; ghost = el.cloneNode(true); ghost.classList.add('ghost'); ghost.style.width = el.offsetWidth + 'px'; document.body.appendChild(ghost);
+      el.style.opacity = '.35';
+    }
+    if (moved && ghost) {
+      ghost.style.left = (e.clientX - el.offsetWidth / 2) + 'px'; ghost.style.top = (e.clientY - 20) + 'px';
+      $$('.bin').forEach((b) => b.classList.remove('hover'));
+      const t = document.elementFromPoint(e.clientX, e.clientY); const bin = t && t.closest('.bin'); if (bin) bin.classList.add('hover');
+    }
+  });
+  const end = (e) => {
+    if (pid !== e.pointerId) return; pid = null;
+    if (moved) {
+      if (ghost) ghost.remove(); ghost = null; el.style.opacity = '';
+      $$('.bin').forEach((b) => b.classList.remove('hover'));
+      const t = document.elementFromPoint(e.clientX, e.clientY);
+      const bin = t && (t.closest('.bin') || t.closest('#bank'));
+      if (bin) dropInto(el, bin);
+    } else {
+      // tap: select or, if another chip is selected and this chip sits in a bin, drop selected into that bin
+      if (selChip && selChip !== el && el.parentElement.classList.contains('bin')) { dropInto(selChip, el.parentElement); return; }
+      if (selChip === el) { clearSel(); return; }
+      clearSel(); selChip = el; el.classList.add('sel');
+    }
+  };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', (e) => { if (ghost) ghost.remove(); ghost = null; el.style.opacity = ''; pid = null; });
+  el.addEventListener('click', (e) => e.stopPropagation());
+}
+[...$$('.bin'), $('#bank')].forEach((b) => b.addEventListener('click', () => { if (selChip) dropInto(selChip, b); }));
+$('#sortCheck').onclick = () => {
+  let right = 0, placed = 0; const wrong = [];
+  $$('.bin').forEach((b) => $$('.chip', b).forEach((c) => {
+    placed++; const ok = c.dataset.ans === b.dataset.bin; c.classList.toggle('ok', ok); c.classList.toggle('no', !ok);
+    if (ok) right++; else wrong.push(c);
+  }));
+  const fb = $('#sortFb');
+  if (right === CARDS.length) {
+    fb.className = 'fb show ok'; fb.innerHTML = '<strong>All 16 correct!</strong> You can name the non-price factor behind every shift.';
+    $('#sortExplain').innerHTML = ''; markDone('sort', 't2', 'Which shift?', '16/16 sorted');
+  } else {
+    fb.className = 'fb show ' + (placed < CARDS.length ? 'info' : 'no');
+    fb.innerHTML = `${right} / ${CARDS.length} correct${placed < CARDS.length ? ` – ${CARDS.length - placed} still in the bank` : ''}. Red cards are in the wrong box. Hints:`;
+    $('#sortExplain').innerHTML = wrong.map((c) => `<li><strong>${c.firstChild.textContent}</strong>: ${c.dataset.why}</li>`).join('');
+  }
+};
+$('#sortReset').onclick = buildSort;
+buildSort();
+
+/* ---------------- TAB 4: ORDER THE STORY ---------------- */
+const STORIES = {
+  pork: { name: 'Pork & swine fever', lines: [
+    'African swine fever kills many pigs.',
+    'Supply of pork decreases: S shifts left (S₁ → S₂).',
+    'At the old price, quantity demanded is greater than quantity supplied – a shortage.',
+    'Sellers raise the price of pork.',
+    'Quantity demanded contracts and quantity supplied extends.',
+    'New equilibrium: a higher price and a lower quantity traded.'] },
+  durian: { name: 'Durian & China\'s dye test', lines: [
+    'China finds a banned dye and tests every durian shipment.',
+    'Demand for Thai durian decreases: D shifts left (D₁ → D₂).',
+    'At the old price, quantity supplied is greater than quantity demanded – a surplus.',
+    'Sellers cut the price of durian.',
+    'Quantity demanded extends and quantity supplied contracts.',
+    'New equilibrium: a lower price and a lower quantity traded.'] },
+};
+const storyDone = { pork: false, durian: false };
+let story = 'pork', placed = [];
+function buildStoryPick() {
+  $('#storyPick').innerHTML = Object.entries(STORIES).map(([k, v]) => `<button class="case ${k === story ? 'on' : ''}" data-k="${k}">${storyDone[k] ? '✓ ' : ''}${v.name}</button>`).join('');
+  $$('#storyPick .case').forEach((b) => (b.onclick = () => { story = b.dataset.k; buildOrder(); }));
+}
+function buildOrder() {
+  placed = []; buildStoryPick();
+  const L = STORIES[story].lines;
+  $('#orderFb').className = 'fb';
+  $('#pool').innerHTML = '';
+  shuffle(L.map((t, i) => [t, i])).forEach(([t, i]) => {
+    const b = document.createElement('button'); b.className = 'pcard'; b.textContent = t; b.dataset.i = i;
+    b.onclick = () => { if (placed.length < L.length) { placed.push(i); b.disabled = true; renderSlots(); } };
+    $('#pool').appendChild(b);
+  });
+  renderSlots();
+}
+function renderSlots() {
+  const L = STORIES[story].lines;
+  $('#slots').innerHTML = L.map((_, k) => `<div class="slot ${placed[k] != null ? 'filled' : ''}" data-k="${k}"><span class="num">${k + 1}</span><span>${placed[k] != null ? L[placed[k]] : '<span style="color:#9CA3AF">tap a sentence below…</span>'}</span></div>`).join('');
+  $$('#slots .slot.filled').forEach((s) => (s.onclick = () => {
+    const k = +s.dataset.k; const i = placed[k]; placed.splice(k, 1);
+    const btn = $$('#pool .pcard').find((b) => +b.dataset.i === i); if (btn) btn.disabled = false; renderSlots();
+  }));
+}
+$('#orderCheck').onclick = () => {
+  const L = STORIES[story].lines, fb = $('#orderFb');
+  if (placed.length < L.length) { fb.className = 'fb show info'; fb.textContent = 'Place all six sentences first.'; return; }
+  let right = 0; $$('#slots .slot').forEach((s, k) => { const ok = placed[k] === k; s.classList.add(ok ? 'ok' : 'no'); if (ok) right++; });
+  if (right === L.length) {
+    storyDone[story] = true; buildStoryPick();
+    const both = storyDone.pork && storyDone.durian;
+    fb.className = 'fb show ok'; fb.innerHTML = `<strong>Perfect order.</strong> Shift → gap at the old price → price moves → movements along the curves → new equilibrium.${both ? '' : ' Now try the other story.'}`;
+    if (both) markDone('order', 't3', 'Order the story', 'Pork and durian stories correct');
+  } else {
+    fb.className = 'fb show no';
+    fb.innerHTML = `${right} / 6 in the right place. Remember: the <strong>shift</strong> comes before the <strong>gap</strong>, and the gap comes <strong>before</strong> the price moves. Tap red lines to send them back.`;
+  }
+};
+$('#orderReset').onclick = buildOrder;
+buildOrder();
+
+/* ---------------- TAB 5: QUIZ ---------------- */
+const POOL = [
+  ['Thai banks reject more car-loan applications. What is most likely to happen in the market for new cars in Thailand?', 'price falls and quantity traded falls', ['price rises and quantity traded falls', 'price rises and quantity traded rises', 'price falls and quantity traded rises'], 'Fewer people are able to buy → demand shifts left → price and quantity both fall.'],
+  ['Which event would create a shortage at the original price in the market for N95 masks in Bangkok?', 'PM2.5 smoke levels rise sharply', ['new mask factories open', 'the price of cloth masks falls', 'the government subsidises mask producers'], 'Demand increases, so at the old price QD > QS. The other options increase supply or reduce demand.'],
+  ['Many pigs die from disease. At the original price, what exists in the market for pork?', 'excess demand', ['excess supply', 'a contraction in supply', 'equilibrium'], 'Supply shifts left, so at the old price QD > QS – excess demand (a shortage).'],
+  ['Incomes in Thailand fall and the demand for instant noodles rises. What type of good are instant noodles?', 'an inferior good', ['a normal good', 'a complementary good', 'a luxury good'], 'Demand moves in the opposite direction to income: an inferior good.'],
+  ['The equilibrium price of durian falls and the quantity traded rises. What is the most likely cause?', 'a very large harvest', ['a health scare about durian', 'higher wages for fruit pickers', 'a new tax on durian sellers'], 'Price ↓ with quantity ↑ means supply increased.'],
+  ['Demand for a product increases. How does the market reach its new equilibrium?', 'price rises, quantity demanded contracts and quantity supplied extends', ['supply shifts right until the shortage disappears', 'price falls, demand extends and supply contracts', 'demand shifts back to the left'], 'Only demand shifted. The market moves ALONG both curves as the price rises.'],
+  ['The sugar tax rises AND a health campaign reduces demand for sugary drinks at the same time. What will definitely happen?', 'quantity traded falls', ['price rises', 'price falls', 'quantity traded rises'], 'Both shifts reduce quantity. The price effect depends on which shift is bigger.'],
+  ['Which of these would NOT shift the demand curve for Café Amazon coffee?', 'a fall in the price of Café Amazon coffee', ['a new advertising campaign', 'a rise in the price of Starbucks coffee', 'higher incomes'], 'A change in a good\'s own price causes a movement along its demand curve, not a shift.'],
+  ['The government gives a subsidy to EV producers. At the original price there will be:', 'excess supply', ['excess demand', 'equilibrium', 'a fall in demand'], 'Supply shifts right, so at the old price QS > QD – a surplus.'],
+  ['Supply increases. How does the market reach the new equilibrium?', 'price falls, quantity demanded extends and quantity supplied contracts', ['price rises, quantity demanded contracts and quantity supplied extends', 'demand shifts right to meet supply', 'supply shifts back to the left'], 'A surplus forces the price down; buyers move down D, sellers move down S₂.'],
+  ['Rice millers expect the price of rice to rise next month. What happens to the supply of rice today?', 'it decreases', ['it increases', 'it does not change', 'demand for rice decreases'], 'Sellers hold back stock to sell later at the higher price.'],
+  ['Durian becomes more profitable, so farmers replace rubber trees with durian. What happens in the market for rubber?', 'supply decreases; price rises and quantity falls', ['demand increases; price and quantity rise', 'supply increases; price falls', 'demand decreases; price falls'], 'Land moves to the more profitable crop, so less rubber is offered at every price.'],
+  ['A shortage in a market is best described as:', 'quantity demanded is greater than quantity supplied at the current price', ['the shop has no stock left', 'supply is falling', 'the price is above equilibrium'], 'A shortage is excess demand at a price BELOW equilibrium.'],
+  ['Which pair of changes would definitely RAISE the equilibrium price?', 'demand shifts right and supply shifts left', ['demand shifts right and supply shifts right', 'demand shifts left and supply shifts left', 'demand shifts left and supply shifts right'], 'Both changes push the price up. In the other pairs, the price effect depends on the sizes.'],
+  ['Thailand\'s population is ageing. Which market is most likely to see an increase in demand?', 'care homes for older people', ['kindergarten places', 'school uniforms', 'baby formula'], 'Age structure changes what is wanted: more older people, fewer young children.'],
+  ['The price of petrol rises sharply. What happens in the market for large SUVs?', 'demand shifts left; price and quantity fall', ['supply shifts left; price rises', 'demand shifts right; price rises', 'nothing – petrol is a different market'], 'Petrol and SUVs are complements: dearer petrol reduces demand for SUVs.'],
+  ['AI data centres buy far more memory chips. In the market for memory chips:', 'demand shifts right; price and quantity rise', ['supply shifts right; price falls', 'demand shifts left; price falls', 'there is a movement along the demand curve only'], 'More is wanted at every price, so demand increases.'],
+];
+let quiz = null;
+function startQuiz() {
+  quiz = { qs: shuffle(POOL).slice(0, 10), i: 0, score: 0, answered: false };
+  renderQ();
+}
+function renderQ() {
+  const card = $('#quizCard');
+  if (quiz.i >= quiz.qs.length) {
+    card.innerHTML = `<h2>Quick quiz – done</h2><div class="score">${quiz.score} / 10</div><p class="lead">${quiz.score >= 8 ? 'Excellent – you can explain both the shift and the adjustment.' : quiz.score >= 5 ? 'Good start. Re-run two Shift Lab cases, then try again.' : 'Go back to the Shift Lab and step through a demand case and a supply case, then try again.'}</p><button class="btn primary" id="again">New quiz (10 fresh questions)</button>`;
+    $('#again').onclick = startQuiz;
+    markDone('quiz', 't4', 'Quick quiz', 'Score ' + quiz.score + '/10');
+    return;
+  }
+  const [stem, right, wrongs, why] = quiz.qs[quiz.i];
+  const opts = shuffle([right, ...wrongs]);
+  card.innerHTML = `<div class="row" style="justify-content:space-between"><h2>Quick quiz</h2><span class="badge b-int">Question ${quiz.i + 1} / 10 · Score ${quiz.score}</span></div>
+    <p style="font-weight:700;font-size:17px">${stem}</p>
+    ${opts.map((o, k) => `<button class="opt" data-t="${encodeURIComponent(o)}"><span class="k">${'ABCD'[k]}</span>${o}</button>`).join('')}
+    <div class="fb" id="qFb"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="qNext" disabled>Next ▶</button></div>`;
+  quiz.answered = false;
+  $$('.opt', card).forEach((b) => (b.onclick = () => {
+    if (quiz.answered) return; quiz.answered = true;
+    const t = decodeURIComponent(b.dataset.t), ok = t === right;
+    if (ok) quiz.score++;
+    $$('.opt', card).forEach((x) => { const xt = decodeURIComponent(x.dataset.t); if (xt === right) x.classList.add('ok'); else if (x === b) x.classList.add('no'); x.disabled = true; });
+    const fb = $('#qFb'); fb.className = 'fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = `<strong>${ok ? 'Correct.' : 'Not quite.'}</strong> ${why}`;
+    $('#qNext').disabled = false;
+  }));
+  $('#qNext').onclick = () => { quiz.i++; renderQ(); };
+}
+startQuiz();
+</script>
+</body>
+</html>
