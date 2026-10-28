@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.6 Employment and Unemployment · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+/* ---- 4.5 / 4.6 additions ---- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{border-radius:10px;padding:9px 12px;background:var(--ltblue)}
+.tile.o{background:var(--ltorange)}
+.tile > b{display:block;color:var(--navy);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:21px;font-weight:900;color:var(--ink)}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.meter{height:7px;background:rgba(0,47,108,.12);border-radius:4px;margin-top:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.pol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pol{grid-template-columns:1fr}}
+.pc{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:left;font:400 14px Lato,sans-serif;color:var(--ink);position:relative}
+.pc:hover{border-color:var(--blue)}
+.pc.sel{border-color:var(--orange);background:#FFFBF5}
+.pc:disabled{opacity:.45;cursor:not-allowed}
+.pc .nm{display:block;font-weight:900;color:var(--navy);font-size:15px;padding-right:70px;margin-bottom:4px}
+.pc .cost{position:absolute;right:11px;top:11px;font-weight:900;color:var(--dkorange);font-size:14px}
+.pc .d{display:block;margin:6px 0 4px}
+.pc .lag{display:block;color:var(--muted);font-size:13px}
+.pc .w{display:block;color:var(--bad);font-size:13px}
+.pill.g{background:var(--goodbg);color:var(--good)}
+.budget{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:14px}
+@media (max-width:700px){.budget{grid-template-columns:1fr}}
+.aim{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.aim:first-child{border-top:0}
+.light{flex:0 0 14px;height:14px;border-radius:50%;margin-top:4px}
+.light.g{background:var(--good)}.light.a{background:#E0A526}.light.r{background:var(--bad)}
+textarea{width:100%;min-height:100px;font:400 15px Lato,sans-serif;border:2px solid var(--line);border-radius:10px;padding:10px}
+.scrollx{overflow-x:auto}
+@media (max-width:700px){.scrollx svg{min-width:640px}}
+@media print{header,footer,.noprint,.panel{display:none!important}#p4{display:block!important}#p4 .play{display:none!important}body{background:#fff}.card{break-inside:avoid}.card.write{break-inside:auto}.scrollx svg{min-width:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 4 · SISB Nonthaburi</div>
+    <h1>4.6 Employment and Unemployment</h1>
+    <div class="sub">Textbook Chapter 27, pp. 348–359 · Measure unemployment, spot its type and decide what to do about it</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two Thai puzzles</h2>
+  <p class="lead">Both puzzles use real figures from 2026. Answer the two questions under each one.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Puzzle 1 · Q2 2026</span>
+      <h3 style="margin-top:8px">Jobless people, empty jobs</h3>
+      <p>About <b>401,000</b> Thais were unemployed. At the same time, the government’s <i>Thai Mee Ngan Tham</i> job website had more than <b>300,000</b> vacancies. University graduates had the highest unemployment rate of any group: <b>1.6%</b>.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Puzzle 2 · Q2 2026</span>
+      <h3 style="margin-top:8px">One of the lowest rates in the world</h3>
+      <p>Thailand’s unemployment rate was only about <b>1%</b>. But about <b>2.2 million</b> people worked fewer hours than they wanted, and more than half of all workers are informal, with no social security.</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what do the puzzles show?</h3>
+    <div class="grid2">
+      <div><div class="chartbox" id="hookA"></div><p><b>Puzzle 1: the jobs and the jobless do not match.</b> Some people are <b>between jobs</b> and still searching (frictional). Others do not have the skills the vacancies need, or live in the wrong place (structural).</p></div>
+      <div><div class="chartbox" id="hookB"></div><p><b>Puzzle 2: the rate hides a lot.</b> The unemployment rate is a share of the <b>labour force</b> (employed + unemployed), and anyone who did <b>one hour</b> of paid work counts as employed. The 2.2 million <b>underemployed</b> are not in the figure.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: RATE LAB ============ -->
+<section class="panel" id="p1">
+  <h2>The unemployment rate lab</h2>
+  <p class="lead">Country Z has <b>19.0 million</b> employed and <b>1.0 million</b> unemployed this year, so its unemployment rate is <b>5.0%</b>. Change next year’s numbers and complete the four missions. Watch the grey bar: it is the mistake many candidates make.</p>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="chartbox" id="rlChart"></div>
+      <div class="legend"><span><i style="background:var(--navy)"></i>This year</span><span><i style="background:var(--blue)"></i>Next year</span><span><i style="background:#B8C2CF"></i>Wrong: % of population</span></div>
+      <div class="readout">
+        <div class="ro"><b>Labour force next year</b><span id="roLF"></span></div>
+        <div class="ro o"><b>Unemployment rate next year</b><span id="roR"></span></div>
+      </div>
+      <div id="rlVerd"></div>
+    </div>
+    <div class="card">
+      <p class="muted" style="margin-top:0">This year: employed 19.0m · unemployed 1.0m · labour force 20.0m · not in the labour force 10.0m · population 30.0m</p>
+      <div class="sl"><div class="top"><b>Next year: employed</b><span class="val" id="vE"></span></div><input type="range" id="sE" min="18" max="22" step="0.1" value="19" aria-label="Employed next year"></div>
+      <div class="sl"><div class="top"><b>Next year: unemployed</b><span class="val" id="vU"></span></div><input type="range" id="sU" min="0.4" max="2" step="0.05" value="1" aria-label="Unemployed next year"></div>
+      <div class="sl"><div class="top"><b>Next year: not in the labour force</b><span class="val" id="vO"></span></div><input type="range" id="sO" min="8" max="12" step="0.1" value="10" aria-label="Not in the labour force next year"></div>
+      <p class="muted" style="margin:-4px 0 10px">Children, full-time students, retired people and people not looking for work.</p>
+      <div class="chain" id="rlWork"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Missions: can you make these happen?</h3>
+    <div class="missions" id="rlMissions"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: TYPE DETECTIVE ============ -->
+<section class="panel" id="p2">
+  <h2>Type detective</h2>
+  <p class="lead">Ten Thai cases. First decide the <b>type</b> of unemployment. Then choose the policy that matches the <b>cause</b>.</p>
+  <div class="card" id="tdCard">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="tdNum"></span><span class="score" id="tdScore"></span></div>
+    <p class="qtext" id="tdEvent"></p>
+    <div><b>Step 1: which type of unemployment is this?</b><div class="opts" id="tdO1"></div></div>
+    <div id="tdStep2" class="hide"><b>Step 2: which policy would reduce it best?</b><div class="opts" id="tdO2"></div></div>
+    <div id="tdFb"></div>
+    <button class="btn hide" id="tdNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Do not mix these up</h3>
+    <table class="sched"><tr><th>Type</th><th>Cause</th><th>How long and how widespread?</th></tr>
+      <tr><td class="l"><b>Seasonal</b></td><td class="l">The time of year</td><td class="l">Returns every year; ends when the season comes back</td></tr>
+      <tr><td class="l"><b>Cyclical</b></td><td class="l">A fall in total demand (recession)</td><td class="l">Many industries at once; ends when demand recovers</td></tr>
+      <tr><td class="l"><b>Structural</b></td><td class="l">A long-term change: an industry declines</td><td class="l">Lasts longest; workers need new skills or must move</td></tr>
+      <tr><td class="l"><b>Frictional</b></td><td class="l">Workers are between jobs</td><td class="l">Usually short; the jobs exist</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ TAB 4: WHO PAYS? ============ -->
+<section class="panel" id="p3">
+  <h2>Who pays? Build the chains</h2>
+  <p class="lead">Examiners give few marks for a list of consequences. Build each chain one link at a time so it explains <b>why</b> the consequence happens. Pick a chain to start.</p>
+  <div class="missions" id="whoTabs" style="margin-bottom:14px"></div>
+  <div class="card" id="whoCard"></div>
+  <div class="card hide" id="whoPPC">
+    <h3>The economy: unemployment on a PPC</h3>
+    <div class="grid2"><div class="chartbox" id="whoChart"></div>
+      <div><p>At <b>A</b> all resources are used. When unemployment rises, the economy moves to <b>B</b>, inside the curve: output is lower than it could be. That lost output is the <b>opportunity cost</b> of unemployment.</p><p><b>The PPC does not move.</b> The workers still exist, so productive capacity is the same. Only if people stay unemployed for years and lose their skills could the PPC shift inwards.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5: MINISTER OF LABOUR ============ -->
+<section class="panel" id="p4">
+  <div class="play">
+  <h2>Minister of Labour 2027–2029</h2>
+  <p class="lead">You run Thailand’s jobs policy for three years. Each year you have <b>20bn baht</b> for new policies. The labour force is <b>40 million</b>. Diagnose the cause before you spend: a policy only works on the type of unemployment it matches. There is no overall score: at the end you must defend your choices.</p>
+  <div class="tiles" id="tiles"></div>
+  <div class="card">
+    <div class="chartbox" id="gChart"></div>
+    <div class="legend" id="gLegend"></div>
+  </div>
+  <div id="roundBox">
+    <div class="card story b" id="news"></div>
+    <h3 style="color:var(--navy);margin:0 0 10px" id="rHead"></h3>
+    <div class="pol" id="pol"></div>
+    <div class="card budget" style="grid-template-columns:1fr auto">
+      <div><div class="sl" style="margin:0"><div class="top"><b>Spending this year</b><span class="val" id="spent"></span></div></div><div class="meter"><i id="spentBar"></i></div></div>
+      <button class="btn orange" id="go"></button>
+    </div>
+    <div id="bMsg"></div>
+  </div>
+  <div id="resultBox" class="hide">
+    <div class="card" id="roundRes"></div>
+    <div class="card" id="check"></div>
+    <button class="btn" id="next"></button>
+  </div>
+  </div>
+  <div id="report" class="hide">
+    <h2>Your report: Thailand’s jobs 2027–2029</h2>
+    <p class="lead">Name: ______________________ &nbsp; Class: ________</p>
+    <div class="tiles" id="rTiles"></div>
+    <div class="card"><div class="chartbox" id="rChart"></div><div class="legend" id="rLegend"></div></div>
+    <div class="card"><h3>How did you do on each problem?</h3><div id="aims"></div></div>
+    <div class="card"><h3>Your decisions</h3><table class="sched" id="recap"></table></div>
+    <div class="card write">
+      <h3>Plan an 8-mark answer from your results</h3>
+      <p><b>Discuss whether or not training is the best policy to reduce unemployment in Thailand. [8]</b></p>
+      <p style="margin-bottom:4px"><b>1  Why it might be</b></p><div class="fb info" id="h1" style="margin-top:0"></div><textarea aria-label="Why it might be"></textarea>
+      <p style="margin:12px 0 4px"><b>2  Why it might not be</b> (a different argument, not the first one reversed)</p><div class="fb info" id="h2" style="margin-top:0"></div><textarea aria-label="Why it might not be"></textarea>
+      <p style="margin:12px 0 4px"><b>3  Judgement:</b> Training is the best policy when… but… because…</p><div class="fb info" id="h3" style="margin-top:0"></div><textarea aria-label="Judgement"></textarea>
+    </div>
+    <div class="flex noprint"><button class="btn orange" onclick="window.print()">Print or save my report</button><button class="btn alt" id="again">Play again</button></div>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse how a cut in the interest rate could reduce cyclical unemployment. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 4.6 Employment and Unemployment · Thai figures from NESDC, the National Statistical Office, Bangkok Bank Research and Kasikorn Research (2026); the Minister of Labour game is a simplified model for teaching.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',BAD='#B3264E',GOOD='#1E7B34',GREY='#6B7280',LINE='#D6DEE9',PURPLE='#5B2C9A';
+const $=id=>document.getElementById(id);
+const fmt=(x,d=1)=>(x<0?'−':'')+Math.abs(x).toFixed(d);
+const sgn=(x,d=1)=>(x>0?'+':x<0?'−':'')+Math.abs(x).toFixed(d);
+const th=n=>Math.round(n).toLocaleString('en-US');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- tracker ---------- */
+function track(detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('Unit 4','4.6 Employment and Unemployment',detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','Rate lab','Type detective','Who pays?','Minister of Labour','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(detail);if(done.size===6)track('All 6 activities complete');}
+show(0);
+
+/* ---------- bar chart (site style) ---------- */
+// cfg: {values,labels,colors?,yLabel,W,H,rec:[i..],showVals,yStep}
+function bars(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?560:720),H=cfg.H||(vw<600?280:300),L=58,R=14,T=22,B=cfg.xLabel?52:34;
+  const vals=cfg.values;let lo=Math.min(0,...vals),hi=Math.max(0,...vals);const pad=(hi-lo)*.15||1;
+  const step=cfg.yStep||((hi-lo)>12?4:(hi-lo)>6?2:(hi-lo)>2.5?1:0.5);
+  lo=Math.floor((lo-(lo<0?pad:0))/step)*step;hi=Math.ceil((hi+pad)/step)*step;
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B),n=vals.length,slot=(W-L-R)/n,bw=Math.min(54,slot*.55),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Bar chart'}">`;
+  (cfg.rec||[]).forEach(i=>{s+=`<rect x="${X(i)-slot/2}" y="${T}" width="${slot}" height="${H-T-B}" fill="#FBE9EC"/>`;});
+  for(let v=lo;v<=hi+1e-9;v+=step){s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${Math.abs(v)<1e-9?NAVY:'#EEF2F7'}" stroke-width="${Math.abs(v)<1e-9?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${v<0?'−'+fmt(-v,step<1?1:0):fmt(v,step<1?1:0)}</text>`;}
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  vals.forEach((v,i)=>{const c=cfg.colors?cfg.colors[i]:(v<0?ORANGE:NAVY);
+    s+=`<rect x="${X(i)-bw/2}" y="${Math.min(Y(0),Y(v))}" width="${bw}" height="${Math.max(1.5,Math.abs(Y(v)-Y(0)))}" rx="2" fill="${c}"/>`;
+    if(cfg.showVals!==false)s+=`<text x="${X(i)}" y="${v>=0?Y(v)-6:Y(v)+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${c}">${cfg.valFmt?cfg.valFmt(v):sgn(v)}</text>`;
+    s+=`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.labels[i]}</text>`;});
+  if(cfg.xLabel)s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* ---------- PPC diagram (site style) ---------- */
+function ppc(el,kind,opt={}){
+  const W=opt.W||400,H=opt.H||300,L=58,R=26,T=18,B=52;
+  const X=q=>L+q/100*(W-L-R),Y=p=>T+(1-p/100)*(H-T-B);
+  const arc=(r)=>{const pts=[];for(let k=0;k<=40;k++){const a=k/40*Math.PI/2;pts.push(X(r*Math.sin(a))+','+Y(r*Math.cos(a)));}return pts.join(' ');};
+  const r1=68,r2=kind==='out'?86:kind==='in'?52:68;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="PPC diagram"><defs><marker id="pa${opt.id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="${ORANGE}"/></marker></defs>`;
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R+4}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><line x1="${L}" y1="${H-B}" x2="${L}" y2="${T-4}" stroke="${NAVY}" stroke-width="2"/>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-12}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">Consumer goods</text><text transform="translate(18 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">Capital goods</text>`;
+  s+=`<polyline points="${arc(r1)}" fill="none" stroke="${BLUE}" stroke-width="3"/><text x="${X(r1)-4}" y="${Y(4)}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">PPC1</text>`;
+  if(kind==='out'||kind==='in'){s+=`<polyline points="${arc(r2)}" fill="none" stroke="${ORANGE}" stroke-width="3"/><text x="${X(r2)+(kind==='out'?4:-4)}" y="${Y(10)}" text-anchor="${kind==='out'?'start':'end'}" font-size="13" font-weight="900" fill="${NAVY}">PPC2</text>`;
+    const a=Math.PI/4;s+=`<line x1="${X(r1*Math.sin(a)+(kind==='out'?2:-2))}" y1="${Y(r1*Math.cos(a)+(kind==='out'?2:-2))}" x2="${X(r2*Math.sin(a)+(kind==='out'?-3:3))}" y2="${Y(r2*Math.cos(a)+(kind==='out'?-3:3))}" stroke="${ORANGE}" stroke-width="3" marker-end="url(#pa${opt.id})"/>`;}
+  else{const a=Math.PI/4,on=[r1*Math.sin(a),r1*Math.cos(a)],ins=[on[0]*.62,on[1]*.62];
+    const [from,to]=kind==='toward'?[ins,on]:[on,ins];
+    s+=`<line x1="${X(from[0]+(to[0]-from[0])*.12)}" y1="${Y(from[1]+(to[1]-from[1])*.12)}" x2="${X(from[0]+(to[0]-from[0])*.86)}" y2="${Y(from[1]+(to[1]-from[1])*.86)}" stroke="${ORANGE}" stroke-width="3" marker-end="url(#pa${opt.id})"/>`;
+    s+=`<circle cx="${X(from[0])}" cy="${Y(from[1])}" r="6" fill="${NAVY}" stroke="#fff" stroke-width="2"/><circle cx="${X(to[0])}" cy="${Y(to[1])}" r="6" fill="${ORANGE}" stroke="#fff" stroke-width="2"/>`;
+    s+=`<text x="${X(from[0])-10}" y="${Y(from[1])+5}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">A</text><text x="${X(to[0])-10}" y="${Y(to[1])+5}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">B</text>`;}
+  el.innerHTML=s+'</svg>';
+}
+
+/* ---------- stacked bars (4.6) ---------- */
+// cfg: {cats:[labels], series:[{name,color,values}], yLabel, total:fn(i)->label}
+function stacked(el,cfg){
+  const vw=window.innerWidth;const W=vw<600?400:vw<1000?560:720,H=vw<600?280:300,L=58,R=14,T=26,B=34;
+  const n=cfg.cats.length,tots=cfg.cats.map((_,i)=>cfg.series.reduce((t,s)=>t+s.values[i],0));
+  const step=cfg.yStep||200,hi=Math.ceil(Math.max(...tots,1)*1.12/step)*step;
+  const Y=v=>T+(hi-v)/hi*(H-T-B),slot=(W-L-R)/n,bw=Math.min(70,slot*.55),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Stacked bar chart'}">`;
+  for(let v=0;v<=hi+1e-9;v+=step)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0?NAVY:'#EEF2F7'}" stroke-width="${v===0?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${th(v)}</text>`;
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  cfg.cats.forEach((c,i)=>{let base=0;cfg.series.forEach(se=>{const v=se.values[i];if(v>0){s+=`<rect x="${X(i)-bw/2}" y="${Y(base+v)}" width="${bw}" height="${Y(base)-Y(base+v)}" fill="${se.color}" stroke="#fff" stroke-width="1"/>`;}base+=v;});
+    s+=`<text x="${X(i)}" y="${Y(tots[i])-7}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${NAVY}">${cfg.total?cfg.total(i,tots[i]):th(tots[i])}</text><text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${c}</text>`;});
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+
+/* ================= TAB 1: THINK FIRST ================= */
+const hookQs=[
+  {id:'s1',q1:'Can a country have unemployed people and empty jobs at the same time?',o1:['No: if jobs exist, everyone can take one','Yes: the jobless may lack the skills, live in the wrong place or still be searching'],a1:1,
+   q2:'Why might graduates have the highest unemployment rate?',o2:['Graduates do not want to work','They search longer for a job that matches their degree, and some studied subjects firms do not need','Firms never hire graduates'],a2:1,
+   fb:'Searching for the right job is <b>frictional</b> unemployment. Having the wrong skills for the jobs on offer is <b>structural</b> unemployment.'},
+  {id:'s2',q1:'The unemployment rate is about 1%. Does that mean 99% of Thai people have a job?',o1:['Yes','No: it is 1% of the labour force, not of the population'],a1:1,
+   q2:'A woman drove a taxi for three hours last week but wants a full-time job. In the Labour Force Survey she is…',o2:['employed','unemployed','not in the labour force'],a2:0,
+   fb:'Anyone who did <b>one hour</b> of paid work counts as employed. She is <b>underemployed</b>: she works fewer hours than she wants, but she is not in the unemployment figure.'},
+];
+const hookAns=[0,0];
+hookQs.forEach((h,k)=>{
+  const el=$(h.id);
+  el.innerHTML=`<p><b>1. ${h.q1}</b></p><div class="opts" data-s="1"></div><div class="hide" data-w="2"><p><b>2. ${h.q2}</b></p><div class="opts" data-s="2"></div></div><div data-fb></div>`;
+  const o1=el.querySelector('[data-s="1"]'),o2=el.querySelector('[data-s="2"]');
+  h.o1.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===h.a1?'ok':'no');if(i!==h.a1)o1.children[h.a1].classList.add('ok');
+    el.querySelector('[data-w="2"]').classList.remove('hide');};o1.appendChild(b);});
+  h.o2.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===h.a2?'ok':'no');if(i!==h.a2)o2.children[h.a2].classList.add('ok');
+    el.querySelector('[data-fb]').innerHTML=`<div class="fb info">${h.fb}</div>`;
+    hookAns[k]=1;if(hookAns[0]&&hookAns[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two Thai puzzles');}};o2.appendChild(b);});
+});
+function drawHook(){
+  bars($('hookA'),{W:420,H:280,values:[0.40,0.30,2.2],labels:['Unemployed','Vacancies','Underemployed'],colors:[NAVY,BLUE,ORANGE],yLabel:'Million people',yStep:0.5,valFmt:v=>v.toFixed(2)+'m',aria:'Thailand 2026: 0.40 million unemployed, 0.30 million vacancies, 2.2 million underemployed'});
+  bars($('hookB'),{W:420,H:280,values:[1.6,1.0,0.9],labels:['University','Upper sec.','Lower sec.'],colors:[NAVY,BLUE,BLUE],yLabel:'Unemployment rate (%)',yStep:0.5,valFmt:v=>v.toFixed(1)+'%',aria:'Thailand Q2 2026 unemployment rate by education'});
+}
+
+/* ================= TAB 2: RATE LAB ================= */
+const RLM=[
+  {t:'Both rise',d:'Employment and unemployment both rise.',ok:r=>r.E>19.05&&r.U>1.0+1e-9},
+  {t:'No new jobs',d:'Unemployment falls, but employment does not rise.',ok:r=>r.U<1.0-1e-9&&r.E<=19.0+1e-9},
+  {t:'More jobless, lower rate',d:'The number unemployed rises, but the unemployment rate falls.',ok:r=>r.U>1.0+1e-9&&r.rate<5.0-0.005},
+  {t:'Same rate, bigger labour force',d:'The rate stays at 5.0% (to 1 d.p.) while the labour force grows.',ok:r=>r.LF>20.05&&Math.abs(r.rate-5)<0.05},
+];
+const rlDone=new Set();
+$('rlMissions').innerHTML=RLM.map((m,i)=>`<div class="mission" id="rm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function rl(){
+  const E=+$('sE').value,U=+$('sU').value,O=+$('sO').value,LF=E+U,pop=LF+O,rate=U/LF*100,wrong=U/pop*100;
+  $('vE').textContent=E.toFixed(1)+' million';$('vU').textContent=U.toFixed(2)+' million';$('vO').textContent=O.toFixed(1)+' million';
+  bars($('rlChart'),{values:[5.0,rate,wrong],labels:['This year','Next year','% of population'],colors:[NAVY,BLUE,'#B8C2CF'],yLabel:'Unemployment (%)',yStep:2,valFmt:v=>v.toFixed(2)+'%',aria:'Unemployment rate this year and next year'});
+  $('roLF').textContent=LF.toFixed(2)+' million';$('roR').textContent=rate.toFixed(2)+'%';
+  const dE=E-19,dU=U-1;
+  $('rlVerd').innerHTML=`<div class="fb info">Employment ${Math.abs(dE)<1e-9?'is unchanged':dE>0?'rises by '+dE.toFixed(1)+'m':'falls by '+(-dE).toFixed(1)+'m'}; unemployment ${Math.abs(dU)<1e-9?'is unchanged':dU>0?'rises by '+dU.toFixed(2)+'m':'falls by '+(-dU).toFixed(2)+'m'}. The grey bar (${wrong.toFixed(2)}%) divides by the whole population: <b>that is not the unemployment rate.</b></div>`;
+  $('rlWork').innerHTML=`<b>Working</b><ol><li>Labour force = employed + unemployed = ${E.toFixed(1)} + ${U.toFixed(2)} = <b>${LF.toFixed(2)} million</b></li><li>Unemployment rate = unemployed ÷ labour force × 100 = ${U.toFixed(2)} ÷ ${LF.toFixed(2)} × 100 = <b>${rate.toFixed(2)}%</b></li><li>The ${O.toFixed(1)} million outside the labour force are not counted at all.</li></ol>`;
+  RLM.forEach((m,i)=>{if(m.ok({E,U,LF,rate})&&!rlDone.has(i)){rlDone.add(i);$('rm'+i).classList.add('done');}});
+  if(rlDone.size===RLM.length)complete(1,'Rate lab missions');
+}
+['sE','sU','sO'].forEach(id=>$(id).addEventListener('input',rl));
+rl();
+
+/* ================= TAB 3: TYPE DETECTIVE ================= */
+const TYPES=[['F','Frictional'],['SE','Seasonal'],['ST','Structural'],['C','Cyclical']];
+const POLS=[['info','Better job information, or a bigger gap between pay and benefits'],['off','Create work in the off-season'],['train','Training, retraining or help to move to new jobs'],['dem','Raise total demand: more government spending, lower taxes or a lower interest rate']];
+const TD=[
+  ['A rice farmer in Roi Et has no work from February to May while he waits for the rains.','SE','off','The work disappears at the same time every year and comes back with the rains.'],
+  ['Engine-part workers in Rayong lose their jobs. An electric car needs about 1,500–3,000 parts; a petrol car about 30,000.','ST','train','A permanent change in how cars are made (technological). The old jobs will not come back, so workers need new skills.'],
+  ['A new graduate turns down two job offers while she looks for one that pays more.','F','info','She is between jobs and searching (search unemployment). Better information helps her find the right job faster.'],
+  ['2020: foreign tourists stop coming. Hotels, restaurants and shops close across Thailand and unemployment doubles.','C','dem','Spending fell across the whole economy, hitting many industries at once: a lack of total demand.'],
+  ['A bank closes branches because customers now use mobile banking apps. Tellers lose their jobs.','ST','train','Technology has replaced the jobs for good (technological unemployment).'],
+  ['Garment factories in the north close as cheaper imported clothes rise 12% in a year. There are few other jobs nearby.','ST','train','An industry is declining in one region (regional unemployment). Workers need new skills, or help to move to where the jobs are.'],
+  ['A Phuket hotel cleaner is laid off every May when the rainy season starts.','SE','off','The low season returns every year. Year-round tourism would create off-season work.'],
+  ['A world recession cuts orders for Thai exports. Firms in many industries lay off workers.','C','dem','Foreign demand fell, so total demand fell: many industries cut jobs at once.'],
+  ['A Thai actor is out of work between filming two TV series.','F','info','Casual unemployment: people on short contracts are out of work between them. It is a form of frictional unemployment.'],
+  ['A durian picker in Chanthaburi has no work after the harvest ends in July.','SE','off','The harvest only happens at one time of year.'],
+  ['Households cut spending because of high debts. Furniture, car and clothing firms all lay off workers.','C','dem','Lower consumer spending is a fall in total demand, affecting many industries at once.'],
+  ['A cashier quits to look for a better-paid job. It takes her six weeks to find one.','F','info','She is between jobs for a short time: frictional (search) unemployment.'],
+];
+let tdOrder=[],tdI=0,tdS=0,tdM=0;
+function startTD(){tdOrder=shuffle(TD.map((_,i)=>i)).slice(0,10);tdI=0;tdS=0;tdM=0;renderTD();}
+function renderTD(){
+  if(tdI>=tdOrder.length){$('tdCard').innerHTML=`<h3>Finished!</h3><p class="qtext">You scored ${tdS} / ${tdM}.</p><p>${tdS>=tdM*.8?'Excellent. You can diagnose the type and match the cure.':'Remember: <b>seasonal</b> = time of year · <b>cyclical</b> = a fall in total demand across many industries · <b>structural</b> = an industry declines for good · <b>frictional</b> = between jobs.'}</p><button class="btn" id="tdAgain">Try another set</button>`;
+    $('tdAgain').onclick=()=>{restoreTD();startTD();};complete(2,`Type detective: ${tdS}/${tdM}`);return;}
+  const c=TD[tdOrder[tdI]];
+  $('tdNum').textContent=`Case ${tdI+1} of ${tdOrder.length}`;$('tdScore').textContent=`Score: ${tdS} / ${tdM}`;$('tdEvent').textContent=c[0];
+  $('tdStep2').classList.add('hide');$('tdFb').innerHTML='';$('tdNext').classList.add('hide');
+  const o1=$('tdO1');o1.innerHTML='';
+  TYPES.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);tdM++;const r1=k===c[1];if(r1)tdS++;b.classList.add(r1?'ok':'no');if(!r1)o1.children[TYPES.findIndex(x=>x[0]===c[1])].classList.add('ok');
+    $('tdScore').textContent=`Score: ${tdS} / ${tdM}`;$('tdStep2').classList.remove('hide');const o2=$('tdO2');o2.innerHTML='';
+    POLS.forEach(([k2,t2])=>{const b2=document.createElement('button');b2.className='opt';b2.textContent=t2;b2.onclick=()=>{
+      o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);tdM++;const r2=k2===c[2];if(r2)tdS++;b2.classList.add(r2?'ok':'no');if(!r2)o2.children[POLS.findIndex(x=>x[0]===c[2])].classList.add('ok');
+      $('tdScore').textContent=`Score: ${tdS} / ${tdM}`;
+      $('tdFb').innerHTML=`<div class="fb ${r1&&r2?'ok':'no'}"><b>${r1&&r2?'Correct.':'Answer:'} ${TYPES.find(x=>x[0]===c[1])[1]} unemployment.</b> ${c[3]}</div>`;$('tdNext').classList.remove('hide');};o2.appendChild(b2);});};o1.appendChild(b);});
+}
+const tdHTML=$('tdCard').innerHTML;
+function restoreTD(){$('tdCard').innerHTML=tdHTML;$('tdNext').onclick=()=>{tdI++;renderTD();};}
+restoreTD();startTD();
+
+/* ================= TAB 4: WHO PAYS? ================= */
+const WHO=[
+  {t:'The individual',start:'Khun Somchai loses his factory job.',steps:[
+    ['His income falls to 9,000 baht a month of benefit, and to nothing after six months.','His income stays the same because the government pays his full wage.','He leaves the labour force, so nothing changes for him.'],
+    ['His family cuts spending and cannot afford school costs.','Prices in Thailand fall, so his family is better off.','His old factory reopens next month.']],
+   end:'His daughter may leave school early, so her own future income is lower.'},
+  {t:'Firms: a cost',start:'Unemployment rises across Thailand.',steps:[
+    ['Unemployed people have lower incomes.','Firms find it harder to recruit workers.','Wages rise quickly.'],
+    ['They spend less, so firms’ sales and revenue fall.','They spend more because they have more free time.','The government cuts taxes on firms.']],
+   end:'Firms cut production, invest less and some close.'},
+  {t:'Firms: a benefit',start:'Unemployment is high.',steps:[
+    ['Many people apply for each job.','Few people want to work.','Workers ask for big pay rises.'],
+    ['Workers fear being replaced, so they accept smaller pay rises.','Firms must raise wages to attract workers.','Firms must pay more tax.']],
+   end:'Firms’ wage costs rise more slowly and it is easier to recruit.'},
+  {t:'The government',start:'Unemployment rises.',steps:[
+    ['People earn and spend less, so income tax and VAT revenue fall.','People earn more, so tax revenue rises.','Firms make bigger profits and pay more corporate tax.'],
+    ['More people claim unemployment benefit, so government spending rises.','Fewer people need healthcare, so spending falls.','The government no longer pays any benefits.']],
+   end:'The budget deficit grows, and money spent on benefits cannot be spent on schools or hospitals (opportunity cost).'},
+  {t:'The economy',start:'Unemployment rises.',steps:[
+    ['Workers who could produce are idle: resources are wasted.','Thailand’s factories and workers disappear.','Thailand gains more resources than before.'],
+    ['Output falls to a point inside the PPC; the PPC does not move.','The PPC shifts inwards straight away.','Output rises to a point beyond the PPC.']],
+   end:'There are fewer goods and services per person: living standards are lower than they could be.'},
+];
+const whoDone=new Set();let whoI=0,whoStep=0,whoOrder=[];
+function whoTabs(){$('whoTabs').innerHTML=WHO.map((w,i)=>`<div class="mission${whoDone.has(i)?' done':''}" data-i="${i}" style="cursor:pointer${i===whoI?';border-color:var(--orange)':''}"><span class="t">${w.t}</span>${w.start}</div>`).join('');
+  $('whoTabs').querySelectorAll('.mission').forEach(m=>m.onclick=()=>{whoI=+m.dataset.i;whoStep=0;renderWho();});}
+function renderWho(){
+  whoTabs();const w=WHO[whoI];
+  let h=`<span class="pill">${w.t}</span><div class="slot filled" style="margin-top:10px"><span class="k">▶</span><span><b>${w.start}</b></span></div>`;
+  for(let s=0;s<whoStep;s++)h+=`<div style="text-align:center;color:var(--orange);font-weight:900">↓</div><div class="slot ok"><span class="k">${s+1}</span><span>${w.steps[s][0]}</span></div>`;
+  if(whoStep<w.steps.length){h+=`<div style="text-align:center;color:var(--orange);font-weight:900">↓</div><p><b>Link ${whoStep+1}: what happens next, and why?</b></p><div class="opts" style="flex-direction:column" id="whoO"></div><div id="whoF"></div>`;}
+  else h+=`<div style="text-align:center;color:var(--orange);font-weight:900">↓</div><div class="slot ok"><span class="k">■</span><span><b>${w.end}</b></span></div><div class="fb ok">Chain complete. In an exam, write it as: “${w.start} <b>This means that</b> ${w.steps[0][0].charAt(0).toLowerCase()+w.steps[0][0].slice(1)} <b>As a result,</b> ${w.steps[1][0].charAt(0).toLowerCase()+w.steps[1][0].slice(1)} <b>So</b> ${w.end.charAt(0).toLowerCase()+w.end.slice(1)}”</div>${whoDone.size<WHO.length?'<button class="btn" id="whoNext" style="margin-top:10px">Next chain</button>':''}`;
+  $('whoCard').innerHTML=h;
+  if(whoStep<w.steps.length){const opts=shuffle(w.steps[whoStep].map((t,i)=>({t,ok:i===0})));
+    opts.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o.t;b.onclick=()=>{
+      if(o.ok){whoStep++;if(whoStep===w.steps.length){whoDone.add(whoI);if(whoI===4){$('whoPPC').classList.remove('hide');ppc($('whoChart'),'away',{id:'who',W:380,H:270});}if(whoDone.size===WHO.length)complete(3,'Who pays? All five chains built');}renderWho();}
+      else{b.classList.add('no');b.disabled=true;$('whoF').innerHTML='<div class="fb no">That link does not follow, or it is not why the consequence happens. Try again.</div>';}};$('whoO').appendChild(b);});}
+  const nx=$('whoNext');if(nx)nx.onclick=()=>{const k=WHO.findIndex((_,i)=>!whoDone.has(i));if(k>=0){whoI=k;whoStep=0;renderWho();}};
+}
+renderWho();
+
+/* ================= TAB 5: MINISTER OF LABOUR ================= */
+// Unemployed in thousands; labour force 40,000 thousand. Seasonal idle farm workers are counted separately (not in the rate).
+const LF_K=40000,BUDGET=20,YEARS=['2027','2028','2029'];
+const GROUPS=[['grad','Young graduates',NAVY],['auto','Auto-parts workers',BLUE],['cyc','Cyclical (recession)',ORANGE],['other','Other frictional and structural','#9DB3D3']];
+const P={
+  jobs:   {name:'Job-matching website and careers fairs',cost:2,type:'Frictional',d:'Graduates and other job seekers find vacancies faster.',lag:'Works: this year only',w:'Watch out: does not help if the skills are wrong or the jobs are not there.'},
+  benefit:{name:'Cut unemployment benefit from 60% to 45% of wages',cost:-2,type:'Frictional',d:'People search for less time before taking a job. Saves 2bn this year and stays in place.',lag:'Works: this year, and lasts',w:'Watch out: hardship for laid-off families. Can only be chosen once.'},
+  stem:   {name:'STEM, AI and technical courses for graduates',cost:8,type:'Structural',d:'Conversion courses run with firms in the skills they need.',lag:'Works: after a year',w:'Watch out: no effect this year.'},
+  retrain:{name:'EV and robotics retraining for auto-parts workers',cost:6,type:'Structural',d:'Workers learn to build electric cars, batteries and robots.',lag:'Works: after a year',w:'Watch out: works much better if new EV factories are opening nearby.'},
+  ev:     {name:'Subsidies for EV and battery plants in Rayong',cost:8,type:'Structural (regional)',d:'Brings new jobs to where the auto-parts workers live.',lag:'Works: after a year',w:'Watch out: EV plants need fewer workers than the old factories.'},
+  irrig:  {name:'Irrigation for dry-season crops',cost:7,type:'Seasonal',d:'Farmers in the north-east can grow a second crop.',lag:'Works: after a year, and lasts',w:'Watch out: costly, and only if there is water.'},
+  tour:   {name:'Off-season community tourism grants',cost:3,type:'Seasonal',d:'Villages earn money from visitors in the dry season.',lag:'Works: this year only',w:'Watch out: the effect ends when the grants stop.'},
+  infra:  {name:'Spend on roads and railways now',cost:12,type:'Cyclical (fiscal)',d:'Construction firms hire workers now; their wages are spent in other firms.',lag:'Works: this year',w:'Watch out: if there is no recession, mainly pushes up prices.'},
+  tax:    {name:'Cut income tax for one year',cost:10,type:'Cyclical (fiscal)',d:'Households have more to spend, so firms sell more and hire more.',lag:'Works: this year',w:'Watch out: if there is no recession, mainly pushes up prices.'},
+};
+const NEWS=[
+  '<span class="pill o">Briefing · January 2027</span><p>Unemployment is about <b>1.0%</b> (400,000 people). <b>175,000</b> young graduates cannot find work: many studied subjects firms do not need. Car makers are switching to electric cars, so auto-parts factories in Rayong keep closing: about 15,000 more workers lose their jobs each year. In the dry season, <b>120,000</b> farm workers in the north-east have no work. They are counted separately, not as unemployed.</p>',
+  '<span class="pill o">Breaking news · January 2028</span><p>A <b>world recession</b> has started. Orders for Thai exports are collapsing and firms in many industries are laying off workers. The Bank of Thailand’s interest rate is already 1.00%, so it can cut only a little.</p>',
+  '<span class="pill o">Briefing · January 2029</span><p>World demand is starting to recover. The final year: projects you started earlier may now be working. Leave Thailand’s jobs market in good shape.</p>',
+];
+const CHECKS=[
+  {q:'Graduates who studied subjects firms do not need face which type of unemployment?',o:['Structural','Cyclical','Seasonal'],a:0,f:'Their skills do not match the jobs available: a mismatch between the skills workers have and the skills demanded.'},
+  {q:'The world recession raised which type of unemployment?',o:['Cyclical','Structural','Seasonal'],a:0,f:'Lower foreign spending cut total demand, so firms in many industries needed fewer workers.'},
+  {q:'Thailand counts dry-season farm workers separately, not as unemployed. So Thailand’s unemployment rate…',o:['may understate the problem','overstates the problem','is not affected'],a:0,f:'Idle farm workers are left out of the figure, as are the underemployed. The real problem is bigger than the rate suggests.'},
+];
+let G,sel;
+function newGame(){return{round:0,grad:175,auto:40,other:185,cyc:0,seas:120,infl:1.0,maxInfl:1.0,benefit:false,evFrom:99,queue:[],picks:[],hist:[{y:'2026',grad:175,auto:40,other:185,cyc:0,seas:120,infl:1.0}]};}
+const total=h=>h.grad+h.auto+h.other+h.cyc;
+const rate=h=>total(h)/LF_K*100;
+// Model: G holds the underlying levels. "This year only" effects change the year's figures but not the levels.
+function playRound(picks){
+  const r=G.round;
+  // 1. effects of last year's policies arrive (lasting)
+  G.queue.filter(q=>q.r===r).forEach(q=>{if(q.k==='retrain')G.auto-=20+(G.evFrom<=r?15:0);else G[q.k]+=q.v;});
+  // 2. trends: a new group of graduates with the wrong skills; more auto-parts factories close
+  G.grad+=10;G.auto+=15;
+  // 3. events
+  if(r===1)G.cyc+=250;
+  if(r===2)G.cyc=Math.round(G.cyc*0.6);
+  // 4. this year's policies
+  const once={grad:0,other:0,seas:0};let infl=1.0;
+  for(const k of picks){
+    if(k==='jobs'){once.grad-=20;once.other-=20;}
+    if(k==='benefit'){G.benefit=true;G.grad-=10;G.other-=15;}
+    if(k==='stem')G.queue.push({r:r+1,k:'grad',v:-50});
+    if(k==='retrain')G.queue.push({r:r+1,k:'retrain'});
+    if(k==='ev'){G.queue.push({r:r+1,k:'auto',v:-15});G.evFrom=Math.min(G.evFrom,r+1);}
+    if(k==='irrig')G.queue.push({r:r+1,k:'seas',v:-50});
+    if(k==='tour')once.seas-=20;
+    if(k==='infra'){if(G.cyc>0)G.cyc-=120;else{infl+=0.8;once.other-=10;}}
+    if(k==='tax'){if(G.cyc>0)G.cyc-=90;else{infl+=0.6;once.other-=5;}}
+  }
+  G.grad=Math.max(60,G.grad);G.auto=Math.max(5,G.auto);G.other=Math.max(140,G.other);G.cyc=Math.max(0,G.cyc);G.seas=Math.max(30,G.seas);
+  G.infl=infl;G.maxInfl=Math.max(G.maxInfl,infl);
+  G.picks.push(picks.slice());
+  const h={y:YEARS[r],grad:Math.max(60,G.grad+once.grad),auto:G.auto,other:Math.max(140,G.other+once.other),cyc:G.cyc,seas:Math.max(30,G.seas+once.seas),infl,once:once.grad||once.other||once.seas};
+  G.hist.push(h);G.round++;
+  return h;
+}
+function drawGame(id,lg){
+  const h=G.hist;
+  stacked($(id),{cats:h.map(x=>x.y),series:GROUPS.map(g=>({name:g[1],color:g[2],values:h.map(x=>x[g[0]])})),yLabel:'Unemployed (thousand)',yStep:200,
+    total:(i,t)=>`${th(t)}k · ${(t/LF_K*100).toFixed(2)}%`,aria:'Unemployment in Thailand by group'});
+  $(lg).innerHTML=GROUPS.map(g=>`<span><i style="background:${g[2]};height:10px"></i>${g[1]}</span>`).join('')+'<span class="muted">Label: number unemployed · unemployment rate</span>';
+}
+function drawTiles(id,final){
+  const h=G.hist[G.hist.length-1];
+  const T=[
+    ['Year',final?'End of 2029':YEARS[Math.min(G.round,2)],final?'end of the game':'planning year '+(G.round+1)+' of 3'],
+    ['Unemployment rate',rate(h).toFixed(2)+'%',th(total(h))+'k people'],
+    ['Young graduates',th(h.grad)+'k','unemployed'],
+    ['Auto-parts workers',th(h.auto)+'k','unemployed'],
+    ['Cyclical',th(h.cyc)+'k','unemployed by the recession'],
+    ['Dry-season farm workers',th(h.seas)+'k','idle, not in the rate'],
+    ['Inflation',fmt(h.infl)+'%','target 1–3%'],
+    ['Unemployment benefit',G.benefit?'45%':'60%','of wages, for 6 months'],
+  ];
+  $(id).innerHTML=T.map((t,i)=>`<div class="tile${i>=5?' o':''}"><b>${t[0]}</b><div class="v num">${t[1]}</div><div class="s">${t[2]}</div></div>`).join('');
+}
+const cost=()=>[...sel].reduce((t,k)=>t+P[k].cost,0);
+const disabled=k=>k==='benefit'&&G.benefit;
+function showRound(){
+  $('roundBox').classList.remove('hide');$('resultBox').classList.add('hide');
+  $('news').innerHTML=NEWS[G.round];$('rHead').textContent=`Year ${G.round+1} of 3 · ${YEARS[G.round]}: choose your policies`;$('go').textContent=`Run ${YEARS[G.round]} →`;
+  $('pol').innerHTML=Object.entries(P).map(([k,c])=>`<button class="pc" data-k="${k}" aria-pressed="false"><span class="cost">${c.cost>0?c.cost+'bn':'saves 2bn'}</span><span class="nm">${c.name}</span><span class="pill ${c.type.startsWith('Cyc')?'':c.type.startsWith('Str')?'o':'g'}">${c.type}</span><span class="d">${c.d}</span><span class="lag">${c.lag}</span><span class="w">${disabled(k)?'Already in place.':c.w}</span></button>`).join('');
+  $('pol').querySelectorAll('.pc').forEach(el=>el.onclick=()=>{const k=el.dataset.k;if(disabled(k))return;sel.has(k)?sel.delete(k):sel.add(k);updateSel();});
+  updateSel();
+}
+function updateSel(){
+  const c=cost();
+  document.querySelectorAll('.pc').forEach(el=>{const k=el.dataset.k;el.classList.toggle('sel',sel.has(k));el.disabled=disabled(k);el.setAttribute('aria-pressed',sel.has(k));});
+  $('spent').textContent=Math.max(0,c)+'bn of '+(BUDGET+(sel.has('benefit')?2:0))+'bn';$('spentBar').style.width=Math.min(100,Math.max(0,c)/BUDGET*100)+'%';$('spentBar').style.background=c>BUDGET?BAD:BLUE;
+  let m='',ok=true;
+  if(c>BUDGET){m=`Too expensive: you have ${BUDGET}bn baht this year. Remove a policy.`;ok=false;}
+  else if(sel.size===0)m='You can run a year with no new policies, but think about whether that is wise.';
+  $('bMsg').innerHTML=m?`<div class="fb ${ok?'info':'no'}" style="margin-top:0;margin-bottom:12px">${m}</div>`:'';$('go').disabled=!ok;
+}
+function wire(box,fb,ans,exp){const o=$(box);o.querySelectorAll('.opt').forEach((b,i)=>b.onclick=()=>{o.querySelectorAll('.opt').forEach(x=>x.disabled=true);const ok=i===ans;b.classList.add(ok?'ok':'no');if(!ok)o.children[ans].classList.add('ok');$(fb).innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'Correct.':'Answer:'}</b> ${exp}</div>`;});}
+$('go').onclick=()=>{
+  const picks=[...sel],r=G.round,before=G.hist[G.hist.length-1],h=playRound(picks);sel=new Set();drawGame('gChart','gLegend');drawTiles('tiles');
+  const d=k=>{const v=h[k]-before[k];return v===0?'no change':(v>0?'+':'−')+th(Math.abs(v))+'k';};
+  $('roundRes').innerHTML=`<h3>What happened in ${YEARS[r]}</h3><p class="prod">Your policies: <b>${picks.length?picks.map(k=>P[k].name).join(', '):'no new policies'}</b></p>
+    <table class="sched"><tr><th>Group</th><th>Start of year</th><th>End of year</th><th>Change</th></tr>
+    ${[['grad','Young graduates'],['auto','Auto-parts workers'],['cyc','Cyclical (recession)'],['other','Other frictional and structural'],['seas','Dry-season farm workers (not in the rate)']].map(([k,n])=>`<tr><td class="l">${n}</td><td>${th(before[k])}k</td><td>${th(h[k])}k</td><td>${d(k)}</td></tr>`).join('')}
+    <tr class="afford"><td class="l"><b>Unemployment rate</b></td><td>${rate(before).toFixed(2)}%</td><td><b>${rate(h).toFixed(2)}%</b></td><td>${sgn(rate(h)-rate(before),2)} pts</td></tr></table>
+    ${h.infl>1.05?`<div class="fb no">Inflation rose to ${fmt(h.infl)}%: you raised total demand when there was no recession, so firms raised prices more than output.</div>`:''}
+    ${G.queue.some(q=>q.r===G.round)?'<div class="fb info">Some of your policies will start to work next year (time lag).</div>':''}
+    ${h.once?'<div class="fb info">Some effects this year (job fairs, tourism grants, spending without a recession) last for this year only.</div>':''}`;
+  const c=CHECKS[r],up=rate(h)>rate(before)+1e-9;
+  $('check').innerHTML=`<h3>Checkpoint</h3><p><b>1. Did the unemployment rate rise or fall during ${YEARS[r]}?</b></p><div class="opts" id="ck1"><button class="opt">It rose</button><button class="opt">It fell or stayed the same</button></div><div id="ckf1"></div><p style="margin-top:12px"><b>2. ${c.q}</b></p><div class="opts" id="ck2">${c.o.map(o=>`<button class="opt">${o}</button>`).join('')}</div><div id="ckf2"></div>`;
+  wire('ck1','ckf1',up?0:1,`The rate went from ${rate(before).toFixed(2)}% to ${rate(h).toFixed(2)}%.`);
+  wire('ck2','ckf2',c.a,c.f);
+  $('next').textContent=G.round<3?'Next year →':'See your report →';
+  $('roundBox').classList.add('hide');$('resultBox').classList.remove('hide');$('resultBox').scrollIntoView({behavior:'smooth'});
+};
+$('next').onclick=()=>{if(G.round<3){showRound();$('p4').scrollIntoView({behavior:'smooth'});}else report();};
+function report(){
+  document.querySelector('#p4 .play').classList.add('hide');$('report').classList.remove('hide');drawTiles('rTiles',true);drawGame('rChart','rLegend');
+  const s=G.hist[0],e=G.hist[G.hist.length-1],peak=G.hist.reduce((m,x)=>Math.max(m,rate(x)),0),pk=G.hist.find(x=>rate(x)===peak);
+  const used=k=>G.picks.some(p=>p.includes(k)),when=k=>YEARS[G.picks.findIndex(p=>p.includes(k))];
+  const A=[
+    ['Unemployment rate',rate(e)<=1.0?'g':rate(e)<=1.3?'a':'r',`From ${rate(s).toFixed(2)}% (2026) to ${rate(e).toFixed(2)}% (2029). The peak was ${peak.toFixed(2)}% in ${pk.y}.`],
+    ['Young graduates (structural and frictional)',e.grad<=110?'g':e.grad<=160?'a':'r',`${th(s.grad)}k → ${th(e.grad)}k unemployed.`],
+    ['Auto-parts workers (structural)',e.auto<=60?'g':e.auto<=100?'a':'r',`${th(s.auto)}k → ${th(e.auto)}k unemployed.`],
+    ['The 2028 recession (cyclical)',G.hist[2].cyc<=60?'g':G.hist[2].cyc<=160?'a':'r',`Cyclical unemployment reached ${th(G.hist[2].cyc)}k in 2028 and ${th(e.cyc)}k in 2029.`],
+    ['Dry-season farm workers (seasonal)',e.seas<=70?'g':e.seas<=100?'a':'r',`${th(s.seas)}k → ${th(e.seas)}k idle in the dry season. They never appear in the unemployment rate.`],
+    ['Stable prices',G.maxInfl<=1.3?'g':G.maxInfl<=1.7?'a':'r',`Inflation peaked at ${fmt(G.maxInfl)}% (target 1–3%).`],
+    ['Hardship for the unemployed',G.benefit?'r':'g',G.benefit?`You cut unemployment benefit in ${when('benefit')}. Searches were shorter, but laid-off families received a quarter less.`:'Unemployment benefit stayed at 60% of wages.'],
+  ];
+  $('aims').innerHTML=A.map(a=>`<div class="aim"><span class="light ${a[1]}"></span><div><b>${a[0]}.</b> ${a[2]}</div></div>`).join('')+(G.queue.some(q=>q.r===3)?`<div class="fb info">Still to come after 2029: ${G.queue.filter(q=>q.r===3).map(q=>({grad:'graduate courses',retrain:'retraining',auto:'new EV plants',seas:'irrigation'})[q.k]).join(', ')}. You paid for these, but their effect arrives after the game ends (time lag).</div>`:'')+'<p class="muted" style="margin:8px 0 0">There is no overall score. Money spent on one group could not be spent on another, and some policies helped one aim but hurt another: that is what your 8-mark answer should discuss.</p>';
+  $('recap').innerHTML='<tr><th>Year</th><th>Your policies</th><th>Unemployment rate</th></tr>'+G.picks.map((p,r)=>`<tr><td><b>${YEARS[r]}</b></td><td class="l">${p.length?p.map(k=>P[k].name).join('<br>'):'<i>none</i>'}</td><td>${rate(G.hist[r+1]).toFixed(2)}%</td></tr>`).join('');
+  let h1='Chain: training raises the skills of workers whose skills do not match the jobs → occupational mobility rises → they can fill vacancies in growing industries → structural unemployment falls. It also raises productivity, so the PPC shifts out.';
+  h1+=used('stem')?` <b>Your example:</b> you started graduate courses in ${when('stem')}; graduate unemployment ended at ${th(e.grad)}k (from ${th(s.grad)}k).`:used('retrain')?` <b>Your example:</b> you retrained auto-parts workers in ${when('retrain')}; their unemployment ended at ${th(e.auto)}k.`:' <b>Your game:</b> you did not choose training. What happened to graduate and auto-parts unemployment?';
+  let h2='Chain: training does nothing for cyclical unemployment, because workers lose jobs when firms sell less, not because they lack skills; raising total demand works instead. Training also takes time (a lag) and costs money that could be spent elsewhere.';
+  h2+=` <b>Your example:</b> in 2028 the recession added 250k cyclical unemployment${used('infra')||used('tax')?`; your ${used('infra')?'infrastructure spending':'tax cut'} cut it, which training could not have done.`:'; training could not stop it.'}`;
+  if(used('retrain')&&!used('ev'))h2+=' You retrained auto-parts workers without new EV factories nearby, so fewer of them found jobs.';
+  $('h1').innerHTML=h1;$('h2').innerHTML=h2;$('h3').innerHTML='It depends on the type of unemployment (structural or cyclical?) · whether the courses match the skills firms need · whether firms create the jobs · how long the time lag is. Name the condition that mattered most in your game.';
+  $('p4').scrollIntoView({behavior:'smooth'});
+  complete(4,`Minister of Labour: rate ${rate(s).toFixed(2)}%→${rate(e).toFixed(2)}%, graduates ${th(e.grad)}k, auto ${th(e.auto)}k, seasonal ${th(e.seas)}k`);
+}
+function newGame2(){G=newGame();sel=new Set();$('report').classList.add('hide');document.querySelector('#p4 .play').classList.remove('hide');document.querySelectorAll('#report textarea').forEach(t=>t.value='');showRound();drawGame('gChart','gLegend');drawTiles('tiles');}
+$('again').onclick=()=>{newGame2();window.scrollTo({top:0});};
+newGame2();
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['A country has a population of 70 million, a labour force of 40 million and 2 million unemployed. What is its unemployment rate?',['5%','2.9%','3.4%','95%'],'Unemployment rate = unemployed ÷ labour force × 100 = 2 ÷ 40 × 100 = 5%. Dividing by the population (2.9%) is the most common mistake.'],
+  ['Which person is unemployed?',['a graduate who is actively looking for work but has no job','a retired farmer who does not want a job','a full-time university student','a worker who did two hours of paid work last week'],'Unemployed people are willing and able to work and are looking for work. The retired farmer and the student are not in the labour force; the worker counts as employed.'],
+  ['What causes cyclical unemployment?',['a lack of total demand in the economy','the time of year','workers moving between jobs','the long-term decline of an industry'],'Cyclical unemployment is caused by a lack of total (aggregate) demand, e.g. in a recession. The others are seasonal, frictional and structural.'],
+  ['Which is a disadvantage of measuring unemployment with a Labour Force Survey?',['people who did one hour of paid work count as employed','it only counts people who claim benefits','it cannot be compared between countries','it counts children as unemployed'],'The one-hour rule hides underemployment. Counting only claimants is a feature of the claimant count, not the survey.'],
+  ['Which policy is most likely to reduce structural unemployment?',['retraining workers whose industry has declined','a cut in the interest rate','a cut in sales tax','an increase in government spending on consumer goods'],'Structural unemployment needs new skills or help to move. The other three raise total demand, which targets cyclical unemployment.'],
+  ['How may firms benefit from high unemployment?',['it is easier to recruit and wage rises are smaller','consumers spend more','government tax revenue rises','the PPC shifts outwards'],'More people apply for each job and workers fear being replaced, so firms’ wage costs rise more slowly.'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[],mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+startMCQ();
+
+const CH=[
+  ['Define','Cyclical unemployment is unemployment caused by a lack of total demand, for example in a recession.'],
+  ['Context','In Thailand the Bank of Thailand held the interest rate at 1.00% in October 2026, so it could cut it if a recession raised unemployment.'],
+  ['Chain 1','One effect is that a lower interest rate makes borrowing cheaper and saving less rewarding, so households spend more on goods such as cars and furniture.'],
+  ['Chain 1','This leads to firms selling more, so they need to produce more and hire more workers.'],
+  ['Chain 2','Another effect is that cheaper loans encourage firms to invest in machinery, so firms that make capital goods receive more orders and employ more workers.'],
+  ['Overall','Overall, a cut in the interest rate raises total demand, which removes the cause of cyclical unemployment, so unemployment falls.'],
+];
+let placed=[],chipOrder=shuffle(CH.map((_,i)=>i));
+function renderChain(){
+  $('chainSlots').innerHTML=CH.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?CH[placed[i]][1]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+  $('chainSlots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(placed[i]!==undefined){placed[i]=undefined;renderChain();}});
+  $('chainChips').innerHTML='';
+  chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=CH[k][1];b.disabled=placed.includes(k);
+    b.onclick=()=>{const e=CH.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;renderChain();};$('chainChips').appendChild(b);});
+}
+$('chainReset').onclick=()=>{placed=[];chipOrder=shuffle(CH.map((_,i)=>i));$('chainFb').innerHTML='';$('chainModel').classList.add('hide');renderChain();};
+$('chainCheck').onclick=()=>{
+  if(placed.filter(x=>x!==undefined).length<CH.length){$('chainFb').innerHTML='<div class="fb no">Place all six sentences first.</div>';return;}
+  let ok=0;const slots=$('chainSlots').querySelectorAll('.slot');
+  placed.forEach((k,i)=>{const good=k===i;if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+  if(ok===CH.length){$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">Cyclical unemployment is</span> unemployment caused by a lack of total demand, for example in a recession. <span class="hl">In</span> Thailand the Bank of Thailand held the interest rate at 1.00% in October 2026, so it could cut it if a recession raised unemployment.</p>
+      <p><span class="hl">One effect is</span> that a lower interest rate makes borrowing cheaper and saving less rewarding, so households spend more on goods such as cars and furniture. <span class="hl">This leads to</span> firms selling more, so they need to produce more. <span class="hl">This increases</span> the demand for workers <span class="hl">because</span> labour is needed to make the extra output, so firms hire some of the unemployed.</p>
+      <p><span class="hl">Another effect is</span> that cheaper loans make investment more profitable, so firms buy more machinery. Firms that make capital goods receive more orders, <span class="hl">so</span> they employ more workers.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> a cut in the interest rate raises total demand, which removes the cause of cyclical unemployment, so unemployment falls.</p></div>`;
+    chainDone=true;checkExam();}
+  else $('chainFb').innerHTML=`<div class="fb no">${ok} of 6 in the right place. Remember: define the key term first, then the context, then build the chain (“One effect is… This leads to…”), then “Another effect”, and finish with “Overall”. Tap a red slot to send it back.</div>`;
+};
+renderChain();
+})();
+</script>
+</body>
+</html>
