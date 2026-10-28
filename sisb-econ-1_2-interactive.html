@@ -328,8 +328,24 @@ show(0);
 
 /* ---------------- PROGRESS ---------------- */
 const done={sort:false,rew:false,ch:false,mcq:false};
+/* Hub tracker: one row per section, sent the first time that section is completed. */
+const TRACK_LABELS = {sort:'C.E.L.L. sort',rew:'Rewards',ch:'Quantity & quality',mcq:'Exam practice'};
+const trackSent = {};
+function trackDone(){
+  try {
+    const T = window.SISB_TRACKER;
+    if (!T || typeof T.log !== 'function') return;
+    Object.keys(done).forEach(function(k){
+      if (done[k] && !trackSent[k]) {
+        trackSent[k] = true;
+        T.log('1.2', '1.2 Factors of Production · ' + TRACK_LABELS[k], 'Completed');
+      }
+    });
+  } catch (e) { /* tracker unavailable – activity still works */ }
+}
 function progress(){
   const n=Object.values(done).filter(Boolean).length;
+  trackDone();
   document.getElementById('pbar').style.width=(n/4*100)+'%';
   document.getElementById('pscore').textContent=n+' / 4 activities';
 }
@@ -571,5 +587,6 @@ document.getElementById('revealBtn').onclick=function(){
 
 progress();
 </script>
+<script src="sisb-tracker.js"></script>
 </body>
 </html>

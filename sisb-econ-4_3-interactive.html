@@ -491,6 +491,14 @@ var SCENARIOS = {
   }
 };
 
+/* Hub tracker: one row per stage, sent the first time that stage is completed. */
+function track43(activity, detail){
+  try {
+    var T = window.SISB_TRACKER;
+    if (T && typeof T.log === "function") T.log("4.3", "4.3 Monetary Policy \u00b7 " + activity, detail);
+  } catch(e) { /* tracker unavailable \u2013 activity still works */ }
+}
+
 var KEY = "sisb_u43_mpc_v4";
 var S;
 
@@ -1228,7 +1236,7 @@ el("btnCut").onclick   = function(){ move(-0.25); };
 el("btnRaise").onclick = function(){ move(0.25); };
 el("btnQ").onclick     = nextQuarter;
 el("btnReset").onclick = function(){ loadScenario(S.id); };
-el("btnGate").onclick  = function(){ S.revealed = true; render(); save(); };
+el("btnGate").onclick  = function(){ S.revealed = true; track43("Run the simulator", "Verdict revealed: " + cfg().name); render(); save(); };
 
 
 /* ============================================================
@@ -1382,6 +1390,7 @@ function checkBuild(){
   var binOk = B.binned.length === 3 && B.binned.every(function(id){ return !!cardById(id).reject; });
   var fb = el("buildFb");
   if(right === 7 && binOk){
+    track43("Build the chain", "All seven links correct");
     fb.className = "fb good";
     fb.innerHTML = '<b style="color:var(--green)">All seven links in the right order, and all three distractors rejected.</b>'+
       '<p style="margin:10px 0 0">Now read it as one paragraph. This is what a 6-mark answer sounds like \u2014 notice that every connective is doing work:</p>'+
@@ -1443,6 +1452,7 @@ function renderDefs(){
     })(bs[k]);
   }
   if(D.done.length === TERMS.length){
+    track43("Key terms", "All eight matched");
     el("defFb").className = "fb good";
     el("defFb").innerHTML = '<b style="color:var(--green)">All eight matched.</b> In the exam a definition is worth 2 marks: '+
       'one for the core meaning and one for a valid example or component. Try the Two-mark check next.';
@@ -1541,5 +1551,6 @@ showStage("st-sim"); showPane("p-growth");
 
 if(!restore()) loadScenario("recession"); else render();
 </script>
+<script src="sisb-tracker.js"></script>
 </body>
 </html>
