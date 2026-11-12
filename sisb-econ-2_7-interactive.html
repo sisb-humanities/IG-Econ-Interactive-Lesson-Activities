@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.7 Price Elasticity of Supply · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dorange:#B85C00; --red:#C8102E; --green:#1B7F3B;
+  --ink:#1F2937; --muted:#6B7280; --line:#D6DEE8; --bg:#F3F6FA; --card:#FFFFFF;
+  --pale-blue:#E6F3FA; --pale-orange:#FFF1E2; --pale-red:#FBEAEC; --pale-green:#E9F5EC; --pale-navy:#E8EDF4;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.5}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+header.top{background:var(--navy);color:#fff;padding:14px 16px 0}
+.wrap{max-width:1120px;margin:0 auto}
+.brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo-tile{background:#fff;border-radius:10px;padding:7px 10px;display:flex;align-items:center;flex:none}
+.logo-tile img{display:block;height:56px;width:auto}
+@media (max-width:520px){.logo-tile img{height:44px}}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9CC9EA;font-weight:700}
+h1{margin:2px 0 0;font-size:26px;font-weight:900}
+.sub{color:#C9D6E8;font-size:14px;margin:2px 0 10px}
+.tabs{display:flex;gap:4px;overflow-x:auto;margin-top:6px;-webkit-overflow-scrolling:touch}
+.tab{background:transparent;border:0;color:#C9D6E8;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;white-space:nowrap;display:flex;gap:8px;align-items:center}
+.tab .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);font-size:12px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--green);color:#fff}
+.progress{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.progress .wrap{display:flex;align-items:center;gap:12px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.bar{flex:1;height:8px;background:var(--pale-navy);border-radius:99px;overflow:hidden}
+.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));transition:width .4s}
+main{padding:18px 16px 60px}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--card);border-radius:14px;border:1px solid var(--line);padding:18px;margin-bottom:16px}
+.card h2{margin:0 0 6px;color:var(--navy);font-size:21px}
+.card h3{margin:0 0 6px;color:var(--navy);font-size:17px}
+.lead{color:var(--muted);margin:0 0 12px}
+.badge{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;padding:3px 8px;border-radius:99px;text-transform:uppercase}
+.b-th{background:var(--pale-orange);color:var(--dorange)}
+.b-int{background:var(--pale-blue);color:#005B87}
+.btn{border:2px solid var(--navy);background:#fff;color:var(--navy);padding:9px 14px;border-radius:10px;font-weight:700}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.orange{background:var(--orange);border-color:var(--orange);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:6px 10px;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--pale-green);border-left:5px solid var(--green)}
+.fb.no{background:var(--pale-red);border-left:5px solid var(--red)}
+.fb.info{background:var(--pale-blue);border-left:5px solid var(--blue)}
+.choice{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-weight:700;color:var(--navy);min-width:120px}
+.choice.ok{border-color:var(--green);background:var(--pale-green)}
+.choice.no{border-color:var(--red);background:var(--pale-red)}
+/* problem tab */
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+.tl{border-left:5px solid var(--orange);background:var(--pale-orange);border-radius:10px;padding:12px}
+.tl b{color:var(--navy);display:block}
+.big{font-size:28px;font-weight:900;color:var(--navy)}
+/* shift lab */
+.lab{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.lab{grid-template-columns:1fr}}
+.cases{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.case{border:2px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:14px;font-weight:700;color:var(--navy)}
+.case.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.case .fl{font-size:10px;font-weight:900;margin-right:4px;color:var(--dorange)}
+.case.on .fl{color:var(--orange)}
+.chartbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}
+svg.chart{width:100%;height:auto;display:block;touch-action:manipulation}
+.steps{display:flex;gap:4px;margin:10px 0}
+.st{flex:1;text-align:center;font-size:12px;font-weight:700;color:var(--muted);padding:6px 2px;border-radius:8px;background:var(--pale-navy)}
+.st.on{background:var(--navy);color:#fff}
+.st.done{background:#CFE3F3;color:var(--navy)}
+.readout{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.ro{background:var(--pale-navy);border-radius:8px;padding:6px 8px;text-align:center}
+.ro small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.ro span{font-weight:900;color:var(--navy);font-size:17px}
+.ro.gap span{color:var(--red)}
+.steptext{min-height:150px}
+.steptext .label{font-size:12px;font-weight:900;letter-spacing:.06em;color:var(--orange);text-transform:uppercase}
+.steptext p{margin:6px 0}
+.q{background:var(--pale-blue);border-radius:10px;padding:10px 12px;margin-top:8px}
+.q .row{margin-top:6px}
+.q.nudge{animation:nudge .5s}
+@keyframes nudge{0%,100%{transform:none}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.choice:disabled{cursor:default}
+.fact{background:var(--pale-orange);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:14px}
+.missions{display:grid;gap:6px;margin-top:10px}
+.mi{display:flex;gap:8px;align-items:center;font-size:14px;padding:6px 10px;border-radius:8px;background:var(--pale-navy)}
+.mi .tick{width:20px;height:20px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font-size:12px;color:#fff;flex:none}
+.mi.done{background:var(--pale-green)}
+.mi.done .tick{background:var(--green);border-color:var(--green)}
+.free{display:none;gap:10px;flex-wrap:wrap;align-items:center;background:var(--pale-navy);border-radius:10px;padding:8px 10px;margin-bottom:10px;font-size:14px}
+.free.on{display:flex}
+.free select,.free input{font-family:inherit;font-size:14px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--navy)}
+/* sorter */
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;padding:10px;border:2px dashed var(--line);border-radius:12px;background:#fff}
+.chip{background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:10px;padding:8px 10px;font-weight:700;font-size:14px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;max-width:100%}
+.chip small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.chip.sel{outline:4px solid var(--orange);outline-offset:1px}
+.chip.ok{border-color:var(--green);background:var(--pale-green)}
+.chip.no{border-color:var(--red);background:var(--pale-red)}
+.chip.ghost{position:fixed;pointer-events:none;z-index:999;opacity:.9;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+@media (max-width:860px){.bins{grid-template-columns:repeat(2,1fr)}}
+.bin{border-radius:12px;padding:8px;min-height:150px;display:flex;flex-direction:column;gap:6px;border:2px solid var(--line)}
+.bin.hover{border-color:var(--orange)}
+.bin h4{margin:0 0 4px;font-size:15px;text-align:center}
+.bin.d{background:var(--pale-blue)} .bin.d h4{color:#005B87}
+.bin.s{background:var(--pale-orange)} .bin.s h4{color:var(--dorange)}
+.explain{font-size:14px;margin-top:10px}
+.explain li{margin-bottom:4px}
+/* order */
+.slots{display:grid;gap:6px;margin:10px 0}
+.slot{display:flex;gap:10px;align-items:center;min-height:44px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;background:#fff}
+.slot .num{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px;flex:none}
+.slot.filled{border-style:solid;border-color:var(--navy);cursor:pointer}
+.slot.ok{border-color:var(--green);background:var(--pale-green)}
+.slot.no{border-color:var(--red);background:var(--pale-red)}
+.pool{display:grid;gap:6px}
+.pcard{text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;color:var(--ink)}
+.pcard:disabled{opacity:.25}
+/* quiz */
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font-weight:700;color:var(--ink)}
+.opt .k{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--pale-navy);color:var(--navy);margin-right:8px;font-size:13px}
+.opt.ok{border-color:var(--green);background:var(--pale-green)}
+.opt.no{border-color:var(--red);background:var(--pale-red)}
+.score{font-size:40px;font-weight:900;color:var(--navy)}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- 2.6/2.7 additions ---- */
+.bins{grid-template-columns:repeat(2,1fr)}
+.bin{min-height:190px}
+.bin.i{background:var(--pale-blue)} .bin.i h4{color:#005B87}
+.bin.e{background:var(--pale-orange)} .bin.e h4{color:var(--dorange)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:#fff;color:var(--navy);padding:8px 14px;font-weight:700}
+.seg button.on{background:var(--navy);color:#fff}
+.readout4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.rev-bar{position:relative;height:26px;background:var(--pale-navy);border-radius:8px;overflow:hidden;margin-top:6px}
+.rev-bar>span{position:absolute;left:0;top:0;bottom:0;background:var(--blue);transition:width .15s}
+.rev-bar>i{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--orange)}
+.rev-bar.up>span{background:var(--green)} .rev-bar.down>span{background:var(--red)}
+input[type=range]{width:100%;height:36px;accent-color:var(--orange)}
+.slider-ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:-4px}
+.pillrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.note{font-size:13px;color:var(--muted)}
+.formula{background:var(--pale-navy);border-radius:10px;padding:10px 12px;font-weight:900;color:var(--navy);margin:8px 0}
+.inline-q{margin:10px 0 4px;font-weight:700}
+.chart-note{font-size:12px;color:var(--muted);padding:2px 8px 6px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="logo-tile"><img src="data:image/png;base64,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" alt="SISB School Nonthaburi"></div>
+      <div>
+        <div class="kicker">IGCSE Economics 0455 · Unit 2 · Topic 2.7</div>
+        <h1>Price Elasticity of Supply</h1>
+      </div>
+    </div>
+    <p class="sub">How much do sellers react when the price changes? Textbook Chapter 11, pp. 51–55.</p>
+    <nav class="tabs" role="tablist">
+      <button class="tab on" data-tab="0" id="t0"><span class="n">1</span>The problem</button>
+      <button class="tab" data-tab="1" id="t1"><span class="n">2</span>PES Lab</button>
+      <button class="tab" data-tab="2" id="t2"><span class="n">3</span>Sort it</button>
+      <button class="tab" data-tab="3" id="t3"><span class="n">4</span>Order it</button>
+      <button class="tab" data-tab="4" id="t4"><span class="n">5</span>Quick quiz</button>
+    </nav>
+  </div>
+</header>
+<div class="progress"><div class="wrap"><span id="progTxt">0 / 5 activities</span><div class="bar"><span id="progBar"></span></div></div></div>
+
+<main class="wrap">
+<!-- ============ TAB 1 ============ -->
+<section class="panel on" id="p0">
+  <div class="card">
+    <span class="badge b-th">Thailand</span>
+    <h2>Rubber prices are high. Why can't farmers just make more?</h2>
+    <p class="lead">Thailand grows about one third of the world's natural rubber. Farmers collect latex by tapping the bark of rubber trees.</p>
+    <div class="timeline">
+      <div class="tl"><b>2011</b>Rubber prices hit a record. Farmers across Asia plant <strong>many new trees</strong>.</div>
+      <div class="tl"><b>2015</b>The new trees are ready. Too much rubber: Thai rubber sheet falls to about <strong>37 baht/kg</strong>.</div>
+      <div class="tl"><b>2026</b>World supply is tight. Smoked rubber sheet reaches <strong>97.90 baht/kg</strong>, the highest in ten years.</div>
+      <div class="tl" style="border-left-color:var(--blue);background:var(--pale-blue)"><b>Remember</b>A new rubber tree needs <strong>5 to 7 years</strong> before it can be tapped.</div>
+    </div>
+    <p class="note">Sources: Krungsri Research 2026; Bangkok Post, Dec 2015; Rubber Authority of Thailand via The Nation, 28 Oct 2026; FAO.</p>
+  </div>
+  <div class="card">
+    <h3>Think first</h3>
+    <p>A farmer in Surat Thani sees the price of rubber rise from <strong>60 to 90 baht per kg</strong>. What can she do <strong>this week</strong> to sell more?</p>
+    <div class="row" id="hookQ1"></div>
+    <div class="fb" id="hookFb1"></div>
+    <div id="hookPart2" style="display:none;margin-top:14px">
+      <p>Her rubber goes from <strong>1,000 kg to 1,050 kg</strong> a month (+5%). The price went up by 50%. Which change was <strong>bigger</strong>?</p>
+      <div class="row" id="hookQ2"></div>
+      <div class="fb" id="hookFb2"></div>
+    </div>
+    <div id="hookPart3" style="display:none;margin-top:14px">
+      <p>So how <strong>responsive</strong> was her supply to the higher price?</p>
+      <div class="row" id="hookQ3"></div>
+      <div class="fb" id="hookFb3"></div>
+    </div>
+  </div>
+  <div class="card" id="hookName" style="display:none">
+    <h3>Now it has a name</h3>
+    <p>Economists divide the two percentages. This is <strong>price elasticity of supply (PES)</strong>.</p>
+    <div class="formula">PES = %Δ quantity supplied ÷ %Δ price = (+5) ÷ (+50) = <span style="color:var(--red)">0.1</span></div>
+    <p>0.1 is <strong>less than 1</strong>. Quantity supplied changed by a smaller percentage than price, so supply was <strong>price inelastic</strong>. Notice that PES is <strong>positive</strong>: price and quantity supplied move in the same direction.</p>
+  </div>
+  <div class="card" id="longCard" style="display:none">
+    <span class="badge b-int">Over time</span>
+    <h3>What about the long run?</h3>
+    <p>After the 2011 record price, farmers planted many new trees. What do you think happened when those trees could be tapped, years later?</p>
+    <div class="row" id="longQ"></div>
+    <div class="fb" id="longFb"></div>
+    <div class="fact" id="cocoaFact" style="display:none"><strong>Same story abroad:</strong> cocoa passed <strong>US$12,000 a tonne</strong> in December 2024 after disease and bad weather in West Africa. Trees cannot be replaced quickly. By early 2026 the price was back near US$3,000 as the crop recovered (FoodNavigator, March 2026).</div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="toLab" style="display:none" onclick="goTab(1)">Measure it in the PES Lab →</button></div>
+  </div>
+</section>
+
+<!-- ============ TAB 2 ============ -->
+<section class="panel" id="p1">
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div><h2 style="margin:0">PES Lab</h2><p class="lead" style="margin:0">Two ways to explore. Finish both missions to complete the activity.</p></div>
+      <div class="seg" id="modeSeg"><button class="on" id="modeA">Step by step</button><button id="modeB">Supply curves</button></div>
+    </div>
+    <div class="missions">
+      <div class="mi" id="m1"><span class="tick">✓</span><span id="m1t">Step by step: finish 3 cases (0 / 3)</span></div>
+      <div class="mi" id="m2"><span class="tick">✓</span><span id="m2t">Supply curves: name all 5 mystery curves (0 / 5)</span></div>
+    </div>
+  </div>
+
+  <div id="labA" class="lab">
+    <div class="card" style="margin:0">
+      <div class="cases" id="caseRow"></div>
+      <div class="chartbox"><div id="chartA"></div><div class="chart-note">Not to scale: the percentage changes are real, the starting numbers are tidied up.</div></div>
+      <div class="readout4">
+        <div class="ro"><small>%Δ Qs</small><span id="roQ">?</span></div>
+        <div class="ro"><small>%Δ price</small><span id="roP">?</span></div>
+        <div class="ro"><small>PES</small><span id="roPES">?</span></div>
+        <div class="ro"><small>Supply is</small><span id="roK">?</span></div>
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="steps" id="stepBar"></div>
+      <div class="steptext" id="stepText"></div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="backBtn">◀ Back</button>
+        <button class="btn primary" id="nextBtn">Next ▶</button>
+      </div>
+      <div class="fact" id="caseFact"></div>
+    </div>
+  </div>
+
+  <div id="labB" class="lab" style="display:none">
+    <div class="card" style="margin:0">
+      <div class="pillrow" id="curveRow"></div>
+      <div class="chartbox"><div id="chartB"></div></div>
+    </div>
+    <div class="card" style="margin:0">
+      <p class="inline-q" id="bPrompt"></p>
+      <input type="range" id="slider" min="0" max="50" step="5" value="0" aria-label="Change">
+      <div class="slider-ticks"><span id="tickL">0%</span><span id="tickR">+50%</span></div>
+      <div class="readout4" style="margin-top:12px">
+        <div class="ro"><small>%Δ price</small><span id="bP">0%</span></div>
+        <div class="ro"><small>%Δ Qs</small><span id="bQ">0%</span></div>
+        <div class="ro"><small>PES</small><span id="bPES">–</span></div>
+        <div class="ro"><small>Moved?</small><span id="bMoved">–</span></div>
+      </div>
+      <p class="inline-q">Name this supply curve:</p>
+      <div class="row" id="bOpts"></div>
+      <div class="fb" id="bFb"></div>
+      <div class="row" style="margin-top:10px"><button class="btn primary" id="bNext" style="display:none">Next mystery curve ▶</button></div>
+      <div class="card" style="margin:14px 0 0;background:var(--pale-orange);border-color:#F6D2A8">
+        <h3>Rubber: short run vs long run</h3>
+        <div class="seg" id="runSeg"><button class="on" id="runS">This month</button><button id="runL">7 years later</button></div>
+        <p class="note" id="runNote" style="margin-top:8px"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 3 ============ -->
+<section class="panel" id="p2">
+  <div class="card">
+    <h2>Sort it</h2>
+    <p class="lead">Drag (or tap a card, then tap a box). Is the <strong>supply</strong> of each product likely to be price inelastic or price elastic?</p>
+    <div class="bank drop-pool" id="bank"></div>
+    <div class="bins">
+      <div class="bin i" data-bin="I"><h4>Price INELASTIC supply<br><small>PES less than 1: hard to make more quickly</small></h4></div>
+      <div class="bin e" data-bin="E"><h4>Price ELASTIC supply<br><small>PES more than 1: easy to make more quickly</small></h4></div>
+    </div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="sortCheck">Check</button><button class="btn" id="sortReset">Shuffle and restart</button></div>
+    <div class="fb" id="sortFb"></div>
+    <ul class="explain" id="sortExplain"></ul>
+  </div>
+</section>
+
+<!-- ============ TAB 4 ============ -->
+<section class="panel" id="p3">
+  <div class="card">
+    <h2>Order it</h2>
+    <p class="lead">Tap the sentences in the right order. Tap a placed sentence to send it back.</p>
+    <div class="cases" id="storyPick"></div>
+    <div class="slots" id="slots"></div>
+    <div class="pool" id="pool"></div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="orderCheck">Check order</button><button class="btn" id="orderReset">Start again</button></div>
+    <div class="fb" id="orderFb"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5 ============ -->
+<section class="panel" id="p4"><div class="card" id="quizCard"></div></section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 2.7 Price Elasticity of Supply</footer>
+
+<script>
+/* ---------------- utilities ---------------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MINUS = '−';
+function track(activity, detail) {
+  try {
+    const T = window.SISB_TRACKER;
+    if (T && typeof T.log === 'function') T.log('2.7', '2.7 Price Elasticity of Supply · ' + activity, detail);
+  } catch (e) { /* tracker unavailable – activity still works */ }
+}
+const done = { problem: false, lab: false, sort: false, order: false, quiz: false };
+function markDone(key, tabId, activity, detail) {
+  if (done[key]) return;
+  done[key] = true;
+  const t = document.getElementById(tabId); if (t) t.classList.add('done');
+  const n = Object.values(done).filter(Boolean).length;
+  $('#progTxt').textContent = n + ' / 5 activities';
+  $('#progBar').style.width = (n * 20) + '%';
+  track(activity, detail);
+}
+function goTab(i) {
+  $$('.tab').forEach((t, k) => t.classList.toggle('on', k === i));
+  $$('.panel').forEach((p, k) => p.classList.toggle('on', k === i));
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+$$('.tab').forEach((t) => t.addEventListener('click', () => goTab(+t.dataset.tab)));
+function num1(v) { let s = (Math.round(v * 10) / 10).toFixed(1); if (s.endsWith('.0')) s = s.slice(0, -2); return s; }
+function pctStr(v) { const r = Math.round(v * 10) / 10; return (r < 0 ? MINUS : (r > 0 ? '+' : '')) + num1(Math.abs(v)) + '%'; }
+function pesStr(v) { return (v < 0 ? MINUS : '') + String(parseFloat(Math.abs(v).toFixed(2))); }
+const money = (v, c) => (c.cur === '$' ? '$' : '') + (Math.abs(v - Math.round(v)) < 1e-9 ? Math.round(v).toLocaleString('en-US') : v.toFixed(2)) + (c.cur === 'B' ? ' baht' : '');
+function choiceSet(container, options, correct, fbEl, onRight) {
+  const box = document.getElementById(container), fb = document.getElementById(fbEl);
+  options.forEach(([val, label, msg]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.textContent = label;
+    b.addEventListener('click', () => {
+      const ok = val === correct;
+      b.classList.add(ok ? 'ok' : 'no');
+      fb.className = 'fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = msg;
+      if (ok) { $$('.choice', box).forEach((x) => (x.disabled = true)); onRight && onRight(); }
+    });
+    box.appendChild(b);
+  });
+}
+
+/* ---------------- TAB 1: the problem ---------------- */
+choiceSet('hookQ1', [
+  ['plant', 'Plant new trees and sell their rubber', 'Good idea for later, but a new tree needs <strong>5 to 7 years</strong> before it can be tapped.'],
+  ['tap', 'Tap the trees she already has more often', '<strong>Yes.</strong> That is about all she can do this week, so she can only add a <strong>little</strong> more rubber.'],
+  ['factory', 'Build a bigger rubber factory', 'A factory does not make latex. The rubber comes from the trees.'],
+], 'tap', 'hookFb1', () => { $('#hookPart2').style.display = 'block'; });
+choiceSet('hookQ2', [
+  ['price', 'The change in price (50%)', '<strong>Yes.</strong> The price rose by 50%, but quantity supplied rose by only 5%.'],
+  ['qty', 'The change in quantity supplied (5%)', 'Compare 50% with 5%. Which is bigger?'],
+  ['same', 'They were the same', 'Look again: 50% and 5% are not the same.'],
+], 'price', 'hookFb2', () => { $('#hookPart3').style.display = 'block'; });
+choiceSet('hookQ3', [
+  ['not', 'Not very responsive', '<strong>Yes.</strong> The percentage change in quantity supplied was much smaller than the percentage change in price.'],
+  ['very', 'Very responsive', 'A very responsive seller would change quantity by a bigger percentage than the price. Did she?'],
+  ['perfect', 'Exactly in proportion', 'Exactly in proportion would mean +50%. It was +5%.'],
+], 'not', 'hookFb3', () => { $('#hookName').style.display = 'block'; $('#longCard').style.display = 'block'; });
+choiceSet('longQ', [
+  ['less', 'Supply fell and prices rose even more', 'Think again: there were many more trees to tap.'],
+  ['more', 'Supply rose a lot and the price fell', '<strong>Yes.</strong> By 2015 the new trees were tapped, there was too much rubber and the price fell to about 37 baht/kg. In the <strong>long run</strong> supply is much more <strong>elastic</strong>.'],
+  ['same', 'Nothing changed', 'The new trees could be tapped, so farmers could supply much more.'],
+], 'more', 'longFb', () => { $('#cocoaFact').style.display = 'block'; $('#toLab').style.display = 'inline-block'; markDone('problem', 't0', 'The problem', 'Rubber questions answered'); });
+
+/* ---------------- TAB 2: PES LAB (step by step) ---------------- */
+const CASES = [
+  { id: 'beans', name: 'Beans', src: 'Textbook p. 51', cur: '$', p1: 2, p2: 2.2, q1: 10000, q2: 10500, unit: 'kilos per week',
+    why: ['time', { time: 'Beans take time to grow, so farmers cannot add much in a short time.', spare: 'Do bean farms have idle machines that can make beans? Beans have to grow.', subs: 'There are many bean farmers, but every one of them has to wait for the crop to grow.' }] },
+  { id: 'mango', name: 'Mangoes', src: 'Textbook p. 51', cur: '$', p1: 1, p2: 1.45, q1: 110, q2: 120, unit: 'kilos per month',
+    why: ['time', { time: 'Mango trees take time to grow and fruit only in season.', stocks: 'Fresh mangoes cannot be stored for long, but the main reason is the time they take to grow.', spare: 'Extra trees cannot be switched on like machines.' }] },
+  { id: 'rubber', name: 'Rubber farm', src: 'Part 1 (illustrative figures)', cur: 'B', p1: 60, p2: 90, q1: 1000, q2: 1050, unit: 'kg per month',
+    why: ['time', { time: 'A new rubber tree needs 5–7 years before it can be tapped.', stocks: 'Rubber sheet can be stored, but this farmer had little in stock.', many: 'Thailand has many rubber farmers, but each one has to wait for new trees.' }] },
+  { id: 'bottle', name: 'Water-bottle factory', src: 'Practice example', cur: 'B', p1: 50, p2: 55, q1: 10000, q2: 13000, unit: 'packs per day',
+    why: ['spare', { spare: 'Idle machines can be switched on straight away: lots of spare capacity.', time: 'The factory did not need to wait: it already had the machines.', few: 'There are many bottle makers, not few.' }] },
+  { id: 'garland', name: 'Jasmine garlands', src: 'Practice example, Nonthaburi', cur: 'B', p1: 40, p2: 60, q1: 300, q2: 360, unit: 'garlands per day',
+    why: ['stocks', { stocks: 'Fresh flowers die quickly, so the stall cannot keep stocks ready to sell.', spare: 'The stall can work longer, but without flowers in stock it cannot make many more.', subs: 'Garland makers are skilled, but the problem is the supply of fresh flowers.' }] },
+  { id: 'eggs', name: 'Eggs (price falls)', src: 'Practice example', cur: 'B', p1: 4, p2: 3.6, q1: 50000, q2: 48000, unit: 'eggs per day',
+    why: ['time', { time: 'The farm still has the same hens this month, so it cannot cut supply much quickly.', spare: 'Spare capacity explains increases in supply more than cuts.', many: 'The number of farms does not explain one farm’s quick response.' }] },
+];
+const WHY_LABELS = { time: 'Time period: it takes time to grow or build more', spare: 'Spare capacity: idle machines and workers', stocks: 'Stocks: goods ready (or not ready) to sell', many: 'Number of producers', few: 'There are very few producers', subs: 'Factor substitution' };
+CASES.forEach((c) => { c.dQ = (c.q2 - c.q1) / c.q1 * 100; c.dP = (c.p2 - c.p1) / c.p1 * 100; c.pes = c.dQ / c.dP; c.kind = c.pes < 0.98 ? 'inelastic' : (c.pes > 1.02 ? 'elastic' : 'unitary'); });
+const lab = { ci: 0, step: 1, ok: {}, finished: new Set() };
+const STEPS = ['%Δ Qs', '%Δ price', 'PES', 'Elastic?', 'Why?'];
+const qCache = {};
+function mkOpts(correct, wrongs) { const seen = new Set([correct]); const out = [correct]; wrongs.forEach((w) => { if (!seen.has(w)) { seen.add(w); out.push(w); } }); return shuffle(out.slice(0, 4)); }
+function stepQuestion(c, s) {
+  const pq = pctStr(c.dQ), pp = pctStr(c.dP);
+  if (s === 1) return { label: 'Step 1 of 5', text: 'Work out the <strong>% change in quantity supplied</strong>: (new − old) ÷ <em>old</em> × 100.<br><small>' + c.q1.toLocaleString('en-US') + ' → ' + c.q2.toLocaleString('en-US') + ' ' + c.unit + '</small>',
+    correct: pq, opts: mkOpts(pq, [pctStr(-c.dQ), pctStr((c.q2 - c.q1) / c.q2 * 100), pp]), good: 'Right: divide the change by the <strong>original</strong> quantity.', bad: 'Not quite. Divide the change by the <em>old</em> quantity, and keep the sign.' };
+  if (s === 2) return { label: 'Step 2 of 5', text: 'Now the <strong>% change in price</strong>.<br><small>' + money(c.p1, c) + ' → ' + money(c.p2, c) + '</small>',
+    correct: pp, opts: mkOpts(pp, [pctStr(-c.dP), pctStr((c.p2 - c.p1) / c.p2 * 100), pq]), good: 'Right.', bad: 'Not quite. Same method: (new − old) ÷ old × 100.' };
+  if (s === 3) { const ps = pesStr(c.pes); return { label: 'Step 3 of 5', text: 'Divide: <strong>PES = %ΔQs ÷ %ΔP</strong> = ' + pq + ' ÷ ' + pp + '.',
+    correct: ps, opts: mkOpts(ps, [pesStr(1 / c.pes), pesStr(-c.pes), pesStr(c.dQ), pesStr(c.dQ + c.dP)]), good: c.dP < 0 ? 'Yes. A negative divided by a negative is <strong>positive</strong>.' : 'Yes: quantity supplied on top, price below. PES is positive.', bad: 'Check the order: %ΔQs goes on <em>top</em>. And PES for supply is positive.' }; }
+  if (s === 4) return { label: 'Step 4 of 5', text: 'PES = ' + pesStr(c.pes) + '. Compare it with 1. Is supply price elastic, inelastic or unitary?',
+    correct: c.kind, opts: ['inelastic', 'elastic', 'unitary'], fixed: true, labels: { inelastic: 'Price inelastic (less than 1)', elastic: 'Price elastic (more than 1)', unitary: 'Unitary (equal to 1)' },
+    good: c.kind === 'inelastic' ? 'Yes. Quantity supplied changed by a <strong>smaller</strong> percentage than price.' : 'Yes. Quantity supplied changed by a <strong>bigger</strong> percentage than price.', bad: 'Compare the PES with 1. Less than 1 is inelastic; more than 1 is elastic.' };
+  const [right, msgs] = c.why; const keys = Object.keys(msgs);
+  return { label: 'Step 5 of 5', text: 'Which <strong>determinant</strong> best explains this PES for ' + c.name.toLowerCase() + '? (textbook pp. 54–55)', correct: right, opts: shuffle(keys), fixed: true, labels: WHY_LABELS,
+    good: '<strong>Yes.</strong> ' + msgs[right], badFor: msgs };
+}
+function getQ(c, s) { const k = c.id + s; if (!qCache[k]) qCache[k] = stepQuestion(c, s); return qCache[k]; }
+function renderCases() { $('#caseRow').innerHTML = CASES.map((c, i) => `<button class="case ${i === lab.ci ? 'on' : ''}" data-i="${i}">${lab.finished.has(c.id) ? '✓ ' : ''}${c.name}</button>`).join(''); }
+function renderSteps() { $('#stepBar').innerHTML = STEPS.map((s, i) => `<div class="st ${i + 1 === lab.step ? 'on' : (i + 1 < lab.step ? 'done' : '')}">${i + 1}. ${s}</div>`).join(''); }
+function renderStep() {
+  const c = CASES[lab.ci], q = getQ(c, lab.step), key = c.id + lab.step, answered = !!lab.ok[key];
+  const optsHtml = q.opts.map((o) => `<button class="choice" data-o="${encodeURIComponent(o)}" ${answered ? 'disabled' : ''}>${q.labels ? q.labels[o] : o}</button>`).join('');
+  $('#stepText').innerHTML = `<div class="label">${q.label} · ${c.name}</div><p>${q.text}</p><div class="q" id="qBox"><div class="row" id="qOpts">${optsHtml}</div><div class="fb ${answered ? 'show ok' : ''}" id="qFb">${answered ? q.good : ''}</div></div>`;
+  if (answered) $$('#qOpts .choice').forEach((b) => { if (decodeURIComponent(b.dataset.o) === q.correct) b.classList.add('ok'); });
+  $('#backBtn').disabled = lab.step === 1;
+  $('#nextBtn').textContent = lab.step === 5 ? (lab.ci < CASES.length - 1 ? 'Next case ▶' : 'Start again ▶') : 'Next ▶';
+  renderSteps(); renderReadout(); drawChart();
+  $('#caseFact').innerHTML = '<strong>' + c.name + '</strong> · ' + c.src + '.';
+}
+function renderReadout() {
+  const c = CASES[lab.ci], ok = (s) => !!lab.ok[c.id + s];
+  $('#roQ').textContent = ok(1) ? pctStr(c.dQ) : '?'; $('#roP').textContent = ok(2) ? pctStr(c.dP) : '?';
+  $('#roPES').textContent = ok(3) ? pesStr(c.pes) : '?'; $('#roK').textContent = ok(4) ? c.kind : '?';
+}
+function onAnswer(val) {
+  const c = CASES[lab.ci], q = getQ(c, lab.step), key = c.id + lab.step, ok = val === q.correct, fb = $('#qFb');
+  $$('#qOpts .choice').forEach((b) => { if (decodeURIComponent(b.dataset.o) === val) b.classList.add(ok ? 'ok' : 'no'); });
+  fb.className = 'fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = ok ? q.good : (q.badFor ? q.badFor[val] : q.bad);
+  if (ok) {
+    lab.ok[key] = true; $$('#qOpts .choice').forEach((b) => (b.disabled = true));
+    if (lab.step === 5) { lab.finished.add(c.id); renderCases(); updateMissions(); }
+    renderReadout(); drawChart(); renderSteps();
+  }
+}
+$('#stepText').addEventListener('click', (e) => { const b = e.target.closest('#qOpts .choice'); if (b && !b.disabled) onAnswer(decodeURIComponent(b.dataset.o)); });
+$('#nextBtn').addEventListener('click', () => {
+  const c = CASES[lab.ci];
+  if (!lab.ok[c.id + lab.step]) { const qb = $('#qBox'); if (qb) { qb.classList.remove('nudge'); void qb.offsetWidth; qb.classList.add('nudge'); } const fb = $('#qFb'); if (fb && !fb.classList.contains('show')) { fb.className = 'fb show info'; fb.textContent = 'Answer the question first, then press Next.'; } return; }
+  if (lab.step < 5) { lab.step++; renderStep(); } else { lab.ci = (lab.ci + 1) % CASES.length; lab.step = 1; renderCases(); renderStep(); }
+});
+$('#backBtn').addEventListener('click', () => { if (lab.step > 1) { lab.step--; renderStep(); } });
+$('#caseRow').addEventListener('click', (e) => { const b = e.target.closest('.case'); if (!b) return; lab.ci = +b.dataset.i; lab.step = 1; renderCases(); renderStep(); });
+
+function axesSvg(Wd, Ht, L, T, pw, ph, xl, yl) {
+  return `<line x1="${L}" y1="${T}" x2="${L}" y2="${T + ph}" stroke="#002F6C" stroke-width="2"/><line x1="${L}" y1="${T + ph}" x2="${L + pw}" y2="${T + ph}" stroke="#002F6C" stroke-width="2"/>` +
+    `<text x="${L + pw / 2}" y="${Ht - 6}" text-anchor="middle" font-size="13" font-weight="700" fill="#002F6C">${xl}</text><text x="14" y="${T + ph / 2}" text-anchor="middle" font-size="13" font-weight="700" fill="#002F6C" transform="rotate(-90 14 ${T + ph / 2})">${yl}</text>` +
+    `<text x="${L - 8}" y="${T + ph + 14}" text-anchor="end" font-size="12" font-weight="700" fill="#002F6C">O</text>`;
+}
+function drawChart() {
+  const c = CASES[lab.ci], ok = (s) => !!lab.ok[c.id + s];
+  const Wd = 460, Ht = 356, L = 62, R = 22, T = 16, Bm = 76, pw = Wd - L - R, ph = Ht - T - Bm;
+  const p1 = 50, q1 = 100, p2 = p1 * (1 + c.dP / 100), q2 = q1 * (1 + c.dQ / 100);
+  const xmax = Math.max(q1, q2) * 1.5, ymax = Math.max(p1, p2) * 1.5;
+  const X = (q) => L + q / xmax * pw, Y = (p) => T + ph - p / ymax * ph;
+  const m = (p2 - p1) / (q2 - q1);
+  const pa = 0.04 * ymax, pb = 0.97 * ymax, qa = q1 + (pa - p1) / m, qb = q1 + (pb - p1) / m;
+  let s = `<svg class="chart" viewBox="0 0 ${Wd} ${Ht}" role="img" aria-label="Supply curve for ${c.name}"><defs><clipPath id="cp"><rect x="${L}" y="${T}" width="${pw}" height="${ph}"/></clipPath><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#B85C00"/></marker></defs>`;
+  s += axesSvg(Wd, Ht, L, T, pw, ph, 'Quantity supplied', 'Price');
+  s += `<g clip-path="url(#cp)"><line x1="${X(qa)}" y1="${Y(pa)}" x2="${X(qb)}" y2="${Y(pb)}" stroke="#008BCC" stroke-width="3.5"/></g>`;
+  s += `<text x="${Math.min(L + pw - 6, X(qb) + 8)}" y="${Math.max(T + 14, Y(pb) + 4)}" font-size="14" font-weight="900" fill="#008BCC">S</text>`;
+  const close = Math.abs(X(q2) - X(q1)) < 26, closeP = Math.abs(Y(p2) - Y(p1)) < 16;
+  [[q1, p1, 'Q₁', 'P₁', 0], [q2, p2, 'Q₂', 'P₂', 1]].forEach(([q, p, ql, pl, second]) => {
+    s += `<line x1="${L}" y1="${Y(p)}" x2="${X(q)}" y2="${Y(p)}" stroke="#002F6C" stroke-dasharray="4 3"/><line x1="${X(q)}" y1="${Y(p)}" x2="${X(q)}" y2="${T + ph}" stroke="#002F6C" stroke-dasharray="4 3"/><circle cx="${X(q)}" cy="${Y(p)}" r="5" fill="#002F6C"/>`;
+    s += `<text x="${L - 6 - (closeP && second ? 18 : 0)}" y="${Y(p) + 4}" text-anchor="end" font-size="12" fill="#002F6C" font-weight="700">${pl}</text><text x="${X(q) + (close ? (second ? 9 : -9) : 0)}" y="${T + ph + 16}" text-anchor="middle" font-size="12" fill="#002F6C" font-weight="700">${ql}</text>`;
+  });
+  s += `<line x1="${X(q1)}" y1="${T + ph + 30}" x2="${X(q2)}" y2="${T + ph + 30}" stroke="#B85C00" stroke-width="2" marker-end="url(#ah)"/><text x="${(X(q1) + X(q2)) / 2}" y="${T + ph + 45}" text-anchor="middle" font-size="11" font-weight="700" fill="#B85C00">${ok(1) ? '%ΔQs ' + pctStr(c.dQ) : '%ΔQs ?'}</text>`;
+  s += `<line x1="${L + 18}" y1="${Y(p1)}" x2="${L + 18}" y2="${Y(p2)}" stroke="#B85C00" stroke-width="2" marker-end="url(#ah)"/><text x="${L + 26}" y="${Math.max(Y(p1), Y(p2)) + 16}" font-size="11" font-weight="700" fill="#B85C00">${ok(2) ? '%ΔP ' + pctStr(c.dP) : '%ΔP ?'}</text>`;
+  s += '</svg>'; $('#chartA').innerHTML = s;
+}
+
+/* ---------------- TAB 2: PES LAB (supply curves) ---------------- */
+// each curve: q(p) with P0 = 50 at start; kind key
+const CURVES = [
+  { k: 'elastic', name: 'Price elastic', q: (p) => (p - 30) * 5, dir: 'price' },       // through price axis at 30
+  { k: 'inelastic', name: 'Price inelastic', q: (p) => 80 + p * 0.4, dir: 'price' },    // through quantity axis at 80
+  { k: 'zero', name: 'Perfectly inelastic', q: () => 100, dir: 'price' },
+  { k: 'inf', name: 'Perfectly elastic', q: null, dir: 'demand' },
+  { k: 'unit', name: 'Unitary', q: (p) => p * 2, dir: 'price' },
+];
+const CURVE_TIPS = {
+  elastic: 'The line starts on the <strong>price</strong> axis and is flat: %ΔQs is bigger than %ΔP, so PES > 1.',
+  inelastic: 'The line starts on the <strong>quantity</strong> axis and is steep: %ΔQs is smaller than %ΔP, so PES < 1.',
+  zero: 'A <strong>vertical</strong> line: quantity supplied never changes, so PES = 0 (like seats in a stadium).',
+  inf: 'A <strong>horizontal</strong> line: quantity supplied can change with no change in price, so PES = ∞ (like app downloads).',
+  unit: 'A straight line from the <strong>origin</strong>: %ΔQs always equals %ΔP, so PES = 1. It does not have to be at 45°.',
+};
+const bst = { order: shuffle(CURVES.map((c) => c.k)), i: 0, named: new Set(), answered: false, run: 'S' };
+const curveOf = (k) => CURVES.find((c) => c.k === k);
+function curveRow() { $('#curveRow').innerHTML = bst.order.map((k, i) => `<button class="case ${i === bst.i ? 'on' : ''}" data-i="${i}">${bst.named.has(k) ? '✓ ' + curveOf(k).name : 'Mystery curve ' + (i + 1)}</button>`).join(''); }
+function renderCurve() {
+  const cv = curveOf(bst.order[bst.i]); bst.answered = bst.named.has(cv.k);
+  $('#bPrompt').innerHTML = cv.dir === 'demand' ? '<strong>Drag the slider</strong> to raise demand. Watch what happens to price and quantity supplied.' : '<strong>Drag the slider</strong> to raise the price. Watch quantity supplied.';
+  $('#tickR').textContent = cv.dir === 'demand' ? 'more demand' : '+50% price';
+  $('#slider').value = 0;
+  $('#bOpts').innerHTML = CURVES.map((c) => `<button class="choice" data-k="${c.k}" ${bst.answered ? 'disabled' : ''}>${c.name}</button>`).join('');
+  if (bst.answered) { $$('#bOpts .choice').forEach((b) => { if (b.dataset.k === cv.k) b.classList.add('ok'); }); $('#bFb').className = 'fb show ok'; $('#bFb').innerHTML = CURVE_TIPS[cv.k]; } else { $('#bFb').className = 'fb'; }
+  $('#bNext').style.display = bst.answered && bst.named.size < 5 ? 'inline-block' : 'none';
+  curveRow(); updateCurve();
+}
+function updateCurve() {
+  const cv = curveOf(bst.order[bst.i]), x = +$('#slider').value;
+  let P0 = 50, P = 50, Q0, Q;
+  if (cv.dir === 'demand') { Q0 = 60; Q = 60 + x * 3; } else { P = P0 * (1 + x / 100); Q0 = cv.q(P0); Q = cv.q(P); }
+  const dP = (P - P0) / P0 * 100, dQ = (Q - Q0) / Q0 * 100;
+  $('#bP').textContent = pctStr(dP); $('#bQ').textContent = pctStr(dQ);
+  $('#bPES').textContent = x === 0 ? '–' : (dP === 0 ? '∞' : (Math.abs(dQ) < 1e-9 ? '0' : pesStr(dQ / dP)));
+  $('#bMoved').textContent = x === 0 ? '–' : (dP === 0 ? 'Q only' : (Math.abs(dQ) < 1e-9 ? 'P only' : 'both'));
+  drawCurve(cv, P0, Q0, P, Q);
+}
+function drawCurve(cv, P0, Q0, P, Q) {
+  const Wd = 460, Ht = 320, L = 62, R = 22, T = 14, Bm = 44, pw = Wd - L - R, ph = Ht - T - Bm, xmax = 220, ymax = 100;
+  const X = (q) => L + q / xmax * pw, Y = (p) => T + ph - p / ymax * ph;
+  let s = `<svg class="chart" viewBox="0 0 ${Wd} ${Ht}" role="img" aria-label="Mystery supply curve"><defs><clipPath id="cpb"><rect x="${L}" y="${T}" width="${pw}" height="${ph}"/></clipPath></defs>`;
+  s += axesSvg(Wd, Ht, L, T, pw, ph, 'Quantity supplied', 'Price');
+  let pts;
+  if (cv.k === 'inf') pts = [[0, 50], [xmax, 50]];
+  else if (cv.k === 'zero') pts = [[100, 0], [100, ymax]];
+  else { const ps = []; for (let p = 0; p <= ymax; p += 2) { const q = cv.q(p); if (q >= 0) ps.push([q, p]); } pts = [ps[0], ps[ps.length - 1]]; }
+  s += `<g clip-path="url(#cpb)"><line x1="${X(pts[0][0])}" y1="${Y(pts[0][1])}" x2="${X(pts[1][0])}" y2="${Y(pts[1][1])}" stroke="#008BCC" stroke-width="3.5"/></g>`;
+  s += `<line x1="${L}" y1="${Y(P0)}" x2="${X(Q0)}" y2="${Y(P0)}" stroke="#9AA5B1" stroke-dasharray="4 3"/><line x1="${X(Q0)}" y1="${Y(P0)}" x2="${X(Q0)}" y2="${T + ph}" stroke="#9AA5B1" stroke-dasharray="4 3"/>`;
+  s += `<line x1="${L}" y1="${Y(P)}" x2="${X(Q)}" y2="${Y(P)}" stroke="#B85C00" stroke-dasharray="4 3"/><line x1="${X(Q)}" y1="${Y(P)}" x2="${X(Q)}" y2="${T + ph}" stroke="#B85C00" stroke-dasharray="4 3"/>`;
+  s += `<circle cx="${X(Q0)}" cy="${Y(P0)}" r="6" fill="#9AA5B1"/><circle cx="${X(Q)}" cy="${Y(P)}" r="8" fill="#FF8F1C" stroke="#fff" stroke-width="2"/>`;
+  s += `<text x="${L - 6}" y="${Y(P0) + 4}" text-anchor="end" font-size="12" font-weight="700" fill="#6B7280">P₁</text><text x="${X(Q0)}" y="${T + ph + 15}" text-anchor="middle" font-size="12" font-weight="700" fill="#6B7280">Q₁</text>`;
+  s += '</svg>'; $('#chartB').innerHTML = s;
+}
+$('#slider').addEventListener('input', updateCurve);
+$('#curveRow').addEventListener('click', (e) => { const b = e.target.closest('.case'); if (!b) return; bst.i = +b.dataset.i; renderCurve(); });
+$('#bOpts').addEventListener('click', (e) => {
+  const b = e.target.closest('.choice'); if (!b || b.disabled) return;
+  const cv = curveOf(bst.order[bst.i]), ok = b.dataset.k === cv.k, fb = $('#bFb');
+  b.classList.add(ok ? 'ok' : 'no'); fb.className = 'fb show ' + (ok ? 'ok' : 'no');
+  if (+$('#slider').value === 0 && !ok) { fb.innerHTML = 'Move the slider first and watch the readout.'; return; }
+  fb.innerHTML = ok ? '<strong>Yes.</strong> ' + CURVE_TIPS[cv.k] : 'Not quite. Look at the readout: did price change, quantity change, or both? By how much?';
+  if (ok) { bst.named.add(cv.k); $$('#bOpts .choice').forEach((x) => (x.disabled = true)); $('#bNext').style.display = bst.named.size < 5 ? 'inline-block' : 'none'; curveRow(); updateMissions(); }
+});
+$('#bNext').addEventListener('click', () => { let j = bst.i; for (let n = 0; n < 5; n++) { j = (j + 1) % 5; if (!bst.named.has(bst.order[j])) break; } bst.i = j; renderCurve(); });
+function renderRun() {
+  const S = bst.run === 'S';
+  $('#runS').classList.toggle('on', S); $('#runL').classList.toggle('on', !S);
+  $('#runNote').innerHTML = S ? '<strong>This month:</strong> price +50% → quantity supplied +5%. PES = 0.1: <strong>very inelastic</strong>. Farmers can only tap the trees they have.' : '<strong>7 years later:</strong> new trees are ready. The same +50% price can lead to +80% quantity supplied. PES = 1.6: <strong>elastic</strong>. Time is the key determinant. (Illustrative figures.)';
+}
+$('#runS').addEventListener('click', () => { bst.run = 'S'; renderRun(); });
+$('#runL').addEventListener('click', () => { bst.run = 'L'; renderRun(); });
+function setMode(m) {
+  $('#labA').style.display = m === 'A' ? '' : 'none'; $('#labB').style.display = m === 'B' ? '' : 'none';
+  $('#modeA').classList.toggle('on', m === 'A'); $('#modeB').classList.toggle('on', m === 'B');
+  if (m === 'B') { renderCurve(); renderRun(); }
+}
+$('#modeA').addEventListener('click', () => setMode('A')); $('#modeB').addEventListener('click', () => setMode('B'));
+function updateMissions() {
+  const a = Math.min(3, lab.finished.size), b = bst.named.size;
+  $('#m1t').textContent = 'Step by step: finish 3 cases (' + a + ' / 3)'; $('#m2t').textContent = 'Supply curves: name all 5 mystery curves (' + b + ' / 5)';
+  $('#m1').classList.toggle('done', a >= 3); $('#m2').classList.toggle('done', b >= 5);
+  if (a >= 3 && b >= 5) markDone('lab', 't1', 'PES Lab', lab.finished.size + ' cases and 5 curves complete');
+}
+renderCases(); renderStep(); updateMissions();
+
+/* ---------------- TAB 3: SORT ---------------- */
+const CARDS = [
+  ['Thai rubber (this month)', 'I', 'Time: a new tree needs 5–7 years before it can be tapped.'],
+  ['Concert seats at Rajamangala Stadium', 'I', 'Fixed number of seats: close to PES = 0.'],
+  ['Fresh flowers', 'I', 'Take time to grow and die quickly, so no stocks (p. 53).'],
+  ['Organic vegetables', 'I', 'Slow to grow and perishable (p. 53).'],
+  ['Hotel rooms in Phuket (this year)', 'I', 'New hotels take years to build (p. 53).'],
+  ['Ferrari cars', 'I', 'Skilled workers and limited capacity (p. 53).'],
+  ['Bananas', 'I', 'Take months to grow and ripen (p. 55).'],
+  ['Coal', 'I', 'New mines take years to open (p. 55).'],
+  ['Smartphones', 'E', 'Mass-produced; parts and finished phones can be stocked (p. 53).'],
+  ['Water bottles from a factory with idle machines', 'E', 'Spare capacity: switch the machines on.'],
+  ['Computers', 'E', 'Components can be stocked; spare factory capacity (p. 55).'],
+  ['Game app downloads', 'E', 'Copies cost almost nothing to make: perfectly elastic (p. 54).'],
+  ['Printed calendars', 'E', 'Factor substitution: a press can switch from textbooks to calendars (p. 55).'],
+  ['Fresh bread from a bakery', 'E', 'Bakeries can bake more within hours; flour is easy to store (p. 55).'],
+];
+let selChip = null;
+function buildSort() {
+  $('#bank').innerHTML = ''; $$('.bin').forEach((b) => $$('.chip', b).forEach((c) => c.remove()));
+  $('#sortFb').className = 'fb'; $('#sortExplain').innerHTML = '';
+  shuffle(CARDS).forEach(([g, ans, why]) => { const c = document.createElement('div'); c.className = 'chip'; c.dataset.ans = ans; c.dataset.why = why; c.textContent = g; makeDraggable(c); $('#bank').appendChild(c); });
+}
+function clearSel() { if (selChip) selChip.classList.remove('sel'); selChip = null; }
+function dropInto(chip, target) { chip.classList.remove('ok', 'no'); target.appendChild(chip); clearSel(); }
+function makeDraggable(el) {
+  let sx, sy, ghost = null, moved = false, pid = null;
+  el.addEventListener('pointerdown', (e) => { if (e.button && e.button !== 0) return; sx = e.clientX; sy = e.clientY; moved = false; pid = e.pointerId; try { el.setPointerCapture(pid); } catch (_) {} });
+  el.addEventListener('pointermove', (e) => {
+    if (pid !== e.pointerId) return;
+    if (!moved && Math.hypot(e.clientX - sx, e.clientY - sy) > 8) { moved = true; ghost = el.cloneNode(true); ghost.classList.add('ghost'); ghost.style.width = el.offsetWidth + 'px'; document.body.appendChild(ghost); el.style.opacity = '.35'; }
+    if (moved && ghost) {
+      ghost.style.left = (e.clientX - el.offsetWidth / 2) + 'px'; ghost.style.top = (e.clientY - 20) + 'px';
+      $$('.bin').forEach((b) => b.classList.remove('hover'));
+      const t = document.elementFromPoint(e.clientX, e.clientY); const bin = t && t.closest('.bin'); if (bin) bin.classList.add('hover');
+    }
+  });
+  const end = (e) => {
+    if (pid !== e.pointerId) return; pid = null;
+    if (moved) {
+      if (ghost) ghost.remove(); ghost = null; el.style.opacity = '';
+      $$('.bin').forEach((b) => b.classList.remove('hover'));
+      const t = document.elementFromPoint(e.clientX, e.clientY); const bin = t && (t.closest('.bin') || t.closest('#bank'));
+      if (bin) dropInto(el, bin);
+    } else {
+      if (selChip && selChip !== el && el.parentElement.classList.contains('bin')) { dropInto(selChip, el.parentElement); return; }
+      if (selChip === el) { clearSel(); return; }
+      clearSel(); selChip = el; el.classList.add('sel');
+    }
+  };
+  el.addEventListener('pointerup', end);
+  el.addEventListener('pointercancel', () => { if (ghost) ghost.remove(); ghost = null; el.style.opacity = ''; pid = null; });
+  el.addEventListener('click', (e) => e.stopPropagation());
+}
+[...$$('.bin'), $('#bank')].forEach((b) => b.addEventListener('click', () => { if (selChip) dropInto(selChip, b); }));
+$('#sortCheck').onclick = () => {
+  let right = 0, placed = 0; const wrong = [];
+  $$('.bin').forEach((b) => $$('.chip', b).forEach((c) => { placed++; const ok = c.dataset.ans === b.dataset.bin; c.classList.toggle('ok', ok); c.classList.toggle('no', !ok); if (ok) right++; else wrong.push(c); }));
+  const fb = $('#sortFb');
+  if (right === CARDS.length) {
+    fb.className = 'fb show ok'; fb.innerHTML = '<strong>All ' + CARDS.length + ' correct!</strong> Time, spare capacity, stocks, the number of producers and factor substitution decide PES.';
+    $('#sortExplain').innerHTML = CARDS.map(([g, a, w]) => `<li><strong>${g}</strong> (${a === 'I' ? 'inelastic' : 'elastic'}): ${w}</li>`).join('');
+    markDone('sort', 't2', 'Sort it', CARDS.length + '/' + CARDS.length + ' sorted');
+  } else {
+    fb.className = 'fb show ' + (placed < CARDS.length ? 'info' : 'no');
+    fb.innerHTML = `${right} / ${CARDS.length} correct${placed < CARDS.length ? ` – ${CARDS.length - placed} still in the bank` : ''}. Red cards are in the wrong box. Hints:`;
+    $('#sortExplain').innerHTML = wrong.map((c) => `<li><strong>${c.firstChild.textContent}</strong>: ${c.dataset.why}</li>`).join('');
+  }
+};
+$('#sortReset').onclick = buildSort;
+buildSort();
+
+/* ---------------- TAB 4: ORDER ---------------- */
+const STORIES = {
+  A: { name: 'A: The PES method', lines: [
+    'Work out the % change in quantity supplied: (new − old) ÷ old × 100.',
+    'Work out the % change in price in the same way.',
+    'Divide: PES = %Δ quantity supplied ÷ %Δ price.',
+    'Check the answer is positive: price and quantity supplied move together.',
+    'Compare the number with 1: below 1 is inelastic, above 1 is elastic.',
+    'Explain what it means for the seller and give a reason.'] },
+  B: { name: 'B: Rubber over time', lines: [
+    'The world price of rubber rises sharply.',
+    'This week, farmers can only tap the trees they already have.',
+    'So quantity supplied rises by a smaller percentage than price: supply is price inelastic.',
+    'Farmers plant new rubber trees.',
+    'After 5 to 7 years, the new trees can be tapped.',
+    'As a result, supply is more price elastic in the long run, and the price may fall.'] },
+};
+const storyDone = { A: false, B: false };
+let story = 'A', placed = [];
+function buildStoryPick() {
+  $('#storyPick').innerHTML = Object.entries(STORIES).map(([k, v]) => `<button class="case ${k === story ? 'on' : ''}" data-k="${k}">${storyDone[k] ? '✓ ' : ''}${v.name}</button>`).join('');
+  $$('#storyPick .case').forEach((b) => (b.onclick = () => { story = b.dataset.k; buildOrder(); }));
+}
+function buildOrder() {
+  placed = []; buildStoryPick();
+  const Ls = STORIES[story].lines; $('#orderFb').className = 'fb'; $('#pool').innerHTML = '';
+  shuffle(Ls.map((t, i) => [t, i])).forEach(([t, i]) => {
+    const b = document.createElement('button'); b.className = 'pcard'; b.textContent = t; b.dataset.i = i;
+    b.onclick = () => { if (placed.length < Ls.length) { placed.push(i); b.disabled = true; renderSlots(); } };
+    $('#pool').appendChild(b);
+  });
+  renderSlots();
+}
+function renderSlots() {
+  const Ls = STORIES[story].lines;
+  $('#slots').innerHTML = Ls.map((_, k) => `<div class="slot ${placed[k] != null ? 'filled' : ''}" data-k="${k}"><span class="num">${k + 1}</span><span>${placed[k] != null ? Ls[placed[k]] : '<span style="color:#9CA3AF">tap a sentence below…</span>'}</span></div>`).join('');
+  $$('#slots .slot.filled').forEach((s) => (s.onclick = () => { const k = +s.dataset.k; const i = placed[k]; placed.splice(k, 1); const btn = $$('#pool .pcard').find((b) => +b.dataset.i === i); if (btn) btn.disabled = false; renderSlots(); }));
+}
+$('#orderCheck').onclick = () => {
+  const Ls = STORIES[story].lines, fb = $('#orderFb');
+  if (placed.length < Ls.length) { fb.className = 'fb show info'; fb.textContent = 'Place all six sentences first.'; return; }
+  let right = 0; $$('#slots .slot').forEach((s, k) => { const ok = placed[k] === k; s.classList.add(ok ? 'ok' : 'no'); if (ok) right++; });
+  if (right === Ls.length) {
+    storyDone[story] = true; buildStoryPick(); const both = storyDone.A && storyDone.B;
+    fb.className = 'fb show ok'; fb.innerHTML = story === 'A' ? '<strong>Perfect order.</strong> Two percentages, one division, check the sign, compare with 1, explain.' + (both ? '' : ' Now try round B.') : '<strong>Perfect chain.</strong> Short run first (inelastic), then the long run (more elastic). Time is the determinant.' + (both ? '' : ' Now try round A.');
+    if (both) markDone('order', 't3', 'Order it', 'Method and rubber chain correct');
+  } else {
+    fb.className = 'fb show no';
+    fb.innerHTML = `${right} / 6 in the right place. ` + (story === 'A' ? 'You need both percentages <strong>before</strong> you can divide.' : 'Start with the price rise. What can farmers do this week, and what can they do years later?') + ' Tap red lines to send them back.';
+  }
+};
+$('#orderReset').onclick = buildOrder;
+buildOrder();
+
+/* ---------------- TAB 5: QUIZ ---------------- */
+const POOL = [
+  ['What is the formula for price elasticity of supply?', '%Δ quantity supplied ÷ %Δ price', ['%Δ price ÷ %Δ quantity supplied', '%Δ quantity demanded ÷ %Δ price', 'price × quantity supplied'], 'Quantity supplied on top, price below.'],
+  ['The price rises by 10% and quantity supplied rises by 5%. What is PES?', '0.5', ['2', MINUS + '0.5', '15'], '5 ÷ 10 = 0.5.'],
+  ['The price rises by 20% and quantity supplied rises by 40%. Supply is:', 'price elastic', ['price inelastic', 'unitary elastic', 'perfectly inelastic'], '40 ÷ 20 = 2, which is more than 1.'],
+  ['PES is 0.3. Supply is:', 'price inelastic', ['price elastic', 'unitary elastic', 'perfectly elastic'], '0.3 is less than 1: quantity supplied changes by a smaller percentage than price.'],
+  ['Why is PES normally a positive number?', 'price and quantity supplied move in the same direction', ['firms always make a profit', 'price and quantity supplied move in opposite directions', 'supply curves slope downwards'], 'The law of supply: a higher price means a higher quantity supplied.'],
+  ['A price falls from $50 to $40. What is the % change in price?', MINUS + '20%', [MINUS + '25%', MINUS + '10%', '+20%'], '(40 − 50) ÷ 50 × 100 = −20%. Divide by the original.'],
+  ['What does a perfectly price inelastic supply curve look like?', 'a vertical straight line', ['a horizontal straight line', 'a straight line from the origin', 'a flat line starting on the price axis'], 'Quantity supplied cannot change at any price: PES = 0.'],
+  ['A horizontal supply curve has a PES of:', 'infinity', ['0', '1', '0.5'], 'Perfectly elastic: quantity supplied can change with no change in price.'],
+  ['Which supply curve has a PES of 1?', 'any straight line that starts at the origin', ['only a line at 45°', 'a vertical line', 'a line that starts on the quantity axis'], 'Any straight line from O has unitary elasticity (p. 53). It does not need to be at 45°.'],
+  ['Which product is likely to have the MOST price inelastic supply?', 'seats at Rajamangala Stadium for one concert', ['smartphones', 'game app downloads', 'printed calendars'], 'The number of seats is fixed tonight: PES is close to 0.'],
+  ['Which factor makes supply MORE price elastic?', 'lots of spare capacity', ['no stocks of finished goods', 'very few firms in the industry', 'products that cannot be stored'], 'Idle machines and workers can raise output quickly.'],
+  ['Why is the supply of Thai rubber price inelastic in the short run?', 'new trees take 5–7 years before they can be tapped', ['demand for rubber is low', 'rubber is a luxury product', 'there are too many rubber farmers'], 'Time period: farmers can only tap the trees they already have.'],
+  ['Over a longer period of time, supply tends to become:', 'more price elastic', ['more price inelastic', 'perfectly inelastic', 'unitary'], 'In the long run firms can change all factors of production.'],
+  ['In Chapter 11, "stocks" means:', 'raw materials, components and finished goods held by a firm', ['shares in a company', 'money saved in a bank', 'the number of firms in an industry'], 'Stocks = inventories (p. 54).'],
+  ['A printing press can switch quickly from textbooks to calendars. This is an example of:', 'ease of factor substitution', ['spare capacity', 'the number of producers', 'price elasticity of demand'], 'Capital is occupationally mobile, so supply is more elastic (p. 55).'],
+  ['Why is the supply of fresh flowers price inelastic?', 'they take time to grow and cannot be stored', ['people buy them for festivals', 'they are cheap to produce', 'there are many flower sellers'], 'Time and stocks: no stockpile can be held.'],
+  ['Many people want Angry Birds but the price stays at $0.99. Supply is:', 'perfectly elastic', ['perfectly inelastic', 'price inelastic', 'unitary elastic'], 'Extra downloads cost almost nothing to supply: PES = ∞ (p. 54).'],
+  ['Compared with a steep supply curve, a flatter supply curve (through the price axis) is:', 'more price elastic', ['more price inelastic', 'perfectly inelastic', 'unitary elastic'], 'The same price rise moves quantity supplied by more.'],
+  ['The price of eggs falls by 10% and quantity supplied falls by 4%. PES is:', '0.4', [MINUS + '0.4', '2.5', '14'], '(−4) ÷ (−10) = +0.4. Inelastic.'],
+  ['Which of these is NOT a determinant of PES?', 'the availability of substitutes for buyers', ['spare capacity', 'the time period', 'the level of stocks'], 'Substitutes for buyers are a determinant of PED, not PES.'],
+];
+let quiz = null;
+function startQuiz() { quiz = { qs: shuffle(POOL).slice(0, 10), i: 0, score: 0, answered: false }; renderQ(); }
+function renderQ() {
+  const card = $('#quizCard');
+  if (quiz.i >= quiz.qs.length) {
+    card.innerHTML = `<h2>Quick quiz – done</h2><div class="score">${quiz.score} / 10</div><p class="lead">${quiz.score >= 8 ? 'Excellent: you can calculate PES and explain what it means.' : quiz.score >= 5 ? 'Good start. Run two PES Lab cases again, then retry.' : 'Go back to the PES Lab (step by step) and then try again.'}</p><button class="btn primary" id="again">Try 10 new questions</button>`;
+    $('#again').onclick = startQuiz; markDone('quiz', 't4', 'Quick quiz', 'Score ' + quiz.score + '/10'); return;
+  }
+  const [stem, right, wrongs, why] = quiz.qs[quiz.i];
+  const opts = shuffle([right, ...wrongs]);
+  card.innerHTML = `<div class="row" style="justify-content:space-between"><h2>Quick quiz</h2><span class="badge b-int">Question ${quiz.i + 1} / 10 · Score ${quiz.score}</span></div>
+    <p style="font-weight:700;font-size:17px">${stem}</p>
+    ${opts.map((o, k) => `<button class="opt" data-t="${encodeURIComponent(o)}"><span class="k">${'ABCD'[k]}</span>${o}</button>`).join('')}
+    <div class="fb" id="qFb2"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="qNext" disabled>Next ▶</button></div>`;
+  quiz.answered = false;
+  $$('.opt', card).forEach((b) => (b.onclick = () => {
+    if (quiz.answered) return; quiz.answered = true;
+    const t = decodeURIComponent(b.dataset.t), ok = t === right; if (ok) quiz.score++;
+    $$('.opt', card).forEach((x) => { const xt = decodeURIComponent(x.dataset.t); if (xt === right) x.classList.add('ok'); else if (x === b) x.classList.add('no'); x.disabled = true; });
+    const fb = $('#qFb2'); fb.className = 'fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = `<strong>${ok ? 'Correct.' : 'Not quite.'}</strong> ${why}`;
+    $('#qNext').disabled = false;
+  }));
+  $('#qNext').onclick = () => { quiz.i++; renderQ(); };
+}
+startQuiz();
+</script>
+</body>
+</html>
