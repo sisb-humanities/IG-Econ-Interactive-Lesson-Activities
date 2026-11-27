@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.1 Living Standards · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+/* ---- 4.5 / 4.6 additions ---- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{border-radius:10px;padding:9px 12px;background:var(--ltblue)}
+.tile.o{background:var(--ltorange)}
+.tile > b{display:block;color:var(--navy);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:21px;font-weight:900;color:var(--ink)}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.meter{height:7px;background:rgba(0,47,108,.12);border-radius:4px;margin-top:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.pol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pol{grid-template-columns:1fr}}
+.pc{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:left;font:400 14px Lato,sans-serif;color:var(--ink);position:relative}
+.pc:hover{border-color:var(--blue)}
+.pc.sel{border-color:var(--orange);background:#FFFBF5}
+.pc:disabled{opacity:.45;cursor:not-allowed}
+.pc .nm{display:block;font-weight:900;color:var(--navy);font-size:15px;padding-right:70px;margin-bottom:4px}
+.pc .cost{position:absolute;right:11px;top:11px;font-weight:900;color:var(--dkorange);font-size:14px}
+.pc .d{display:block;margin:6px 0 4px}
+.pc .lag{display:block;color:var(--muted);font-size:13px}
+.pc .w{display:block;color:var(--bad);font-size:13px}
+.pill.g{background:var(--goodbg);color:var(--good)}
+.budget{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:14px}
+@media (max-width:700px){.budget{grid-template-columns:1fr}}
+.aim{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.aim:first-child{border-top:0}
+.light{flex:0 0 14px;height:14px;border-radius:50%;margin-top:4px}
+.light.g{background:var(--good)}.light.a{background:#E0A526}.light.r{background:var(--bad)}
+textarea{width:100%;min-height:100px;font:400 15px Lato,sans-serif;border:2px solid var(--line);border-radius:10px;padding:10px}
+.scrollx{overflow-x:auto}
+@media (max-width:700px){.scrollx svg{min-width:640px}}
+@media print{header,footer,.noprint{display:none!important}body{background:#fff}.card{break-inside:avoid}}
+.pill.g{background:var(--goodbg);color:var(--good)}
+#hdSeg button{padding:8px 11px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 5 · SISB Nonthaburi</div>
+    <h1>5.1 Living Standards</h1>
+    <div class="sub">Textbook Chapter 29, pp. 382–392 · Measure living standards, test the measures, and explain why some people and places are better off than others</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two puzzles</h2>
+  <p class="lead">Both puzzles use real figures. Answer the two questions under each one.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Puzzle 1 · Thailand, 2023</span>
+      <h3 style="margin-top:8px">One country, two worlds?</h3>
+      <p>In 2023 the value of output per person in <b>Bangkok</b> was about <b>676,000 baht</b>. In the <b>Northeast (Isan)</b> it was about <b>99,000 baht</b>. The average for the whole of Thailand was <b>256,345 baht</b>.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Puzzle 2 · Viet Nam and Indonesia, 2023</span>
+      <h3 style="margin-top:8px">Similar incomes, different lives</h3>
+      <p>Income per head in <b>Indonesia</b> was <b>$13,700</b>; in <b>Viet Nam</b> it was <b>$13,033</b>. But people in Viet Nam live <b>74.6</b> years on average (Indonesia: <b>71.1</b>), and children can expect <b>15.5</b> years of school (Indonesia: <b>13.3</b>).</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what do the puzzles show?</h3>
+    <div class="scrollx"><div class="chartbox" id="hookChart"></div></div>
+    <p class="muted" style="margin:4px 0 0">Gross provincial product (output) per person by region, 2023, thousand baht. Source: NESDC, Statistical Yearbook Thailand 2025.</p>
+    <div class="grid2" style="margin-top:12px">
+      <p style="margin:0"><b>Puzzle 1:</b> an <b>average</b> such as GDP per head hides big differences between regions and between people. The Thai average is far below Bangkok and far above the Northeast.</p>
+      <p style="margin:0"><b>Puzzle 2:</b> income is not everything. The <b>Human Development Index (HDI)</b> adds health and education: Viet Nam scores <b>0.766</b>, Indonesia <b>0.728</b>.</p>
+    </div>
+    <h3 style="margin-top:16px">Why is it useful to know about this?</h3>
+    <div class="missions">
+      <div class="mission done"><span class="t">Your future</span>Where will you study, work and live? Comparing living standards helps you judge the choices.</div>
+      <div class="mission done"><span class="t">Your country</span>Thailand is 76th of 193 countries on the HDI, just below “very high”. What would move it up?</div>
+      <div class="mission done"><span class="t">Fairness</span>Why is Bangkok so far ahead of Isan? You need this to judge handouts, taxes and spending on regions.</div>
+      <div class="mission done"><span class="t">Your exam</span>GDP per head calculations, the HDI and “Is GDP per head the best measure?” questions come up often.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: PER HEAD LAB ============ -->
+<section class="panel" id="p1">
+  <h2>Per head lab: real GDP per head</h2>
+  <p class="lead"><b>Real GDP per head</b> = real GDP ÷ population. “Real” means the effect of inflation has been removed. Start with Thailand in 2025, move the sliders for next year, and complete the four missions.</p>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="chartbox" id="phChart"></div>
+      <div class="readout">
+        <div class="ro"><b>Real GDP per head next year</b><span id="roPH"></span></div>
+        <div class="ro o"><b>Change in real GDP per head</b><span id="roPHc"></span></div>
+      </div>
+      <div id="phVerd"></div>
+    </div>
+    <div class="card">
+      <div class="sl"><div class="top"><b>Real GDP growth</b><span class="val" id="vG"></span></div><input type="range" id="sG" min="-5" max="8" step="0.1" value="0" aria-label="Real GDP growth"></div>
+      <div class="sl"><div class="top"><b>Population growth</b><span class="val" id="vN"></span></div><input type="range" id="sN" min="-3" max="8" step="0.1" value="0" aria-label="Population growth"></div>
+      <div class="sl"><div class="top"><b>Inflation</b><span class="val" id="vP"></span></div><input type="range" id="sP" min="-2" max="10" step="0.5" value="0" aria-label="Inflation"></div>
+      <div class="chain" id="phWork"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Missions: can you make these happen?</h3>
+    <div class="missions" id="phMissions"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: HDI BUILDER ============ -->
+<section class="panel" id="p2">
+  <h2>HDI builder</h2>
+  <p class="lead">The HDI combines three things: a <b>long and healthy life</b> (life expectancy), <b>education</b> (expected and mean years of schooling) and <b>income</b> (income per head). It goes from 0 to 1. Choose a country, then change its figures.</p>
+  <div class="card">
+    <b>Start from</b>&nbsp; <div class="seg" id="hdSeg" style="margin-top:6px"></div>
+  </div>
+  <div class="grid-lab">
+    <div class="card">
+      <div class="flex" style="justify-content:space-between;align-items:flex-end">
+        <div><span class="muted">Human Development Index</span><div id="hdVal" style="font-size:44px;font-weight:900;line-height:1.05"></div></div>
+        <span class="pill" id="hdCat" style="font-size:14px;padding:6px 12px"></span>
+      </div>
+      <div id="hdDims" style="margin-top:12px"></div>
+      <div id="hdNote"></div>
+    </div>
+    <div class="card">
+      <div class="sl"><div class="top"><b>Life expectancy at birth</b><span class="val" id="vLE"></span></div><input type="range" id="sLE" min="50" max="85" step="0.1" aria-label="Life expectancy"></div>
+      <div class="sl"><div class="top"><b>Expected years of schooling</b><span class="val" id="vEY"></span></div><input type="range" id="sEY" min="5" max="20" step="0.1" aria-label="Expected years of schooling"></div>
+      <div class="sl"><div class="top"><b>Mean years of schooling (adults)</b><span class="val" id="vMY"></span></div><input type="range" id="sMY" min="2" max="15" step="0.1" aria-label="Mean years of schooling"></div>
+      <div class="sl"><div class="top"><b>Income per head (PPP $)</b><span class="val" id="vGN"></span></div><input type="range" id="sGN" min="0" max="100" step="0.1" aria-label="Income per head"></div>
+      <p class="muted" style="margin:0">You do not need the HDI formula for the exam. Notice what happens to the income bar when a rich country gets richer.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Missions</h3>
+    <div class="missions" id="hdMissions" style="grid-template-columns:repeat(3,1fr)"></div>
+  </div>
+  <div class="card">
+    <h3>ASEAN: income rank or HDI rank?</h3>
+    <div class="scrollx"><table class="sched" id="hdTable"></table></div>
+    <p class="muted">Ranks out of 193 countries, 2023 data. Income = gross national income per head at purchasing power parity (PPP), so it allows for prices being lower in some countries. Source: UNDP, Human Development Report 2025.</p>
+    <div id="hdQ"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 4: BEYOND GDP ============ -->
+<section class="panel" id="p3">
+  <h2>Beyond GDP: is it the whole story?</h2>
+  <p class="lead">Ten cases. First decide what happens to <b>real GDP per head</b>. Then decide whether it gives a <b>fair picture</b> of what happens to most people’s living standards, or whether it is <b>misleading</b>, and why.</p>
+  <div class="card" id="bgCard">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="bgNum"></span><span class="score" id="bgScore"></span></div>
+    <p class="qtext" id="bgEvent"></p>
+    <div><b>Step 1: what happens to real GDP per head?</b><div class="opts" id="bgO1"></div></div>
+    <div id="bgStep2" class="hide"><b>Step 2: is real GDP per head a fair guide to living standards here?</b><div class="opts" style="flex-direction:column" id="bgO2"></div></div>
+    <div id="bgFb"></div>
+    <button class="btn hide" id="bgNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Why real GDP per head can mislead</h3>
+    <table class="sched"><tr><th>Problem</th><th>What it means</th><th>Thai example</th></tr>
+      <tr><td class="l"><b>It is an average</b></td><td class="l">Extra income may go to a few people; many get nothing extra</td><td class="l">Bangkok output per person is almost 7 times the Northeast’s</td></tr>
+      <tr><td class="l"><b>Not all output makes life better</b></td><td class="l">Spending on pollution, crime or illness raises GDP but people are not better off</td><td class="l">Air purifiers, masks and asthma treatment in the PM2.5 season</td></tr>
+      <tr><td class="l"><b>Unrecorded output</b></td><td class="l">Informal (undeclared) work and unpaid work at home are missed, so GDP may <b>understate</b> living standards</td><td class="l">52.7% of Thai workers were informal in 2024</td></tr>
+      <tr><td class="l"><b>Leisure and working conditions</b></td><td class="l">Output may rise because people work longer or in worse conditions</td><td class="l">12-hour shifts to meet export orders</td></tr>
+      <tr><td class="l"><b>Quality</b></td><td class="l">Better quality at the same price is not shown, so GDP may understate gains</td><td class="l">A phone at the same price with a much better camera</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ TAB 5: GAP EXPLORER ============ -->
+<section class="panel" id="p4">
+  <h2>Gap explorer: why are some better off?</h2>
+  <p class="lead">Three parts: how unequal is income, why do two households have different incomes, and why comparing countries in dollars can trick you.</p>
+  <div class="card">
+    <h3>Part A · Who gets the income?</h3>
+    <div class="scrollx"><div class="chartbox" id="gaChart"></div></div>
+    <div class="legend"><span><i style="background:var(--blue);height:10px"></i>Share of income received by the poorest 40% of people</span><span><i style="background:var(--orange);height:10px"></i>Share received by the richest 10%</span></div>
+    <p class="muted">Source: UNDP, Human Development Report 2025, Table 3 (latest survey for each country). If income were shared equally, the poorest 40% would get 40% and the richest 10% would get 10%.</p>
+    <div id="gaQ"></div>
+  </div>
+  <div class="card">
+    <h3>Part B · Two households, two incomes</h3>
+    <p class="muted" style="margin-top:0">Coursebook p. 390. Choose the main reason for each difference.</p>
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="gbNum"></span><span class="score" id="gbScore"></span></div>
+    <p class="qtext" id="gbEvent"></p>
+    <div class="opts" style="flex-direction:column" id="gbO"></div>
+    <div id="gbFb"></div>
+    <button class="btn hide" id="gbNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Part C · The exchange-rate trap</h3>
+    <p>To compare countries, GDP is changed into one currency, usually US dollars. Thailand’s GDP was <b>18.97 trillion baht</b> in 2025. Move the exchange rate and watch the value in dollars.</p>
+    <div class="grid-lab">
+      <div>
+        <div class="sl"><div class="top"><b>Exchange rate (baht per US$)</b><span class="val" id="vX"></span></div><input type="range" id="sX" min="28" max="40" step="0.1" value="32.9" aria-label="Exchange rate"></div>
+        <div class="readout"><div class="ro"><b>Thai GDP in US$</b><span id="roX"></span></div><div class="ro o"><b>Thai output</b><span>18.97 trillion baht (unchanged)</span></div></div>
+      </div>
+      <div class="chain"><b>Real data</b><ol><li>2024: GDP 18.68 trillion baht = <b>$529 billion</b> (about 35.3 baht per $)</li><li>2025: GDP 18.97 trillion baht = <b>$577 billion</b> (about 32.9 baht per $)</li><li>Real GDP (output) grew by <b>2.4%</b>.</li></ol></div>
+    </div>
+    <div id="gcQ"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse why living standards may be higher in Bangkok than in the Northeast of Thailand. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 5.1 Living Standards · Figures from NESDC and the National Statistical Office of Thailand (2023–2025) and UNDP Human Development Report 2025 (2023 data). The HDI builder uses the UNDP method; results can differ from published values by 0.001 because of rounding.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',DKOR='#C25E00',BAD='#B3264E',GOOD='#1E7B34',GREY='#6B7280',PURPLE='#5B2C9A';
+const $=id=>document.getElementById(id);
+const fmt=(x,d=1)=>(x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const sgn=(x,d=1)=>(x>1e-9?'+':x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const th=n=>Math.round(n).toLocaleString('en-US');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- tracker ---------- */
+// One row per activity: the activity name is part of the label, so the tracker does not merge them.
+function track(activity,detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('5.1','5.1 Living Standards · '+activity,detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','Per head lab','HDI builder','Beyond GDP','Gap explorer','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(TABS[i],detail);if(done.size===6)track('All activities','All 6 activities complete');}
+show(0);
+
+/* ---------- bar chart (site style) ---------- */
+function bars(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?560:720),H=cfg.H||(vw<600?280:300),L=62,R=14,T=24,B=cfg.xLabel?52:36;
+  const vals=cfg.values;let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(cfg.min!==undefined)lo=Math.min(lo,cfg.min);if(cfg.max!==undefined)hi=Math.max(hi,cfg.max);const pad=(hi-lo)*.12||1;
+  const step=cfg.yStep||((hi-lo)>12?4:(hi-lo)>6?2:(hi-lo)>2.5?1:0.5);
+  lo=Math.floor((lo-(lo<0?pad:0))/step)*step;hi=Math.ceil((hi+pad)/step)*step;
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B),n=vals.length,slot=(W-L-R)/n,bw=Math.min(cfg.bw||54,slot*.6),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Bar chart'}">`;
+  for(let v=lo;v<=hi+1e-9;v+=step){s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${Math.abs(v)<1e-9?NAVY:'#EEF2F7'}" stroke-width="${Math.abs(v)<1e-9?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${cfg.yFmt?cfg.yFmt(v):fmt(v,step<1?1:0)}</text>`;}
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  if(cfg.refLine!==undefined)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(cfg.refLine)}" y2="${Y(cfg.refLine)}" stroke="${ORANGE}" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-R-4}" y="${Y(cfg.refLine)-6}" text-anchor="end" font-size="12" font-weight="900" fill="${DKOR}">${cfg.refText||''}</text>`;
+  vals.forEach((v,i)=>{const c=cfg.colors?cfg.colors[i]:(v<0?ORANGE:NAVY);
+    s+=`<rect x="${X(i)-bw/2}" y="${Math.min(Y(0),Y(v))}" width="${bw}" height="${Math.max(1.5,Math.abs(Y(v)-Y(0)))}" rx="2" fill="${c}"/>`;
+    if(cfg.showVals!==false)s+=`<text x="${X(i)}" y="${v>=0?Y(v)-6:Y(v)+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${c}">${cfg.valFmt?cfg.valFmt(v):sgn(v)}</text>`;
+    s+=`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.labels[i]}</text>`;});
+  if(cfg.xLabel)s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* grouped bars: cfg {labels, a:[], b:[], yLabel, max, hl} */
+function bars2(el,cfg){
+  const W=760,H=300,L=58,R=14,T=24,B=40,hi=cfg.max,step=10;
+  const Y=v=>T+(hi-v)/hi*(H-T-B),n=cfg.labels.length,slot=(W-L-R)/n,bw=Math.min(34,slot*.32),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Grouped bar chart'}">`;
+  for(let v=0;v<=hi;v+=step)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0?NAVY:'#EEF2F7'}" stroke-width="${v===0?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${v}%</text>`;
+  cfg.labels.forEach((l,i)=>{
+    if(cfg.hl===i)s+=`<rect x="${X(i)-slot/2+4}" y="${T-6}" width="${slot-8}" height="${H-B-T+30}" rx="8" fill="#FFF1E0"/>`;
+    [[cfg.a[i],BLUE,-1],[cfg.b[i],ORANGE,1]].forEach(([v,c,d])=>{const x=X(i)+d*(bw/2+2);
+      s+=`<rect x="${x-bw/2}" y="${Y(v)}" width="${bw}" height="${Y(0)-Y(v)}" rx="2" fill="${c}"/><text x="${x}" y="${Y(v)-6}" text-anchor="middle" font-size="12" font-weight="900" fill="${c===ORANGE?DKOR:NAVY}">${v.toFixed(1)}</text>`;});
+    s+=`<text x="${X(i)}" y="${H-B+20}" text-anchor="middle" font-size="12.5" font-weight="${cfg.hl===i?900:400}" fill="${cfg.hl===i?NAVY:GREY}">${l}</text>`;});
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* two-step question helper: el, list of {q,o,a} then fb, onDone */
+function quizBlock(el,qs,fb,onDone){
+  el.innerHTML=qs.map((q,k)=>`<div class="${k?'hide':''}" data-w="${k}"><p><b>${k+1}. ${q.q}</b></p><div class="opts" data-s="${k}"></div></div>`).join('')+'<div data-fb></div>';
+  qs.forEach((q,k)=>{const o=el.querySelector(`[data-s="${k}"]`);
+    q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+      o.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===q.a?'ok':'no');if(i!==q.a)o.children[q.a].classList.add('ok');
+      if(q.why)el.querySelector(`[data-w="${k}"]`).insertAdjacentHTML('beforeend',`<div class="fb ${i===q.a?'ok':'no'}" style="margin-bottom:8px">${q.why}</div>`);
+      const nx=el.querySelector(`[data-w="${k+1}"]`);if(nx)nx.classList.remove('hide');
+      else{if(fb)el.querySelector('[data-fb]').innerHTML=`<div class="fb info">${fb}</div>`;onDone&&onDone();}};o.appendChild(b);});});
+}
+
+/* ================= TAB 1: THINK FIRST ================= */
+const hookDone=[0,0];
+quizBlock($('s1'),[
+  {q:'About how many times bigger was output per person in Bangkok than in the Northeast?',o:['About 2 times','About 7 times','About 20 times'],a:1},
+  {q:'Does the Thai average (256,345 baht) describe the living standards of most Thais?',o:['Yes: an average describes everyone','No: an average hides big differences between regions and people','Yes: it includes health and education']}].map(q=>Object.assign({a:1},q)),
+  '676,000 ÷ 99,000 ≈ <b>6.8</b>. GDP per head is an <b>average</b>: it tells us nothing about how output and income are shared. A family in Yasothon and a family in Bangkok can have very different living standards.',
+  ()=>{hookDone[0]=1;hookCheck();});
+quizBlock($('s2'),[
+  {q:'Which country has the higher income per head?',o:['Viet Nam','Indonesia','They are exactly the same'],a:1},
+  {q:'Viet Nam scores higher on the Human Development Index. What best explains this?',o:['Its people live longer and get more years of schooling','It has more people','The HDI only measures income'],a:0}],
+  'The <b>HDI</b> measures income <b>and</b> health (life expectancy) <b>and</b> education (years of schooling). Viet Nam’s health and education results more than make up for its slightly lower income.',
+  ()=>{hookDone[1]=1;hookCheck();});
+function hookCheck(){if(hookDone[0]&&hookDone[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two puzzles');}}
+const REG=[['Bangkok',676],['East',497],['Central',278],['Thailand',256],['South',147],['North',125],['Northeast',99]];
+function drawHook(){bars($('hookChart'),{labels:REG.map(r=>r[0]),values:REG.map(r=>r[1]),colors:REG.map(r=>r[0]==='Thailand'?ORANGE:r[0]==='Northeast'?BLUE:NAVY),W:760,H:300,yStep:100,yLabel:'Thousand baht per person',valFmt:v=>th(v),aria:'Output per person by region of Thailand, 2023'});}
+
+/* ================= TAB 2: PER HEAD LAB ================= */
+const GDP0=18.97,POP0=65.8,PH0=GDP0*1e12/(POP0*1e6);
+const ph={g:0,n:0,p:0};
+const phDone=new Set();
+const near=(a,b)=>Math.abs(a-b)<0.05;
+function phCalc(){const real=GDP0*(1+ph.g/100),nom=real*(1+ph.p/100),pop=POP0*(1+ph.n/100),phv=real*1e12/(pop*1e6),phc=(phv/PH0-1)*100,nomph=nom*1e12/(pop*1e6),nomc=(nomph/PH0-1)*100,nomg=(nom/GDP0-1)*100;return{real,nom,pop,phv,phc,nomph,nomc,nomg};}
+const PHM=[
+  {t:'Thailand 2025',d:'Set real GDP growth to 2.4% and population to −0.2% (what happened in 2025). Real GDP per head grows faster than GDP.',ok:c=>near(ph.g,2.4)&&near(ph.n,-0.2)},
+  {t:'Bigger, but poorer',d:'Real GDP rises, but real GDP per head falls.',ok:c=>ph.g>0&&c.phc<-0.005},
+  {t:'Money illusion',d:'GDP in money terms (nominal) rises by 5% or more, but real GDP per head falls.',ok:c=>c.nomg>=5-1e-9&&c.phc<-0.005},
+  {t:'Coursebook p. 392, Q3',d:'Real GDP rises 5% and the population rises 8%. What happens to living standards?',ok:c=>near(ph.g,5)&&near(ph.n,8)},
+];
+$('phMissions').innerHTML=PHM.map((m,i)=>`<div class="mission" id="pm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+[['sG','g'],['sN','n'],['sP','p']].forEach(([id,k])=>$(id).addEventListener('input',e=>{ph[k]=+e.target.value;phRender();}));
+function phRender(){
+  const c=phCalc();
+  $('vG').textContent=sgn(ph.g)+'%';$('vN').textContent=sgn(ph.n)+'%';$('vP').textContent=sgn(ph.p)+'%';
+  bars($('phChart'),{values:[c.nomg,ph.g,ph.n,c.phc],labels:['Nominal GDP','Real GDP','Population','Real GDP per head'],colors:[GREY,NAVY,BLUE,c.phc<0?ORANGE:GOOD],W:560,H:320,yLabel:'% change on this year',min:-4,max:6,yStep:2,valFmt:v=>sgn(v,1)+'%',aria:'Percentage changes'});
+  $('roPH').textContent=th(c.phv)+' baht';$('roPHc').textContent=sgn(c.phc,2)+'%';
+  $('phWork').innerHTML=`<b>Working</b><ol><li>This year: ${GDP0.toFixed(2)} trillion baht ÷ ${POP0} million people = <b>${th(PH0)} baht</b> per head.</li><li>Real GDP next year: ${GDP0.toFixed(2)} × ${(1+ph.g/100).toFixed(3)} = <b>${c.real.toFixed(2)} trillion baht</b>.</li><li>Population next year: ${POP0} × ${(1+ph.n/100).toFixed(3)} = <b>${c.pop.toFixed(2)} million</b>.</li><li>Real GDP per head: ${c.real.toFixed(2)} trillion ÷ ${c.pop.toFixed(2)} million = <b>${th(c.phv)} baht</b> (${sgn(c.phc,2)}%).</li><li>Nominal GDP also includes inflation: ${c.real.toFixed(2)} × ${(1+ph.p/100).toFixed(3)} = ${c.nom.toFixed(2)} trillion (${sgn(c.nomg,1)}%).</li></ol>`;
+  const v=c.phc>0.005?`Real GDP per head <b>rose</b>: on average each person has more goods and services, so living standards are likely to rise.`:c.phc<-0.005?`Real GDP per head <b>fell</b>: ${ph.n>ph.g?'output grew more slowly than the population, so there is less for each person.':'there are fewer goods and services for each person.'}`:'Real GDP per head is <b>unchanged</b>.';
+  const quick=`Quick check: ${sgn(ph.g)}% − (${sgn(ph.n)}%) ≈ <b>${sgn(ph.g-ph.n)}%</b>.`;
+  $('phVerd').innerHTML=`<div class="fb ${c.phc<-0.005?'no':'info'}">${v} ${quick}${ph.p?` Inflation of ${sgn(ph.p)}% changes nominal GDP but <b>not</b> real GDP.`:''}</div>`;
+  PHM.forEach((m,i)=>{if(!phDone.has(i)&&m.ok(c)){phDone.add(i);$('pm'+i).classList.add('done');if(i===3)$('pm3').insertAdjacentHTML('beforeend','<br><b>Answer: they fall</b> (C in Q3).');}});
+  if(phDone.size===PHM.length)complete(1,'Per head lab missions');
+}
+phRender();
+
+/* ================= TAB 3: HDI BUILDER ================= */
+// [name, LE, EYS, MYS, GNI pc PPP$, HDI, HDI rank, GNI rank minus HDI rank]
+const HC={
+  TH:['Thailand',76.4,15.4,9.0,20570,0.798,76,1],VN:['Viet Nam',74.6,15.5,9.0,13033,0.766,93,14],ID:['Indonesia',71.1,13.3,8.7,13700,0.728,113,-8],
+  MY:['Malaysia',76.7,12.7,11.1,32553,0.819,67,-13],BN:['Brunei',75.3,13.7,9.3,75827,0.837,60,-51],PH:['Philippines',69.8,12.8,10.0,10731,0.720,117,0],
+  KH:['Cambodia',70.7,11.2,5.2,4931,0.606,151,1],SG:['Singapore',83.7,16.7,12.0,111239,0.946,13,-10],
+};
+const ASEAN=['SG','BN','MY','TH','VN','ID','PH','KH'];
+const EXTRA=[['Lao PDR',8106,0.617,147,-18],['Myanmar',4919,0.609,150,3]];
+const gniFromS=s=>1000*Math.pow(120,s/100),sFromGni=g=>100*Math.log(g/1000)/Math.log(120);
+let hd={c:'TH',le:0,ey:0,my:0,gn:0},touched={};
+function hdiOf(le,ey,my,gn){const H=Math.max(0,Math.min(1,(le-20)/65)),E=(Math.min(ey,18)/18+Math.min(my,15)/15)/2,I=Math.max(0,Math.min(1,(Math.log(Math.min(gn,75000))-Math.log(100))/(Math.log(75000)-Math.log(100))));return{H,E,I,v:Math.cbrt(H*E*I)};}
+const cat=v=>v>=0.8?['Very high','g']:v>=0.7?['High','']:v>=0.55?['Medium','o']:['Low','o'];
+function setCountry(k){const c=HC[k];hd={c:k,le:c[1],ey:c[2],my:c[3],gn:c[4]};touched={};
+  $('sLE').value=c[1];$('sEY').value=c[2];$('sMY').value=c[3];$('sGN').value=sFromGni(c[4]);hdRender();}
+$('hdSeg').innerHTML=ASEAN.map(k=>`<button data-k="${k}">${HC[k][0]}</button>`).join('');
+$('hdSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>setCountry(b.dataset.k));
+[['sLE','le'],['sEY','ey'],['sMY','my']].forEach(([id,k])=>$(id).addEventListener('input',e=>{hd[k]=+e.target.value;touched[k]=1;hdRender();}));
+$('sGN').addEventListener('input',e=>{const g=gniFromS(+e.target.value);hd.gn=g<20000?Math.round(g/10)*10:Math.round(g/100)*100;touched.gn=1;hdRender();});
+const hdDone=new Set();
+const HDM=[
+  {t:'Back to “very high”',d:'Start from Thailand. Reach 0.800 or more <b>without</b> changing income per head.',ok:r=>hd.c==='TH'&&!touched.gn&&r.v>=0.8},
+  {t:'Overtake Malaysia',d:'Start from Viet Nam. Beat Malaysia’s 0.819 <b>without</b> changing income per head.',ok:r=>hd.c==='VN'&&!touched.gn&&r.v>0.819},
+  {t:'Money is not everything',d:'Start from Cambodia. Give it Thailand’s income (about $20,600) but keep health and education the same. Is its HDI as high as Thailand’s?',ok:r=>hd.c==='KH'&&hd.gn>=20000&&!touched.le&&!touched.ey&&!touched.my},
+];
+$('hdMissions').innerHTML=HDM.map((m,i)=>`<div class="mission" id="hm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+let hdQdone=false;
+function hdRender(){
+  const r=hdiOf(hd.le,hd.ey,hd.my,hd.gn),any=Object.keys(touched).length>0,C=HC[hd.c],val=any?r.v:C[5],[cn,cc]=cat(val);
+  $('hdSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===hd.c));
+  $('vLE').textContent=hd.le.toFixed(1)+' years';$('vEY').textContent=hd.ey.toFixed(1)+' years';$('vMY').textContent=hd.my.toFixed(1)+' years';$('vGN').textContent='$'+th(hd.gn);
+  $('hdVal').textContent=val.toFixed(3);$('hdVal').style.color=val>=0.8?GOOD:NAVY;
+  $('hdCat').textContent=cn+' human development';$('hdCat').className='pill '+cc;
+  const dims=[['Health: a long and healthy life',r.H,GOOD],['Education: years of schooling',r.E,BLUE],['Income: income per head',r.I,ORANGE]];
+  $('hdDims').innerHTML=dims.map(([n,v,c])=>`<div style="margin:8px 0"><div class="flex" style="justify-content:space-between"><b style="color:${NAVY}">${n}</b><span class="num" style="font-weight:900">${v.toFixed(3)}</span></div><div class="meter" style="height:12px"><i style="width:${(v*100).toFixed(1)}%;background:${c}"></i></div></div>`).join('');
+  let note=any?`<b>Changed from ${C[0]}’s real figures</b> (real HDI: ${C[5].toFixed(3)}, rank ${C[6]} of 193).`:`<b>${C[0]}, 2023:</b> HDI rank ${C[6]} of 193.`;
+  if(hd.gn>75000)note+=' Income above $75,000 adds nothing more: the income bar is already full. Each extra dollar adds less and less to the HDI.';
+  else if(touched.gn&&!touched.le&&!touched.ey&&!touched.my)note+=' Only income changed: notice how slowly the income bar moves as income rises.';
+  $('hdNote').innerHTML=`<div class="fb info">${note}</div>`;
+  HDM.forEach((m,i)=>{if(!hdDone.has(i)&&m.ok(r)){hdDone.add(i);$('hm'+i).classList.add('done');
+    if(i===2)$('hm2').insertAdjacentHTML('beforeend',`<br><b>No: about ${r.v.toFixed(3)}</b>, still well below Thailand’s 0.798. Health and education matter too.`);}});
+  hdCheck();
+}
+function hdCheck(){if(hdDone.size===HDM.length&&hdQdone)complete(2,'HDI builder: missions and ranks');}
+// ASEAN table
+(function(){
+  const rows=ASEAN.map(k=>{const c=HC[k];return[c[0],c[4],c[5],c[6],c[7]];}).concat(EXTRA.map(e=>[e[0],e[1],e[2],e[3],e[4]])).sort((a,b)=>a[3]-b[3]);
+  $('hdTable').innerHTML='<tr><th>Country</th><th>Income per head (PPP $)</th><th>HDI</th><th>HDI rank</th><th>Income rank minus HDI rank</th></tr>'+rows.map(r=>`<tr${r[0]==='Thailand'?' class="afford"':''}><td class="l"><b>${r[0]}</b></td><td class="num">${th(r[1])}</td><td class="num">${r[2].toFixed(3)}</td><td class="num">${r[3]}</td><td class="num" style="font-weight:900;color:${r[4]>0?GOOD:r[4]<0?BAD:GREY}">${r[4]>0?'+':r[4]<0?'−':''}${Math.abs(r[4])}</td></tr>`).join('');
+  quizBlock($('hdQ'),[
+    {q:'A positive number in the last column means the country does better on the HDI than its income suggests. Which ASEAN country does best on this?',o:['Brunei','Viet Nam','Singapore','Malaysia'],a:1,why:'Viet Nam (+14): its health and education results are better than its income would suggest.'},
+    {q:'Brunei is −51. What does this suggest?',o:['Its income is high, but health and education are not as high as its income would suggest','It is the poorest country in ASEAN','It has the highest life expectancy in ASEAN'],a:0,why:'Brunei is the 2nd richest in ASEAN (oil and gas) but its life expectancy (75.3) is lower than Thailand’s (76.4). A high income does not guarantee a high HDI.'}],
+    'Real GDP (or income) per head measures <b>material</b> living standards. The HDI is <b>wider</b>: it also counts how long and how well-educated lives are.',()=>{hdQdone=true;hdCheck();});
+})();
+setCountry('TH');
+
+/* ================= TAB 4: BEYOND GDP ================= */
+const S1=[['U','Rises'],['D','Falls'],['N','No change']];
+const S2=[['fair','A fair guide: most people’s living standards change in the same direction'],['avg','Misleading: it is an average and the gains go to only a few people'],['bad','Misleading: the extra output does not make life better (pollution, crime, illness)'],['unrec','Misleading: it misses informal or unpaid output'],['hours','Misleading: people work longer hours or in worse conditions'],['qual','Misleading: it misses a change in quality']];
+const BG=[
+  ['Factories in Rayong expand and output rises 5%. Almost all of the extra income goes to the owners and top managers; most workers’ wages do not change.','U','avg','Real GDP per head is an average. If the extra income is not shared, most people are no better off.'],
+  ['Bangkok has a bad PM2.5 season. Families spend billions of baht on air purifiers, masks and asthma treatment.','U','bad','This spending is counted in GDP, but people are not better off: they are paying to repair harm. The World Bank estimates PM2.5 costs Thailand about 3.9% of GDP a year.'],
+  ['More break-ins in a town, so households and shops pay for security guards and CCTV cameras.','U','bad','Coursebook p. 385: more police or security because of more crime raises output but does not improve most people’s lives.'],
+  ['More sugary drinks are made and sold. Rates of diabetes rise.','U','bad','Coursebook p. 385: higher output of high-sugar foods may harm health and reduce life expectancy.'],
+  ['Factory workers are asked to work 12-hour shifts, six days a week, to meet export orders.','U','hours','Output rises, but people have less leisure time and may be more tired or less safe. Living standards include more than goods and services.'],
+  ['A grandmother stops selling khanom at her unregistered street stall and starts work in a registered shop. She earns the same and works the same hours.','U','unrec','Her informal work was not recorded; now it is. Recorded GDP rises even though her life has not changed. In 2024, 52.7% of Thai workers were informal.'],
+  ['A daughter gives up her paid job to care for her grandparents at home, instead of paying a care home.','D','unrec','Paid work and paid care fall, so recorded GDP falls. But unpaid care at home still has value: GDP misses it.'],
+  ['More rice farmers in the Northeast grow food for their own families instead of selling it.','D','unrec','Food grown and eaten at home is not sold, so it is not counted (non-marketed output). Families still eat.'],
+  ['Phones cost the same as last year, but the new model has a far better camera and battery.','N','qual','GDP counts the value of output, so better quality at the same price is missed. GDP may understate the rise in living standards.'],
+  ['Real GDP grows 1%, but the population grows 3%. Nothing else changes.','D','fair','There are fewer goods and services for each person, so living standards are likely to fall. Here real GDP per head gives a fair picture.'],
+  ['Real GDP grows 2.4% and the population falls slightly. Jobs and wages rise in every region.','U','fair','Output per person rises and the gains are widely shared, so most people are better off.'],
+  ['Prices rise 4% and nominal GDP rises 4%. Output and population do not change.','N','fair','Real GDP removes the effect of inflation, so real GDP per head is unchanged. That is a fair picture: people are not better off.'],
+];
+let bgOrder=[],bgI=0,bgS=0,bgM=0;
+function startBG(){bgOrder=shuffle(BG.map((_,i)=>i)).slice(0,10);bgI=0;bgS=0;bgM=0;renderBG();}
+function renderBG(){
+  if(bgI>=bgOrder.length){$('bgCard').innerHTML=`<h3>Finished!</h3><p class="qtext">You scored ${bgS} / ${bgM}.</p><p>${bgS>=bgM*.8?'Excellent. You can explain when real GDP per head is a fair guide and when it misleads.':'Remember the five problems in the table below: average, harmful output, unrecorded output, leisure and conditions, quality.'}</p><button class="btn" id="bgAgain">Try another set</button>`;
+    $('bgAgain').onclick=()=>{restoreBG();startBG();};complete(3,`Beyond GDP: ${bgS}/${bgM}`);return;}
+  const c=BG[bgOrder[bgI]];
+  $('bgNum').textContent=`Case ${bgI+1} of ${bgOrder.length}`;$('bgScore').textContent=`Score: ${bgS} / ${bgM}`;$('bgEvent').textContent=c[0];
+  $('bgStep2').classList.add('hide');$('bgFb').innerHTML='';$('bgNext').classList.add('hide');
+  const o1=$('bgO1');o1.innerHTML='';
+  S1.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o1.querySelectorAll('.opt').forEach(x=>x.disabled=true);bgM++;const r1=k===c[1];if(r1)bgS++;b.classList.add(r1?'ok':'no');if(!r1)o1.children[S1.findIndex(x=>x[0]===c[1])].classList.add('ok');
+    $('bgScore').textContent=`Score: ${bgS} / ${bgM}`;$('bgStep2').classList.remove('hide');const o2=$('bgO2');o2.innerHTML='';
+    S2.forEach(([k2,t2])=>{const b2=document.createElement('button');b2.className='opt';b2.textContent=t2;b2.onclick=()=>{
+      o2.querySelectorAll('.opt').forEach(x=>x.disabled=true);bgM++;const r2=k2===c[2];if(r2)bgS++;b2.classList.add(r2?'ok':'no');if(!r2)o2.children[S2.findIndex(x=>x[0]===c[2])].classList.add('ok');
+      $('bgScore').textContent=`Score: ${bgS} / ${bgM}`;
+      $('bgFb').innerHTML=`<div class="fb ${r1&&r2?'ok':'no'}"><b>${r1&&r2?'Correct.':'Answer:'} Real GDP per head ${({U:'rises',D:'falls',N:'does not change'})[c[1]]}.</b> ${c[3]}</div>`;$('bgNext').classList.remove('hide');};o2.appendChild(b2);});};o1.appendChild(b);});
+}
+const bgHTML=$('bgCard').innerHTML;
+function restoreBG(){$('bgCard').innerHTML=bgHTML;$('bgNext').onclick=()=>{bgI++;renderBG();};}
+restoreBG();startBG();
+
+/* ================= TAB 5: GAP EXPLORER ================= */
+const gap={a:false,b:false,c:false};
+function gapCheck(){if(gap.a&&gap.b&&gap.c)complete(4,`Gap explorer: households ${gbS}/${GB.length}`);}
+const INC=[['Iceland',23.9,22.0],['Sweden',21.5,22.7],['Thailand',19.1,27.1],['Viet Nam',18.6,28.1],['USA',15.6,30.2],['Brazil',11.3,41.0],['South Africa',7.2,50.5]];
+bars2($('gaChart'),{labels:INC.map(r=>r[0]),a:INC.map(r=>r[1]),b:INC.map(r=>r[2]),max:60,hl:2,yLabel:'Share of total income (%)',aria:'Income shares of the poorest 40% and richest 10%'});
+quizBlock($('gaQ'),[
+  {q:'In Thailand, which group receives more income in total?',o:['The poorest 40% of people','The richest 10% of people','They receive the same'],a:1,why:'The richest 10% get 27.1% of income; the poorest 40%, four times as many people, get only 19.1%. The World Bank also found that the richest 10% of Thais hold over half of the country’s wealth.'},
+  {q:'Which country has the most unequal distribution of income in the chart?',o:['Iceland','Thailand','South Africa','Sweden'],a:2,why:'In South Africa the richest 10% receive over half of all income and the poorest 40% only 7.2%. Iceland and Sweden are the most equal (coursebook p. 391).'}],null,()=>{gap.a=true;gapCheck();});
+const GR=[['wealth','Wealth: property, savings, inheritance or a business'],['skills','Skills and qualifications'],['workers','Number of workers and dependants in the household'],['hours','Hours of work: full-time or part-time'],['benefits','Depends on state benefits or help from relatives'],['place','Where they live and the industry they work in']];
+const GB=[
+  ['The Srisuk family owns three condos in Bangkok and earns rent every month. The Boonma family owns no property.','wealth','Wealth creates income: rent, interest and dividends are added to earned income (p. 390).'],
+  ['Khun Pim is an engineer with a master’s degree. Khun Daeng left school at 15 and works on a building site.','skills','High-skilled workers are in high demand and earn high wages (p. 390).'],
+  ['In one household both parents and an adult son work. In another, one parent supports three children and a grandmother.','workers','Households with more workers and fewer dependants have higher incomes (p. 390).'],
+  ['Nok works 48 hours a week in a factory. Lek can only find 20 hours a week at a market.','hours','Full-time workers usually earn more than part-time workers (p. 390).'],
+  ['Khun Somsri, 70, lives on a state old-age allowance and money her children send her.','benefits','People who depend on state benefits or help from relatives usually have low incomes (p. 390).'],
+  ['Malee inherited her parents’ rubber plantation and house. Her neighbour inherited nothing.','wealth','Inheritance is a major reason why some people are wealthy (p. 390). Wealthy people can save more, so wealth creates more wealth.'],
+  ['One family works in finance and tourism in Bangkok. Another grows rice in Yasothon and sells it at the local market.','place','Over half of workers in the Northeast are in farming, where incomes are low. Bangkok has more high-paid jobs.'],
+  ['Khun Ploy set up an online shop that now employs 30 people. Her school friend works in her shop.','wealth','Entrepreneurs may set up a business and become wealthy (p. 390).'],
+];
+let gbI=0,gbS=0;const gbOrder=shuffle(GB.map((_,i)=>i));
+function renderGB(){
+  if(gbI>=GB.length){$('gbEvent').textContent=`Finished: ${gbS} / ${GB.length}.`;$('gbO').innerHTML='';$('gbNext').classList.add('hide');$('gbNum').textContent='Done';
+    $('gbFb').innerHTML='<div class="fb info">Within a country, income differs because of <b>wealth</b>, <b>skills</b>, the <b>number of workers</b> in a household, <b>hours</b> worked and dependence on <b>benefits</b>. Between countries, it also depends on <b>education</b>, <b>healthcare</b>, the <b>industries</b> a country has, <b>pollution</b> and <b>working hours</b> (p. 390).</div>';gap.b=true;gapCheck();return;}
+  const c=GB[gbOrder[gbI]];$('gbNum').textContent=`Household pair ${gbI+1} of ${GB.length}`;$('gbScore').textContent=`Score: ${gbS}`;$('gbEvent').textContent=c[0];$('gbFb').innerHTML='';$('gbNext').classList.add('hide');
+  const o=$('gbO');o.innerHTML='';
+  GR.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+    o.querySelectorAll('.opt').forEach(x=>x.disabled=true);const r=k===c[1];if(r)gbS++;b.classList.add(r?'ok':'no');if(!r)o.children[GR.findIndex(x=>x[0]===c[1])].classList.add('ok');
+    $('gbScore').textContent=`Score: ${gbS}`;$('gbFb').innerHTML=`<div class="fb ${r?'ok':'no'}">${c[2]}</div>`;$('gbNext').classList.remove('hide');};o.appendChild(b);});
+}
+$('gbNext').onclick=()=>{gbI++;renderGB();};renderGB();
+function xRender(){const x=+$('sX').value;$('vX').textContent=x.toFixed(1)+' baht';$('roX').textContent='$'+th(18.97e12/x/1e9)+' billion';}
+$('sX').addEventListener('input',xRender);xRender();
+quizBlock($('gcQ'),[
+  {q:'From 2024 to 2025, Thai GDP in US dollars rose by about 9%. Did Thailand produce 9% more?',o:['Yes: GDP in dollars shows output','No: real output rose only 2.4%. Most of the rise came from a stronger baht'],a:1,why:'In baht, GDP rose only 1.6% (18.68 → 18.97 trillion). Each baht was worth more dollars in 2025, so the dollar value jumped. The coursebook’s Kenya example (p. 390) shows the same trap.'},
+  {q:'Real GDP per head in dollars may still mislead when comparing Thailand with another country. Which is one reason?',o:['Countries differ in the size of their informal economy and in how income is shared','Real GDP per head already includes life expectancy','Every country uses the same currency'],a:0,why:'Other reasons: working hours and conditions, quality of output, the environment and prices (a dollar buys more in Bangkok than in Singapore) also differ (p. 390).'}],null,()=>{gap.c=true;gapCheck();});
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['Real GDP rises by 2% and the population rises by 3%. What happens to real GDP per head?',['It falls by about 1%','It rises by about 5%','It rises by about 1%','It does not change'],'Real GDP per head change ≈ real GDP growth − population growth = 2% − 3% = −1%.'],
+  ['Which of these is not one of the parts of the Human Development Index?',['the distribution of income','life expectancy at birth','years of schooling','income per head'],'The HDI uses health (life expectancy), education (years of schooling) and income per head. It does not show how income is shared (coursebook p. 389).'],
+  ['Why is real GDP per head better than nominal GDP for comparing living standards over time?',['It removes the effects of inflation and of changes in population','It includes the quality of the environment','It shows how income is distributed','It includes informal output'],'“Real” removes inflation; “per head” allows for population size.'],
+  ['Viet Nam has a lower income per head than Indonesia but a higher HDI. What best explains this?',['People in Viet Nam live longer and receive more schooling','Viet Nam has a larger population','Viet Nam’s income is more unequal','Viet Nam has a larger informal economy'],'The HDI also counts life expectancy and education: Viet Nam’s are higher.'],
+  ['What is most likely to cause an increase in a country’s standard of living?',['a rise in the number of doctors per head of the population','a rise in the level of pollution','a fall in the size of the labour force','a fall in the school leaving age'],'More doctors per head improves health care and life expectancy (coursebook p. 392, Q2).'],
+  ['Why might comparing two countries’ GDP in US dollars be misleading?',['Exchange rates change, so the dollar value can change even if output does not','The US dollar is never used for trade','GDP cannot be measured in dollars','Exchange rates remove the effect of inflation'],'Thai GDP in dollars rose about 9% in 2025 while real output rose only 2.4%: the baht had strengthened.'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[],mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+startMCQ();
+
+const CH=[
+  ['Define','Living standards are the quality of people’s lives, often measured by real GDP per head and the Human Development Index.'],
+  ['Context','In 2023 output per person in Bangkok was about 676,000 baht, nearly seven times the Northeast’s 99,000 baht.'],
+  ['Chain 1','One reason is that Bangkok has many high-skilled jobs in finance, tourism and government, so workers with good qualifications earn high wages.'],
+  ['Chain 1','This leads to higher household incomes, so families can buy more and better goods and services, such as healthcare and education.'],
+  ['Chain 2','Another reason is that over half of workers in the Northeast work in farming, where incomes are low and often informal, so households have less to spend and save.'],
+  ['Overall','Overall, higher incomes and more wealth in Bangkok mean that people can afford more, so living standards are usually higher, although averages hide poor households in Bangkok too.'],
+];
+let placed=[],chipOrder=shuffle(CH.map((_,i)=>i));
+function renderChain(){
+  $('chainSlots').innerHTML=CH.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?CH[placed[i]][1]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+  $('chainSlots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(placed[i]!==undefined){placed[i]=undefined;renderChain();}});
+  $('chainChips').innerHTML='';
+  chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=CH[k][1];b.disabled=placed.includes(k);
+    b.onclick=()=>{const e=CH.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;renderChain();};$('chainChips').appendChild(b);});
+}
+$('chainReset').onclick=()=>{placed=[];chipOrder=shuffle(CH.map((_,i)=>i));$('chainFb').innerHTML='';$('chainModel').classList.add('hide');renderChain();};
+$('chainCheck').onclick=()=>{
+  if(placed.filter(x=>x!==undefined).length<CH.length){$('chainFb').innerHTML='<div class="fb no">Place all six sentences first.</div>';return;}
+  let ok=0;const slots=$('chainSlots').querySelectorAll('.slot');
+  placed.forEach((k,i)=>{const good=k===i;if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+  if(ok===CH.length){$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">Living standards are</span> the quality of people’s lives, often measured by real GDP per head and the Human Development Index. <span class="hl">In</span> 2023 output per person in Bangkok was about 676,000 baht, nearly seven times the Northeast’s 99,000 baht.</p>
+      <p><span class="hl">One reason is that</span> Bangkok has many high-skilled jobs in finance, tourism and government, so workers with good qualifications earn high wages. <span class="hl">This leads to</span> higher household incomes, so families can buy more and better goods and services, such as healthcare and education.</p>
+      <p><span class="hl">Another reason is that</span> over half of workers in the Northeast work in farming, where incomes are low and often informal, <span class="hl">so</span> households have less to spend and save. With lower savings they build up less wealth, <span class="hl">which means that</span> they receive little income from assets such as property.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> higher incomes and more wealth in Bangkok mean that people can afford more, so living standards are usually higher, although averages hide poor households in Bangkok too.</p></div>`;
+    chainDone=true;checkExam();}
+  else $('chainFb').innerHTML=`<div class="fb no">${ok} of 6 in the right place. Remember: define the key term first, then the context, then build the chain (“One reason is… This leads to…”), then “Another reason”, and finish with “Overall”. Tap a red slot to send it back.</div>`;
+};
+renderChain();
+})();
+</script>
+</body>
+</html>
