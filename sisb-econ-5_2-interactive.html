@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.2 Poverty · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+/* ---- 4.5 / 4.6 additions ---- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{border-radius:10px;padding:9px 12px;background:var(--ltblue)}
+.tile.o{background:var(--ltorange)}
+.tile > b{display:block;color:var(--navy);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:21px;font-weight:900;color:var(--ink)}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.meter{height:7px;background:rgba(0,47,108,.12);border-radius:4px;margin-top:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.pol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pol{grid-template-columns:1fr}}
+.pc{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:left;font:400 14px Lato,sans-serif;color:var(--ink);position:relative}
+.pc:hover{border-color:var(--blue)}
+.pc.sel{border-color:var(--orange);background:#FFFBF5}
+.pc:disabled{opacity:.45;cursor:not-allowed}
+.pc .nm{display:block;font-weight:900;color:var(--navy);font-size:15px;padding-right:70px;margin-bottom:4px}
+.pc .cost{position:absolute;right:11px;top:11px;font-weight:900;color:var(--dkorange);font-size:14px}
+.pc .d{display:block;margin:6px 0 4px}
+.pc .lag{display:block;color:var(--muted);font-size:13px}
+.pc .w{display:block;color:var(--bad);font-size:13px}
+.pill.g{background:var(--goodbg);color:var(--good)}
+.budget{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:14px}
+@media (max-width:700px){.budget{grid-template-columns:1fr}}
+.aim{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.aim:first-child{border-top:0}
+.light{flex:0 0 14px;height:14px;border-radius:50%;margin-top:4px}
+.light.g{background:var(--good)}.light.a{background:#E0A526}.light.r{background:var(--bad)}
+textarea{width:100%;min-height:100px;font:400 15px Lato,sans-serif;border:2px solid var(--line);border-radius:10px;padding:10px}
+.scrollx{overflow-x:auto}
+@media (max-width:700px){.scrollx svg{min-width:640px}}
+@media print{header,footer,.noprint{display:none!important}body{background:#fff}.card{break-inside:avoid}}
+.pill.g{background:var(--goodbg);color:var(--good)}
+#yrSeg button{padding:8px 14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 5 · SISB Nonthaburi</div>
+    <h1>5.2 Poverty</h1>
+    <div class="sub">Textbook Chapter 30, pp. 394–401 · Absolute and relative poverty, why people become poor, and what governments can do about it</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two puzzles</h2>
+  <p class="lead">Both puzzles use real Thai figures. Answer the two questions under each one.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Puzzle 1 · Thailand, 2024</span>
+      <h3 style="margin-top:8px">About 100 baht a day</h3>
+      <p>The Thai government says a person is <b>poor</b> if they have less than <b>3,078 baht a month</b> to live on: about <b>100 baht a day</b> for food, housing, transport and everything else. In 2024, <b>3.43 million</b> Thais (<b>4.89%</b>) were below this line. In <b>Mae Hong Son</b> it was <b>25.69%</b>.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Puzzle 2 · Bangkok, 2026</span>
+      <h3 style="margin-top:8px">Not poor… or poor?</h3>
+      <p><b>Khun Lek</b> cleans offices in Bangkok for the minimum wage of <b>400 baht a day</b>. She has two children. The family has food and a room to rent, so they are just above the poverty line. But they have no internet at home, and her son could not go on the Grade 6 school trip that almost all of his class went on.</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what do the puzzles show?</h3>
+    <div class="scrollx"><div class="chartbox" id="hookChart"></div></div>
+    <p class="muted" style="margin:4px 0 0">Share of people below the poverty line, 2024 (%). Source: NESDC, Poverty and Inequality Report 2024.</p>
+    <div class="grid2" style="margin-top:12px">
+      <p style="margin:0"><b>Puzzle 1:</b> people below the poverty line cannot pay for their <b>basic needs</b>: food, clothing, shelter, clean water and healthcare. This is <b>absolute poverty</b>. It is much more common in some provinces than others.</p>
+      <p style="margin:0"><b>Puzzle 2:</b> Lek’s family can meet basic needs, but they are poor <b>compared with other people</b> in their country and cannot take part in normal activities. This is <b>relative poverty</b>.</p>
+    </div>
+    <h3 style="margin-top:16px">Why is it useful to know about this?</h3>
+    <div class="missions">
+      <div class="mission done"><span class="t">Your country</span>3.43 million Thais are below the poverty line. One in four people in Mae Hong Son, Yala and Pattani are poor. Why there?</div>
+      <div class="mission done"><span class="t">Government choices</span>Welfare cards, old-age allowances, the minimum wage and taxes are in the news every month. Which ones work?</div>
+      <div class="mission done"><span class="t">Your future</span>Illness, job loss, old age or a flood can push any family into poverty. Knowing why helps you plan and protect yourself.</div>
+      <div class="mission done"><span class="t">Your exam</span>“Absolute or relative?”, causes of poverty and “Discuss the best policy” questions come up often.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: ABSOLUTE OR RELATIVE ============ -->
+<section class="panel" id="p1">
+  <h2>Absolute or relative?</h2>
+  <p class="lead"><b>Absolute poverty:</b> income is too low to meet <b>basic needs</b>. <b>Relative poverty:</b> poor <b>compared with others</b> in the same country, so people cannot enjoy the average standard of living. Decide what each case shows, then read the explanation.</p>
+  <div class="card" id="arCard">
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="arNum"></span><span class="score" id="arScore"></span></div>
+    <p class="qtext" id="arEvent"></p>
+    <div class="opts" style="flex-direction:column" id="arO"></div>
+    <div id="arFb"></div>
+    <button class="btn hide" id="arNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Same income, different country</h3>
+    <p>Move the slider to choose a monthly income per person. Is that person in absolute poverty, relative poverty, or neither, in each country?</p>
+    <div class="sl"><div class="top"><b>Income per person (US$ a month)</b><span class="val" id="vInc"></span></div><input type="range" id="sInc" min="40" max="3000" step="10" value="120" aria-label="Income per person"></div>
+    <div class="scrollx"><table class="sched" id="incTable"></table></div>
+    <p class="muted">Made-up countries with rounded figures, to show the idea. Basic needs = the cost of food, shelter and other essentials in that country. Half of the typical (middle) income is a common way to set a relative poverty line. Thailand is an upper-middle-income country: its official poverty line is 3,078 baht (about US$90) a month.</p>
+    <div id="incQ"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: CAUSES ============ -->
+<section class="panel" id="p2">
+  <h2>Why are people poor?</h2>
+  <p class="lead">The coursebook gives five causes: <b>unemployment</b>, <b>low wages</b>, <b>illness</b>, <b>age</b> and <b>environmental factors</b>. Part A: find the main cause for six real-life cases. Part B: build the vicious circle of poverty.</p>
+  <div class="card">
+    <h3>Part A · What pushed them into poverty?</h3>
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="caNum"></span><span class="score" id="caScore"></span></div>
+    <p class="qtext" id="caEvent"></p>
+    <div class="opts" id="caO"></div>
+    <div id="caFb"></div>
+    <button class="btn hide" id="caNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Part B · Build the vicious circle of poverty</h3>
+    <p class="muted" style="margin-top:0">A vicious circle of poverty is a situation where people become trapped in poverty (coursebook p. 396). Start from “Low income”. Tap the links in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="vcSlots"></div>
+      <div id="vcChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="vcCheck">Check my circle</button><button class="btn alt" id="vcReset">Start again</button></div>
+    <div id="vcFb"></div>
+    <div id="vcDraw" class="hide" style="margin-top:12px"></div>
+    <div id="vcQ" class="hide"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 4: POLICY LAB ============ -->
+<section class="panel" id="p3">
+  <h2>Policy lab: you are the Minister</h2>
+  <p class="lead">You have <b>100 billion baht a year</b> to reduce poverty. Choose your policies, then see what happens to six households <b>next year</b> and <b>in 10 years</b>. Poverty line: <b>3,078 baht</b> per person per month. There is no single right answer: try at least two different plans.</p>
+  <div class="card">
+    <h3>The six households</h3>
+    <div class="scrollx"><table class="sched" id="hhTable"></table></div>
+  </div>
+  <div class="card">
+    <h3>Choose your policies</h3>
+    <div class="pol" id="polGrid"></div>
+    <div class="budget">
+      <div><div class="flex" style="justify-content:space-between"><b>Budget used</b><span class="num" id="budTxt" style="font-weight:900"></span></div><div class="meter" style="height:12px"><i id="budBar"></i></div></div>
+      <label class="flex" style="gap:8px;cursor:pointer"><input type="checkbox" id="taxTog" style="width:22px;height:22px;accent-color:var(--orange)"> <span><b>Raise the top income tax rate from 35% to 40%</b><br><span class="muted">Adds 20 billion baht to your budget</span></span></label>
+      <button class="btn orange" id="runBtn">See the results</button>
+    </div>
+  </div>
+  <div class="card hide" id="resCard">
+    <h3>Results: income per person per month</h3>
+    <div class="seg" id="yrSeg" style="margin-bottom:10px"><button data-y="0" class="on">Next year</button><button data-y="1">In 10 years</button></div>
+    <div class="scrollx"><div class="chartbox" id="resChart"></div></div>
+    <div class="legend"><span><i style="background:var(--good);height:10px"></i>Above the poverty line</span><span><i style="background:var(--bad);height:10px"></i>Still below</span><span><i style="background:var(--orange);height:4px"></i>Poverty line 3,078 baht</span></div>
+    <div class="tiles" id="resTiles" style="margin-top:12px"></div>
+    <div id="resSide"></div>
+    <p class="muted" style="margin-bottom:0">Plans tried: <b id="planCount">0</b>. Change your choices and run again to compare.</p>
+  </div>
+  <div class="card hide" id="labQCard">
+    <h3>Checkpoint: what did you notice?</h3>
+    <div id="labQ"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5: TAX AND GROWTH ============ -->
+<section class="panel" id="p4">
+  <h2>Redistribution and growth</h2>
+  <p class="lead">Two big ideas from coursebook pp. 399–400. Part A: how a <b>progressive tax</b> takes a bigger share from higher incomes. Part B: does <b>economic growth</b> always reduce poverty?</p>
+  <div class="card">
+    <h3>Part A · Thailand’s progressive income tax</h3>
+    <div class="grid-lab">
+      <div>
+        <div class="sl"><div class="top"><b>Taxable income a year</b><span class="val" id="vTx"></span></div><input type="range" id="sTx" min="0" max="100" step="0.5" value="20" aria-label="Taxable income"></div>
+        <div class="readout"><div class="ro"><b>Tax to pay</b><span id="roTax"></span></div><div class="ro o"><b>Average tax rate</b><span id="roAvg"></span></div></div>
+        <div class="chain" id="txWork"></div>
+      </div>
+      <div>
+        <div class="scrollx"><table class="sched" id="bandTable"></table></div>
+        <p class="muted">Personal income tax bands, Thailand. Taxable income = income after allowances. Source: Revenue Department.</p>
+      </div>
+    </div>
+    <div class="missions" id="txMissions" style="margin-top:12px;grid-template-columns:repeat(3,1fr)"></div>
+  </div>
+  <div class="card">
+    <h3>Part B · Growth and poverty: who gains?</h3>
+    <p class="muted" style="margin-top:0">Coursebook p. 400, Economics in Action. Economic growth is <b>necessary but not sufficient</b> to reduce poverty. Decide what each case does to absolute poverty.</p>
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="grNum"></span><span class="score" id="grScore"></span></div>
+    <p class="qtext" id="grEvent"></p>
+    <div class="opts" id="grO"></div>
+    <div id="grFb"></div>
+    <button class="btn hide" id="grNext" style="margin-top:10px">Next</button>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse how improving education can reduce poverty in a country such as Thailand. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 5.2 Poverty · Poverty figures from NESDC, Poverty and Inequality Report 2024; minimum wage from the Government Gazette (July 2025); tax bands from the Revenue Department. The six households in the Policy lab are made up, and the policy effects are simplified to show how each policy works.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',DKOR='#C25E00',BAD='#B3264E',GOOD='#1E7B34',GREY='#6B7280',PURPLE='#5B2C9A';
+const $=id=>document.getElementById(id);
+const fmt=(x,d=1)=>(x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const sgn=(x,d=1)=>(x>1e-9?'+':x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const th=n=>Math.round(n).toLocaleString('en-US');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- tracker ---------- */
+// One row per activity: the activity name is part of the label, so the tracker does not merge them.
+function track(activity,detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('5.2','5.2 Poverty · '+activity,detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','Absolute or relative?','Why are people poor?','Policy lab','Tax and growth','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(TABS[i],detail);if(done.size===6)track('All activities','All 6 activities complete');}
+show(0);
+
+/* ---------- bar chart (site style) ---------- */
+function bars(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?560:720),H=cfg.H||(vw<600?280:300),L=62,R=14,T=24,B=cfg.xLabel?52:36;
+  const vals=cfg.values;let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(cfg.min!==undefined)lo=Math.min(lo,cfg.min);if(cfg.max!==undefined)hi=Math.max(hi,cfg.max);const pad=(hi-lo)*.12||1;
+  const step=cfg.yStep||((hi-lo)>12?4:(hi-lo)>6?2:(hi-lo)>2.5?1:0.5);
+  lo=Math.floor((lo-(lo<0?pad:0))/step)*step;hi=Math.ceil((hi+pad)/step)*step;
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B),n=vals.length,slot=(W-L-R)/n,bw=Math.min(cfg.bw||54,slot*.6),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Bar chart'}">`;
+  for(let v=lo;v<=hi+1e-9;v+=step){s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${Math.abs(v)<1e-9?NAVY:'#EEF2F7'}" stroke-width="${Math.abs(v)<1e-9?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${cfg.yFmt?cfg.yFmt(v):fmt(v,step<1?1:0)}</text>`;}
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  vals.forEach((v,i)=>{const c=cfg.colors?cfg.colors[i]:(v<0?ORANGE:NAVY);
+    s+=`<rect x="${X(i)-bw/2}" y="${Math.min(Y(0),Y(v))}" width="${bw}" height="${Math.max(1.5,Math.abs(Y(v)-Y(0)))}" rx="2" fill="${c}"/>`;
+    if(cfg.showVals!==false)s+=`<text x="${X(i)}" y="${v>=0?Y(v)-6:Y(v)+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${c}">${cfg.valFmt?cfg.valFmt(v):sgn(v)}</text>`;
+    s+=`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.labels[i]}</text>`;});
+  if(cfg.refLine!==undefined)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(cfg.refLine)}" y2="${Y(cfg.refLine)}" stroke="${ORANGE}" stroke-width="2.5" stroke-dasharray="6 4"/><text x="${W-R-4}" y="${Y(cfg.refLine)-6}" text-anchor="end" font-size="12" font-weight="900" fill="${DKOR}">${cfg.refText||''}</text>`;
+  if(cfg.xLabel)s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* two-step question helper: el, list of {q,o,a,why} then fb, onDone */
+function quizBlock(el,qs,fb,onDone){
+  el.innerHTML=qs.map((q,k)=>`<div class="${k?'hide':''}" data-w="${k}"><p><b>${k+1}. ${q.q}</b></p><div class="opts" data-s="${k}"></div></div>`).join('')+'<div data-fb></div>';
+  qs.forEach((q,k)=>{const o=el.querySelector(`[data-s="${k}"]`);
+    q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+      o.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===q.a?'ok':'no');if(i!==q.a)o.children[q.a].classList.add('ok');
+      if(q.why)el.querySelector(`[data-w="${k}"]`).insertAdjacentHTML('beforeend',`<div class="fb ${i===q.a?'ok':'no'}" style="margin-bottom:8px">${q.why}</div>`);
+      const nx=el.querySelector(`[data-w="${k+1}"]`);if(nx)nx.classList.remove('hide');
+      else{if(fb)el.querySelector('[data-fb]').innerHTML=`<div class="fb info">${fb}</div>`;onDone&&onDone();}};o.appendChild(b);});});
+}
+/* one-question-at-a-time sorter: cfg {cases:[[text,key,why]], cats:[[key,label]], ids:{num,score,ev,o,fb,next}, label, onEnd(score,total)} */
+function sorter(cfg){
+  let order=shuffle(cfg.cases.map((_,i)=>i)),i=0,s=0;const I=cfg.ids;
+  function render(){
+    if(i>=order.length){$(I.ev).textContent=`Finished: ${s} / ${order.length}.`;$(I.o).innerHTML='';$(I.next).classList.add('hide');$(I.num).textContent='Done';
+      $(I.fb).innerHTML=`<div class="fb info">${cfg.summary}</div>`;cfg.onEnd(s,order.length);return;}
+    const c=cfg.cases[order[i]];$(I.num).textContent=`${cfg.label} ${i+1} of ${order.length}`;$(I.score).textContent=`Score: ${s}`;$(I.ev).textContent=c[0];$(I.fb).innerHTML='';$(I.next).classList.add('hide');
+    const o=$(I.o);o.innerHTML='';
+    cfg.cats.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+      o.querySelectorAll('.opt').forEach(x=>x.disabled=true);const r=k===c[1];if(r)s++;b.classList.add(r?'ok':'no');if(!r)o.children[cfg.cats.findIndex(x=>x[0]===c[1])].classList.add('ok');
+      $(I.score).textContent=`Score: ${s}`;$(I.fb).innerHTML=`<div class="fb ${r?'ok':'no'}"><b>${r?'Correct.':'Answer: '+cfg.cats.find(x=>x[0]===c[1])[1]+'.'}</b> ${c[2]}</div>`;$(I.next).classList.remove('hide');};o.appendChild(b);});
+  }
+  $(I.next).onclick=()=>{i++;render();};render();
+}
+/* ordering tool: cfg {items:[text], slotsEl, chipsEl, checkBtn, resetBtn, fbEl, label, onOk} ; item k belongs in slot k */
+function orderer(cfg){
+  let placed=[],chipOrder=shuffle(cfg.items.map((_,i)=>i)).filter(k=>!(cfg.fixed||[]).includes(k));
+  (cfg.fixed||[]).forEach(k=>placed[k]=k);
+  function render(){
+    $(cfg.slotsEl).innerHTML=cfg.items.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?cfg.items[placed[i]]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+    $(cfg.slotsEl).querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if((cfg.fixed||[]).includes(i))return;if(placed[i]!==undefined){placed[i]=undefined;render();}});
+    $(cfg.chipsEl).innerHTML='';
+    chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=cfg.items[k];b.disabled=placed.includes(k);
+      b.onclick=()=>{const e=cfg.items.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;render();};$(cfg.chipsEl).appendChild(b);});
+  }
+  $(cfg.resetBtn).onclick=()=>{placed=[];(cfg.fixed||[]).forEach(k=>placed[k]=k);chipOrder=shuffle(cfg.items.map((_,i)=>i)).filter(k=>!(cfg.fixed||[]).includes(k));$(cfg.fbEl).innerHTML='';cfg.onReset&&cfg.onReset();render();};
+  $(cfg.checkBtn).onclick=()=>{
+    if(placed.filter(x=>x!==undefined).length<cfg.items.length){$(cfg.fbEl).innerHTML=`<div class="fb no">Place all ${cfg.items.length} ${cfg.label} first.</div>`;return;}
+    let ok=0;const slots=$(cfg.slotsEl).querySelectorAll('.slot');
+    placed.forEach((k,i)=>{const good=k===i;if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+    if(ok===cfg.items.length)cfg.onOk();else $(cfg.fbEl).innerHTML=`<div class="fb no">${ok} of ${cfg.items.length} in the right place. ${cfg.hint} Tap a red slot to send it back.</div>`;
+  };
+  render();
+}
+
+/* ================= TAB 1: THINK FIRST ================= */
+const hookDone=[0,0];
+quizBlock($('s1'),[
+  {q:'3,078 baht a month is about 100 baht a day. What would a person below this line find hard to pay for?',o:['A new phone every year','Enough food, a safe home and healthcare','A holiday abroad'],a:1},
+  {q:'Poverty in Mae Hong Son (25.69%) is over five times the Thai average (4.89%). What does this suggest?',o:['Poverty is the same everywhere in a country','Where people live affects their chance of being poor','The poverty line is higher in Mae Hong Son']}].map(q=>Object.assign({a:1},q)),
+  'People below the poverty line cannot meet their <b>basic needs</b>. Poverty is concentrated in remote, mainly farming provinces: in 2024 the poorest were Mae Hong Son, Yala, Pattani, Narathiwat and Ubon Ratchathani.',
+  ()=>{hookDone[0]=1;hookCheck();});
+quizBlock($('s2'),[
+  {q:'Is Lek’s family in poverty?',o:['No: they have food and a home, so they cannot be poor','Yes: they are poor compared with most families in Thailand','Yes: they cannot meet any basic needs'],a:1},
+  {q:'Which word best describes this kind of poverty?',o:['Relative: poor compared with others in the same country','Absolute: not enough for basic needs','Neither: poverty only means hunger'],a:0}],
+  'Lek’s family is above the absolute poverty line, but they cannot take part in normal activities, such as the school trip or using the internet at home. This is <b>relative poverty</b>.',
+  ()=>{hookDone[1]=1;hookCheck();});
+function hookCheck(){if(hookDone[0]&&hookDone[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two puzzles');}}
+const PROV=[['Mae Hong Son',25.69],['Yala',25.41],['Pattani',25.39],['Narathiwat',21.07],['Ubon Ratch.',20.34],['Sa Kaeo',16.0],['Thailand',4.89]];
+function drawHook(){bars($('hookChart'),{labels:PROV.map(r=>r[0]),values:PROV.map(r=>r[1]),colors:PROV.map(r=>r[0]==='Thailand'?ORANGE:NAVY),W:760,H:300,yStep:5,max:30,yLabel:'% of people who are poor',valFmt:v=>v.toFixed(1)+'%',aria:'Poverty rate in the poorest provinces and Thailand, 2024'});}
+
+/* ================= TAB 2: ABSOLUTE OR RELATIVE ================= */
+const AR_CATS=[['abs','Absolute poverty: basic needs are not met'],['rel','Relative poverty: basic needs are met, but poor compared with others'],['not','Not a sign of poverty']];
+const AR=[
+  ['Many people in a country are homeless and sleep on the streets.','abs','Shelter is a basic need. Homelessness is a clear sign of absolute poverty (Activity 30.1, p. 396).'],
+  ['Children in a village are malnourished: they do not get enough food or the right food.','abs','Food is the most basic need. Malnutrition shows absolute poverty (Activity 30.1).'],
+  ['Many homes in a region have no electricity.','abs','Without electricity, people struggle to cook safely, study at night or keep food. Limited access to electricity suggests absolute poverty (Activity 30.1).'],
+  ['Most households in a country own a car.','not','High car ownership shows that most people have income above basic needs: it is a sign of a <b>high</b> standard of living (Activity 30.1).'],
+  ['People in a country live, on average, to 83.','not','A long lifespan (longevity) suggests good food, housing and healthcare, so it is not a sign of poverty. A <b>short</b> lifespan would be.'],
+  ['A Bangkok family pays for food and rent, but cannot afford home internet when nearly all classmates have it.','rel','Their basic needs are met, but they cannot do what is normal in their society. This is relative poverty.'],
+  ['A family in Mae Hong Son lives on 1,500 baht per person a month.','abs','This is less than half of Thailand’s poverty line of 3,078 baht, so they cannot meet basic needs.'],
+  ['In the UK, a family cannot afford the winter holiday that most families take.','rel','The coursebook (p. 395): people in relative poverty in a rich country might not be seen as poor if they had the same income in a low-income country.'],
+  ['Children in Haiti miss school to work, because the family cannot afford food.','abs','The family cannot meet basic needs, so the children must work (coursebook p. 395, Economics in Context).'],
+  ['A grandmother in Isan has enough rice and a home, but cannot afford the bus fare to visit her family at Songkran.','rel','Her basic needs are met, but she cannot take part in a normal activity in her society: relative poverty.'],
+];
+const arState={done:false,q:false};
+sorter({cases:AR,cats:AR_CATS,label:'Case',ids:{num:'arNum',score:'arScore',ev:'arEvent',o:'arO',fb:'arFb',next:'arNext'},
+  summary:'<b>Absolute</b> poverty is about <b>basic needs</b>: food, shelter, clean water, clothing, healthcare. <b>Relative</b> poverty is about being poor <b>compared with others</b> in the same country. Some things, such as high car ownership or a long life, show the opposite of poverty.',
+  onEnd:(s,n)=>{arState.done=true;arState.s=s;arState.n=n;arCheck();}});
+// Same income, different country. [country, basic needs US$/month, typical (median) income US$/month]
+const CTRY=[['A low-income country',60,120],['An upper-middle-income country',90,500],['A high-income country',450,2400]];
+function incRender(){
+  const v=+$('sInc').value;$('vInc').textContent='$'+th(v)+' (≈'+th(v*34)+' baht)';
+  $('incTable').innerHTML='<tr><th>Country</th><th>Basic needs (US$/month)</th><th>Half of typical income</th><th>This person is…</th></tr>'+CTRY.map(c=>{
+    const half=c[2]/2,st=v<c[1]?['In absolute poverty','warn']:v<half?['In relative poverty','afford']:['Not poor',''];
+    return `<tr class="${st[1]}"><td class="l"><b>${c[0]}</b></td><td class="num">$${th(c[1])}</td><td class="num">$${th(half)}</td><td class="l"><b>${st[0]}</b></td></tr>`;}).join('');
+}
+$('sInc').addEventListener('input',incRender);incRender();
+quizBlock($('incQ'),[
+  {q:'Set the income to $1,000 a month. In which country is this person poor?',o:['The low-income country','The upper-middle-income country','The high-income country'],a:2,why:'In the high-income country $1,000 covers basic needs, but it is less than half of a typical income: relative poverty. In the other two countries it is far above a typical income. Now try $300: in the high-income country it does not even cover basic needs.'},
+  {q:'What does this show about relative poverty?',o:['It is the same income in every country','It depends on the income of other people in the same country','It only exists in low-income countries'],a:1,why:'Relative poverty is measured against the people around you. That is why every country, even a rich one, has some relative poverty (coursebook p. 395).'}],
+  null,()=>{arState.q=true;arCheck();});
+function arCheck(){if(arState.done&&arState.q)complete(1,`Absolute or relative: ${arState.s}/${arState.n}`);}
+
+/* ================= TAB 3: CAUSES ================= */
+const CA_CATS=[['unemp','Unemployment'],['wage','Low wages'],['ill','Illness'],['age','Age'],['env','Environmental factors']];
+const CA=[
+  ['Somchai’s electronics factory in Samut Prakan closed in 2025. He has looked for work for eight months.','unemp','No job means no wage. Unemployment is one of the main causes of poverty (coursebook summary, p. 401).'],
+  ['Ae sold food from a stall in Hat Yai. The November 2025 floods destroyed her stall and stock.','env','Floods, storms and droughts damage homes, crops and equipment. The 2025 southern floods affected about one million households.'],
+  ['Yai Wanna is 74 and lives alone in Si Sa Ket. She lives on the old-age allowance of 700 baht a month and a little money from her children.','age','Older people may be unable to work and may have no savings or pension. In the North, almost one person in three is 60 or over.'],
+  ['Nok has kidney disease. She can only work two days a week and spends part of her income travelling to hospital.','ill','Illness lowers income (less work) and raises costs (treatment, travel). Poor people are also more likely to become ill.'],
+  ['The Saetang family grow maize on a hillside in Mae Hong Son. They work hard all year but earn about 2,600 baht each a month.','wage','Many poor people are working: farm and low-skilled jobs pay little. In 2024, 45.5% of Thailand’s poor worked in farming.'],
+  ['Lek cleans offices in Bangkok for 400 baht a day, the minimum wage. After rent and food, nothing is left.','wage','Lek has a full-time job, but low pay keeps her family close to the poverty line. People like Lek are often called the “working poor”.'],
+  ['A drought in the Northeast means the rice harvest fails for a second year.','env','Droughts made worse by global warming damage crops and kill livestock (coursebook p. 396).'],
+  ['A delivery rider is injured in a road accident and cannot work for six months.','ill','Illness or injury stops people earning. Informal workers such as riders often have no sick pay.'],
+];
+const caState={a:false,b:false,c:false};
+sorter({cases:CA,cats:CA_CATS,label:'Case',ids:{num:'caNum',score:'caScore',ev:'caEvent',o:'caO',fb:'caFb',next:'caNext'},
+  summary:'Most poor people face <b>more than one</b> cause at once: Ae lost her stall in a flood <b>and</b> she is an informal worker with no unemployment benefit. In an exam, name the cause, then explain <b>how</b> it lowers income.',
+  onEnd:(s,n)=>{caState.a=true;caState.s=s;caState.n=n;caCheck();}});
+const VC=['Low income','Poor food, housing and healthcare, and children leave school early','Poor health and few skills','Low productivity: they produce less per hour','Only low-paid jobs, or no job at all','Low income again… and their children’s prospects are poor too'];
+orderer({items:VC,fixed:[0],slotsEl:'vcSlots',chipsEl:'vcChips',checkBtn:'vcCheck',resetBtn:'vcReset',fbEl:'vcFb',label:'links',
+  hint:'Ask “what does this lead to?” after each link. Low income means families cannot afford good food or schooling, which affects health and skills…',
+  onReset:()=>{$('vcDraw').classList.add('hide');},
+  onOk:()=>{$('vcFb').innerHTML='<div class="fb ok"><b>Correct.</b> Each link causes the next, so the circle repeats: people become <b>trapped</b> in poverty, and it passes from parents to children.</div>';drawCircle();$('vcDraw').classList.remove('hide');$('vcQ').classList.remove('hide');caState.b=true;}});
+function drawCircle(){
+  const W=720,H=360,cx=360,cy=180,rx=255,ry=125,lab=['Low income','Poor food, housing,\nhealthcare, schooling','Poor health,\nfew skills','Low productivity','Low-paid jobs\nor unemployment'];
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Vicious circle of poverty"><defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${BLUE}"/></marker></defs>`;
+  const pts=lab.map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/lab.length;return[cx+rx*Math.cos(a),cy+ry*Math.sin(a)];});
+  pts.forEach((p,i)=>{const q=pts[(i+1)%pts.length],mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,dx=mx-cx,dy=my-cy,k=1.18;
+    const sx=p[0]+(q[0]-p[0])*.32,sy=p[1]+(q[1]-p[1])*.32,ex=p[0]+(q[0]-p[0])*.68,ey=p[1]+(q[1]-p[1])*.68;
+    s+=`<path d="M${sx},${sy} Q${cx+dx*k},${cy+dy*k} ${ex},${ey}" fill="none" stroke="${BLUE}" stroke-width="3" marker-end="url(#ah)"/>`;});
+  pts.forEach((p,i)=>{const ls=lab[i].split('\n'),h=ls.length*17+14;
+    s+=`<rect x="${p[0]-92}" y="${p[1]-h/2}" width="184" height="${h}" rx="10" fill="${i===0?ORANGE:NAVY}"/>`;
+    ls.forEach((l,j)=>s+=`<text x="${p[0]}" y="${p[1]-h/2+22+j*17}" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">${l}</text>`);});
+  s+=`<text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="15" font-weight="900" fill="${NAVY}">The vicious circle</text><text x="${cx}" y="${cy+24}" text-anchor="middle" font-size="13" fill="${GREY}">of poverty</text></svg>`;
+  $('vcDraw').innerHTML=`<div class="scrollx"><div class="chartbox">${s}</div></div>`;
+}
+quizBlock($('vcQ'),[
+  {q:'The government gives free school meals, uniforms and books to poor children. Where does this break the circle?',o:['At “Poor food, housing, healthcare, schooling”: children eat well and stay in school','At “Low productivity”: firms buy new machines','It does not break the circle'],a:0,why:'Better food and more schooling improve health and skills, so the next generation can get better-paid jobs. This is a long-run policy (coursebook p. 397).'},
+  {q:'Why is the circle hard to escape on your own?',o:['Because poor people do not want to work','Because each problem causes the next: with a low income you cannot afford the education and healthcare that would raise your income','Because the poverty line keeps falling'],a:1,why:'That is why the coursebook calls it a trap: people need help from outside, such as free education and healthcare, to break one of the links.'}],
+  null,()=>{caState.c=true;caCheck();});
+function caCheck(){if(caState.a&&caState.b&&caState.c)complete(2,`Why are people poor? causes ${caState.s}/${caState.n}, circle built`);}
+
+/* ================= TAB 4: POLICY LAB ================= */
+const LINE=3078;
+// households: [id, name, place, people, cause, base income per person per month]
+const HH=[
+  ['S','The Saetangs','Mae Hong Son · maize farmers · 4 people','Low wages (farming)',2600],
+  ['W','Yai Wanna','Si Sa Ket · aged 74 · lives alone','Age',2800],
+  ['C','Somchai’s family','Samut Prakan · factory closed · 3 people','Unemployment',1600],
+  ['A','Ae’s family','Hat Yai · street-food seller, stall lost in floods · 3 people','Environment (flood)',2300],
+  ['N','Nok’s family','Ubon Ratchathani · kidney disease · 2 people','Illness',2600],
+  ['L','Lek’s family','Bangkok · office cleaner on 400 baht a day · 3 people','Low wages',3470],
+];
+// policies: id, name, type, cost (bn baht/yr), desc, effects now {hh:+baht}, effects in 10 yrs, side note
+const POL=[
+  {id:'old',nm:'Raise the old-age allowance to 1,000 baht a month',ty:'Benefit',c:40,d:'For everyone aged 60 and over (now 600–1,000 baht, by age).',now:{W:300},ten:{W:300},
+    side:'Helps every older person, rich or poor, so much of the money does not go to the poor.'},
+  {id:'card',nm:'Top up the state welfare card by 500 baht a month',ty:'Benefit',c:80,d:'About 13.5 million low-income card holders (income under 100,000 baht a year).',now:{S:500,W:500,A:500,N:500},ten:{S:500,W:500,A:500,N:500},
+    side:'Raises incomes quickly, but it is expensive and does not remove the <b>causes</b> of poverty. It must be paid every year.'},
+  {id:'ub',nm:'Extend unemployment benefit from 6 to 12 months',ty:'Benefit',c:10,d:'For workers in the social security system who lose their job.',now:{C:2100},ten:{},
+    side:'Helps Somchai now, but not in 10 years. Ae is an <b>informal</b> worker, so she gets nothing. If jobs are available, a long benefit may reduce the incentive to look for work.'},
+  {id:'mw',nm:'Raise the minimum wage from 400 to 450 baht a day',ty:'Wage law',c:0,d:'Costs the government nothing: firms pay the higher wages.',now:{L:430},ten:{L:430},
+    side:'Helps workers like Lek. It does <b>not</b> help farmers, informal workers, older people or the unemployed. Some firms may employ fewer low-skilled workers (Chapter 17).'},
+  {id:'edu',nm:'Scholarships and job training',ty:'Education',c:30,d:'Free vocational training for adults; scholarships so poor children stay in school.',now:{},ten:{S:900,C:1500,A:500,L:800},
+    side:'Little effect next year, but large in 10 years: skills raise productivity and wages, and break the vicious circle for the next generation.'},
+  {id:'hea',nm:'More rural clinics and doctors',ty:'Healthcare',c:25,d:'Shorter journeys and faster treatment outside Bangkok.',now:{N:500,W:200},ten:{N:1300,W:200,S:300},
+    side:'People are less likely to fall into poverty through illness, and healthier workers are more productive. Takes time to train doctors.'},
+  {id:'env',nm:'Flood defences and crop insurance',ty:'Supply-side',c:30,d:'Better drains and sea defences; insurance pays farmers when crops fail.',now:{A:600,S:300},ten:{A:1300,S:500},
+    side:'Protects incomes from floods and droughts. Benefits grow as disasters are prevented in later years.'},
+  {id:'gro',nm:'Promote economic growth',ty:'Fiscal and monetary',c:40,d:'Build new rail and roads; the central bank also cuts the interest rate.',now:{C:2000,L:200},ten:{C:2000,L:300,S:200},
+    side:'Creates jobs, so Somchai finds work. But it does nothing for Yai Wanna or Nok, and higher earners may gain most, so <b>relative</b> poverty may rise. Lower interest rates may raise inflation.'},
+  {id:'thr',nm:'Raise the income tax threshold',ty:'Tax',c:20,d:'People pay no income tax on the first 200,000 baht of taxable income (now 150,000).',now:{},ten:{},
+    side:'None of the six households earn enough to pay income tax, so <b>none</b> of them gain. Most of the benefit goes to middle-income earners.'},
+];
+const sel=new Set();let taxOn=false,plans=0,yr=0,lastRes=null;
+$('hhTable').innerHTML='<tr><th>Household</th><th>Where and who</th><th>Main cause</th><th>Income per person a month</th></tr>'+HH.map(h=>`<tr class="${h[4]<LINE?'warn':''}"><td class="l"><b>${h[1]}</b></td><td class="l">${h[2]}</td><td class="l">${h[3]}</td><td class="num"><b>${th(h[4])}</b> baht ${h[4]<LINE?'<span class="pill" style="background:var(--badbg);color:var(--bad)">poor</span>':'<span class="pill o">just above</span>'}</td></tr>`).join('');
+function budget(){return 100+(taxOn?20:0);}
+function used(){return [...sel].reduce((a,id)=>a+POL.find(p=>p.id===id).c,0);}
+function polRender(){
+  $('polGrid').innerHTML=POL.map(p=>{const on=sel.has(p.id),fits=on||used()+p.c<=budget();
+    return `<button class="pc ${on?'sel':''}" data-id="${p.id}" ${fits?'':'disabled'}><span class="cost">${p.c?p.c+' bn':'0'}</span><span class="nm">${p.nm}</span><span class="pill ${on?'o':''}">${p.ty}</span><span class="d">${p.d}</span>${!fits?'<span class="w">Not enough budget left</span>':''}</button>`;}).join('');
+  $('polGrid').querySelectorAll('.pc').forEach(b=>b.onclick=()=>{const id=b.dataset.id;sel.has(id)?sel.delete(id):sel.add(id);polRender();});
+  const u=used(),B=budget();$('budTxt').textContent=`${u} / ${B} billion baht`;$('budBar').style.width=Math.min(100,u/B*100)+'%';$('budBar').style.background=u>B?BAD:BLUE;
+}
+$('taxTog').onchange=e=>{taxOn=e.target.checked;
+  if(!taxOn){while(used()>budget()){const last=[...sel].pop();sel.delete(last);}}polRender();};
+polRender();
+function results(){
+  return HH.map(h=>{let now=h[4],ten=h[4];sel.forEach(id=>{const p=POL.find(x=>x.id===id);now+=(p.now[h[0]]||0);ten+=(p.ten[h[0]]||0);});return{h,now,ten};});
+}
+function resRender(){
+  const r=lastRes,k=yr?'ten':'now';
+  $('yrSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.y===yr));
+  bars($('resChart'),{labels:r.map(x=>x.h[1].replace('’s family','').replace('The ','')),values:r.map(x=>x[k]),colors:r.map(x=>x[k]>=LINE?GOOD:BAD),W:760,H:310,min:0,max:6000,yStep:1000,refLine:LINE,yLabel:'Baht per person a month',valFmt:v=>th(v),yFmt:v=>th(v),aria:'Household incomes after policies'});
+  const above=r.filter(x=>x[k]>=LINE).length,abN=r.filter(x=>x.now>=LINE).length,abT=r.filter(x=>x.ten>=LINE).length;
+  const cost=used();
+  $('resTiles').innerHTML=`<div class="tile"><b>Above the line next year</b><div class="v">${abN} / 6</div></div><div class="tile"><b>Above the line in 10 years</b><div class="v">${abT} / 6</div></div><div class="tile o"><b>Spent each year</b><div class="v">${cost} bn</div><div class="s">of ${budget()} bn baht</div></div><div class="tile o"><b>Top tax rate</b><div class="v">${taxOn?'40%':'35%'}</div></div>`;
+  let side=[...sel].map(id=>{const p=POL.find(x=>x.id===id);return `<li><b>${p.nm}:</b> ${p.side}</li>`;}).join('');
+  if(taxOn)side+='<li><b>Top tax rate 40%:</b> a more <b>progressive</b> tax raises money to help the poor and makes income more equal, but it may discourage some high earners and entrepreneurs, or lead them to avoid tax.</li>';
+  if(!sel.size)side='<li>You chose no policies, so nothing changed. Poverty does not fix itself.</li>';
+  const lost=r.filter(x=>x[k]<LINE).map(x=>x.h[1]);
+  $('resSide').innerHTML=`<div class="chain"><b>What happened and why</b><ul style="margin:6px 0 0 18px;padding:0">${side}</ul></div>`+(lost.length?`<div class="fb no">Still below the line ${yr?'in 10 years':'next year'}: <b>${lost.join(', ')}</b>. Which policy would reach them?</div>`:`<div class="fb ok">Every household is above the poverty line ${yr?'in 10 years':'next year'}. Now check the other time period: does your plan still work?</div>`);
+}
+$('yrSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{yr=+b.dataset.y;resRender();});
+let labQdone=false;const planKeys=new Set();
+$('runBtn').onclick=()=>{
+  if(used()>budget()){return;}
+  lastRes=results();planKeys.add([...sel].sort().join('|')+(taxOn?'+tax':''));plans=planKeys.size;$('planCount').textContent=plans;
+  $('resCard').classList.remove('hide');resRender();
+  if(plans>=2)$('labQCard').classList.remove('hide');
+  track('Policy lab plan',`Plan ${plans}: ${[...sel].join(', ')||'none'}${taxOn?' + top tax 40%':''}; above line now ${lastRes.filter(x=>x.now>=LINE).length}/6, in 10 yrs ${lastRes.filter(x=>x.ten>=LINE).length}/6`);
+  $('resCard').scrollIntoView({behavior:'smooth',block:'start'});
+};
+quizBlock($('labQ'),[
+  {q:'Which kind of policy helps most <b>next year</b> but does little to remove the <b>causes</b> of poverty?',o:['Cash benefits, such as the welfare card top-up','Education and training','Flood defences'],a:0,why:'Benefits raise income straight away, but they must be paid every year and do not raise skills or productivity.'},
+  {q:'Why did the higher minimum wage not help the Saetangs, Ae or Yai Wanna?',o:['They are self-employed, informal or not working, so they are not paid a wage by an employer','The minimum wage only applies in Bangkok','The minimum wage is paid by the government'],a:0,why:'A minimum wage only helps people who have a job with an employer. Many of Thailand’s poor are farmers, informal workers or older people.'},
+  {q:'Raising the income tax threshold helped none of the six households. Why?',o:['Their incomes are already too low to pay income tax','The threshold was raised too much','The poor pay the most income tax'],a:0,why:'Lek earns about 125,000 baht a year, below the 150,000 baht tax-free amount. A tax cut cannot help people who pay no income tax.'}],
+  'Good poverty policy often <b>combines</b> a short-run policy (benefits) with long-run policies (education, healthcare, protection from disasters), and it must be <b>targeted</b> at the people who are actually poor.',
+  ()=>{labQdone=true;complete(3,`Policy lab: ${plans} plans tried`);});
+
+/* ================= TAB 5: TAX AND GROWTH ================= */
+const BANDS=[[0,150000,0],[150000,300000,5],[300000,500000,10],[500000,750000,15],[750000,1000000,20],[1000000,2000000,25],[2000000,5000000,30],[5000000,Infinity,35]];
+$('bandTable').innerHTML='<tr><th>Taxable income (baht a year)</th><th>Tax rate on this part</th></tr>'+BANDS.map(b=>`<tr data-b="${b[0]}"><td class="l num">${th(b[0])}${b[1]===Infinity?' and above':' – '+th(b[1])}</td><td class="num"><b>${b[2]}%</b></td></tr>`).join('');
+const incFromS=s=>s<=0?0:Math.round(Math.pow(10,4+s/100*(Math.log10(10000000)-4))/1000)*1000;
+// snap to key values so 125,000, 1,000,000 and 2,000,000 can be reached exactly
+function snapInc(y){for(const v of [125000,150000,1000000,2000000,5000000])if(Math.abs(y-v)/v<0.025)return v;return y;}
+function taxOf(y){let t=0,parts=[];BANDS.forEach(([a,b,r])=>{if(y>a){const part=Math.min(y,b)-a;t+=part*r/100;parts.push([a,Math.min(y,b),r,part*r/100]);}});return{t,parts};}
+const txM=[{t:'The cleaner',d:'Lek earns about 125,000 baht a year. Set this income. How much tax does she pay?',ok:y=>y>=120000&&y<=130000},
+  {t:'Ten per cent',d:'Find an income where the <b>average</b> tax rate is at least 10%.',ok:y=>taxOf(y).t/y>=0.1},
+  {t:'Double the income, more than double the tax',d:'Set 1,000,000 baht, then 2,000,000 baht. Does the tax double?',ok:()=>txSeen.has(1000000)&&txSeen.has(2000000)}];
+const txSeen=new Set(),txDone=new Set();
+$('txMissions').innerHTML=txM.map((m,i)=>`<div class="mission" id="tm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function txRender(){
+  const y=snapInc(incFromS(+$('sTx').value)),{t,parts}=taxOf(y),avg=y?t/y*100:0;
+  if(y===1000000||y===2000000)txSeen.add(y);
+  $('vTx').textContent=th(y)+' baht';$('roTax').textContent=th(t)+' baht';$('roAvg').textContent=avg.toFixed(1)+'%';
+  $('bandTable').querySelectorAll('tr[data-b]').forEach(tr=>{const a=+tr.dataset.b;tr.classList.toggle('afford',y>a);});
+  $('txWork').innerHTML=`<b>Working</b><ol>${parts.map(p=>`<li>${th(p[0])} – ${th(p[1])}: ${p[2]}% × ${th(p[1]-p[0])} = <b>${th(p[3])}</b></li>`).join('')||'<li>No income, no tax.</li>'}</ol><div>Average tax rate = ${th(t)} ÷ ${th(y)||1} = <b>${avg.toFixed(1)}%</b>. ${avg>0?'Higher incomes pay a <b>larger share</b> of their income in tax: the tax is <b>progressive</b>.':'Income below 150,000 baht pays no income tax.'}</div>`;
+  txM.forEach((m,i)=>{if(!txDone.has(i)&&m.ok(y)){txDone.add(i);$('tm'+i).classList.add('done');
+    if(i===0)$('tm0').insertAdjacentHTML('beforeend','<br><b>Nothing:</b> she is below the 150,000 baht band.');
+    if(i===2)$('tm2').insertAdjacentHTML('beforeend','<br><b>No: 115,000 → 365,000 baht</b>, more than three times as much.');}});
+  growthCheck();
+}
+$('sTx').addEventListener('input',txRender);
+const GR_CATS=[['down','Absolute poverty is likely to fall'],['same','Absolute poverty may not fall'],['rel','Absolute poverty falls, but relative poverty may rise']];
+const GRC=[
+  ['A new car factory opens in Chachoengsao and hires 3,000 local workers who were unemployed.','down','New jobs for the unemployed raise their income: growth creates jobs (coursebook p. 400).'],
+  ['Output rises because a factory installs robots. It hires no extra workers.','same','If growth comes from new technology, few new jobs are created, so the poor may not gain (p. 400).'],
+  ['New jobs in software and finance open in Bangkok. Unemployed farm workers in Isan do not have the skills.','same','The unemployed may lack the skills for the new jobs, so growth does not reach them (p. 400).'],
+  ['The economy grows by 3%. Tax revenue rises, and the government spends it on rural schools and clinics.','down','Growth raises tax revenue, which can be spent on education and healthcare for the poor (p. 400).'],
+  ['Growth raises all incomes, but top earners’ incomes rise by 10% and the lowest incomes by only 2%.','rel','The poorest are better off, so absolute poverty falls, but the gap widens: relative poverty may rise (p. 400).'],
+  ['The economy grows, but extra tax revenue is spent on a new airport for business travellers.','same','Extra tax revenue may not be spent on reducing poverty (p. 400).'],
+];
+let grDone=false,grS=0,grN=0;
+sorter({cases:GRC,cats:GR_CATS,label:'Case',ids:{num:'grNum',score:'grScore',ev:'grEvent',o:'grO',fb:'grFb',next:'grNext'},
+  summary:'Growth helps the poor when it creates <b>jobs they can do</b>, raises <b>wages</b> and provides <b>tax revenue</b> that is spent on them. It may not, if the jobs need skills the poor lack, if growth comes from technology, or if the gains go mainly to those on high incomes.',
+  onEnd:(s,n)=>{grDone=true;grS=s;grN=n;growthCheck();}});
+function growthCheck(){if(grDone&&txDone.size===txM.length)complete(4,`Tax and growth: tax missions done, growth ${grS}/${grN}`);}
+txRender();
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['What is meant by absolute poverty?',['Income is too low to meet basic needs such as food and shelter','Income is below the average income in the country','Having less wealth than other people','Being unemployed'],'Absolute poverty is about <b>basic needs</b>. Being below the average is relative poverty.'],
+  ['Which of these indicates that people are living in absolute poverty?',['malnutrition','high internet use','high car ownership','a long life expectancy'],'Malnutrition means food, a basic need, is not met (Activity 30.1).'],
+  ['What could cause a decrease in absolute poverty but a rise in relative poverty?',['the income of the rich rising by more than those living on low incomes','the income of the rich rising by less than those living on low incomes','the income of the rich falling by more than those living on low incomes','the income of the rich falling by less than those living on low incomes'],'The poor are better off (absolute poverty falls) but the gap widens (relative poverty rises). Coursebook p. 401, Q3.'],
+  ['Which government policy measure may reduce absolute poverty?',['granting subsidies to builders of low-cost housing','a cut in government expenditure on state education','an increase in the rate of interest','the imposition of a tax on food'],'Cheaper housing helps meet the basic need for shelter. Coursebook p. 401, Q4.'],
+  ['What might cause a more uneven distribution of income?',['a reduction in the top rates of tax','an increase in the national minimum wage','an increase in state benefits','a reduction in unemployment'],'Lower top tax rates let high earners keep more, so the gap widens. Coursebook p. 401, Q1.'],
+  ['Why may a national minimum wage not reduce poverty for some poor people?',['Many poor people are self-employed farmers, informal workers or unemployed','It raises the wages of the lowest-paid workers','It is paid for by the government','It only applies to high-income workers'],'A minimum wage only helps employees. It can also reduce employment if firms hire fewer low-skilled workers.'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[],mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+startMCQ();
+
+const CH=[
+  'Poverty is when people do not have enough income to meet their basic needs (absolute) or to enjoy the average standard of living in their country (relative).',
+  'In Thailand in 2024, 3.43 million people were below the poverty line of 3,078 baht a month, and people with no education are among the most likely to be poor.',
+  'One way is that better education and training raise people’s skills, so they become more productive and can get better-paid jobs.',
+  'This leads to higher incomes, so families can afford enough food, housing and healthcare, which moves them out of absolute poverty.',
+  'Another reason is that when children from poor families stay in school, they are less likely to be poor as adults, so the vicious circle of poverty is broken.',
+  'Overall, education reduces poverty by raising skills and incomes, although it takes many years to work and only helps if good jobs are available.',
+];
+orderer({items:CH,slotsEl:'chainSlots',chipsEl:'chainChips',checkBtn:'chainCheck',resetBtn:'chainReset',fbEl:'chainFb',label:'sentences',
+  hint:'Remember: define the key term first, then the context, then build the chain (“One way is… This leads to…”), then “Another reason”, and finish with “Overall”.',
+  onReset:()=>{$('chainModel').classList.add('hide');},
+  onOk:()=>{$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">Poverty is</span> when people do not have enough income to meet their basic needs (absolute) or to enjoy the average standard of living in their country (relative). <span class="hl">In</span> Thailand in 2024, 3.43 million people were below the poverty line of 3,078 baht a month, and people with no education are among the most likely to be poor.</p>
+      <p><span class="hl">One way is that</span> better education and training raise people’s skills, so they become more productive and can get better-paid jobs. <span class="hl">This leads to</span> higher incomes, so families can afford enough food, housing and healthcare, which moves them out of absolute poverty.</p>
+      <p><span class="hl">Another reason is that</span> when children from poor families stay in school, they are less likely to be poor as adults, <span class="hl">so</span> the vicious circle of poverty is broken. Educated parents also earn more, <span class="hl">which means that</span> they can afford to keep their own children in school.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> education reduces poverty by raising skills and incomes, although it takes many years to work and only helps if good jobs are available.</p></div>`;
+    chainDone=true;checkExam();}});
+})();
+</script>
+</body>
+</html>
