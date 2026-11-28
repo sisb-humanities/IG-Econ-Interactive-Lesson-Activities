@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.3 Population · SISB IGCSE Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="sisb-tracker.js"></script>
+<style>
+:root{
+  --navy:#002F6C; --blue:#008BCC; --orange:#FF8F1C; --dkorange:#C25E00;
+  --ink:#1F2937; --mid:#4B5563; --muted:#6B7280; --line:#D6DEE9; --bg:#F4F7FB; --card:#FFFFFF;
+  --ltblue:#E6F3FA; --ltorange:#FFF1E0; --hl:#FFE0BD; --good:#1E7B34; --goodbg:#E7F5EA; --bad:#B3264E; --badbg:#FBE9EC;
+  --purple:#5B2C9A; --ltpurple:#EFE7FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Lato,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 16px 0}
+.wrap{max-width:1100px;margin:0 auto}
+.kicker{color:var(--orange);font-weight:900;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:2px 0 2px;font-size:30px;font-weight:900;line-height:1.15}
+.sub{color:#CFE3F5;font-size:14.5px}
+.progress{display:flex;align-items:center;gap:10px;margin:12px 0 12px;font-size:13.5px;color:#CFE3F5}
+.bar{flex:1;max-width:260px;height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:rgba(255,255,255,.08);color:#DCE8F5;font:700 14px Lato,sans-serif;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px;margin-right:6px}
+.tab.on{background:var(--bg);color:var(--navy)}
+.tab.on .n{background:var(--orange);color:#fff}
+.tab.done .n{background:var(--good);color:#fff}
+main{padding:20px 16px 48px}
+.panel{display:none}
+.panel.on{display:block}
+h2{color:var(--navy);font-size:23px;margin:0 0 4px;font-weight:900}
+.lead{color:var(--mid);margin:0 0 16px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 8px;color:var(--navy);font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-lab{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+@media (max-width:700px){.grid-lab{grid-template-columns:1fr}}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:700 15px Lato,sans-serif;cursor:pointer;background:var(--navy);color:#fff;min-height:44px}
+.btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.orange{background:var(--orange);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font:700 15px Lato,sans-serif;color:var(--navy);cursor:pointer;min-height:44px;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--navy);background:var(--ltblue)}
+.opt.ok{border-color:var(--good);background:var(--goodbg);color:var(--good)}
+.opt.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--goodbg);border-left:5px solid var(--good)}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}
+.fb.info{background:var(--ltblue);border-left:5px solid var(--blue)}
+.pill{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.04em;padding:3px 9px;border-radius:20px;background:var(--ltblue);color:var(--navy)}
+.pill.o{background:var(--ltorange);color:var(--dkorange)}
+.muted{color:var(--muted);font-size:13.5px}
+.story{border-left:5px solid var(--blue);background:#FAFCFE}
+.story.b{border-left-color:var(--orange)}
+.story p{margin:6px 0}
+table.sched{border-collapse:collapse;width:100%;font-size:14.5px}
+table.sched th{background:var(--navy);color:#fff;font-weight:700;padding:7px 8px;text-align:center}
+table.sched td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+table.sched td.l{text-align:left}
+table.sched tr.warn td{background:var(--badbg)}
+table.sched tr.afford td{background:var(--ltorange)}
+.num{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--blue);height:30px;cursor:pointer;touch-action:pan-y}
+.sl{display:grid;grid-template-columns:1fr;gap:2px;margin:6px 0 10px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:14.5px}
+.sl .top b{color:var(--navy)}
+.sl .val{font-weight:900;color:var(--dkorange);white-space:nowrap}
+.fac{border:1px solid var(--line);border-radius:10px;padding:8px 10px 2px;margin-bottom:8px;background:#fff}
+.fac.active{border-color:var(--orange);background:#FFFBF5}
+.letter{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-weight:900;font-size:13px;margin-right:6px;flex:0 0 auto}
+.ticks{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:-4px}
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block;touch-action:none}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,47,108,.15);border-radius:8px;padding:6px 9px;font-size:13px;display:none;white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--mid);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.chain{background:var(--ltpurple);border-left:5px solid var(--purple);border-radius:10px;padding:12px 14px;font-size:15px}
+.chain ol{margin:6px 0 0 18px;padding:0}
+.chain li{margin:3px 0}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.ro{border-radius:10px;padding:10px 12px;background:var(--ltblue)}
+.ro.o{background:var(--ltorange)}
+.ro > b{display:block;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.ro span{font-size:15.5px;font-weight:700}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.missions{grid-template-columns:1fr 1fr}}
+.mission{border:2px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+.mission.done{border-style:solid;border-color:var(--good);background:var(--goodbg)}
+.mission .t{font-weight:900;color:var(--navy);display:block;margin-bottom:2px}
+.mission.done .t::after{content:"  ✓";color:var(--good)}
+.seg{display:inline-flex;border:2px solid var(--navy);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:#fff;color:var(--navy);font:700 14px Lato,sans-serif;padding:9px 14px;cursor:pointer;min-height:42px}
+.seg button.on{background:var(--navy);color:#fff}
+.hl{background:var(--hl);color:var(--dkorange);font-weight:900;padding:0 3px;border-radius:3px}
+.slot{min-height:46px;border:2px dashed var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;background:#fff;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.slot .k{font-weight:900;color:var(--muted);min-width:22px}
+.slot.filled{border-style:solid;border-color:var(--blue)}
+.slot.ok{border-color:var(--good);background:var(--goodbg)}
+.slot.no{border-color:var(--bad);background:var(--badbg)}
+.chip{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;margin:6px 0;font:400 15px Lato,sans-serif;color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--blue)}
+.chip.used{opacity:.35;cursor:default}
+.score{font-size:15px;font-weight:900;color:var(--navy)}
+.hide{display:none!important}
+.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.qtext{font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.prod{font-size:14px;color:var(--mid)}
+.done-banner{background:var(--goodbg);border:2px solid var(--good);border-radius:12px;padding:12px 14px;font-weight:700;color:var(--good);margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12.5px;padding:0 16px 30px}
+/* ---- 4.5 / 4.6 additions ---- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media (max-width:860px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{border-radius:10px;padding:9px 12px;background:var(--ltblue)}
+.tile.o{background:var(--ltorange)}
+.tile > b{display:block;color:var(--navy);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font-size:21px;font-weight:900;color:var(--ink)}
+.tile .s{font-size:12.5px;color:var(--muted)}
+.meter{height:7px;background:rgba(0,47,108,.12);border-radius:4px;margin-top:5px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.pol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pol{grid-template-columns:1fr}}
+.pc{border:2px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:left;font:400 14px Lato,sans-serif;color:var(--ink);position:relative}
+.pc:hover{border-color:var(--blue)}
+.pc.sel{border-color:var(--orange);background:#FFFBF5}
+.pc:disabled{opacity:.45;cursor:not-allowed}
+.pc .nm{display:block;font-weight:900;color:var(--navy);font-size:15px;padding-right:70px;margin-bottom:4px}
+.pc .cost{position:absolute;right:11px;top:11px;font-weight:900;color:var(--dkorange);font-size:14px}
+.pc .d{display:block;margin:6px 0 4px}
+.pc .lag{display:block;color:var(--muted);font-size:13px}
+.pc .w{display:block;color:var(--bad);font-size:13px}
+.pill.g{background:var(--goodbg);color:var(--good)}
+.budget{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end;margin-top:14px}
+@media (max-width:700px){.budget{grid-template-columns:1fr}}
+.aim{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.aim:first-child{border-top:0}
+.light{flex:0 0 14px;height:14px;border-radius:50%;margin-top:4px}
+.light.g{background:var(--good)}.light.a{background:#E0A526}.light.r{background:var(--bad)}
+textarea{width:100%;min-height:100px;font:400 15px Lato,sans-serif;border:2px solid var(--line);border-radius:10px;padding:10px}
+.scrollx{overflow-x:auto}
+@media (max-width:700px){.scrollx svg{min-width:640px}}
+@media print{header,footer,.noprint{display:none!important}body{background:#fff}.card{break-inside:avoid}}
+.pill.g{background:var(--goodbg);color:var(--good)}
+#yrSeg button{padding:8px 14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">IGCSE Economics 0455 · Unit 5 · SISB Nonthaburi</div>
+    <h1>5.3 Population</h1>
+    <div class="sub">Textbook Chapter 31, pp. 403–414 · Birth rates, death rates and migration, optimum population, and what happens when a population grows, shrinks or gets older</div>
+    <div class="progress"><span id="progTxt">0 / 6 activities complete</span><div class="bar"><i id="progBar"></i></div></div>
+    <nav id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ TAB 1: THINK FIRST ============ -->
+<section class="panel" id="p0">
+  <h2>Think first: two puzzles</h2>
+  <p class="lead">Both puzzles use real Thai figures. Answer the two questions under each one.</p>
+  <div class="grid2">
+    <div class="card story">
+      <span class="pill">Puzzle 1 · Thailand, 2025</span>
+      <h3 style="margin-top:8px">More deaths than births</h3>
+      <p>In 2025, <b>416,574</b> babies were born in Thailand: the fewest for 75 years. In the same year, <b>559,684</b> people died. From 1963 to 1983, Thailand had <b>over one million</b> births every year. Today a Thai woman has, on average, only about <b>one child</b>.</p>
+      <div id="s1"></div>
+    </div>
+    <div class="card story b">
+      <span class="pill o">Puzzle 2 · Samut Sakhon, 2026</span>
+      <h3 style="margin-top:8px">Who will do the work?</h3>
+      <p>Thailand has more than <b>3.6 million</b> registered migrant workers, most of them from <b>Myanmar, Cambodia and Laos</b>. Many work in factories, construction, fishing and farming. When thousands of Cambodian workers went home during the <b>2025 border conflict</b>, firms struggled to fill the jobs, and the government began recruiting workers from <b>Sri Lanka</b>.</p>
+      <div id="s2"></div>
+    </div>
+  </div>
+  <div class="card hide" id="hookReveal">
+    <h3>So what do the puzzles show?</h3>
+    <div class="scrollx"><div class="chartbox" id="hookChart"></div></div>
+    <p class="muted" style="margin:4px 0 0">Births in Thailand (thousands). The orange line shows deaths in 2025. Sources: Mahidol University IPSR; Ministry of Public Health; Department of Provincial Administration.</p>
+    <div class="grid2" style="margin-top:12px">
+      <p style="margin:0"><b>Puzzle 1:</b> a population grows when births are higher than deaths (a <b>natural increase</b>). In Thailand, deaths are now higher than births, so without migration the population <b>falls</b>. It has fallen this way every year since 2021.</p>
+      <p style="margin:0"><b>Puzzle 2:</b> population also changes through <b>migration</b>. More people moving in (<b>immigration</b>) than moving out (<b>emigration</b>) raises the population and adds to the <b>labour force</b>.</p>
+    </div>
+    <h3 style="margin-top:16px">Why is it useful to know about this?</h3>
+    <div class="missions">
+      <div class="mission done"><span class="t">Your country</span>Thailand is shrinking and getting older faster than almost any other middle-income country. One Thai in five is now aged 60 or over.</div>
+      <div class="mission done"><span class="t">Government choices</span>Baby bonuses, a later retirement age, work permits for migrants: these are in the news every month. Which ones work?</div>
+      <div class="mission done"><span class="t">Your future</span>Your generation will be a smaller workforce supporting more older people. That affects your taxes, your job and your own retirement.</div>
+      <div class="mission done"><span class="t">Your exam</span>Birth rate, net migration, optimum population, the dependency ratio and “Discuss” questions on ageing come up often.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2: POPULATION MATHS ============ -->
+<section class="panel" id="p1">
+  <h2>Births, deaths and migration</h2>
+  <p class="lead">Rates are measured <b>per 1,000 people per year</b> (coursebook p. 405). <b>Population change = birth rate − death rate + net migration rate.</b> Part A: use the sliders to complete four missions. Part B: solve the mystery country (Activity 31.1, p. 407).</p>
+  <div class="card">
+    <h3>Part A · The population calculator</h3>
+    <div class="grid-lab">
+      <div>
+        <div class="sl"><div class="top"><b>Birth rate (births per 1,000 a year)</b><span class="val" id="vB"></span></div><input type="range" id="sB" min="0" max="45" step="0.1" value="20" aria-label="Birth rate"></div>
+        <div class="sl"><div class="top"><b>Death rate (deaths per 1,000 a year)</b><span class="val" id="vD"></span></div><input type="range" id="sD" min="0" max="25" step="0.1" value="8" aria-label="Death rate"></div>
+        <div class="sl"><div class="top"><b>Net migration rate (per 1,000 a year)</b><span class="val" id="vM"></span></div><input type="range" id="sM" min="-8" max="8" step="0.1" value="0" aria-label="Net migration rate"></div>
+        <div class="readout"><div class="ro"><b>Change per 1,000 a year</b><span id="roC"></span></div><div class="ro o"><b>In a country of 65.8 million</b><span id="roP"></span></div></div>
+        <div class="chain" id="popWork"></div>
+      </div>
+      <div>
+        <div class="chartbox" id="popChart"></div>
+        <p class="muted" style="margin:4px 0 0">Population over the next 25 years if these rates stay the same. Start: 65.8 million, about the size of Thailand.</p>
+      </div>
+    </div>
+    <div class="missions" id="popMissions" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h3>Part B · The mystery country (Activity 31.1, p. 407)</h3>
+    <p class="muted" style="margin-top:0">An economist’s report has lost its first page. The country is one of these five. Clues: children are seen as a cost rather than a source of income; a third of people are over 65 and a tenth are over 80; there is net positive migration, <b>but the population is falling</b>; life expectancy is 85.</p>
+    <div class="scrollx"><table class="sched" id="mysTable"></table></div>
+    <div id="mysQ" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 3: WHY RATES DIFFER ============ -->
+<section class="panel" id="p2">
+  <h2>Why do rates differ between countries?</h2>
+  <p class="lead">Coursebook pp. 405–406. Part A: decide what each situation does. Part B: what happens to a country when its people leave?</p>
+  <div class="card">
+    <h3>Part A · Birth, death or migration?</h3>
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="rtNum"></span><span class="score" id="rtScore"></span></div>
+    <p class="qtext" id="rtEvent"></p>
+    <div class="opts" id="rtO"></div>
+    <div id="rtFb"></div>
+    <button class="btn hide" id="rtNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Part B · When people leave: negative net migration</h3>
+    <div class="grid2">
+      <div class="story" style="padding:10px 14px;border-radius:10px">
+        <span class="pill o">Leaving Myanmar</span>
+        <p>Conflict since the 2021 coup has pushed many more young people to leave Myanmar. Over two million Myanmar workers are registered in Thailand. Most are of working age, and they include skilled workers such as nurses and engineers.</p>
+      </div>
+      <div class="story b" style="padding:10px 14px;border-radius:10px">
+        <span class="pill o">Leaving Thailand</span>
+        <p>About <b>145,000</b> Thais work legally abroad, mainly in Taiwan, South Korea, Japan and Israel. Thai workers abroad sent home about <b>270 billion baht</b> in the 2024 fiscal year.</p>
+      </div>
+    </div>
+    <div id="emQ" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 4: OPTIMUM AND DEPENDENCY ============ -->
+<section class="panel" id="p3">
+  <h2>Too many, too few, too old?</h2>
+  <p class="lead">Coursebook pp. 407–411. Part A: find the <b>optimum population</b>: the size that gives the highest output per head. Part B: calculate the <b>dependency ratio</b>.</p>
+  <div class="card">
+    <h3>Part A · The optimum population</h3>
+    <div class="grid-lab">
+      <div>
+        <div class="chartbox" id="optChart"></div>
+      </div>
+      <div>
+        <div class="sl"><div class="top"><b>Number of people</b><span class="val" id="vN"></span></div><input type="range" id="sN" min="2" max="98" step="1" value="20" aria-label="Number of people"></div>
+        <div class="readout"><div class="ro"><b>Output per head</b><span id="roO"></span></div><div class="ro o"><b>This country is…</b><span id="roS"></span></div></div>
+        <label class="flex" style="gap:8px;cursor:pointer;margin:6px 0 10px"><input type="checkbox" id="techTog" style="width:22px;height:22px;accent-color:var(--orange)"> <span><b>New technology arrives</b> (Figure 31.4, p. 409)</span></label>
+        <div class="chain" id="optNote"></div>
+      </div>
+    </div>
+    <div class="missions" id="optMissions" style="margin-top:12px;grid-template-columns:repeat(3,1fr)"></div>
+  </div>
+  <div class="card">
+    <h3>Part A2 · Activity 31.2: the Democratic Republic of the Congo</h3>
+    <p class="muted" style="margin-top:0">Is the DRC moving towards or away from its optimum population? First work out <b>GDP per head</b> = GDP ÷ population.</p>
+    <div class="scrollx"><table class="sched" id="drcTable"></table></div>
+    <div class="flex" style="margin-top:8px"><button class="btn" id="drcBtn">Calculate GDP per head</button></div>
+    <div id="drcQ" class="hide" style="margin-top:10px"></div>
+  </div>
+  <div class="card">
+    <h3>Part B · The dependency ratio (p. 411)</h3>
+    <div class="grid-lab">
+      <div>
+        <div class="sl"><div class="top"><b>Children under 15 (millions)</b><span class="val" id="vK"></span></div><input type="range" id="sK" min="2" max="20" step="0.1" value="12" aria-label="Children"></div>
+        <div class="sl"><div class="top"><b>Working age, 15–59 (millions)</b><span class="val" id="vW"></span></div><input type="range" id="sW" min="20" max="60" step="0.1" value="40" aria-label="Working age"></div>
+        <div class="sl"><div class="top"><b>Aged 60 and over (millions)</b><span class="val" id="vO"></span></div><input type="range" id="sO" min="2" max="30" step="0.1" value="8" aria-label="Aged 60 and over"></div>
+      </div>
+      <div>
+        <div class="chain" id="depWork"></div>
+        <div class="readout"><div class="ro"><b>Dependency ratio</b><span id="roDep"></span></div><div class="ro o"><b>Workers per older person</b><span id="roWp"></span></div></div>
+      </div>
+    </div>
+    <p class="muted">Here “working age” is 15–59 because Thailand’s official retirement age is 60. Thai figures for 2025 are from civil registration (rounded). The 2033 figures are a projection reported by The Nation (Sept 2025) as shares of the population: 14% children, 57.9% working age, 28% aged 60+.</p>
+    <div class="missions" id="depMissions" style="grid-template-columns:repeat(3,1fr)"></div>
+    <div id="depQ" class="hide" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 5: AGEING POLICY LAB ============ -->
+<section class="panel" id="p4">
+  <h2>Ageing Thailand: you are the Minister</h2>
+  <p class="lead">Part A: young or older workers (Activity 31.3, p. 410). Part B: choose policies to cope with an ageing population, then see Thailand in <b>2035</b> and <b>2050</b>. There is no single right answer: try at least two different plans.</p>
+  <div class="card">
+    <h3>Part A · Young or older workers?</h3>
+    <div class="flex" style="justify-content:space-between"><span class="pill" id="ywNum"></span><span class="score" id="ywScore"></span></div>
+    <p class="qtext" id="ywEvent"></p>
+    <div class="opts" id="ywO"></div>
+    <div id="ywFb"></div>
+    <button class="btn hide" id="ywNext" style="margin-top:10px">Next</button>
+  </div>
+  <div class="card">
+    <h3>Part B · Choose your policies</h3>
+    <p class="muted" style="margin-top:0">You have <b>60 billion baht a year</b>. Without any policy, by 2050 Thailand would have far fewer workers and many more older people.</p>
+    <div class="pol" id="polGrid"></div>
+    <div class="budget">
+      <div><div class="flex" style="justify-content:space-between"><b>Budget used</b><span class="num" id="budTxt" style="font-weight:900"></span></div><div class="meter" style="height:12px"><i id="budBar"></i></div></div>
+      <label class="flex" style="gap:8px;cursor:pointer"><input type="checkbox" id="taxTog" style="width:22px;height:22px;accent-color:var(--orange)"> <span><b>Raise income tax on workers</b><br><span class="muted">Adds 20 billion baht to your budget</span></span></label>
+      <button class="btn orange" id="runBtn">See the results</button>
+    </div>
+  </div>
+  <div class="card hide" id="resCard">
+    <h3>Results: dependents per 100 people of working age</h3>
+    <div class="seg" id="yrSeg" style="margin-bottom:10px"><button data-y="0" class="on">2035</button><button data-y="1">2050</button></div>
+    <div class="scrollx"><div class="chartbox" id="resChart"></div></div>
+    <div class="tiles" id="resTiles" style="margin-top:12px"></div>
+    <div id="resSide"></div>
+    <p class="muted" style="margin-bottom:0">Plans tried: <b id="planCount">0</b>. Change your choices and run again to compare.</p>
+  </div>
+  <div class="card hide" id="labQCard">
+    <h3>Checkpoint: what did you notice?</h3>
+    <div id="labQ"></div>
+  </div>
+</section>
+
+<!-- ============ TAB 6: EXAM PRACTICE ============ -->
+<section class="panel" id="p5">
+  <h2>Exam practice</h2>
+  <p class="lead">Part 1: six multiple-choice questions. Part 2: build a 6-mark chain of reasoning, then compare it with the model answer.</p>
+  <div class="card" id="mcqCard"></div>
+  <div class="card">
+    <h3>Build the 6-mark answer</h3>
+    <p><b>Analyse the consequences of an ageing population for an economy such as Thailand. [6]</b></p>
+    <p class="muted">Structure: Define → Context → Chain of reasoning × 2 → Overall. Tap the sentences in the right order. Tap a filled slot to send it back.</p>
+    <div class="grid2">
+      <div id="chainSlots"></div>
+      <div id="chainChips"></div>
+    </div>
+    <div class="flex"><button class="btn" id="chainCheck">Check my order</button><button class="btn alt" id="chainReset">Start again</button></div>
+    <div id="chainFb"></div>
+    <div id="chainModel" class="hide" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<footer>SISB Nonthaburi · Humanities · IGCSE Economics 0455 · 5.3 Population · Births and deaths from the Department of Provincial Administration (NSO Statistical Yearbook Thailand 2026); migrant workers from the Department of Employment via the Migrant Working Group (2025); Thai workers abroad and remittances from the Ministry of Labour. The Policy lab is a simplified model based on current trends, not an official forecast. Activity 31.1 and 31.2 data are from the coursebook.</footer>
+
+<script>
+(function(){
+'use strict';
+const NAVY='#002F6C',BLUE='#008BCC',ORANGE='#FF8F1C',DKOR='#C25E00',BAD='#B3264E',GOOD='#1E7B34',GREY='#6B7280',PURPLE='#5B2C9A';
+const $=id=>document.getElementById(id);
+const fmt=(x,d=1)=>(x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const sgn=(x,d=1)=>(x>1e-9?'+':x<-1e-9?'−':'')+Math.abs(x).toFixed(d);
+const th=n=>Math.round(n).toLocaleString('en-US');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- tracker ---------- */
+// One row per activity: the activity name is part of the label, so the tracker does not merge them.
+function track(activity,detail){try{const T=window.SISB_TRACKER||window.SISBTracker;if(T&&typeof T.log==='function')T.log('5.3','5.3 Population · '+activity,detail);}catch(e){}}
+
+/* ---------- tabs + progress ---------- */
+const TABS=['Think first','Population maths','Why rates differ','Optimum and dependency','Ageing policy lab','Exam practice'];
+const done=new Set();
+const tabsEl=$('tabs');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.dataset.i=i;b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>show(i);tabsEl.appendChild(b);});
+function show(i){document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j===i));document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',j===i));window.scrollTo({top:0,behavior:'smooth'});}
+function complete(i,detail){if(done.has(i))return;done.add(i);document.querySelectorAll('.tab')[i].classList.add('done');
+  $('progTxt').textContent=`${done.size} / 6 activities complete`;$('progBar').style.width=(done.size/6*100)+'%';
+  track(TABS[i],detail);if(done.size===6)track('All activities','All 6 activities complete');}
+show(0);
+
+/* ---------- bar chart (site style) ---------- */
+function bars(el,cfg){
+  const vw=window.innerWidth;const W=cfg.W||(vw<600?400:vw<1000?560:720),H=cfg.H||(vw<600?280:300),L=62,R=14,T=24,B=cfg.xLabel?52:36;
+  const vals=cfg.values;let lo=Math.min(0,...vals),hi=Math.max(0,...vals);if(cfg.min!==undefined)lo=Math.min(lo,cfg.min);if(cfg.max!==undefined)hi=Math.max(hi,cfg.max);const pad=(hi-lo)*.12||1;
+  const step=cfg.yStep||((hi-lo)>12?4:(hi-lo)>6?2:(hi-lo)>2.5?1:0.5);
+  lo=Math.floor((lo-(lo<0?pad:0))/step)*step;hi=Math.ceil((hi+pad)/step)*step;
+  const Y=v=>T+(hi-v)/(hi-lo)*(H-T-B),n=vals.length,slot=(W-L-R)/n,bw=Math.min(cfg.bw||54,slot*.6),X=i=>L+slot*(i+.5);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.aria||'Bar chart'}">`;
+  for(let v=lo;v<=hi+1e-9;v+=step){s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${Math.abs(v)<1e-9?NAVY:'#EEF2F7'}" stroke-width="${Math.abs(v)<1e-9?2:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${cfg.yFmt?cfg.yFmt(v):fmt(v,step<1?1:0)}</text>`;}
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  vals.forEach((v,i)=>{const c=cfg.colors?cfg.colors[i]:(v<0?ORANGE:NAVY);
+    s+=`<rect x="${X(i)-bw/2}" y="${Math.min(Y(0),Y(v))}" width="${bw}" height="${Math.max(1.5,Math.abs(Y(v)-Y(0)))}" rx="2" fill="${c}"/>`;
+    if(cfg.showVals!==false)s+=`<text x="${X(i)}" y="${v>=0?Y(v)-6:Y(v)+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${c}">${cfg.valFmt?cfg.valFmt(v):sgn(v)}</text>`;
+    s+=`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">${cfg.labels[i]}</text>`;});
+  if(cfg.refLine!==undefined)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(cfg.refLine)}" y2="${Y(cfg.refLine)}" stroke="${ORANGE}" stroke-width="2.5" stroke-dasharray="6 4"/><text x="${W-R-4}" y="${Y(cfg.refLine)-6}" text-anchor="end" font-size="12" font-weight="900" fill="${DKOR}">${cfg.refText||''}</text>`;
+  if(cfg.xLabel)s+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" font-size="13.5" font-weight="700" fill="${NAVY}">${cfg.xLabel}</text>`;
+  s+=`<text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">${cfg.yLabel}</text></svg>`;
+  el.innerHTML=s;
+}
+/* two-step question helper: el, list of {q,o,a,why} then fb, onDone */
+function quizBlock(el,qs,fb,onDone){
+  el.innerHTML=qs.map((q,k)=>`<div class="${k?'hide':''}" data-w="${k}"><p><b>${k+1}. ${q.q}</b></p><div class="opts" data-s="${k}"></div></div>`).join('')+'<div data-fb></div>';
+  qs.forEach((q,k)=>{const o=el.querySelector(`[data-s="${k}"]`);
+    q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+      o.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(i===q.a?'ok':'no');if(i!==q.a)o.children[q.a].classList.add('ok');
+      if(q.why)el.querySelector(`[data-w="${k}"]`).insertAdjacentHTML('beforeend',`<div class="fb ${i===q.a?'ok':'no'}" style="margin-bottom:8px">${q.why}</div>`);
+      const nx=el.querySelector(`[data-w="${k+1}"]`);if(nx)nx.classList.remove('hide');
+      else{if(fb)el.querySelector('[data-fb]').innerHTML=`<div class="fb info">${fb}</div>`;onDone&&onDone();}};o.appendChild(b);});});
+}
+/* one-question-at-a-time sorter: cfg {cases:[[text,key,why]], cats:[[key,label]], ids:{num,score,ev,o,fb,next}, label, onEnd(score,total)} */
+function sorter(cfg){
+  let order=shuffle(cfg.cases.map((_,i)=>i)),i=0,s=0;const I=cfg.ids;
+  function render(){
+    if(i>=order.length){$(I.ev).textContent=`Finished: ${s} / ${order.length}.`;$(I.o).innerHTML='';$(I.next).classList.add('hide');$(I.num).textContent='Done';
+      $(I.fb).innerHTML=`<div class="fb info">${cfg.summary}</div>`;cfg.onEnd(s,order.length);return;}
+    const c=cfg.cases[order[i]];$(I.num).textContent=`${cfg.label} ${i+1} of ${order.length}`;$(I.score).textContent=`Score: ${s}`;$(I.ev).textContent=c[0];$(I.fb).innerHTML='';$(I.next).classList.add('hide');
+    const o=$(I.o);o.innerHTML='';
+    cfg.cats.forEach(([k,t])=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{
+      o.querySelectorAll('.opt').forEach(x=>x.disabled=true);const r=k===c[1];if(r)s++;b.classList.add(r?'ok':'no');if(!r)o.children[cfg.cats.findIndex(x=>x[0]===c[1])].classList.add('ok');
+      $(I.score).textContent=`Score: ${s}`;$(I.fb).innerHTML=`<div class="fb ${r?'ok':'no'}"><b>${r?'Correct.':'Answer: '+cfg.cats.find(x=>x[0]===c[1])[1]+'.'}</b> ${c[2]}</div>`;$(I.next).classList.remove('hide');};o.appendChild(b);});
+  }
+  $(I.next).onclick=()=>{i++;render();};render();
+}
+/* ordering tool: cfg {items:[text], slotsEl, chipsEl, checkBtn, resetBtn, fbEl, label, onOk} ; item k belongs in slot k */
+function orderer(cfg){
+  let placed=[],chipOrder=shuffle(cfg.items.map((_,i)=>i)).filter(k=>!(cfg.fixed||[]).includes(k));
+  (cfg.fixed||[]).forEach(k=>placed[k]=k);
+  function render(){
+    $(cfg.slotsEl).innerHTML=cfg.items.map((c,i)=>`<div class="slot ${placed[i]!==undefined?'filled':''}" data-i="${i}"><span class="k">${i+1}</span><span>${placed[i]!==undefined?cfg.items[placed[i]]:'<span class="muted">Tap a sentence to place it here</span>'}</span></div>`).join('');
+    $(cfg.slotsEl).querySelectorAll('.slot').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if((cfg.fixed||[]).includes(i))return;if(placed[i]!==undefined){placed[i]=undefined;render();}});
+    $(cfg.chipsEl).innerHTML='';
+    chipOrder.forEach(k=>{const b=document.createElement('button');b.className='chip'+(placed.includes(k)?' used':'');b.textContent=cfg.items[k];b.disabled=placed.includes(k);
+      b.onclick=()=>{const e=cfg.items.findIndex((_,i)=>placed[i]===undefined);if(e<0)return;placed[e]=k;render();};$(cfg.chipsEl).appendChild(b);});
+  }
+  $(cfg.resetBtn).onclick=()=>{placed=[];(cfg.fixed||[]).forEach(k=>placed[k]=k);chipOrder=shuffle(cfg.items.map((_,i)=>i)).filter(k=>!(cfg.fixed||[]).includes(k));$(cfg.fbEl).innerHTML='';cfg.onReset&&cfg.onReset();render();};
+  $(cfg.checkBtn).onclick=()=>{
+    if(placed.filter(x=>x!==undefined).length<cfg.items.length){$(cfg.fbEl).innerHTML=`<div class="fb no">Place all ${cfg.items.length} ${cfg.label} first.</div>`;return;}
+    let ok=0;const slots=$(cfg.slotsEl).querySelectorAll('.slot');
+    placed.forEach((k,i)=>{const good=k===i;if(good)ok++;slots[i].classList.add(good?'ok':'no');});
+    if(ok===cfg.items.length)cfg.onOk();else $(cfg.fbEl).innerHTML=`<div class="fb no">${ok} of ${cfg.items.length} in the right place. ${cfg.hint} Tap a red slot to send it back.</div>`;
+  };
+  render();
+}
+
+/* ================= TAB 1: THINK FIRST ================= */
+const hookDone=[0,0];
+quizBlock($('s1'),[
+  {q:'Leaving out migration, what happened to Thailand’s population in 2025?',o:['It grew by about 143,000 people','It fell by about 143,000 people','It stayed the same'],a:1,why:'559,684 − 416,574 = 143,110 more deaths than births. This is a <b>natural decrease</b>.'},
+  {q:'To keep a population the same size, each woman needs to have, on average, about…',o:['1 child','2 children','5 children'],a:1,why:'About 2.1 children per woman replaces both parents. Thailand is at about 1, so each generation is only about half the size of the one before.'}],
+  null,()=>{hookDone[0]=1;hookCheck();});
+quizBlock($('s2'),[
+  {q:'How do migrant workers change Thailand’s population?',o:['They add to it: people moving in raise the population and the labour force','They have no effect, because they are not Thai','They reduce it'],a:0,why:'When more people move into a country than leave it, there is <b>positive net migration</b>: the population grows.'},
+  {q:'Why may Thai firms find it even harder to find young workers in the future?',o:['Fewer babies were born 15–20 years ago, so fewer young people are reaching working age','Young people do not want to work','Wages in Thailand are too high'],a:0,why:'Today’s low birth rate means a smaller labour force in 15–20 years. Population changes are slow, but they are hard to reverse.'}],
+  null,()=>{hookDone[1]=1;hookCheck();});
+function hookCheck(){if(hookDone[0]&&hookDone[1]){$('hookReveal').classList.remove('hide');drawHook();complete(0,'Think first: two puzzles');}}
+const BIRTHS=[['1971 (peak)',1200],['2022',485],['2024',462],['2025',417]];
+function drawHook(){bars($('hookChart'),{labels:BIRTHS.map(r=>r[0]),values:BIRTHS.map(r=>r[1]),colors:BIRTHS.map((r,i)=>i?NAVY:BLUE),W:720,H:300,min:0,max:1300,yStep:200,refLine:560,refText:'Deaths in 2025: 560,000',yLabel:'Births (thousands)',valFmt:v=>th(v)+'k',yFmt:v=>th(v),aria:'Births in Thailand, 1971 to 2025, with deaths in 2025'});}
+
+/* ================= TAB 2: POPULATION MATHS ================= */
+const START=65.8;
+const popM=[
+  {t:'Thailand, 2025',d:'Set a birth rate of 6.3 and a death rate of 8.5, with no migration. How many people does Thailand lose each year?',ok:(b,d,m)=>near(b,6.3)&&near(d,8.5)&&near(m,0),msg:'About <b>145,000 a year</b>: −2.2 per 1,000.'},
+  {t:'Fill the gap',d:'Keep 6.3 and 8.5. What net migration rate stops the population falling?',ok:(b,d,m)=>near(b,6.3)&&near(d,8.5)&&near(b-d+m,0),msg:'<b>+2.2 per 1,000</b>: about 145,000 more people moving in than out each year.'},
+  {t:'The mystery puzzle',d:'Find rates where net migration is <b>positive</b>, but the population still <b>falls</b>.',ok:(b,d,m)=>m>0.05&&b-d+m<-0.05,msg:'The natural decrease is bigger than the net immigration.'},
+  {t:'Fast growth',d:'Set Tanzania’s rates from Part B: 33, 5 and −0.3. How long until the population doubles?',ok:(b,d,m)=>near(b,33)&&near(d,5)&&near(m,-0.3),msg:'+27.7 per 1,000 (2.8% a year): it <b>doubles in about 25 years</b>.'}];
+function near(a,b){return Math.abs(a-b)<0.05;}
+const popDone=new Set();
+$('popMissions').innerHTML=popM.map((m,i)=>`<div class="mission" id="pm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function popRender(){
+  const b=+$('sB').value,d=+$('sD').value,m=+$('sM').value,c=b-d+m,per=c/1000*START*1e6;
+  $('vB').textContent=b.toFixed(1);$('vD').textContent=d.toFixed(1);$('vM').textContent=sgn(m);
+  $('roC').textContent=sgn(c)+' per 1,000';$('roP').textContent=Math.abs(per)<500?'No change':(per>=0?'+':'−')+th(Math.abs(per))+' people a year';
+  const nat=b-d;
+  $('popWork').innerHTML=`<b>Working</b><div>Natural ${nat>=0?'increase':'decrease'} = ${b.toFixed(1)} − ${d.toFixed(1)} = <b>${sgn(nat)}</b> per 1,000</div><div>Population change = ${sgn(nat)} ${m>=0?'+':'−'} ${Math.abs(m).toFixed(1)} (net migration) = <b>${sgn(c)} per 1,000</b>, or ${sgn(c/10,2)}% a year.</div><div>${c>0.05?'The population is <b>growing</b>.':c<-0.05?'The population is <b>falling</b>.':'The population is <b>stable</b>.'}${m>0.05?' Net migration is positive: more immigrants than emigrants.':m<-0.05?' Net migration is negative: more emigrants than immigrants.':''}</div>`;
+  drawPop(c);
+  popM.forEach((x,i)=>{if(!popDone.has(i)&&x.ok(b,d,m)){popDone.add(i);$('pm'+i).classList.add('done');$('pm'+i).insertAdjacentHTML('beforeend','<br>'+x.msg);}});
+  popCheck();
+}
+function drawPop(c){
+  const W=460,H=300,L=58,R=14,T=18,B=44,yrs=25,pts=[];for(let t=0;t<=yrs;t++)pts.push(START*Math.pow(1+c/1000,t));
+  let lo=Math.min(...pts),hi=Math.max(...pts);const pad=Math.max(2,(hi-lo)*.15);lo=Math.max(0,Math.floor((lo-pad)/5)*5);hi=Math.ceil((hi+pad)/5)*5;
+  const step=(hi-lo)>60?20:(hi-lo)>30?10:5;
+  const X=t=>L+t/yrs*(W-L-R),Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Population over 25 years">`;
+  for(let v=lo;v<=hi+1e-9;v+=step)s+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#EEF2F7"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${GREY}">${v}</text>`;
+  for(let t=0;t<=yrs;t+=5)s+=`<text x="${X(t)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">+${t}</text>`;
+  s+=`<line x1="${L}" x2="${W-R}" y1="${Y(START)}" y2="${Y(START)}" stroke="${ORANGE}" stroke-width="2" stroke-dasharray="6 4"/>`;
+  s+=`<polyline fill="none" stroke="${c<-0.05?BAD:c>0.05?GOOD:NAVY}" stroke-width="3.5" points="${pts.map((p,t)=>X(t)+','+Y(p)).join(' ')}"/>`;
+  s+=`<circle cx="${X(yrs)}" cy="${Y(pts[yrs])}" r="5" fill="${NAVY}"/><text x="${X(yrs)-8}" y="${Y(pts[yrs])+(pts[yrs]>=START?-10:20)}" text-anchor="end" font-size="13" font-weight="900" fill="${NAVY}">${pts[yrs].toFixed(1)} m</text>`;
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">Years from now</text><text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">Population (millions)</text></svg>`;
+  $('popChart').innerHTML=s;
+}
+['sB','sD','sM'].forEach(id=>$(id).addEventListener('input',popRender));
+// Activity 31.1 data: [country, average age, age of mother at first child, years of schooling, birth rate, death rate, net migration rate]
+const MYS=[['Cambodia',28,23,7,19,6,-2.7],['Hungary',45,28,9,9,9,2.6],['Japan',50,32,15,7,12,0.7],['Philippines',25,24,13,22,6,-0.1],['Tanzania',19,15,9,33,5,-0.3]];
+$('mysTable').innerHTML='<tr><th>Country</th><th>Average age</th><th>Mother’s age at first child</th><th>Years of schooling</th><th>Birth rate</th><th>Death rate</th><th>Net migration rate</th></tr>'+MYS.map(r=>`<tr><td class="l"><b>${r[0]}</b></td>${r.slice(1).map(v=>`<td class="num">${typeof v==='number'&&v<0?'−'+Math.abs(v):v}</td>`).join('')}</tr>`).join('');
+let mysDone=false;
+quizBlock($('mysQ'),[
+  {q:'Which country is the mystery country?',o:['Cambodia','Hungary','Japan','Philippines','Tanzania'],a:2,why:'<b>Japan.</b> It has the oldest population (average age 50) and the only death rate higher than its birth rate. 7 − 12 + 0.7 = <b>−4.3 per 1,000</b>: net immigration is too small to stop the fall.'},
+  {q:'Hungary also has positive net migration. Why is it NOT the mystery country?',o:['Its population is growing: 9 − 9 + 2.6 = +2.6 per 1,000','Its birth rate is too high','It has negative net migration'],a:0,why:'Hungary’s births and deaths are equal, so its net immigration makes the population <b>grow</b>. The clue says the population is falling.'},
+  {q:'Tanzania’s birth rate (33) is almost five times Japan’s (7). Which reason is supported by the table?',o:['Women in Tanzania have their first child at 15, so they have more years in which to have children','Tanzania has a higher death rate','Tanzania has more immigration'],a:0,why:'A young population and early motherhood raise the birth rate. Fewer years of schooling and fewer job opportunities for women also play a part (coursebook p. 406).'}],
+  null,()=>{mysDone=true;popCheck();});
+function popCheck(){if(popDone.size===popM.length&&mysDone)complete(1,'Population maths: 4 missions + mystery country');}
+popRender();
+
+/* ================= TAB 3: WHY RATES DIFFER ================= */
+const RT_CATS=[['hb','Raises the birth rate'],['lb','Lowers the birth rate'],['hd','Raises the death rate'],['ld','Lowers the death rate'],['em','Causes emigration']];
+const RT=[
+  ['More women stay in education until 22 and then have well-paid careers.','lb','Educated women with good jobs tend to have children later and have fewer of them (coursebook p. 406).'],
+  ['Children help on the family farm from a young age and look after their parents in old age, because there is no state pension.','hb','When children are a source of income and old-age support, families have more of them.'],
+  ['Many babies die before their first birthday, so parents have more children.','hb','A high <b>infant mortality rate</b> (deaths per 1,000 live births) leads to a high birth rate: parents worry that some children will not survive.'],
+  ['Raising a child in Bangkok is expensive: school fees, tutoring and university.','lb','When children are expensive, people have fewer of them. This is a main reason for Thailand’s low birth rate.'],
+  ['The government pays parents a cash grant for every child born.','hb','Cash incentives reduce the cost of having children. (But Italy has tried this without much success: coursebook p. 404.)'],
+  ['A country is at war and many hospitals are destroyed.','hd','Military conflict raises the death rate (p. 405).'],
+  ['Most people now have clean water, vaccinations and cheap healthcare, such as Thailand’s 30-baht scheme.','ld','Better medical care, nutrition and housing lower the death rate.'],
+  ['Many adults smoke, drink a lot of alcohol and rarely exercise.','hd','Unhealthy lifestyles raise the death rate (p. 406).'],
+  ['A Thai farm worker can earn several times more in South Korea than at home.','em','Higher living standards abroad, with few limits on entry, lead people to <b>emigrate</b> (p. 406).'],
+  ['There is civil war at home and few jobs, but a neighbouring country has plenty of work.','em','People leave to escape conflict and to find work. This is why millions of people have moved from Myanmar to Thailand.'],
+  ['Contraception and family-planning advice are free and easy to get.','lb','Better family-planning services help households limit the size of their families (p. 410).'],
+];
+const rtState={a:false,b:false};
+sorter({cases:RT,cats:RT_CATS,label:'Situation',ids:{num:'rtNum',score:'rtScore',ev:'rtEvent',o:'rtO',fb:'rtFb',next:'rtNext'},
+  summary:'Birth rates are <b>high</b> where the population is young, infant mortality is high, women have little education and children are cheap or bring income. They are <b>low</b> where children are expensive, women have good jobs and there are state pensions. Death rates depend on diet, housing, healthcare, lifestyle and conflict. Migration depends on living standards at home and abroad.',
+  onEnd:(s,n)=>{rtState.a=true;rtState.s=s;rtState.n=n;rtCheck();}});
+quizBlock($('emQ'),[
+  {q:'Many young doctors and nurses leave Myanmar to work abroad. What is this called for Myanmar?',o:['A brain drain','A brain gain','A natural decrease'],a:0,why:'Myanmar loses skilled workers (a <b>brain drain</b>); the country they move to gains them (a <b>brain gain</b>).'},
+  {q:'Most emigrants are of working age. What is likely to happen in the country they leave?',o:['The remaining labour force has a greater burden of dependency','The labour force grows','The average age of workers falls'],a:0,why:'Fewer workers are left to support children and older people, and the average age of the labour force rises (coursebook p. 405).'},
+  {q:'How can Thais working abroad benefit Thailand?',o:['They send money home (remittances) and may return with new skills','They raise Thailand’s birth rate','They increase Thailand’s labour force'],a:0,why:'Thai workers abroad sent home about 270 billion baht in the 2024 fiscal year. Workers may also bring back skills that benefit Thailand.'}],
+  null,()=>{rtState.b=true;rtCheck();});
+function rtCheck(){if(rtState.a&&rtState.b)complete(2,`Why rates differ: ${rtState.s}/${rtState.n} + emigration`);}
+
+/* ================= TAB 4: OPTIMUM AND DEPENDENCY ================= */
+let tech=false;
+const optP=()=>tech?{N:130,P:125}:{N:100,P:100};
+const oph=n=>{const {N,P}=optP();return Math.max(0,4*P*(n/N)*(1-n/N));};
+const optM=[{t:'Find the optimum',d:'Move the slider to the size that gives the highest output per head.',ok:n=>!tech&&n>=48&&n<=52},
+  {t:'Too many people',d:'Find a size where output per head has fallen below 60 because there are too many people.',ok:n=>!tech&&n>=70&&oph(n)<60},
+  {t:'New technology',d:'Tick “New technology”. Where is the optimum now?',ok:n=>tech&&n>=62&&n<=68}];
+const optDone=new Set();
+$('optMissions').innerHTML=optM.map((m,i)=>`<div class="mission" id="om${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function optRender(){
+  const n=+$('sN').value,v=oph(n),{N,P}=optP(),q=N/2,st=n<q-2?'Underpopulated':n>q+2?'Overpopulated':'At the optimum';
+  $('vN').textContent=n+' million';$('roO').textContent=v.toFixed(0)+(tech?'':' ');$('roS').textContent=st;
+  $('optNote').innerHTML=st==='Underpopulated'?'<b>Underpopulated:</b> not enough people to make the best use of the land, capital and technology. Adding people <b>raises</b> output per head. The government may encourage immigration.':st==='Overpopulated'?'<b>Overpopulated:</b> too many people for the land, capital and technology available. Adding people <b>lowers</b> output per head. The government may try to reduce the birth rate or increase investment.':'<b>Optimum population:</b> the size of population that, combined with the country’s land, capital and technology, gives the <b>maximum output per head</b>.';
+  const W=460,H=300,L=50,R=16,T=20,B=44,xmax=100,ymax=130,X=x=>L+x/xmax*(W-L-R),Y=y=>T+(ymax-y)/ymax*(H-T-B);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Optimum population curve">`;
+  const curve=(NN,PP,col,dash)=>{let p=[];for(let x=0;x<=Math.min(xmax,NN);x+=1)p.push(X(x)+','+Y(Math.max(0,4*PP*(x/NN)*(1-x/NN))));return `<polyline fill="none" stroke="${col}" stroke-width="3" ${dash?'stroke-dasharray="6 4"':''} points="${p.join(' ')}"/>`;};
+  if(tech)s+=curve(100,100,'#B8C4D6',true);
+  s+=curve(N,P,NAVY,false);
+  s+=`<line x1="${X(q)}" x2="${X(q)}" y1="${Y(P)}" y2="${Y(0)}" stroke="${GREY}" stroke-dasharray="3 3"/><text x="${X(q)}" y="${H-B+18}" text-anchor="middle" font-size="13" font-weight="900" fill="${NAVY}">Q${tech?'₂':''}</text>`;
+  if(tech)s+=`<text x="${X(50)}" y="${H-B+18}" text-anchor="middle" font-size="12" fill="${GREY}">Q₁</text>`;
+  const ux=X(q*0.5),ox=X(Math.min(q*1.5,88)),ly=Y(P*0.3);
+  s+=`<text x="${ux}" y="${ly}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${BLUE}">Under-</text><text x="${ux}" y="${ly+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${BLUE}">populated</text>`;
+  s+=`<text x="${ox}" y="${ly}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${DKOR}">Over-</text><text x="${ox}" y="${ly+15}" text-anchor="middle" font-size="12.5" font-weight="900" fill="${DKOR}">populated</text>`;
+  s+=`<line x1="${X(n)}" x2="${X(n)}" y1="${Y(v)}" y2="${Y(0)}" stroke="${ORANGE}" stroke-width="2"/><circle cx="${X(n)}" cy="${Y(v)}" r="7" fill="${ORANGE}" stroke="#fff" stroke-width="2"/>`;
+  s+=`<line x1="${L}" y1="${T-4}" x2="${L}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="${NAVY}" stroke-width="2"/><text x="${L-6}" y="${H-B+18}" text-anchor="end" font-size="12" fill="${GREY}">0</text>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">Number of people</text><text transform="translate(18 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${NAVY}">Output per head</text></svg>`;
+  $('optChart').innerHTML=s;
+  optM.forEach((m,i)=>{if(!optDone.has(i)&&m.ok(n)){optDone.add(i);$('om'+i).classList.add('done');
+    if(i===2)$('om2').insertAdjacentHTML('beforeend','<br><b>About 65 million.</b> Better technology raises the size of the optimum, so a country at 50 million is now underpopulated.');}});
+  optCheck();
+}
+$('sN').addEventListener('input',optRender);$('techTog').onchange=e=>{tech=e.target.checked;optRender();};
+// Activity 31.2
+const DRC=[[1995,43,5640],[2000,49,19090],[2005,57,11960],[2010,66,21570],[2015,79,37920],[2020,99,48720]];
+let drcShown=false,drcDone=false;
+function drcRender(){$('drcTable').innerHTML='<tr><th>Year</th><th>Population (millions)</th><th>GDP ($ millions)</th><th>GDP per head ($)</th></tr>'+DRC.map(r=>`<tr><td class="num">${r[0]}</td><td class="num">${r[1]}</td><td class="num">${th(r[2])}</td><td class="num"><b>${drcShown?th(r[2]/r[1]):'?'}</b></td></tr>`).join('');}
+drcRender();
+$('drcBtn').onclick=()=>{drcShown=true;drcRender();$('drcQ').classList.remove('hide');$('drcBtn').disabled=true;};
+quizBlock($('drcQ'),[
+  {q:'What happened to GDP per head between 1995 and 2020?',o:['It rose from about $131 to about $492','It fell, because the population more than doubled','It stayed the same'],a:0,why:'GDP grew much faster than the population. Note the fall between 2000 and 2005: the change was not smooth.'},
+  {q:'So was the DRC moving towards or away from its optimum population?',o:['Probably towards it: the population grew and output per head rose too','Away from it: a population that doubles must be overpopulated','It is impossible to say anything'],a:0,why:'If extra people help make better use of resources, output per head rises: the country is moving <b>towards</b> its optimum. But be careful: output per head also depends on other resources (the DRC is rich in minerals), and the optimum is hard to measure because resources keep changing (p. 408).'}],
+  null,()=>{drcDone=true;optCheck();});
+// dependency ratio
+const depM=[{t:'Thailand, 2025',d:'Set 9.6, 41.9 and 14.3 million. What is the dependency ratio?',ok:(k,w,o)=>near(k,9.6)&&near(w,41.9)&&near(o,14.3),msg:'(9.6 + 14.3) ÷ 41.9 × 100 = <b>57</b>.'},
+  {t:'Thailand, 2033',d:'Use the shares: 14 children, 57.9 working age, 28 aged 60+ (per 100 people).',ok:(k,w,o)=>near(k,14)&&near(w,57.9)&&near(o,28),msg:'(14 + 28) ÷ 57.9 × 100 = <b>73</b>.'},
+  {t:'A young country',d:'Make a ratio above 80 where most dependants are <b>children</b>, like Tanzania.',ok:(k,w,o)=>(k+o)/w*100>80&&k>2*o,msg:'High birth rates also create a high dependency ratio, but of children.'}];
+const depDone=new Set();let depQdone=false;
+$('depMissions').innerHTML=depM.map((m,i)=>`<div class="mission" id="dm${i}"><span class="t">${m.t}</span>${m.d}</div>`).join('');
+function depRender(){
+  const k=+$('sK').value,w=+$('sW').value,o=+$('sO').value,r=(k+o)/w*100;
+  $('vK').textContent=k.toFixed(1);$('vW').textContent=w.toFixed(1);$('vO').textContent=o.toFixed(1);
+  $('roDep').textContent=r.toFixed(0);$('roWp').textContent=(w/o).toFixed(1);
+  $('depWork').innerHTML=`<b>Dependency ratio</b> = number in dependent age groups ÷ number in the labour force × 100<div style="margin-top:6px">= (${k.toFixed(1)} + ${o.toFixed(1)}) ÷ ${w.toFixed(1)} × 100 = <b>${r.toFixed(0)}</b></div><div>Every 100 people of working age support <b>${r.toFixed(0)}</b> dependants: ${th(k/w*100)} children and ${th(o/w*100)} older people.</div>`;
+  depM.forEach((m,i)=>{if(!depDone.has(i)&&m.ok(k,w,o)){depDone.add(i);$('dm'+i).classList.add('done');$('dm'+i).insertAdjacentHTML('beforeend','<br>'+m.msg);if(depDone.size===depM.length)$('depQ').classList.remove('hide');}});
+}
+['sK','sW','sO'].forEach(id=>$(id).addEventListener('input',depRender));depRender();
+quizBlock($('depQ'),[
+  {q:'Thailand’s ratio rises from 57 (2025) to about 73 (2033). What does this mean?',o:['Each 100 people of working age must support more dependants','There will be more workers per older person','The population will grow'],a:0,why:'More older people and fewer workers mean a bigger burden on the labour force, for example through taxes to pay for pensions and healthcare.'},
+  {q:'What would raising the retirement age from 60 to 65 do to the dependency ratio?',o:['Lower it: people aged 60–64 would count as part of the labour force, not as dependants','Raise it','Nothing'],a:0,why:'Workers aged 60–64 pay taxes instead of receiving pensions. This is one of the ways of coping with an ageing population (coursebook p. 412).'}],
+  null,()=>{depQdone=true;optCheck();});
+function optCheck(){if(optDone.size===optM.length&&drcDone&&depQdone)complete(3,'Optimum and dependency');}
+optRender();
+
+/* ================= TAB 5: AGEING POLICY LAB ================= */
+const YW=[
+  ['Experienced','o','Older workers have usually done the job for longer.'],
+  ['Geographically mobile: willing to move to another part of the country for a job','y','Young workers are less likely to own a home or have children in school, so they find it easier to move.'],
+  ['Occupationally mobile: able to switch to a different type of job','y','Young workers have more years ahead of them to retrain and usually learn new skills more quickly.'],
+  ['Prepared to stay in the job for some time','o','Older workers change jobs less often. They may be more reliable and patient (p. 411).'],
+  ['Has received a large amount of on-the-job training','o','Over many years, older workers build up training and skills from their employers.'],
+  ['Up to date with advances in technology','y','Young workers have usually learned the newest technology at school or university.']];
+const ywState={done:false};
+sorter({cases:YW,cats:[['y','Young workers'],['o','Older workers']],label:'Characteristic',ids:{num:'ywNum',score:'ywScore',ev:'ywEvent',o:'ywO',fb:'ywFb',next:'ywNext'},
+  summary:'An ageing labour force may be <b>less mobile</b> and less up to date with technology, but <b>more experienced, reliable and patient</b>. That is why the coursebook calls it a <b>change</b> in the labour force, not just a problem.',
+  onEnd:(s,n)=>{ywState.done=true;ywState.s=s;ywState.n=n;labCheck();}});
+// Simplified model (millions). K children 0–14, W working age 15–59, O aged 60+, O64 = aged 60–64
+const BASE={2025:{K:9.6,W:41.9,O:14.3,O64:4.3},2035:{K:7.8,W:38.0,O:19.0,O64:5.0},2050:{K:6.0,W:31.5,O:22.0,O64:4.5}};
+const POL=[
+  {id:'ret',nm:'Raise the retirement age from 60 to 65',ty:'Retirement age',c:0,d:'Pensions start at 65. About 7 in 10 people aged 60–64 keep working.',
+    fx:{2035:{shift:3.5},2050:{shift:3.2}},side:'People aged 60–64 become <b>workers</b> who pay tax instead of dependants who receive pensions. But it is unpopular, hard for people in physical jobs, and older workers may be less mobile (Part A).'},
+  {id:'baby',nm:'Baby bonus and free childcare',ty:'Birth rate',c:35,d:'600 baht a month for every child aged 0–6, plus free nurseries. Births rise by about one-sixth.',
+    fx:{2035:{K:0.7},2050:{K:0.7,W:1.0}},side:'More babies are <b>more dependants</b> at first, so the ratio gets <b>worse</b> in 2035. The extra children only join the labour force after 15–20 years. Italy has tried cash for children with little success (p. 404).'},
+  {id:'mig',nm:'One million more work permits',ty:'Immigration',c:10,d:'More migrant workers from Myanmar, Laos, Cambodia, Sri Lanka and Nepal, with their families.',
+    fx:{2035:{W:1.0,K:0.15},2050:{W:1.2,K:0.3,O:0.2}},side:'Quickly adds young workers who pay tax, so the ratio falls. But migrants grow old too, so it only helps <b>in the short term</b> unless more keep arriving (p. 412). It may also put pressure on housing and public services.'},
+  {id:'skill',nm:'Visas and tax breaks for skilled foreign workers',ty:'Immigration',c:10,d:'Attract engineers, doctors and IT specialists.',
+    fx:{2035:{W:0.2,prod:1.03},2050:{W:0.3,prod:1.05}},side:'A small number of workers, but they raise productivity: a <b>brain gain</b> for Thailand.'},
+  {id:'save',nm:'Compulsory pension saving',ty:'Saving',c:5,d:'Every worker must save 5% of their pay in a pension fund.',
+    fx:{2035:{save:0.9},2050:{save:0.75}},side:'Workers pay for more of their own retirement, so the burden on the government falls <b>over time</b>. It does not change the number of workers, and it reduces workers’ spending now.'},
+  {id:'prod',nm:'Training, robots and automation',ty:'Productivity',c:35,d:'Retrain workers and help firms invest in machines.',
+    fx:{2035:{prod:1.08},2050:{prod:1.2}},side:'Each worker produces more, so the economy can support more older people, and the government earns more tax revenue. It costs money now and takes time.'},
+];
+const sel=new Set();let taxOn=false,plans=0,yr=0,lastRes=null;
+const budget=()=>60+(taxOn?20:0),used=()=>[...sel].reduce((a,id)=>a+POL.find(p=>p.id===id).c,0);
+function polRender(){
+  $('polGrid').innerHTML=POL.map(p=>{const on=sel.has(p.id),fits=on||used()+p.c<=budget();
+    return `<button class="pc ${on?'sel':''}" data-id="${p.id}" ${fits?'':'disabled'}><span class="cost">${p.c?p.c+' bn':'0'}</span><span class="nm">${p.nm}</span><span class="pill ${on?'o':''}">${p.ty}</span><span class="d">${p.d}</span>${!fits?'<span class="w">Not enough budget left</span>':''}</button>`;}).join('');
+  $('polGrid').querySelectorAll('.pc').forEach(b=>b.onclick=()=>{const id=b.dataset.id;sel.has(id)?sel.delete(id):sel.add(id);polRender();});
+  const u=used(),B=budget();$('budTxt').textContent=`${u} / ${B} billion baht`;$('budBar').style.width=Math.min(100,u/B*100)+'%';
+}
+$('taxTog').onchange=e=>{taxOn=e.target.checked;if(!taxOn){while(used()>budget()){const last=[...sel].pop();sel.delete(last);}}polRender();};
+polRender();
+function model(y,ids){
+  const b=BASE[y];let K=b.K,W=b.W,O=b.O,shift=0,prod=1,save=1;
+  ids.forEach(id=>{const f=(POL.find(p=>p.id===id).fx[y])||{};K+=f.K||0;W+=f.W||0;O+=f.O||0;shift+=f.shift||0;prod*=f.prod||1;save*=f.save||1;});
+  const lab=W+shift,dep=O-shift,tot=K+W+O,b0=BASE[2025],r0=b0.O/b0.W,o0=b0.W/(b0.K+b0.W+b0.O);
+  return{K,lab,dep,tot,ratio:(K+dep)/lab*100,wpo:lab/dep,burden:dep/(lab*prod)*save/r0*100,oph:lab*prod/tot/o0*100};
+}
+const R25=model(2025,[]);
+function resRender(){
+  const y=yr?2050:2035,base=model(y,[]),mine=lastRes[y];
+  $('yrSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.y===yr));
+  bars($('resChart'),{labels:['2025 (today)',y+': no policy',y+': your plan'],values:[R25.ratio,base.ratio,mine.ratio],colors:[GREY,BAD,mine.ratio<base.ratio-0.5?GOOD:mine.ratio>base.ratio+0.5?BAD:NAVY],W:720,H:300,min:0,max:100,yStep:20,bw:90,yLabel:'Dependants per 100 workers',valFmt:v=>v.toFixed(0),yFmt:v=>th(v),aria:'Dependency ratio today, with no policy and with your plan'});
+  const tile=(t,v,b,o,better)=>`<div class="tile${o?' o':''}"><b>${t}</b><div class="v">${v}</div><div class="s">${b}</div></div>`;
+  $('resTiles').innerHTML=tile('Workers per older person',mine.wpo.toFixed(1),`no policy: ${base.wpo.toFixed(1)} · today: ${R25.wpo.toFixed(1)}`)+
+    tile('Cost of pensions and care',th(mine.burden),`per unit of output · today = 100 · no policy: ${th(base.burden)}`,1)+
+    tile('Output per head',th(mine.oph),`today = 100 · no policy: ${th(base.oph)}`)+
+    tile('Population',mine.tot.toFixed(1)+' m',`today: ${R25.tot.toFixed(1)} m`,1);
+  let side=[...sel].map(id=>{const p=POL.find(x=>x.id===id);return `<li><b>${p.nm}:</b> ${p.side}</li>`;}).join('');
+  if(taxOn)side+='<li><b>Higher income tax on workers:</b> pays for your policies, but it raises the <b>tax burden on workers</b> (p. 412) and may discourage work. Every baht spent has an <b>opportunity cost</b>: it could have been spent on education instead.</li>';
+  if(!sel.size)side='<li>You chose no policies. The dependency ratio rises sharply as the population ages.</li>';
+  const fb=mine.ratio<=R25.ratio+0.5?`<div class="fb ok">In ${y} your dependency ratio (${mine.ratio.toFixed(0)}) is no higher than today’s (${R25.ratio.toFixed(0)}). Now check the other year: does your plan still work?</div>`
+    :mine.ratio<base.ratio-0.5?`<div class="fb info">In ${y} your plan lowers the dependency ratio from ${base.ratio.toFixed(0)} (no policy) to <b>${mine.ratio.toFixed(0)}</b>, but it is still above today’s ${R25.ratio.toFixed(0)}. Policies can reduce the effects of an ageing population, but they cannot stop it.</div>`
+    :`<div class="fb no">In ${y} your plan does not lower the dependency ratio (${mine.ratio.toFixed(0)}; no policy: ${base.ratio.toFixed(0)}). Which policy would add workers, or reduce the number of dependants?</div>`;
+  $('resSide').innerHTML=`<div class="chain"><b>What happened and why</b><ul style="margin:6px 0 0 18px;padding:0">${side}</ul></div>`+fb;
+}
+$('yrSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{yr=+b.dataset.y;resRender();});
+const planKeys=new Set();let labQdone=false;
+$('runBtn').onclick=()=>{
+  if(used()>budget())return;
+  const ids=[...sel];lastRes={2035:model(2035,ids),2050:model(2050,ids)};
+  planKeys.add(ids.sort().join('|')+(taxOn?'+tax':''));plans=planKeys.size;$('planCount').textContent=plans;
+  $('resCard').classList.remove('hide');resRender();if(plans>=2)$('labQCard').classList.remove('hide');
+  track('Ageing policy lab plan',`Plan ${plans}: ${ids.join(', ')||'none'}${taxOn?' + tax':''}; ratio 2035 ${lastRes[2035].ratio.toFixed(0)}, 2050 ${lastRes[2050].ratio.toFixed(0)}`);
+  $('resCard').scrollIntoView({behavior:'smooth',block:'start'});
+};
+quizBlock($('labQ'),[
+  {q:'Which policy made the dependency ratio <b>worse</b> in 2035 but better by 2050?',o:['The baby bonus and free childcare','Raising the retirement age','More work permits'],a:0,why:'Babies are dependants for their first 15 years. A higher birth rate only adds workers in the long run.'},
+  {q:'Why does raising the retirement age have such a big effect?',o:['It moves millions of people aged 60–64 from dependants to workers: fewer pensions, more tax','It raises the birth rate','It brings in migrants'],a:0,why:'It changes both the top and the bottom of the ratio at once, and it costs the government nothing. The cost falls on older workers, which is why it is unpopular.'},
+  {q:'The coursebook says immigration reduces the dependency ratio “at least in the short term” (p. 412). Why only the short term?',o:['Migrants also grow old and retire, unless more keep arriving','Migrants always return home after one year','Migrants have no children'],a:0,why:'Immigration buys time. In the long run, the migrants themselves become older dependants.'}],
+  'Most countries <b>combine</b> policies: a later retirement age and immigration help quickly; higher productivity, saving and support for families help in the long run. Every policy has an <b>opportunity cost</b>.',
+  ()=>{labQdone=true;labCheck();});
+function labCheck(){if(ywState.done&&labQdone)complete(4,`Ageing lab: young/older ${ywState.s}/${ywState.n}, ${plans} plans`);}
+
+/* ================= TAB 6: EXAM ================= */
+const MCQ=[
+  ['In a country, more males are born than females and yet there are more females than males in the population. How can this be explained?',['females living longer than males','a higher death rate for females than for males','more females emigrating than males','the infant mortality rate of females being higher than males'],'Women, on average, live longer than men, so there are more older women. Coursebook p. 414, Q1.'],
+  ['What is meant by net migration?',['the difference between immigration and emigration','the number of people who leave a country in a year','the difference between the birth rate and the death rate','the number of deaths per 1,000 people in a year'],'Net migration = immigration − emigration. The difference between births and deaths is the natural increase (or decrease).'],
+  ['A country has a birth rate of 12, a death rate of 9 and a net migration rate of −4, all per 1,000. What happens to its population?',['It falls by 1 per 1,000','It rises by 3 per 1,000','It rises by 7 per 1,000','It falls by 4 per 1,000'],'12 − 9 − 4 = −1. The natural increase of 3 is smaller than the net emigration of 4.'],
+  ['Which policy is most likely to reduce a country’s birth rate?',['improving education and job opportunities for women','increasing cash payments for each child','reducing spending on state pensions','lowering the school-leaving age'],'Educated women with good jobs tend to delay having children and have fewer (coursebook p. 410).'],
+  ['Which is a likely consequence of an ageing population?',['higher demand for healthcare and pensions','a fall in the dependency ratio','a more geographically mobile labour force','lower demand for retirement homes'],'Older people place the greatest burden on health services, and pension costs rise (coursebook pp. 411–412).'],
+  ['What is the optimum population of a country?',['the size of population that maximises output per head','the largest population the country’s land can feed','the population at which the birth rate equals the death rate','the population at which there is no unemployment'],'Optimum population: the size which, combined with land, capital and technology, gives the maximum output per head (p. 407).'],
+];
+let mcqI=0,mcqS=0,mcqOrder=[],mcqDone=false,chainDone=false;
+function checkExam(){if(mcqDone&&chainDone)complete(5,'Exam practice');}
+function startMCQ(){mcqOrder=MCQ.map(m=>({q:m[0],opts:shuffle(m[1].map((t,i)=>({t,ok:i===0}))),why:m[2]}));mcqI=0;mcqS=0;renderMCQ();}
+function renderMCQ(){
+  const c=$('mcqCard');
+  if(mcqI>=mcqOrder.length){c.innerHTML=`<h3>Multiple choice: ${mcqS} / ${mcqOrder.length}</h3><p>${mcqS>=5?'Well done.':'Review the explanations, then have another go.'}</p><button class="btn alt" id="mcqAgain">Try again</button>`;$('mcqAgain').onclick=startMCQ;mcqDone=true;checkExam();return;}
+  const m=mcqOrder[mcqI];
+  c.innerHTML=`<div class="flex" style="justify-content:space-between"><span class="pill">Question ${mcqI+1} of ${mcqOrder.length}</span><span class="score">Score: ${mcqS}</span></div><p class="qtext">${m.q}</p><div class="opts" style="flex-direction:column" id="mcqO"></div><div id="mcqF"></div>`;
+  m.opts.forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[j]}</b>&nbsp;&nbsp;${o.t}`;b.onclick=()=>{
+    $('mcqO').querySelectorAll('.opt').forEach(x=>x.disabled=true);if(o.ok)mcqS++;b.classList.add(o.ok?'ok':'no');if(!o.ok)$('mcqO').children[m.opts.findIndex(x=>x.ok)].classList.add('ok');
+    $('mcqF').innerHTML=`<div class="fb ${o.ok?'ok':'no'}">${m.why}</div><button class="btn" style="margin-top:10px" id="mcqN">${mcqI<mcqOrder.length-1?'Next':'See score'}</button>`;$('mcqN').onclick=()=>{mcqI++;renderMCQ();};};$('mcqO').appendChild(b);});
+}
+startMCQ();
+
+const CH=[
+  'An ageing population is one in which the average age is rising, because of a fall in the birth rate, a fall in the death rate or the emigration of young people.',
+  'In Thailand, more than one person in five is now aged 60 or over, and deaths have been higher than births every year since 2021.',
+  'One consequence is a rise in the dependency ratio: there are more older people and fewer workers, so each worker has to support more dependants.',
+  'This leads to higher government spending on pensions and healthcare, so the government may have to raise taxes on workers or spend less on other things, such as education.',
+  'Another consequence is a smaller and older labour force, which may be less geographically and occupationally mobile, so firms find it harder to fill jobs and output may grow more slowly.',
+  'Overall, an ageing population puts pressure on government finances and on the labour force, although raising the retirement age, raising productivity or encouraging immigration can reduce these effects.',
+];
+orderer({items:CH,slotsEl:'chainSlots',chipsEl:'chainChips',checkBtn:'chainCheck',resetBtn:'chainReset',fbEl:'chainFb',label:'sentences',
+  hint:'Remember: define the key term first, then the context, then build the chain (“One consequence is… This leads to…”), then “Another consequence”, and finish with “Overall”.',
+  onReset:()=>{$('chainModel').classList.add('hide');},
+  onOk:()=>{$('chainFb').innerHTML='<div class="fb ok"><b>Perfect order.</b> Define → Context → Chain 1 (two links) → Chain 2 → Overall. Here is the full model answer. The highlighted words are the class sentence starters.</div>';
+    $('chainModel').classList.remove('hide');$('chainModel').innerHTML=`<div class="card" style="background:#FFFDF0;border-left:5px solid var(--orange)">
+      <p><span class="hl">An ageing population is</span> one in which the average age is rising, because of a fall in the birth rate, a fall in the death rate or the emigration of young people. <span class="hl">In</span> Thailand, more than one person in five is now aged 60 or over, and deaths have been higher than births every year since 2021.</p>
+      <p><span class="hl">One consequence is</span> a rise in the dependency ratio: there are more older people and fewer workers, so each worker has to support more dependants. <span class="hl">This leads to</span> higher government spending on pensions and healthcare, so the government may have to raise taxes on workers or spend less on other things, such as education. This is an opportunity cost.</p>
+      <p><span class="hl">Another consequence is</span> a smaller and older labour force, which may be less geographically and occupationally mobile, <span class="hl">so</span> firms find it harder to fill jobs <span class="hl">and</span> output may grow more slowly. The pattern of demand also changes: <span class="hl">for example,</span> demand for healthcare and retirement homes rises.</p>
+      <p style="margin-bottom:0"><span class="hl">Overall,</span> an ageing population puts pressure on government finances and on the labour force, although raising the retirement age, raising productivity or encouraging immigration can reduce these effects.</p></div>`;
+    chainDone=true;checkExam();}});
+})();
+</script>
+</body>
+</html>
